@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ScannerApp.body.getter:ScannerApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Scanner.getActivity():Model.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewModel.init():ViewModel.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

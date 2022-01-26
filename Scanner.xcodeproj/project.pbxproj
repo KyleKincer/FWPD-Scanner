@@ -8,17 +8,51 @@
 
 /* Begin PBXBuildFile section */
 		E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F442278E84A7009C0B13 /* ScannerApp.swift */; };
-		E202F445278E84A7009C0B13 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F444278E84A7009C0B13 /* ContentView.swift */; };
+		E202F445278E84A7009C0B13 /* ScannerActivityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */; };
 		E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F446278E84A8009C0B13 /* Assets.xcassets */; };
 		E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F449278E84A8009C0B13 /* Preview Assets.xcassets */; };
+		E202F45127907868009C0B13 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* Model.swift */; };
+		E202F4532790C46F009C0B13 /* ScannerActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */; };
+		E24522BE279134F200EFBB3E /* ScannerActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */; };
+		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
+		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
+		E264494B279498B500685DAB /* ScannerActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */; };
+		E264494E2794B56700685DAB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
+		E26449502796487200685DAB /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494F2796487200685DAB /* ActivityCell.swift */; };
+		E264495227964D8B00685DAB /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
+		E2644954279650CD00685DAB /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
+		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
+		E26449592798BE9E00685DAB /* InitialTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26449582798BE9E00685DAB /* InitialTabView.swift */; };
+		E264495C2798C4E800685DAB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495B2798C4E800685DAB /* SettingsView.swift */; };
+		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E202F43F278E84A7009C0B13 /* Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E202F442278E84A7009C0B13 /* ScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerApp.swift; sourceTree = "<group>"; };
-		E202F444278E84A7009C0B13 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityListView.swift; sourceTree = "<group>"; };
 		E202F446278E84A8009C0B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E202F449278E84A8009C0B13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E202F45027907868009C0B13 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityListViewModel.swift; sourceTree = "<group>"; };
+		E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityDetailView.swift; sourceTree = "<group>"; };
+		E24522C52791E17800EFBB3E /* Scanner15App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner15App.swift; sourceTree = "<group>"; };
+		E24522C72791E17800EFBB3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E24522C92791E17900EFBB3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E24522CC2791E17900EFBB3E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E24522D12791F69400EFBB3E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityDetailViewModel.swift; sourceTree = "<group>"; };
+		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E264494F2796487200685DAB /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		E264495127964D8B00685DAB /* ActError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActError.swift; sourceTree = "<group>"; };
+		E2644953279650CD00685DAB /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
+		E26449552796666100685DAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E264495627986B0700685DAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E26449582798BE9E00685DAB /* InitialTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTabView.swift; sourceTree = "<group>"; };
+		E264495B2798C4E800685DAB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
+		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				E202F441278E84A7009C0B13 /* Scanner */,
+				E24522C42791E17800EFBB3E /* Scanner15 */,
 				E202F440278E84A7009C0B13 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,8 +86,16 @@
 		E202F441278E84A7009C0B13 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				E264495D2798D1B200685DAB /* Scanner.entitlements */,
+				E26449552796666100685DAB /* Info.plist */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
-				E202F444278E84A7009C0B13 /* ContentView.swift */,
+				E26449582798BE9E00685DAB /* InitialTabView.swift */,
+				E202F45027907868009C0B13 /* Model.swift */,
+				E26449492794989100685DAB /* ScannerActivityDetailView */,
+				E26449482794981500685DAB /* ScannerActivityListView */,
+				E264495E2798D36400685DAB /* MapView */,
+				E264495A2798C4D500685DAB /* SettingsView */,
+				E264494C2794B55000685DAB /* Utilities */,
 				E202F446278E84A8009C0B13 /* Assets.xcassets */,
 				E202F448278E84A8009C0B13 /* Preview Content */,
 			);
@@ -65,6 +108,73 @@
 				E202F449278E84A8009C0B13 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E24522C42791E17800EFBB3E /* Scanner15 */ = {
+			isa = PBXGroup;
+			children = (
+				E24522C52791E17800EFBB3E /* Scanner15App.swift */,
+				E24522C72791E17800EFBB3E /* ContentView.swift */,
+				E24522C92791E17900EFBB3E /* Assets.xcassets */,
+				E24522CB2791E17900EFBB3E /* Preview Content */,
+			);
+			path = Scanner15;
+			sourceTree = "<group>";
+		};
+		E24522CB2791E17900EFBB3E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E24522CC2791E17900EFBB3E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E26449482794981500685DAB /* ScannerActivityListView */ = {
+			isa = PBXGroup;
+			children = (
+				E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */,
+				E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */,
+				E264494F2796487200685DAB /* ActivityCell.swift */,
+			);
+			path = ScannerActivityListView;
+			sourceTree = "<group>";
+		};
+		E26449492794989100685DAB /* ScannerActivityDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */,
+				E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */,
+			);
+			path = ScannerActivityDetailView;
+			sourceTree = "<group>";
+		};
+		E264494C2794B55000685DAB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E24522D12791F69400EFBB3E /* LocationManager.swift */,
+				E264494D2794B56700685DAB /* NetworkManager.swift */,
+				E264495127964D8B00685DAB /* ActError.swift */,
+				E2644953279650CD00685DAB /* AlertItem.swift */,
+				E264495627986B0700685DAB /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E264495A2798C4D500685DAB /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				E264495B2798C4E800685DAB /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		E264495E2798D36400685DAB /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				E264495F2798D38E00685DAB /* MapView.swift */,
+				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +247,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E202F445278E84A7009C0B13 /* ContentView.swift in Sources */,
+				E2644954279650CD00685DAB /* AlertItem.swift in Sources */,
+				E202F45127907868009C0B13 /* Model.swift in Sources */,
+				E24522BE279134F200EFBB3E /* ScannerActivityDetailView.swift in Sources */,
+				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
+				E202F445278E84A7009C0B13 /* ScannerActivityListView.swift in Sources */,
+				E26449502796487200685DAB /* ActivityCell.swift in Sources */,
+				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
+				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
+				E26449602798D38E00685DAB /* MapView.swift in Sources */,
+				E264495C2798C4E800685DAB /* SettingsView.swift in Sources */,
+				E202F4532790C46F009C0B13 /* ScannerActivityListViewModel.swift in Sources */,
+				E264495227964D8B00685DAB /* ActError.swift in Sources */,
+				E264494B279498B500685DAB /* ScannerActivityDetailViewModel.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
+				E26449592798BE9E00685DAB /* InitialTabView.swift in Sources */,
+				E264495727986B0700685DAB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,9 +320,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				NSLocationAlwaysUsageDescription = "Will you allow this app to always know your location?";
+				NSLocationWhenInUseUsageDescription = "Will you allow this app to always know your location?";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -251,9 +378,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				NSLocationAlwaysUsageDescription = "Will you allow this app to always know your location?";
+				NSLocationWhenInUseUsageDescription = "Will you allow this app to always know your location?";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -266,27 +396,38 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Scanner/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
+				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Debug;
 		};
@@ -295,27 +436,38 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Scanner/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
+				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Release;
 		};
