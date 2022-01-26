@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("useLocation") var useLocation = true
+    @AppStorage("useLocation") var useLocation = false
     @AppStorage("radius") var radius = 10.0
     
     var body: some View {
