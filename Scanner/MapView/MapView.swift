@@ -16,7 +16,6 @@ struct MapView: View {
         NavigationView {
             ZStack(alignment: .topTrailing) {
                 Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: listViewModel.activities) { activity in
-    //                MapMarker(coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude))
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                         NavigationLink {
                             ScannerActivityDetailView(activity: activity)
@@ -24,9 +23,10 @@ struct MapView: View {
                             Image(systemName: "exclamationmark.triangle")
                                 .foregroundColor(.red)
                         }
-
+                        
                     }
-                }.ignoresSafeArea(edges: .top)
+                }   .ignoresSafeArea(edges: .top)
+                    .ignoresSafeArea(edges: .horizontal)
             }
         }
     }
