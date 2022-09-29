@@ -12,12 +12,22 @@ struct ScannerActivityListView: View {
     @State var showingLocationSettingsPopover = false
     @State var radius = 1.0
     @State var isEditing = false
-    @State var isLoading = true
     
     var body: some View {
         NavigationView {
-            List(viewModel.activities) { activity in
-                ActivityCell(activity: activity)
+            List(viewModel.activities) {
+                if viewModel.isLoading {
+                    if $0 == viewModel.activities.first {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                            Spacer()
+                        }
+                    }
+                } else {
+                    ActivityCell(activity: $0)
+                }
             }.refreshable {
                 viewModel.refresh()
             }

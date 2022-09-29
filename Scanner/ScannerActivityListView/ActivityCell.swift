@@ -25,6 +25,7 @@ struct ActivityCell: View {
                     Spacer()
                     Text(activity.date ?? Date(), style: .relative)
                         .font(.footnote)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(1)
                 }
@@ -35,6 +36,7 @@ struct ActivityCell: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .font(.footnote)
+                            .foregroundColor(.secondary)
                         Spacer()
                         Image(systemName: "mappin.and.ellipse").imageScale(.small)
                         Text("\(String(format: "%g", round(10 * activity.distance!) / 10)) miles away")
@@ -44,6 +46,7 @@ struct ActivityCell: View {
                         Spacer()
                         Text(activity.location.capitalized)
                     }   .font(.footnote)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.leading)
                 } else {
                     HStack {
@@ -53,6 +56,7 @@ struct ActivityCell: View {
                         Spacer()
                         Text(activity.location.capitalized)
                     }   .font(.footnote)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.leading)
                 }
             }

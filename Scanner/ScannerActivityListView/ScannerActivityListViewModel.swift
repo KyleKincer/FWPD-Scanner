@@ -14,6 +14,7 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published private var model: Scanner
     @Published private(set) var activities: [Scanner.Activity] = []
     @Published private var alertItem: AlertItem?
+    @Published private(set) var isLoading = false
     
     init() {
         model = Scanner()
@@ -22,11 +23,12 @@ final class ScannerActivityListViewModel: ObservableObject {
     }
     
     func getActivitiesWithinProximity(location: CLLocation, radius: Double) {
+        isLoading = true
         NetworkManager.shared.getActivitiesWithinProximity(location: location, radius: radius) { [self] result in
             
             DispatchQueue.main.async {
+                isLoading = false
                 switch result {
-                    
                 case .success(let activities):
                     self.activities = activities
                     addDatesToActivities(self.activities)
