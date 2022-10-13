@@ -10,12 +10,8 @@ import SwiftUI
 struct WatchSettingsView: View {
     var viewModel: ScannerActivityListViewModel
     @State private var refreshOnExit = false
-    @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    @State var dateTo = Date()
-    @State var showingTypesPopover = false
     
     @AppStorage("useLocation") var useLocation = false
-    @AppStorage("useDate") var useDate = false
     @AppStorage("radius") var radius = 2.0
     @AppStorage("showDistance") var showDistance = true
     
@@ -29,6 +25,9 @@ struct WatchSettingsView: View {
                     Toggle("Show Distance From You", isOn: $showDistance)
                     Toggle(isOn: $useLocation) {
                         Text("Filter By Distance")
+                            .onTapGesture {
+                                viewModel.refresh()
+                            }
                     }
                     if useLocation {
                         VStack {
@@ -45,26 +44,7 @@ struct WatchSettingsView: View {
         }
         .onDisappear {
             print("didDisappear")
-            if dateFrom > dateTo {
-                viewModel.dateFrom = dateTo
-            } else {
-                viewModel.dateFrom = dateFrom
-            }
-            viewModel.dateTo = dateTo
-            if refreshOnExit {
-                refreshOnExit = false
-                viewModel.refresh()
-            }
-        }
-    }
-    
-    func clearAllFilters() {
-        withAnimation {
-            useLocation = false
-            useDate = false
-            viewModel.selectedNatures.removeAll()
-            dateFrom = Date()
-            dateTo = Date()
+            viewModel.refresh()
         }
     }
 }
