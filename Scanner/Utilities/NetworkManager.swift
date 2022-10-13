@@ -15,25 +15,49 @@ class NetworkManager: NSObject {
     // Do I need this???
     private override init() {}
     
-    func getActivities(limit: Int = 100, dateFrom: Date? = nil, dateTo: Date? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
+    func getActivities(page: Int = 1, per_page: Int = 25, dateFrom: Date? = nil, dateTo: Date? = nil, natures: Set<Int>? = nil, location: CLLocation? = nil, radius: Double? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
         let formatter = DateFormatter()
         let dateFromStr: String
         let dateToStr: String
+        var latitudeStr = ""
+        var longitudeStr = ""
+        var radiusStr = ""
+        var naturesStr = ""
+        
         formatter.dateFormat = "yyyy-MM-dd"
         
         // Get dates if we have any
-        if let dateFrom = dateFrom {
+        if let dateFrom = dateFrom, UserDefaults.standard.bool(forKey: "useDate") {
             dateFromStr = formatter.string(from: dateFrom)
         } else {
             dateFromStr = ""
         }
-        if let dateTo = dateTo {
+        if let dateTo = dateTo, UserDefaults.standard.bool(forKey: "useDate") {
             dateToStr = formatter.string(from: dateTo)
         } else {
             dateToStr = ""
         }
         
-        let url = URL(string: "\(Constants.ACTIVITY_URL)?limit=\(limit)&datefrom=\(dateFromStr)&dateto=\(dateToStr)")!
+        // Get the natures if we have any
+        if let natures = natures {
+            naturesStr = natures.sorted().map(String.init).joined(separator: ",")
+        }
+        
+        if let latitude = location?.coordinate.latitude {
+            latitudeStr = String(latitude)
+        } else {
+            latitudeStr = ""
+        }
+        if let longitude = location?.coordinate.longitude {
+            longitudeStr = String(longitude)
+        } else {
+            longitudeStr = ""
+        }
+        if let radius = radius {
+            radiusStr = String(radius)
+        }
+        
+        let url = URL(string: "\(Constants.ACTIVITY_URL)?page=\(page)&?per_page=\(per_page)&datefrom=\(dateFromStr)&dateto=\(dateToStr)&natures=\(naturesStr)&longitude=\(longitudeStr)&latitude=\(latitudeStr)&radius=\(radiusStr)")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -66,9 +90,10 @@ class NetworkManager: NSObject {
         
     }
     
-    func getActivitiesWithinProximity(limit: Int = 100, location: CLLocation, radius: Double, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
+    
+    func getNatures(completed: @escaping (Result<[Scanner.Nature], ActError>) -> Void) {
         
-        let url = URL(string: "\(Constants.PROXIMITY_URL)?limit=\(limit)&longitude=\(location.coordinate.longitude)&latitude=\(location.coordinate.latitude)&radius=\(radius)")!
+        let url = URL(string: Constants.NATURE_URL)!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -90,7 +115,7 @@ class NetworkManager: NSObject {
                 return
             }
             do {
-                let decodedResponse = try JSONDecoder().decode([Scanner.Activity].self, from: data)
+                let decodedResponse = try JSONDecoder().decode([Scanner.Nature].self, from: data)
                 completed(.success(decodedResponse))
             } catch {
                 completed(.failure(.invalidData))
