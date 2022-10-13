@@ -336,8 +336,8 @@
 			children = (
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
-				E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */,
 				E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */,
+				E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
 			path = Models;

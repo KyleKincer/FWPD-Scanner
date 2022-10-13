@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct WatchMainView: View {
-    let viewModel = ScannerActivityListViewModel()
-    let mapModel = MapViewModel()
+    @StateObject var viewModel = ScannerActivityListViewModel()
     @State var showMap = false
 
     var body: some View {
         VStack {
-            WatchListView(viewModel: viewModel, mapModel: mapModel)
+            WatchListView(viewModel: viewModel)
         }
     }
 }

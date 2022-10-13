@@ -9,25 +9,24 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @Binding var viewModel : MapViewModel
-    @Binding var listViewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: ScannerActivityListViewModel
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: listViewModel.activities) { activity in
+            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
-                        MapAnnotationView(mapView: $viewModel, activity: activity)
+                        MapAnnotationView(viewModel: viewModel, activity: activity)
                 }
-            }
-            .ignoresSafeArea(.all)
+            }            
         }
         .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+        .ignoresSafeArea(.all)
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(viewModel: .constant(MapViewModel()), listViewModel: .constant(ScannerActivityListViewModel()))
+        MapView(viewModel: ScannerActivityListViewModel())
     }
 }

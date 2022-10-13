@@ -9,25 +9,18 @@ import SwiftUI
 
 struct TVView: View {
     @AppStorage("onboarding") var onboarding = true
-    @State var viewModel = ScannerActivityListViewModel()
-    let mapModel = MapViewModel()
+    @StateObject var viewModel = ScannerActivityListViewModel()
     
     var body: some View {
         if (onboarding) {
             TVOnboardingView()
                 .transition(.opacity)
-                .onAppear {
-                    viewModel.refresh()
-                    
-                }
+            
         } else {
             
             VStack {
                 TVMainView(viewModel: viewModel)
                     .edgesIgnoringSafeArea(.all)
-                    .onAppear {
-                        viewModel.refresh()
-                    }
             }
             .padding()
         }

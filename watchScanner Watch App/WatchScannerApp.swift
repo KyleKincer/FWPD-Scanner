@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+
 @main
 struct ScannerApp: App {
     var body: some Scene {

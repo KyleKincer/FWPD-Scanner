@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterSettings: View {
-    var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: ScannerActivityListViewModel
     @State private var refreshOnExit = false
     @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State var dateTo = Date()

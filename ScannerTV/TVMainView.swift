@@ -11,7 +11,7 @@ struct TVMainView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var showMap = false
     @State var showLocationDisclaimer = false
-    @State var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : ScannerActivityListViewModel
     @State var mapView = MapViewModel()
     @State var chosenActivity = Scanner.Activity(id: 0, timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
     
@@ -29,7 +29,7 @@ struct TVMainView: View {
                 TVNavBarView(showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
                 
                 if (showMap) {
-                    TVMapView(viewModel: $mapView, listViewModel: $viewModel)
+                    TVMapView(viewModel: viewModel)
                 } else {
                     HStack {
                         VStack {
@@ -76,7 +76,7 @@ struct TVMainView: View {
                                 .padding()
                             
                         }
-                    }
+                    }.padding(.trailing)
                 }
             }
         }

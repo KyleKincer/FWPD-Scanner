@@ -10,7 +10,7 @@ import MapKit
 
 struct TVMapAnnotationView: View {
     @State private var showDetails = false
-    @Binding var mapView : MapViewModel
+    @ObservedObject var viewModel : ScannerActivityListViewModel
     @State var activity: Scanner.Activity
     
     var body: some View {
@@ -47,7 +47,7 @@ struct TVMapAnnotationView: View {
                     .foregroundColor(.red)
                     .onTapGesture {
                         showDetails.toggle()
-                        mapView.region.center = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
+                        viewModel.region.center = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
                     }
                 
                 HStack {
@@ -68,7 +68,7 @@ struct TVMapAnnotationView: View {
 
 struct TVMapAnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        TVMapAnnotationView(mapView: .constant(MapViewModel()), activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
+        TVMapAnnotationView(viewModel: ScannerActivityListViewModel(), activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
             .frame(width: 30, height: 30)
     }
 }

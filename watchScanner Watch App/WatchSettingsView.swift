@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchSettingsView: View {
-    var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: ScannerActivityListViewModel
     @State private var refreshOnExit = false
     
     @AppStorage("useLocation") var useLocation = false

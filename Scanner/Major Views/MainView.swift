@@ -10,8 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
-    let viewModel = ScannerActivityListViewModel()
-    let mapModel = MapViewModel()
+    @StateObject var viewModel = ScannerActivityListViewModel()
     
     @AppStorage("showDistance") var showDistance = true
     @AppStorage("onboarding") var onboarding = true
@@ -24,13 +23,14 @@ struct MainView: View {
         } else {
             VStack {
                 if (sizeClass == .compact) {
-                    StandardSizeView(viewModel: viewModel, mapModel: mapModel) // for iOS devices and compact iPads
+                    StandardSizeView(viewModel: viewModel) // for iOS devices and compact iPads
                 } else {
-                    ExpandedSizeView(viewModel: viewModel, mapModel: mapModel) // for all other iPads
+                    ExpandedSizeView(viewModel: viewModel) // for all other iPads
                 }
             }
             .onAppear {
                 showDistance = true
+                viewModel.refresh()
             }
         }
     }
