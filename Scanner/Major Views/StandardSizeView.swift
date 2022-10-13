@@ -9,7 +9,6 @@ import SwiftUI
 
 struct StandardSizeView: View {
     @ObservedObject var viewModel: ScannerActivityListViewModel
-    @ObservedObject var mapModel: MapViewModel
     @State var showCoffee = false
     @State var showFilter = false
     @State var showScanMenu = false
@@ -68,6 +67,6 @@ struct StandardSizeView: View {
 
 struct StandardSizeView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardSizeView(viewModel: ScannerActivityListViewModel(), mapModel: MapViewModel(), showCoffee: false, showMap: false)
+        StandardSizeView(viewModel: ScannerActivityListViewModel(), showCoffee: false, showMap: false)
     }
 }

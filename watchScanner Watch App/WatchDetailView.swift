@@ -25,7 +25,7 @@ struct WatchDetailView: View {
             Map(coordinateRegion: $viewModel.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode, annotationItems: [activity]) { activity in
                 MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .red)
                 
-            }.ignoresSafeArea(.container)
+            }.ignoresSafeArea(.all)
             
             
             VStack {

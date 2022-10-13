@@ -8,35 +8,37 @@
 import Foundation
 import SwiftUI
 import CoreLocation
+import MapKit
 
 final class ScannerActivityListViewModel: ObservableObject {
-    @Published private var locationManager: LocationManager = LocationManager()
-    @Published private var model: Scanner
-    @Published private(set) var activities = [Scanner.Activity]()
-    @Published private(set) var natures = [Scanner.Nature]()
+    @Published var locationManager: LocationManager = LocationManager()
+    @Published var model: Scanner
+    @Published var activities = [Scanner.Activity]()
+    @Published var natures = [Scanner.Nature]()
     @Published var selectedNatures = Set<Int>() { didSet{ refresh() }}
     @Published var dateFrom = Date()
     @Published var dateTo = Date()
-    
+    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     @Published private var alertItem: AlertItem?
-    @Published private(set) var isLoading = false
+    @Published var isLoading = false
     private var currentPage = 1
     
     init() {
+        print("Initializing activities")
         model = Scanner()
         locationManager.checkIfLocationServicesIsEnabled()
-        refresh()
+        self.refresh()
     }
     
     func getMoreActivitiesIfNeeded(currentActivity activity: Scanner.Activity?) {
         guard let activity = activity else {
-            getActivities()
+            self.getActivities()
             return
         }
         
         let thresholdIndex = activities.index(activities.endIndex, offsetBy: -5)
         if activities.firstIndex(where: { $0.id == activity.id }) == thresholdIndex {
-            getActivities()
+            self.getActivities()
         }
     }
     
@@ -136,9 +138,9 @@ final class ScannerActivityListViewModel: ObservableObject {
         self.activities.removeAll()
         self.currentPage = 1
         if natures.isEmpty {
-            getNatures()
+            self.getNatures()
         }
-        getActivities()
+        self.getActivities()
         self.isLoading = false
     }
 }

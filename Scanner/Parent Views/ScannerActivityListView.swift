@@ -36,7 +36,6 @@ struct ScannerActivityListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ScannerActivityListViewModel()
-        ScannerActivityListView(viewModel: viewModel)
+        ScannerActivityListView(viewModel: ScannerActivityListViewModel())
     }
 }

@@ -11,8 +11,7 @@ struct ActivityView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @Binding var showMap : Bool
     @State private var showFilter = false
-    @State var viewModel : ScannerActivityListViewModel
-    @State var mapView = MapViewModel()
+    @ObservedObject var viewModel : ScannerActivityListViewModel
     
     var body: some View {
         switch sizeClass {
@@ -20,7 +19,7 @@ struct ActivityView: View {
             ZStack {
                 VStack {
                     if (showMap) {
-                        MapView(viewModel: $mapView, listViewModel: $viewModel)
+                        MapView(viewModel: viewModel)
                             .edgesIgnoringSafeArea(.all)
                     } else {
                         if #available(iOS 16.0, *) {
@@ -53,7 +52,7 @@ struct ActivityView: View {
         default:
             VStack {
                 if (showMap) {
-                    MapView(viewModel: $mapView, listViewModel: $viewModel)
+                    MapView(viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                     
                 } else {

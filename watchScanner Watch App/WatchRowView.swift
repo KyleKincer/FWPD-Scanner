@@ -25,7 +25,8 @@ struct WatchRowView: View {
                 Text(activity.address)
                     .lineLimit(1)
             }
-        }.navigationTitle("Scanner")
+        }
+        .navigationTitle("Scanner")
     }
 }
 

@@ -1,3 +1,4 @@
+
 //
 //  WatchListView.swift
 //  watchScanner Watch App
@@ -9,7 +10,6 @@ import SwiftUI
 
 struct WatchListView: View {
     @ObservedObject var viewModel: ScannerActivityListViewModel
-    @State var mapModel : MapViewModel
     @State var showMap = false
     @State var showSettings = false
     
@@ -18,7 +18,7 @@ struct WatchListView: View {
             ZStack {
                 VStack {
                     if (showMap) {
-                        WatchMapView(viewModel: $mapModel, listViewModel: .constant(viewModel))
+                        WatchMapView(viewModel: viewModel)
                     } else {
                         NavigationView{
                             List(viewModel.activities) {
@@ -55,7 +55,9 @@ struct WatchListView: View {
                                 .padding(.bottom, 40)
                         }
                         .onTapGesture {
-                            showMap.toggle()
+                            withAnimation {
+                                showMap.toggle()
+                            }
                         }
                         
                         ZStack {
@@ -68,10 +70,19 @@ struct WatchListView: View {
                                 .padding(.bottom, 40)
                         }
                         .onTapGesture {
-                            showSettings.toggle()
+                            withAnimation {
+                                showSettings.toggle()
+                            }
+                            
+                        }
+                        .onLongPressGesture {
+                            withAnimation {
+                                viewModel.refresh()
+                            }
+                            
                         }
                     }
-                    .padding(.bottom, -70)
+                    .padding(.bottom, -60)
                     .padding(.horizontal, 0)
                 }
             }
@@ -84,6 +95,6 @@ struct WatchListView: View {
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchListView(viewModel: ScannerActivityListViewModel(), mapModel: MapViewModel())
+        WatchListView(viewModel: ScannerActivityListViewModel())
     }
 }

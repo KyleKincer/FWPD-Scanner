@@ -9,15 +9,14 @@ import SwiftUI
 import MapKit
 
 struct TVMapView: View {
-    @Binding var viewModel : MapViewModel
-    @Binding var listViewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: ScannerActivityListViewModel
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: listViewModel.activities) { activity in
+            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
-                    TVMapAnnotationView(mapView: $viewModel, activity: activity).focusable()
+                    TVMapAnnotationView(viewModel: viewModel, activity: activity).focusable()
                 }
             }
             .ignoresSafeArea(.all)
@@ -28,6 +27,6 @@ struct TVMapView: View {
 
 struct TVMapView_Previews: PreviewProvider {
     static var previews: some View {
-        TVMapView(viewModel: .constant(MapViewModel()), listViewModel: .constant(ScannerActivityListViewModel()))
+        TVMapView(viewModel: ScannerActivityListViewModel())
     }
 }

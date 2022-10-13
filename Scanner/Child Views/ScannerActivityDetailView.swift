@@ -94,6 +94,7 @@ struct ScannerActivityDetailView: View {
         }
         .padding(.top, 30).padding(.bottom, 15)
         .navigationBarTitleDisplayMode(.inline)
+        .transition(.slide)
     }
 }
 

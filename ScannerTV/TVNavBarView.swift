@@ -11,7 +11,7 @@ struct TVNavBarView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
-    @State var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : ScannerActivityListViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
