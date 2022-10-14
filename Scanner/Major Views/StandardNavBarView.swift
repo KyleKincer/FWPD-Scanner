@@ -25,6 +25,8 @@ struct StandardNavBarView: View {
                 
                 HStack (alignment: .center) {
                     Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         withAnimation {
                             showFilter.toggle()
                         }
@@ -38,6 +40,8 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         withAnimation {
                             showMap.toggle()
                         }
@@ -64,6 +68,8 @@ struct StandardNavBarView: View {
                         .shadow(radius: 2)
                         .foregroundColor(Color("ModeOpposite"))
                         .onTapGesture {
+                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                impactMed.impactOccurred()
                             showLocationDisclaimer = true
                         }
                         .onLongPressGesture {
@@ -74,6 +80,8 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         withAnimation {
                             showScanMenu.toggle()
                         }
@@ -94,6 +102,8 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         showCoffee.toggle()
                     }, label: {
                         Image(systemName: "cup.and.saucer")

@@ -2,7 +2,7 @@
 //  ActivityView.swift
 //  Scanner
 //
-//  Created by Nick Molargik on 9/29/22.
+//  Created by Nick Molargik on 9/29/22
 //
 
 import SwiftUI
@@ -102,6 +102,8 @@ struct ActivityView: View {
                                         Section {
                                             List(viewModel.activities) { activity in
                                                 ActivityRowView(activity: activity)
+                                                    .onAppear {
+                                                    }
                                                 
                                                 if (viewModel.activities.last == activity) {
                                                     Section {

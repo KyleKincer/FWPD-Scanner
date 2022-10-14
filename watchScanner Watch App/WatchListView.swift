@@ -7,11 +7,13 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct WatchListView: View {
     @ObservedObject var viewModel: ScannerActivityListViewModel
     @State var showMap = false
     @State var showSettings = false
+    var watch = WKInterfaceDevice()
     
     var body: some View {
         GeometryReader { geometry in
@@ -80,6 +82,7 @@ struct WatchListView: View {
                         .onTapGesture {
                             withAnimation {
                                 showMap.toggle()
+                                watch.play(.success)
                             }
                         }
                         
@@ -95,6 +98,7 @@ struct WatchListView: View {
                         .onTapGesture {
                             withAnimation {
                                 showSettings.toggle()
+                                watch.play(.success)
                             }
                             
                         }
