@@ -17,7 +17,7 @@ struct MainView: View {
     
     var body: some View {
         if (onboarding) {
-            OnboardingView()
+            OnboardingView(viewModel: viewModel)
                 .transition(.opacity)
             
         } else {
@@ -30,7 +30,6 @@ struct MainView: View {
             }
             .onAppear {
                 showDistance = true
-                viewModel.refresh()
             }
         }
     }

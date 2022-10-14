@@ -21,11 +21,15 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     @Published private var alertItem: AlertItem?
     @Published var isLoading = false
+    @Published var serverResponsive = true
+    private var thresholdIndex = 20
     private var currentPage = 1
     
+    
     init() {
-        print("Initializing activities")
         model = Scanner()
+        print("Initializing activities")
+        
         locationManager.checkIfLocationServicesIsEnabled()
         self.refresh()
     }
@@ -36,8 +40,8 @@ final class ScannerActivityListViewModel: ObservableObject {
             return
         }
         
-        let thresholdIndex = activities.index(activities.endIndex, offsetBy: -5)
-        if activities.firstIndex(where: { $0.id == activity.id }) == thresholdIndex {
+        self.thresholdIndex = self.activities.endIndex - 5
+        if (self.activities.firstIndex(of: activity) == thresholdIndex) {
             self.getActivities()
         }
     }
@@ -48,12 +52,14 @@ final class ScannerActivityListViewModel: ObservableObject {
         if UserDefaults.standard.bool(forKey: "useLocation") {
             location = locationManager.locationManager?.location
         }
+        
         NetworkManager.shared.getActivities(page: currentPage, dateFrom: dateFrom, dateTo: dateTo, natures: selectedNatures, location: location, radius: radius) { [self] result in
             
             DispatchQueue.main.async {
                 switch result {
                     
                 case .success(let activitiesAll):
+                    self.serverResponsive = true // No error
                     var activityIDs: [Int] = []
                     
                     for activity in activitiesAll {
@@ -67,7 +73,9 @@ final class ScannerActivityListViewModel: ObservableObject {
                     self.addDistancesToActivities(self.activities)
                     self.currentPage+=1
                     self.isLoading = false
+                    
                 case .failure(let error):
+                    self.serverResponsive = false // Server error
                     switch error {
                     case .invalidURL:
                         self.alertItem = AlertContext.invalidURL
@@ -80,7 +88,6 @@ final class ScannerActivityListViewModel: ObservableObject {
                     }
                 }
             }
-            
         }
     }
     
@@ -103,7 +110,6 @@ final class ScannerActivityListViewModel: ObservableObject {
                     }
                 }
             }
-            
         }
     }
     
@@ -130,18 +136,17 @@ final class ScannerActivityListViewModel: ObservableObject {
         }
     }
     
-    // MARK: Intents
-    
     func refresh() {
         print("Refresh")
         self.isLoading = true
+
         self.activities.removeAll()
         self.currentPage = 1
+        
         if natures.isEmpty {
             self.getNatures()
         }
         self.getActivities()
-        self.isLoading = false
     }
 }
 

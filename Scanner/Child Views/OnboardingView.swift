@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var viewModel : ScannerActivityListViewModel
     @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = false
     
@@ -33,26 +34,7 @@ struct OnboardingView: View {
                     .scaleEffect(2)
                     .padding(.bottom, 60)
                 
-                if (colorScheme == .light) {
-                    Image("launchicon")
-                        .colorInvert()
-                        .scaleEffect(self.isAnimating ? 0.3 : 0.5)
-                        .onAppear {
-                            withAnimation (.linear(duration: 1).repeatForever()) {
-                                self.isAnimating = true
-                            }
-                        }
-                        .frame(width: 200, height: 200)
-                } else {
-                    Image("launchicon")
-                        .scaleEffect(self.isAnimating ? 0.3 : 0.5)
-                        .onAppear {
-                            withAnimation (.linear(duration: 1).repeatForever()){
-                                self.isAnimating = true
-                            }
-                        }
-                        .frame(width: 200, height: 200)
-                }
+                StatusView(viewModel: viewModel)
                 
                 Spacer()
                 
@@ -92,6 +74,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(viewModel: ScannerActivityListViewModel())
     }
 }

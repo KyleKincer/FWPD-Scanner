@@ -68,6 +68,7 @@ struct TVActivityDetailView: View {
                     .frame(height: 400, alignment: .top)
                     .cornerRadius(20)
                     .padding(.horizontal)
+                    .focusable(false)
                     
                     Spacer()
                     

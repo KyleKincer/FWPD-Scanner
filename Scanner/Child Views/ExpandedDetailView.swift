@@ -15,9 +15,6 @@ struct ExpandedDetailView: View {
     var body: some View {
         VStack {
             ActivityView(showMap: $showMap, viewModel: viewModel)
-                .onAppear {
-                    viewModel.refresh()
-                }
         }
     }
 }

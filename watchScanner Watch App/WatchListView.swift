@@ -17,26 +17,36 @@ struct WatchListView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    if (showMap) {
-                        WatchMapView(viewModel: viewModel)
-                    } else {
-                        NavigationView{
-                            List(viewModel.activities) {
-                                if viewModel.isLoading {
-                                    if $0 == viewModel.activities.first {
-                                        HStack {
-                                            Spacer()
-                                            ProgressView()
-                                                .progressViewStyle(CircularProgressViewStyle())
-                                            Spacer()
+                    if (viewModel.isLoading) {
+                        WatchStatusView(viewModel: viewModel)
+                            .onTapGesture {
+                                if (!viewModel.serverResponsive) {
+                                    withAnimation (.linear(duration: 0.5)) {
+                                        viewModel.serverResponsive = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            viewModel.serverResponsive = false
+                                            viewModel.refresh()
                                         }
                                     }
-                                } else {
-                                    WatchRowView(activity: $0)
+                                }
+                            }
+                            .frame(width: geometry.size.width)
+                    } else {
+                        if (showMap) {
+                            WatchMapView(viewModel: viewModel)
+                        } else {
+                        NavigationView{
+                            List(viewModel.activities) { activity in
+                                WatchRowView(activity: activity)
+                                    .onAppear {
+                                        viewModel.getMoreActivitiesIfNeeded(currentActivity: activity)
+                                    }
                                 }
                                 
                             }.refreshable {
-                                viewModel.refresh()
+                                withAnimation {
+                                    viewModel.refresh()
+                                }
                             }
                             .navigationBarTitleDisplayMode(.inline)
                         }

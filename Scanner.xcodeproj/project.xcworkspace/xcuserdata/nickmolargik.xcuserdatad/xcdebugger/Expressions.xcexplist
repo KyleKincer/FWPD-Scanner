@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in ScannerActivityListView.body.getter:ScannerActivityListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.getMoreActivitiesIfNeeded(currentActivity:):ScannerActivityListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activities.firstIndex(of: activity)">
+            </PersistentString>
+            <PersistentString
+               value = "self.thresholdIndex">
+            </PersistentString>
+            <PersistentString
+               value = "activities.endIndex">
+            </PersistentString>
+            <PersistentString
+               value = "activities[17]">
+            </PersistentString>
+            <PersistentString
+               value = "activity.id">
+            </PersistentString>
+            <PersistentString
+               value = "$0">
+            </PersistentString>
+            <PersistentString
+               value = "self.activities.endIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.refresh():ScannerActivityListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

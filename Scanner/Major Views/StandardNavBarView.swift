@@ -103,29 +103,11 @@ struct StandardNavBarView: View {
                     })
                 }
                 .padding([.leading, .trailing])
-                .onAppear {
-                    viewModel.refresh()
-                }
                 
                 Spacer()
             }.frame(height: 50)
         } else {
             VStack {
-                Text("Scanner")
-                    .fontWeight(.black)
-                    .italic()
-                    .font(.largeTitle)
-                    .shadow(radius: 2)
-                    .foregroundColor(Color("ModeOpposite"))
-                    .onTapGesture {
-                        showLocationDisclaimer = true
-                    }
-                    .onLongPressGesture {
-                        onboarding = true
-                    }
-                
-                Spacer()
-                
                 HStack (alignment: .center) {
                     Button(action: {
                         withAnimation {
@@ -170,9 +152,6 @@ struct StandardNavBarView: View {
                     })
                 }
                 .padding([.leading, .trailing])
-                .onAppear {
-                    viewModel.refresh()
-                }
                 
                 Spacer()
             }.frame(height: 50)

@@ -21,7 +21,6 @@ struct StandardSizeView: View {
             StandardNavBarView(showScanMenu: $showScanMenu, showFilter: $showFilter, showMap: $showMap, showCoffee: $showCoffee, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
             
             ActivityView(showMap: $showMap, viewModel: viewModel)
-                .transition(.slide)
             
         }.sheet(isPresented: $showCoffee) {
             if #available(iOS 16.0, *) {
