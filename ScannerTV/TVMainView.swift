@@ -48,11 +48,29 @@ struct TVMainView: View {
                                         }
                                     }
                             } else {
-                                List(viewModel.activities) { activity in
-                                    TVRowView(activity: activity, chosenActivity: $chosenActivity)
-                                        .onAppear {
-                                            viewModel.getMoreActivitiesIfNeeded(currentActivity: activity)
+                                Section {
+                                    List(viewModel.activities) { activity in
+                                        TVRowView(activity: activity, chosenActivity: $chosenActivity)
+                                        
+                                        if (viewModel.activities.last == activity) {
+                                            Section {
+                                                ProgressView()
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .onAppear {
+                                                        if (!viewModel.needScroll){
+                                                            viewModel.getMoreActivities()
+                                                        }
+                                                    }
+                                                    .onDisappear {
+                                                        viewModel.needScroll = false
+                                                    }
+                                            }
                                         }
+                                    }
+                                }.refreshable {
+                                    withAnimation {
+                                        viewModel.refresh()
+                                    }
                                 }.frame(width: 450)
                             }
                         }

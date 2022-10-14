@@ -10,6 +10,11 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
+class MM : ObservableObject {
+    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+}
+
+
 final class ScannerActivityListViewModel: ObservableObject {
     @Published var locationManager: LocationManager = LocationManager()
     @Published var model: Scanner
@@ -22,28 +27,27 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published private var alertItem: AlertItem?
     @Published var isLoading = false
     @Published var serverResponsive = true
+    @Published var needScroll = false
+    @Published var mapModel = MM()
+    private var storedPages : [Int] = []
     private var thresholdIndex = 20
     private var currentPage = 1
-    
     
     init() {
         model = Scanner()
         print("Initializing activities")
         
         locationManager.checkIfLocationServicesIsEnabled()
-        self.refresh()
+        self.currentPage = 0
+        self.getActivities()
     }
     
-    func getMoreActivitiesIfNeeded(currentActivity activity: Scanner.Activity?) {
-        guard let activity = activity else {
-            self.getActivities()
-            return
-        }
+    func getMoreActivities() {
+        print("Pulling page \(self.currentPage)")
+        self.needScroll = true
+        self.getActivities()
         
-        self.thresholdIndex = self.activities.endIndex - 5
-        if (self.activities.firstIndex(of: activity) == thresholdIndex) {
-            self.getActivities()
-        }
+        return
     }
     
     func getActivities() {
@@ -67,11 +71,12 @@ final class ScannerActivityListViewModel: ObservableObject {
                     }
                     activityIDs = activityIDs.unique
                     let activities = activitiesAll.filter({activityIDs.contains($0.id)})
-                    
+                    self.storedPages.append(currentPage)
+                    self.currentPage+=1
                     self.activities.append(contentsOf: activities)
                     self.addDatesToActivities(self.activities)
                     self.addDistancesToActivities(self.activities)
-                    self.currentPage+=1
+                    
                     self.isLoading = false
                     
                 case .failure(let error):
@@ -139,9 +144,9 @@ final class ScannerActivityListViewModel: ObservableObject {
     func refresh() {
         print("Refresh")
         self.isLoading = true
-
+        self.storedPages = []
+        self.currentPage = 0
         self.activities.removeAll()
-        self.currentPage = 1
         
         if natures.isEmpty {
             self.getNatures()

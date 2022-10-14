@@ -9,25 +9,13 @@
          contextName = "ScannerActivityListViewModel.getMoreActivitiesIfNeeded(currentActivity:):ScannerActivityListViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.activities.firstIndex(of: activity)">
+               value = "self.currentPage">
             </PersistentString>
             <PersistentString
-               value = "self.thresholdIndex">
+               value = "self.storedPages">
             </PersistentString>
             <PersistentString
-               value = "activities.endIndex">
-            </PersistentString>
-            <PersistentString
-               value = "activities[17]">
-            </PersistentString>
-            <PersistentString
-               value = "activity.id">
-            </PersistentString>
-            <PersistentString
-               value = "$0">
-            </PersistentString>
-            <PersistentString
-               value = "self.activities.endIndex">
+               value = "self.activities.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,6 +24,25 @@
          <PersistentStrings>
             <PersistentString
                value = "self.activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in MapView.body.getter:MapView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "chosenActivity?">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.getMoreActivities():ScannerActivityListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentPage">
+            </PersistentString>
+            <PersistentString
+               value = "self.storedPages">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

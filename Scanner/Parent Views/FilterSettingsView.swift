@@ -16,7 +16,7 @@ struct FilterSettings: View {
     
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
-    @AppStorage("radius") var radius = 2.0
+    @AppStorage("radius") var radius = 0.0
     @AppStorage("showDistance") var showDistance = true
     
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!

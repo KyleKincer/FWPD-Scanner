@@ -15,7 +15,7 @@ class NetworkManager: NSObject {
     // Do I need this???
     private override init() {}
     
-    func getActivities(page: Int = 1, per_page: Int = 25, dateFrom: Date? = nil, dateTo: Date? = nil, natures: Set<Int>? = nil, location: CLLocation? = nil, radius: Double? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
+    func getActivities(page: Int, per_page: Int = 25, dateFrom: Date? = nil, dateTo: Date? = nil, natures: Set<Int>? = nil, location: CLLocation? = nil, radius: Double? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
         let formatter = DateFormatter()
         let dateFromStr: String
         let dateToStr: String

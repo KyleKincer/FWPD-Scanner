@@ -36,13 +36,26 @@ struct WatchListView: View {
                             WatchMapView(viewModel: viewModel)
                         } else {
                         NavigationView{
-                            List(viewModel.activities) { activity in
-                                WatchRowView(activity: activity)
-                                    .onAppear {
-                                        viewModel.getMoreActivitiesIfNeeded(currentActivity: activity)
+                            Section {
+                                List(viewModel.activities) { activity in
+                                    WatchRowView(activity: activity)
+                                    
+                                    if (viewModel.activities.last == activity) {
+                                        Section {
+                                            ProgressView()
+                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                .onAppear {
+                                                    if (!viewModel.needScroll){
+                                                        viewModel.getMoreActivities()
+                                                    }
+                                                }
+                                                .onDisappear {
+                                                    viewModel.needScroll = false
+                                                }
+                                        }
+                                        }
                                     }
                                 }
-                                
                             }.refreshable {
                                 withAnimation {
                                     viewModel.refresh()

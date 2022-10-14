@@ -20,9 +20,10 @@ struct ActivityView: View {
         switch sizeClass {
             case .compact:
             ZStack {
-                MapView(chosenActivity: $chosenActivity, viewModel: viewModel)
-                    .edgesIgnoringSafeArea(.all)
-                
+                if (showMap) {
+                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
+                        .edgesIgnoringSafeArea(.all)
+                }
                 
                 if (showMap==false) {
                     if (colorScheme == .light) {
@@ -43,10 +44,8 @@ struct ActivityView: View {
                                         withAnimation (.linear(duration: 0.5)) {
                                             viewModel.serverResponsive = true
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                withAnimation {
-                                                    viewModel.serverResponsive = false
-                                                    viewModel.refresh()
-                                                }
+                                                viewModel.serverResponsive = false
+                                                viewModel.refresh()
                                             }
                                         }
                                     }
@@ -62,7 +61,6 @@ struct ActivityView: View {
                                 
                             } else {
                                 ScannerActivityListView(viewModel: viewModel)
-                                    .animation(.linear, value: showMap)
                             }
                         }
                     }
@@ -74,7 +72,7 @@ struct ActivityView: View {
         default:
             VStack {
                 if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, viewModel: viewModel)
+                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                     
                 } else {
@@ -101,11 +99,30 @@ struct ActivityView: View {
                                         ExpandedFilterSettings(viewModel: viewModel)
                                         
                                     } else {
-                                        List(viewModel.activities) { activity in
-                                            ActivityRowView(activity: activity)
-                                        }
-                                        .refreshable {
-                                            viewModel.refresh()
+                                        Section {
+                                            List(viewModel.activities) { activity in
+                                                ActivityRowView(activity: activity)
+                                                
+                                                if (viewModel.activities.last == activity) {
+                                                    Section {
+                                                        ProgressView()
+                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                            .listRowSeparator(.hidden)
+                                                            .onAppear {
+                                                                if (!viewModel.needScroll){
+                                                                    viewModel.getMoreActivities()
+                                                                }
+                                                            }
+                                                            .onDisappear {
+                                                                viewModel.needScroll = false
+                                                            }
+                                                    }
+                                                }
+                                            }
+                                        }.refreshable {
+                                            withAnimation {
+                                                viewModel.refresh()
+                                            }
                                         }
                                     }
                                 }

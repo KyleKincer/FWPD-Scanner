@@ -22,22 +22,25 @@ struct ScannerActivityListView: View {
         ZStack {  
             VStack {
                 NavigationView {
+                    Section {
                     List(viewModel.activities) { activity in
-                        if viewModel.isLoading {
-                            if activity == viewModel.activities.first {
-                                HStack {
-                                    Spacer()
+                            ActivityRowView(activity: activity)
+                            
+                            if (viewModel.activities.last == activity) {
+                                Section {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
-                                    Spacer()
+                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        .listRowSeparator(.hidden)
+                                        .onAppear {
+                                            if (!viewModel.needScroll){
+                                                viewModel.getMoreActivities()
+                                            }
+                                        }
+                                        .onDisappear {
+                                            viewModel.needScroll = false
+                                        }
                                 }
                             }
-                        } else {
-                            ActivityRowView(activity: activity)
-                                .onAppear {
-                                    viewModel.getMoreActivitiesIfNeeded(currentActivity: activity)
-                                }
-                                
                         }
                     }.refreshable {
                         withAnimation {
@@ -63,7 +66,7 @@ struct ScannerActivityListView: View {
                         }
                     }
                 }
-            }.transition(.move(edge: .bottom))
+            }
             
             if showingRefreshReminder {
                 VStack {
