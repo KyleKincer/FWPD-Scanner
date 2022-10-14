@@ -14,6 +14,7 @@ struct TVNavBarView: View {
     @ObservedObject var viewModel : ScannerActivityListViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
+    
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
@@ -34,7 +35,17 @@ struct TVNavBarView: View {
             
             Button(action: {
                 withAnimation (.linear) {
-                    viewModel.refresh()
+                    if (!viewModel.serverResponsive) {
+                        withAnimation (.linear(duration: 0.5)) {
+                            viewModel.serverResponsive = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                viewModel.serverResponsive = false
+                                viewModel.refresh()
+                            }
+                        }
+                    } else {
+                        viewModel.refresh()
+                    }
                 }
             }, label: {
                 
@@ -100,9 +111,6 @@ struct TVNavBarView: View {
             
         }
         .padding(30)
-        .onAppear {
-            viewModel.refresh()
-        }
         
         Spacer()
         

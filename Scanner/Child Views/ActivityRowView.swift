@@ -71,9 +71,6 @@ struct ActivityRowView: View {
                         
                         Spacer()
                         
-                        if #available(iOS 16.0, *) {
-                            Image(systemName: "chevron.right")
-                        }
                     }
                     
                     HStack {

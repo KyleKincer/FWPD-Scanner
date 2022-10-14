@@ -33,22 +33,28 @@ struct TVMainView: View {
                 } else {
                     HStack {
                         VStack {
-                            List(viewModel.activities) {
-                                if viewModel.isLoading {
-                                    if $0 == viewModel.activities.first {
-                                        HStack {
-                                            Spacer()
-                                            
-                                            ProgressView()
-                                                .progressViewStyle(CircularProgressViewStyle())
-                                            
-                                            Spacer()
+                            if (viewModel.isLoading || !viewModel.serverResponsive) {
+                                TVStatusView(viewModel: viewModel)
+                                    .frame(width: 450)
+                                    .onTapGesture {
+                                        if (!viewModel.serverResponsive) {
+                                            withAnimation (.linear(duration: 0.5)) {
+                                                viewModel.serverResponsive = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                    viewModel.serverResponsive = false
+                                                    viewModel.refresh()
+                                                }
+                                            }
                                         }
                                     }
-                                } else {
-                                    TVRowView(activity: $0, chosenActivity: $chosenActivity)
-                                }
-                            }.frame(width: 450)
+                            } else {
+                                List(viewModel.activities) { activity in
+                                    TVRowView(activity: activity, chosenActivity: $chosenActivity)
+                                        .onAppear {
+                                            viewModel.getMoreActivitiesIfNeeded(currentActivity: activity)
+                                        }
+                                }.frame(width: 450)
+                            }
                         }
                         
                         Spacer()

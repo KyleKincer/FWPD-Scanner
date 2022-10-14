@@ -136,9 +136,6 @@ struct ExpandedNavBarView: View {
             .shadow(radius: 2)
         }
         .padding([.leading, .trailing])
-        .onAppear {
-            viewModel.refresh()
-        }
         
         Spacer()
         
