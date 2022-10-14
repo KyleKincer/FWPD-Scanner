@@ -9,11 +9,12 @@ import SwiftUI
 import MapKit
 
 struct WatchMapView: View {
+    @State var mapModel = MapViewModel()
     @ObservedObject var viewModel: ScannerActivityListViewModel
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
+            Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                     WatchMapAnnotationView(viewModel: viewModel, activity: activity)
                 }

@@ -9,12 +9,13 @@ import SwiftUI
 import MapKit
 
 struct TVMapView: View {
+    @State var mapModel = MapViewModel()
     @ObservedObject var viewModel: ScannerActivityListViewModel
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
+            Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                     TVMapAnnotationView(viewModel: viewModel, activity: activity).focusable()
                 }

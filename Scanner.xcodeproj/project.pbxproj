@@ -434,12 +434,12 @@
 		EBB721C828F6F55800435375 /* ScannerTV */ = {
 			isa = PBXGroup;
 			children = (
-				EB8FD00628F8F23900B0C5AC /* TVMapView.swift */,
 				EBB721F128F7178600435375 /* Info.plist */,
 				EBB721C928F6F55800435375 /* ScannerTVApp.swift */,
 				EBB721CB28F6F55800435375 /* TVView.swift */,
 				EBB721E228F6FDEC00435375 /* TVMainView.swift */,
 				EBB721E428F6FE6E00435375 /* TVNavBarView.swift */,
+				EB8FD00628F8F23900B0C5AC /* TVMapView.swift */,
 				EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */,
 				EBB721EC28F7067900435375 /* TVRowView.swift */,
 				EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */,

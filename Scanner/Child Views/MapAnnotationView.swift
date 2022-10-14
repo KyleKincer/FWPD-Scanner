@@ -16,7 +16,7 @@ struct MapAnnotationView: View {
     
     var body: some View {
         Image(systemName: "exclamationmark.triangle.fill")
-            .foregroundColor(.red)
+            .foregroundColor(chosenActivity == activity ? .blue : .red)
             .onTapGesture {
                 withAnimation {
                     if (chosenActivity == activity) {
@@ -26,7 +26,7 @@ struct MapAnnotationView: View {
                     }
                 }
             }
-            .scaleEffect(chosenActivity == activity ? 1.5 : 1)
+            .scaleEffect(chosenActivity == activity ? 2 : 1)
     }
 }
 

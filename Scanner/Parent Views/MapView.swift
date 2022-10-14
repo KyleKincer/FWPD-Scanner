@@ -8,10 +8,8 @@
 import SwiftUI
 import MapKit
 
-
-
 struct MapView: View {
-    @StateObject var mapModel = MapViewModel()
+    @State var mapModel = MapViewModel()
     @Binding var chosenActivity : Scanner.Activity?
     @Binding var activities : [Scanner.Activity]
     @ObservedObject var viewModel: ScannerActivityListViewModel
@@ -20,9 +18,14 @@ struct MapView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Map(coordinateRegion: $viewModel.mapModel.region, showsUserLocation: true, annotationItems: activities) { activity in
+            Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                     MapAnnotationView(activity: activity, chosenActivity: $chosenActivity)
+                        .onTapGesture {
+                            mapModel.region.center.latitude = activity.latitude
+                            mapModel.region.center.longitude = activity.longitude
+                            
+                        }
                 }
             }
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))

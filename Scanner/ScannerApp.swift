@@ -1,6 +1,6 @@
 //
 //  ScannerApp.swift
-//  Scanner
+//  Scanner®
 //
 //  Created by Kyle Kincer on 1/11/22.
 //
