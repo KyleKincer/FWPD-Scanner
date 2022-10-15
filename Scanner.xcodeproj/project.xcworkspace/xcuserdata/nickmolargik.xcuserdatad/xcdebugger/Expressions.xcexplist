@@ -3,7 +3,58 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in ScannerActivityListView.body.getter:ScannerActivityListView.swift">
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.getMoreActivities():ScannerActivityListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentPage">
+            </PersistentString>
+            <PersistentString
+               value = "self.storedPages">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in MapView.body.getter:MapView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "chosenActivity?">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #6 in FilterSettings.body.getter:FilterSettingsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newValue">
+            </PersistentString>
+            <PersistentString
+               value = "dateFrom">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.refresh():ScannerActivityListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #8 in FilterSettings.body.getter:FilterSettingsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "refreshOnExit">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ScannerActivityListViewModel.getMoreActivitiesIfNeeded(currentActivity:):ScannerActivityListViewModel.swift">
@@ -20,31 +71,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ScannerActivityListViewModel.refresh():ScannerActivityListViewModel.swift">
+         contextName = "ScannerActivityListViewModel.filterOutDuplicates():ListViewModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.activities">
+               value = "uniqueActivities.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in MapView.body.getter:MapView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "chosenActivity?">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in ScannerActivityListView.body.getter:ScannerActivityListView.swift">
       </ContextState>
       <ContextState
-         contextName = "ScannerActivityListViewModel.getMoreActivities():ScannerActivityListViewModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentPage">
-            </PersistentString>
-            <PersistentString
-               value = "self.storedPages">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "ScannerActivityListViewModel.getMoreActivities():ListViewModel.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

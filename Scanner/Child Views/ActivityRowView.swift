@@ -87,7 +87,6 @@ struct ActivityRowView: View {
                     }
                 }
             }
-
         }
     }
 }

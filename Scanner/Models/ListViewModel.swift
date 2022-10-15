@@ -14,7 +14,6 @@ class MM : ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 }
 
-
 final class ScannerActivityListViewModel: ObservableObject {
     @Published var locationManager: LocationManager = LocationManager()
     @Published var model: Scanner
@@ -25,29 +24,32 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published var dateTo = Date()
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     @Published private var alertItem: AlertItem?
-    @Published var isLoading = false
+    @Published var isRefreshing = false
     @Published var serverResponsive = true
-    @Published var needScroll = false
+    @Published var isLoading = false
     @Published var mapModel = MM()
     private var storedPages : [Int] = []
-    private var thresholdIndex = 20
     private var currentPage = 1
     
     init() {
+        print("Initializing list view model")
         model = Scanner()
-        print("Initializing activities")
-        
         locationManager.checkIfLocationServicesIsEnabled()
-        self.currentPage = 0
-        self.getActivities()
+        self.refresh()
     }
     
-    func getMoreActivities() {
-        print("Pulling page \(self.currentPage)")
-        self.needScroll = true
-        self.getActivities()
+    func refresh() {
+        print("Refreshing Activities")
+        self.isRefreshing = true
+        self.activities.removeAll() // clear out stored activities
+        self.storedPages.removeAll() // clear out page log
+        self.currentPage = 1 // prep us to get page #1
         
-        return
+        if natures.isEmpty {
+            self.getNatures() // get natures if first time using app
+        }
+        
+        self.getActivities() // get first batch of activities
     }
     
     func getActivities() {
@@ -62,25 +64,21 @@ final class ScannerActivityListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                     
-                case .success(let activitiesAll):
-                    self.serverResponsive = true // No error
-                    var activityIDs: [Int] = []
-                    
-                    for activity in activitiesAll {
-                        activityIDs.append(activity.id)
-                    }
-                    activityIDs = activityIDs.unique
-                    let activities = activitiesAll.filter({activityIDs.contains($0.id)})
-                    self.storedPages.append(currentPage)
-                    self.currentPage+=1
-                    self.activities.append(contentsOf: activities)
+                case .success(let newActivities):
+                    print("Page \(self.currentPage) retrieved!")
+                    self.serverResponsive = true // No problem connecting to server
+                    self.isLoading = false
+                    self.isRefreshing = false
+                    self.storedPages.append(self.currentPage)
+                    self.activities.append(contentsOf: newActivities)
+                    self.filterOutDuplicates()
                     self.addDatesToActivities(self.activities)
                     self.addDistancesToActivities(self.activities)
                     
-                    self.isLoading = false
-                    
                 case .failure(let error):
-                    self.serverResponsive = false // Server error
+                    print("Failed to retrieve Page \(self.currentPage)!")
+                    self.serverResponsive = false // Indicate problem connecting to the server
+                    
                     switch error {
                     case .invalidURL:
                         self.alertItem = AlertContext.invalidURL
@@ -91,9 +89,32 @@ final class ScannerActivityListViewModel: ObservableObject {
                     case .invalidData:
                         self.alertItem = AlertContext.invalidData
                     }
+                    
+                    self.getActivities() // Try again until we get some more activities
                 }
             }
         }
+    }
+    
+    func filterOutDuplicates() -> Void {
+        let activityIDs = (self.activities).compactMap { $0.id }
+        let uniqueIDs = Array(Set(activityIDs))
+        var uniqueActivities = [Scanner.Activity]()
+        
+        for activityID in uniqueIDs {
+            uniqueActivities.append(self.activities.first(where: {$0.id == activityID})!) // pile up all unique activities
+        }
+        
+        self.activities = uniqueActivities
+        return
+    }
+    
+    func getMoreActivities() {
+        self.isLoading = true
+        self.currentPage+=1
+        print("Asking for page \(self.currentPage) of activities...")
+        self.getActivities()
+        return
     }
     
     func getNatures() {
@@ -139,29 +160,5 @@ final class ScannerActivityListViewModel: ObservableObject {
         for i in activities.indices {
             self.activities[i].distance = nil
         }
-    }
-    
-    func refresh() {
-        print("Refresh")
-        self.isLoading = true
-        self.storedPages = []
-        self.currentPage = 0
-        self.activities.removeAll()
-        
-        if natures.isEmpty {
-            self.getNatures()
-        }
-        self.getActivities()
-    }
-}
-
-extension Array where Element: Equatable {
-    var unique: [Element] {
-        var uniqueValues: [Element] = []
-        forEach { item in
-            guard !uniqueValues.contains(item) else { return }
-            uniqueValues.append(item)
-        }
-        return uniqueValues
     }
 }

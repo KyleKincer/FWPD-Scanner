@@ -19,7 +19,6 @@ struct LatestAttribute: ActivityAttributes {
     }
 }
 
-
 @available(iOS 16.1, *)
 class LiveActivityHelper {
     var latestActivity: Activity<LatestAttribute>?

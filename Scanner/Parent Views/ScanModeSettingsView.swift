@@ -14,7 +14,6 @@ struct ScanModeSettingsView: View {
     @State var helper = LiveActivityHelper()
     
     var body: some View {
-        
         VStack {
             Capsule()
                     .fill(Color.secondary)

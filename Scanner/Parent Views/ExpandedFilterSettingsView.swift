@@ -14,6 +14,8 @@ struct ExpandedFilterSettings: View {
     @State var dateTo = Date()
     @State var showingTypesPopover = false
     @State var selection = Set<Int>()
+    @State var justAppeared1 = false
+    @State var justAppeared2 = false
     @Environment(\.dismiss) var dismiss
     
     @AppStorage("useLocation") var useLocation = false
@@ -52,49 +54,59 @@ struct ExpandedFilterSettings: View {
                     
                 }
             }
-            .environment(\.editMode, .constant(EditMode.active))
-            .onChange(of: useLocation) { _ in
-                            refreshOnExit = true
+        }
+        .environment(\.editMode, .constant(EditMode.active))
+        .onChange(of: useLocation) { _ in
+            refreshOnExit = true
+        }
+        .onChange(of: radius) { _ in
+            if useLocation {
+                refreshOnExit = true
             }
-            .onChange(of: radius) { _ in
-                if useLocation {
-                    refreshOnExit = true
-                }
+            viewModel.refresh()
+        }
+        .onChange(of: showDistance) { newValue in
+            if !newValue {
+                viewModel.clearDistancesFromActivities()
             }
-            .onChange(of: showDistance) { newValue in
-                if !newValue {
-                    viewModel.clearDistancesFromActivities()
-                }
+            viewModel.refresh()
+        }
+        .onChange(of: dateFrom) {newValue in
+            if (!justAppeared1) {
+                refreshOnExit = true
+            } else {
+                justAppeared1 = false
+            }
+        }
+        .onChange(of: dateTo) {newValue in
+            if (!justAppeared2) {
+                refreshOnExit = true
+            } else {
+                justAppeared2 = false
+            }
+        }
+        .onDisappear {
+            print("didDisappear")
+            if dateFrom > dateTo {
+                viewModel.dateFrom = dateTo
+            } else {
+                viewModel.dateFrom = dateFrom
+            }
+            viewModel.dateTo = dateTo
+            if refreshOnExit {
+                refreshOnExit = false
                 viewModel.refresh()
             }
-            .onChange(of: dateFrom) {newValue in
-                refreshOnExit = true
-            }
-            .onChange(of: dateTo) {newValue in
-                refreshOnExit = true
-            }
-            .onDisappear {
-                viewModel.selectedNatures = selection
-                print("didDisappear")
-                if dateFrom > dateTo {
-                    viewModel.dateFrom = dateTo
-                } else {
-                    viewModel.dateFrom = dateFrom
-                }
-                viewModel.dateTo = dateTo
-                if refreshOnExit {
-                    refreshOnExit = false
-                    viewModel.refresh()
-                }
-            }
-            .onAppear {
-                selection = viewModel.selectedNatures
-                print("didAppear")
-                if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
-                    || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
-                    dateFrom = viewModel.dateFrom
-                    dateTo = viewModel.dateTo
-                }
+        }
+        .onAppear {
+            print("didAppear")
+            refreshOnExit = false
+            justAppeared1 = true
+            justAppeared2 = true
+            if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
+                || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
+                dateFrom = viewModel.dateFrom
+                dateTo = viewModel.dateTo
             }
         }
     }

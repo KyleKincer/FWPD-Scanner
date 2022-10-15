@@ -11,8 +11,6 @@ import CoreLocation
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
-    
-    // Do I need this???
     private override init() {}
     
     func getActivities(page: Int, per_page: Int = 25, dateFrom: Date? = nil, dateTo: Date? = nil, natures: Set<Int>? = nil, location: CLLocation? = nil, radius: Double? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
@@ -87,9 +85,7 @@ class NetworkManager: NSObject {
         }
         
         task.resume()
-        
     }
-    
     
     func getNatures(completed: @escaping (Result<[Scanner.Nature], ActError>) -> Void) {
         
@@ -123,6 +119,5 @@ class NetworkManager: NSObject {
         }
         
         task.resume()
-        
     }
 }

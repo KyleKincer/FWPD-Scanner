@@ -19,7 +19,7 @@ struct WatchListView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    if (viewModel.isLoading) {
+                    if (viewModel.isRefreshing) {
                         WatchStatusView(viewModel: viewModel)
                             .onTapGesture {
                                 if (!viewModel.serverResponsive) {
@@ -42,18 +42,24 @@ struct WatchListView: View {
                                 List(viewModel.activities) { activity in
                                     WatchRowView(activity: activity)
                                     
-                                    if (viewModel.activities.last == activity) {
+                                    if (activity == viewModel.activities.last) {
                                         Section {
-                                            ProgressView()
-                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                .onAppear {
-                                                    if (!viewModel.needScroll){
-                                                        viewModel.getMoreActivities()
+                                            if (viewModel.isLoading) {
+                                                ProgressView()
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                            } else {
+                                                Text("Tap for More")
+                                                    .bold()
+                                                    .italic()
+                                                    .foregroundColor(.blue)
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .onTapGesture {
+                                                        if (activity == viewModel.activities.last && !viewModel.isLoading) {
+                                                            viewModel.getMoreActivities()
+                                                        }
                                                     }
-                                                }
-                                                .onDisappear {
-                                                    viewModel.needScroll = false
-                                                }
+                                            }
+                                            
                                         }
                                         }
                                     }
@@ -106,7 +112,6 @@ struct WatchListView: View {
                             withAnimation {
                                 viewModel.refresh()
                             }
-                            
                         }
                     }
                     .padding(.bottom, -60)

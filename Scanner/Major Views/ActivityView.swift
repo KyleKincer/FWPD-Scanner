@@ -34,7 +34,7 @@ struct ActivityView: View {
                             .edgesIgnoringSafeArea(.all)
                     }
                     VStack {
-                        if (viewModel.isLoading) {
+                        if (viewModel.isRefreshing) {
                             
                             Spacer()
                             
@@ -56,11 +56,11 @@ struct ActivityView: View {
                         } else {
                             if #available(iOS 16.0, *) {
                                 NavigationStack {
-                                    ScannerActivityListView(viewModel: viewModel)
+                                    ScannerActivityListView(viewModel: viewModel, showMap: showMap)
                                 }
                                 
                             } else {
-                                ScannerActivityListView(viewModel: viewModel)
+                                ScannerActivityListView(viewModel: viewModel, showMap: showMap)
                             }
                         }
                     }
@@ -79,7 +79,7 @@ struct ActivityView: View {
                     if #available(iOS 16.0, *) {
                         NavigationSplitView {
                             VStack {
-                                if (viewModel.isLoading) {
+                                if (viewModel.isRefreshing) {
                                     Spacer()
                                     
                                     StatusView(viewModel: viewModel)
@@ -99,32 +99,37 @@ struct ActivityView: View {
                                         ExpandedFilterSettings(viewModel: viewModel)
                                         
                                     } else {
-                                        Section {
                                             List(viewModel.activities) { activity in
                                                 ActivityRowView(activity: activity)
-                                                    .onAppear {
-                                                    }
                                                 
-                                                if (viewModel.activities.last == activity) {
-                                                    Section {
-                                                        ProgressView()
-                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                            .listRowSeparator(.hidden)
-                                                            .onAppear {
-                                                                if (!viewModel.needScroll){
-                                                                    viewModel.getMoreActivities()
-                                                                }
-                                                            }
-                                                            .onDisappear {
-                                                                viewModel.needScroll = false
-                                                            }
-                                                    }
+                                                if (activity == viewModel.activities.last && viewModel.isLoading) {
+                                                    
                                                 }
-                                            }
-                                        }.refreshable {
+                                            }.refreshable {
                                             withAnimation {
                                                 viewModel.refresh()
                                             }
+                                        }
+                                        
+                                        Section {
+                                            if (viewModel.isLoading) {
+                                                ProgressView()
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .listRowSeparator(.hidden)
+                                            } else {
+                                                Text("Tap for More")
+                                                    .bold()
+                                                    .italic()
+                                                    .foregroundColor(.blue)
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .onTapGesture {
+                                                            if (!viewModel.isLoading) {
+                                                                viewModel.getMoreActivities()
+                                                            }
+                                                    }
+                                                    .padding(.trailing, -2)
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -156,7 +161,7 @@ struct ActivityView: View {
                         chosenActivity = nil
                     }
                     } else {
-                        ScannerActivityListView(viewModel: viewModel)
+                        ScannerActivityListView(viewModel: viewModel, showMap: showMap)
                     }
                 }
             }

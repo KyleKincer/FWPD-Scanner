@@ -42,9 +42,30 @@ struct WatchSettingsView: View {
             }
             .padding(.top, -15)
         }
-        .onDisappear {
-            print("didDisappear")
+        .onChange(of: useLocation) { _ in
+            refreshOnExit = true
+        }
+        .onChange(of: radius) { _ in
+            if useLocation {
+                refreshOnExit = true
+            }
             viewModel.refresh()
+        }
+        .onChange(of: showDistance) { newValue in
+            if !newValue {
+                viewModel.clearDistancesFromActivities()
+            }
+            viewModel.refresh()
+        }
+        .onDisappear {
+            if refreshOnExit {
+                refreshOnExit = false
+                viewModel.refresh()
+            }
+        }
+        .onAppear {
+            print("didAppear")
+            refreshOnExit = false
         }
     }
 }

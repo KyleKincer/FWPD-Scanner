@@ -40,8 +40,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         @unknown default:
             break
         }
-
     }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }

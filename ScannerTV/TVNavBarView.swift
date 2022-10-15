@@ -64,6 +64,29 @@ struct TVNavBarView: View {
             })
             .frame(width: 400)
             
+            Button(action: {
+                withAnimation (.linear) {
+                    if (!viewModel.isLoading) {
+                        viewModel.getMoreActivities()
+                    }
+                }
+            }, label: {
+                
+                ZStack {
+                    HStack {
+                        Image(systemName: "plus.magnifyingglass")
+                            .font(.system(size: 40))
+                            .foregroundColor(.red)
+                            .transition(.opacity)
+                        
+                        Text("Get More")
+                            .foregroundColor(.black)
+                            .transition(.opacity)
+                    }
+                }
+            })
+            .frame(width: 400)
+            
             Spacer()
             
             Button(action: {

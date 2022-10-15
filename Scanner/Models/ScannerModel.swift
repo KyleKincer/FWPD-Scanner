@@ -35,7 +35,6 @@ struct Scanner {
         }
     }
     
-    
     struct Nature: Identifiable, Decodable, Equatable {
         let id: Int
         let name: String

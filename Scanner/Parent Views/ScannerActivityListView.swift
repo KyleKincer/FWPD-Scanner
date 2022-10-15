@@ -17,6 +17,7 @@ struct ScannerActivityListView: View {
     @State var isEditing = false
     @State var startingOffsetY: CGFloat = 100.0
     @State var currentDragOffsetY: CGFloat = 0
+    @State var showMap : Bool
     
     var body: some View {
         ZStack {  
@@ -26,30 +27,43 @@ struct ScannerActivityListView: View {
                     List(viewModel.activities) { activity in
                             ActivityRowView(activity: activity)
                             
-                            if (viewModel.activities.last == activity) {
-                                Section {
+                        if (activity == viewModel.activities.last) {
+                            Section {
+                                if (viewModel.isLoading) {
                                     ProgressView()
                                         .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                         .listRowSeparator(.hidden)
-                                        .onAppear {
-                                            if (!viewModel.needScroll){
-                                                viewModel.getMoreActivities()
-                                            }
+                                } else {
+                                    HStack {
+                                        Spacer()
+                                        
+                                        Text("Tap for More")
+                                            .bold()
+                                            .italic()
+                                            .foregroundColor(.blue)
+                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        
+                                        Spacer()
+                                    }
+                                    .onTapGesture {
+                                        if (activity == viewModel.activities.last && !viewModel.isLoading) {
+                                            viewModel.getMoreActivities()
                                         }
-                                        .onDisappear {
-                                            viewModel.needScroll = false
-                                        }
+                                    }
+                                        
+                                }
                                 }
                             }
                         }
-                    }.refreshable {
+                    }
+                    .navigationTitle("Recent Events")
+                    .navigationBarTitleDisplayMode(.automatic)
+                    .refreshable {
                         withAnimation {
                             viewModel.refresh()
                             showingRefreshReminder = false
                         }
                     }
-                    .navigationTitle("Recent Events")
-                    .navigationBarTitleDisplayMode(.automatic)
                     .onChange(of: scenePhase) { newPhase in
                         switch newPhase {
                             
@@ -92,13 +106,13 @@ struct ScannerActivityListView: View {
                                 currentDragOffsetY = value.translation.height
                             }
                             .onEnded{ value in
-                                        if value.translation.height < 0 {
-                                            withAnimation(.spring()) {showingRefreshReminder = false}
-                                        }
-                            }
-                    )
+                                if value.translation.height < 0 {
+                                    withAnimation(.spring()) {showingRefreshReminder = false}
+                                }
+                            })
                     
                     Spacer()
+                    
                 }.transition(.move(edge: .top))
             }
         }
@@ -107,6 +121,6 @@ struct ScannerActivityListView: View {
 
 struct ScannerActivityListView_Previews: PreviewProvider {
     static var previews: some View {
-        ScannerActivityListView(viewModel: ScannerActivityListViewModel())
+        ScannerActivityListView(viewModel: ScannerActivityListViewModel(), showMap: false)
     }
 }

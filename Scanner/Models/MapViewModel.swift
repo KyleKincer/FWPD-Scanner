@@ -9,9 +9,5 @@ import SwiftUI
 import MapKit
 
 final class MapViewModel: ObservableObject {
-    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation,
-                                               span: MKCoordinateSpan(
-                                                latitudeDelta: 0.075,
-                                                longitudeDelta: 0.075))
-    
+    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
 }

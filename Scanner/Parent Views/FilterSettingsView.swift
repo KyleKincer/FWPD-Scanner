@@ -9,10 +9,12 @@ import SwiftUI
 
 struct FilterSettings: View {
     @ObservedObject var viewModel: ScannerActivityListViewModel
-    @State private var refreshOnExit = false
+    @State var refreshOnExit = false
     @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State var dateTo = Date()
     @State var showingTypesPopover = false
+    @State var justAppeared1 = false
+    @State var justAppeared2 = false
     
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
@@ -77,12 +79,13 @@ struct FilterSettings: View {
             NaturesList(viewModel: viewModel)
         }
         .onChange(of: useLocation) { _ in
-                        refreshOnExit = true
+            refreshOnExit = true
         }
         .onChange(of: radius) { _ in
             if useLocation {
                 refreshOnExit = true
             }
+            viewModel.refresh()
         }
         .onChange(of: showDistance) { newValue in
             if !newValue {
@@ -91,10 +94,18 @@ struct FilterSettings: View {
             viewModel.refresh()
         }
         .onChange(of: dateFrom) {newValue in
-            refreshOnExit = true
+            if (!justAppeared1) {
+                refreshOnExit = true
+            } else {
+                justAppeared1 = false
+            }
         }
         .onChange(of: dateTo) {newValue in
-            refreshOnExit = true
+            if (!justAppeared2) {
+                refreshOnExit = true
+            } else {
+                justAppeared2 = false
+            }
         }
         .onDisappear {
             print("didDisappear")
@@ -111,6 +122,9 @@ struct FilterSettings: View {
         }
         .onAppear {
             print("didAppear")
+            refreshOnExit = false
+            justAppeared1 = true
+            justAppeared2 = true
             if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
                 || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
                 dateFrom = viewModel.dateFrom

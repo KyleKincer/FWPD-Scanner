@@ -12,11 +12,10 @@
 		E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F446278E84A8009C0B13 /* Assets.xcassets */; };
 		E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F449278E84A8009C0B13 /* Preview Assets.xcassets */; };
 		E202F45127907868009C0B13 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		E202F4532790C46F009C0B13 /* ScannerActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */; };
+		E202F4532790C46F009C0B13 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
 		E24522BE279134F200EFBB3E /* ScannerActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
-		E264494B279498B500685DAB /* ScannerActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */; };
 		E264494E2794B56700685DAB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
 		E26449502796487200685DAB /* ActivityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494F2796487200685DAB /* ActivityRowView.swift */; };
 		E264495227964D8B00685DAB /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
@@ -28,23 +27,25 @@
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
+		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
 		EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */; };
 		EB3A359328F5FEDE009625D0 /* ScanModeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* ScanModeSettingsView.swift */; };
 		EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */; };
+		EB4E805A28FA55C900F396C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
+		EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406728E6166E009FDA3D /* StandardNavBarView.swift */; };
 		EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406928E617A0009FDA3D /* ActivityView.swift */; };
 		EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */; };
 		EB57DA1628E78D0C0031B68A /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
 		EB57DA1828E78D0D0031B68A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1728E78D0D0031B68A /* Assets.xcassets */; };
 		EB57DA1B28E78D0D0031B68A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */; };
-		EB57DA2228E78E240031B68A /* ScannerActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */; };
+		EB57DA2228E78E240031B68A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
 		EB57DA2328E78E270031B68A /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EB57DA2428E78E2B0031B68A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EB57DA2528E78E2B0031B68A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
 		EB57DA2628E78E2B0031B68A /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
 		EB57DA2728E78E2B0031B68A /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
-		EB62D7E628E79A7D005A76E7 /* ScannerActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */; };
 		EB62D7E728E79A80005A76E7 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB62D7E928E79ADD005A76E7 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
 		EB62D7EA28E79BB6005A76E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
@@ -57,7 +58,7 @@
 		EB64E79228F6328400721DD0 /* ScanModeUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
-		EB7E41F628F72FDC0007347E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */; };
+		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
 		EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */; };
 		EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00628F8F23900B0C5AC /* TVMapView.swift */; };
 		EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
@@ -79,8 +80,7 @@
 		EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721CD28F6F55900435375 /* Assets.xcassets */; };
 		EBB721D128F6F55900435375 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721D028F6F55900435375 /* Preview Assets.xcassets */; };
 		EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EBB721D728F6F56100435375 /* ScannerActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */; };
-		EBB721D828F6F56100435375 /* ScannerActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */; };
+		EBB721D828F6F56100435375 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
 		EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EBB721DA28F6F56600435375 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
@@ -137,11 +137,10 @@
 		E202F446278E84A8009C0B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E202F449278E84A8009C0B13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E202F45027907868009C0B13 /* ScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerModel.swift; sourceTree = "<group>"; };
-		E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityListViewModel.swift; sourceTree = "<group>"; };
+		E202F4522790C46F009C0B13 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityDetailView.swift; sourceTree = "<group>"; };
 		E24522D12791F69400EFBB3E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
-		E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityDetailViewModel.swift; sourceTree = "<group>"; };
 		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E264494F2796487200685DAB /* ActivityRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRowView.swift; sourceTree = "<group>"; };
 		E264495127964D8B00685DAB /* ActError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActError.swift; sourceTree = "<group>"; };
@@ -155,6 +154,7 @@
 		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedDetailView.swift; sourceTree = "<group>"; };
+		EB346CB828FA407200693F59 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		EB397D2B28F8AC2900E7178F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStatusView.swift; sourceTree = "<group>"; };
 		EB3A359228F5FEDE009625D0 /* ScanModeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeSettingsView.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeUpgradeView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
-		EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
 		EB8FD00628F8F23900B0C5AC /* TVMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapView.swift; sourceTree = "<group>"; };
 		EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModel.swift; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 		E202F441278E84A7009C0B13 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */,
+				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				E26449552796666100685DAB /* Info.plist */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
@@ -343,8 +343,8 @@
 			children = (
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
-				E202F4522790C46F009C0B13 /* ScannerActivityListViewModel.swift */,
-				E264494A279498B500685DAB /* ScannerActivityDetailViewModel.swift */,
+				E202F4522790C46F009C0B13 /* ListViewModel.swift */,
+				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
 			path = Models;
@@ -591,7 +591,7 @@
 			files = (
 				E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */,
 				E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */,
-				EB7E41F628F72FDC0007347E /* Launch Screen.storyboard in Resources */,
+				EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */,
 				EBB721F328F7229200435375 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,13 +649,13 @@
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
+				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
 				EB64E79228F6328400721DD0 /* ScanModeUpgradeView.swift in Sources */,
 				E264495C2798C4E800685DAB /* CoffeeView.swift in Sources */,
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
-				E202F4532790C46F009C0B13 /* ScannerActivityListViewModel.swift in Sources */,
+				E202F4532790C46F009C0B13 /* ListViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
 				E264495227964D8B00685DAB /* ActError.swift in Sources */,
-				E264494B279498B500685DAB /* ScannerActivityDetailViewModel.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */,
 				EBF51FC228F66D3500488B2D /* ScanModeComingView.swift in Sources */,
@@ -673,11 +673,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB57DA2228E78E240031B68A /* ScannerActivityListViewModel.swift in Sources */,
+				EB57DA2228E78E240031B68A /* ListViewModel.swift in Sources */,
 				EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */,
 				EB62D7F128E7A7D7005A76E7 /* WatchMapAnnotationView.swift in Sources */,
 				EB62D7F628E7B83D005A76E7 /* WatchScannerApp.swift in Sources */,
-				EB62D7E628E79A7D005A76E7 /* ScannerActivityDetailViewModel.swift in Sources */,
 				EB62D7ED28E79D47005A76E7 /* WatchDetailView.swift in Sources */,
 				EB62D7E728E79A80005A76E7 /* ScannerModel.swift in Sources */,
 				EB57DA2528E78E2B0031B68A /* NetworkManager.swift in Sources */,
@@ -687,6 +686,7 @@
 				EBF51F9E28F662F500488B2D /* WatchSettingsView.swift in Sources */,
 				EB62D7EA28E79BB6005A76E7 /* LocationManager.swift in Sources */,
 				EB62D7EF28E79D9B005A76E7 /* WatchRowView.swift in Sources */,
+				EB4E805A28FA55C900F396C5 /* DetailViewModel.swift in Sources */,
 				EB62D7E928E79ADD005A76E7 /* WatchListView.swift in Sources */,
 				EB62D7F428E7A810005A76E7 /* WatchMapView.swift in Sources */,
 				EB57DA2628E78E2B0031B68A /* AlertItem.swift in Sources */,
@@ -716,6 +716,7 @@
 				EBB721DD28F6F56600435375 /* AlertItem.swift in Sources */,
 				EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */,
 				EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */,
+				EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */,
 				EBB721E528F6FE6E00435375 /* TVNavBarView.swift in Sources */,
 				EBB721CC28F6F55800435375 /* TVView.swift in Sources */,
 				EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */,
@@ -728,8 +729,7 @@
 				EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */,
 				EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */,
 				EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */,
-				EBB721D828F6F56100435375 /* ScannerActivityListViewModel.swift in Sources */,
-				EBB721D728F6F56100435375 /* ScannerActivityDetailViewModel.swift in Sources */,
+				EBB721D828F6F56100435375 /* ListViewModel.swift in Sources */,
 				EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */,
 				EBB721DA28F6F56600435375 /* Constants.swift in Sources */,
 				EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */,
@@ -888,14 +888,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to collect and filter nearby FWPD activity. This information is never shared to third parties.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to collect and filter nearby FWPD activity. This information is never shared to third parties.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -934,14 +934,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to collect and filter nearby FWPD activity. This information is never shared to third parties.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to collect and filter nearby FWPD activity. This information is never shared to third parties.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -981,7 +981,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "watchScanner-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1020,7 +1020,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "watchScanner-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1120,7 +1120,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1154,7 +1154,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
+				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (

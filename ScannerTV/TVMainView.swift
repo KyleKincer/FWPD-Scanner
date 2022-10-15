@@ -33,7 +33,7 @@ struct TVMainView: View {
                 } else {
                     HStack {
                         VStack {
-                            if (viewModel.isLoading || !viewModel.serverResponsive) {
+                            if (viewModel.isRefreshing || !viewModel.serverResponsive) {
                                 TVStatusView(viewModel: viewModel)
                                     .frame(width: 450)
                                     .onTapGesture {
@@ -52,18 +52,24 @@ struct TVMainView: View {
                                     List(viewModel.activities) { activity in
                                         TVRowView(activity: activity, chosenActivity: $chosenActivity)
                                         
-                                        if (viewModel.activities.last == activity) {
+                                        if (activity == viewModel.activities.last) {
                                             Section {
-                                                ProgressView()
-                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                    .onAppear {
-                                                        if (!viewModel.needScroll){
-                                                            viewModel.getMoreActivities()
+                                                if (viewModel.isLoading) {
+                                                    ProgressView()
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                } else {
+                                                    Text("Tap for More")
+                                                        .bold()
+                                                        .italic()
+                                                        .focusable()
+                                                        .foregroundColor(.blue)
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                        .onTapGesture {
+                                                            if (activity == viewModel.activities.last && !viewModel.isLoading) {
+                                                                viewModel.getMoreActivities()
+                                                            }
                                                         }
-                                                    }
-                                                    .onDisappear {
-                                                        viewModel.needScroll = false
-                                                    }
+                                                }
                                             }
                                         }
                                     }

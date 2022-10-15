@@ -100,23 +100,48 @@ struct MapView: View {
                     Spacer()
                 }
             }
-            
-            if (viewModel.activities.count > 50) {
-                VStack {
+            VStack {
+                Spacer()
+                
+                HStack {
+                    
                     Spacer()
                     
-                    HStack {
-                        Spacer()
+                    if (viewModel.isLoading) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.blue)
+                            
+                            ProgressView()
+                        }
+                        .frame(width: 120, height: 33)
+                        .padding(.bottom)
                         
-                        Text("Too many activities can cause Map slowdown.\nTry filtering.")
-                            .foregroundColor(.blue)
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 10))
-                            .padding(.bottom, 20)
+                    } else {
                         
-                        Spacer()
+                        Button() {
+                            withAnimation {
+                                viewModel.getMoreActivities()
+                            }
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(.blue)
+                                
+                                HStack {
+                                    Text("Get More").fontWeight(.semibold)
+                                    Image(systemName: "plus.magnifyingglass")
+                                }
+                                .tint(.white)
+                            }
+                            .frame(width: 120, height: 33)
+                            .padding(.bottom)
+                        }
                     }
-                }
+                
+                    Spacer()
+                
+                }.transition(.move(edge: .top))
             }
         }
     }

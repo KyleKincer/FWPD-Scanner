@@ -23,36 +23,40 @@ struct OnboardingView: View {
             }
             
             VStack {
-                Text("Welcome to")
-                    .italic()
-                Text("Scanner")
-                    .fontWeight(.black)
-                    .font(.largeTitle)
-                    .italic()
-                    .shadow(radius: 2)
-                    .foregroundColor(Color("ModeOpposite"))
-                    .scaleEffect(2)
-                    .padding(.bottom, 60)
-                
-                StatusView(viewModel: viewModel)
-                
-                Spacer()
-                
-                Text("One-Time Disclaimer")
-                    .fontWeight(.bold)
-                
-                Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                Text("If you are experiencing an emergency, dial 911.")
-                    .fontWeight(.bold)
-                    .padding()
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                Group {
+                    Spacer()
                     
-                
-                Spacer()
+                    Text("Welcome to")
+                        .italic()
+                    Text("Scanner")
+                        .fontWeight(.black)
+                        .font(.largeTitle)
+                        .italic()
+                        .shadow(radius: 2)
+                        .foregroundColor(Color("ModeOpposite"))
+                        .scaleEffect(2)
+                    
+                    StatusView(viewModel: viewModel)
+                        .scaleEffect(0.5)
+                        .frame(width: 400, height: 100)
+                    
+                    Spacer()
+                    
+                    Text("One-Time Disclaimer")
+                        .fontWeight(.bold)
+                    
+                    Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("If you are experiencing an emergency, dial 911.")
+                        .fontWeight(.bold)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                    Spacer()
+                }
                 
                 Button(action: {
                     onboarding = false
@@ -65,10 +69,11 @@ struct OnboardingView: View {
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
-                })
+                }).padding(.bottom, 50)
+                
+                Spacer()
             }
-            .padding()
-        }
+        }.padding()
     }
 }
 

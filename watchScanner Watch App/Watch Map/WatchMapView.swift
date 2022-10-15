@@ -20,6 +20,29 @@ struct WatchMapView: View {
                 }
             }
             .ignoresSafeArea(.all)
+            
+            VStack {
+                HStack {
+                    ZStack {
+                        Circle()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.blue)
+                        if (viewModel.isLoading) {
+                            ProgressView()
+                        } else {
+                            Image(systemName: "goforward.plus")
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .onTapGesture {
+                        if (!viewModel.isLoading) {
+                            viewModel.getMoreActivities()
+                        }
+                    }
+                    
+                    Spacer()
+                }.padding(.leading)
+            }
         }
     }
 }
