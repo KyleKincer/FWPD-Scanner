@@ -33,12 +33,14 @@ struct ScannerActivityDetailView: View {
                 Spacer()
                 
                 HStack {
+                    Image(systemName: "info.circle")
+                    Text(activity.controlNumber)
+                }
+                
+                
+                HStack {
                     Image(systemName: "mappin.and.ellipse")
-                    
                     Text(activity.address).padding(.trailing, -8).lineLimit(1)
-                    if activity.distance != nil {
-                        Text(", \(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
-                    }
                 }.minimumScaleFactor(0.75)
                 
                 Divider()
@@ -56,6 +58,8 @@ struct ScannerActivityDetailView: View {
                     Image(systemName: "location")
                     Text(activity.location)
                 }
+                
+                Divider()
                 
                 if (showDistance) {
                     HStack {
