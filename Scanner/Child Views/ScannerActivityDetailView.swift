@@ -21,22 +21,21 @@ struct ScannerActivityDetailView: View {
     
     var body: some View {
         VStack {
-            
-            Spacer()
-            
             Group {
                 Text(activity.nature)
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
-                
                 Spacer()
-                
+            }
+            
+            Group {
                 HStack {
                     Image(systemName: "info.circle")
                     Text(activity.controlNumber)
                 }
                 
+                Divider()
                 
                 HStack {
                     Image(systemName: "mappin.and.ellipse")
