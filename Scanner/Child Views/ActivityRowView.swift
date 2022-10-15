@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityRowView: View {
     let activity: Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
+    @AppStorage("bookmarks") var bookmarks = [String]
     
     var body: some View {
         NavigationLink(destination: {ScannerActivityDetailView(activity: activity)}) {
@@ -87,6 +88,10 @@ struct ActivityRowView: View {
                     }
                 }
             }
+        }.swipeActions {
+            Button("Bookmark") {
+                
+            }.tint(.accentColor)
         }
     }
 }
