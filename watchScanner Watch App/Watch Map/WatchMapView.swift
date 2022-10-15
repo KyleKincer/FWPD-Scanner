@@ -25,20 +25,24 @@ struct WatchMapView: View {
                 HStack {
                     ZStack {
                         Circle()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 50, height: 50)
                             .foregroundColor(.blue)
                         if (viewModel.isLoading) {
                             ProgressView()
                         } else {
                             Image(systemName: "goforward.plus")
                                 .foregroundColor(.white)
+                                .font(.system(size: 30))
+                                .onTapGesture {
+                                    if (!viewModel.isLoading) {
+                                        withAnimation (.easeInOut(duration: 0.5)){
+                                            viewModel.getMoreActivities()
+                                        }
+                                    }
+                                }
                         }
                     }
-                    .onTapGesture {
-                        if (!viewModel.isLoading) {
-                            viewModel.getMoreActivities()
-                        }
-                    }
+                    
                     
                     Spacer()
                 }.padding(.leading)
