@@ -40,6 +40,7 @@ struct FilterSettings: View {
             List {
                 Section("Location") {
                     Text("This app only works for Fort Wayne, IN")
+                        .multilineTextAlignment(.center)
                     Toggle("Show Distance From You", isOn: $showDistance)
                     Toggle(isOn: $useLocation) {
                         Text("Filter By Distance")

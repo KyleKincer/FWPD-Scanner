@@ -71,7 +71,7 @@ final class ScannerActivityListViewModel: ObservableObject {
                     self.isRefreshing = false
                     self.storedPages.append(self.currentPage)
                     self.activities.append(contentsOf: newActivities)
-                    self.filterOutDuplicates()
+//                    self.filterOutDuplicates()
                     self.addDatesToActivities(self.activities)
                     self.addDistancesToActivities(self.activities)
                     

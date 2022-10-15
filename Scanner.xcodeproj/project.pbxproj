@@ -884,7 +884,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
@@ -906,7 +906,7 @@
 				MARKETING_VERSION = 2.0;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -930,7 +930,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
@@ -952,7 +952,7 @@
 				MARKETING_VERSION = 2.0;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1052,7 +1052,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
@@ -1064,7 +1064,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1083,7 +1083,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
@@ -1095,7 +1095,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1116,7 +1116,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
@@ -1128,7 +1128,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.ScannerTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
@@ -1150,7 +1150,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
@@ -1162,7 +1162,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.ScannerTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;

@@ -59,6 +59,7 @@ class NetworkManager: NSObject {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print(url)
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             

@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
             endingLineNumber = "37"
-            landmarkName = "getActivities(limit:dateFrom:dateTo:completed:)"
+            landmarkName = "getActivities(page:per_page:dateFrom:dateTo:natures:location:radius:completed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
