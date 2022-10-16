@@ -15,6 +15,7 @@ struct FilterSettings: View {
     @State var showingTypesPopover = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
+    @State var showFavorites = false
     
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
@@ -67,6 +68,16 @@ struct FilterSettings: View {
                 }
                 
                 Section("Filter By Activity Type") {
+                    Toggle(isOn: showFavorites) {
+                        Text("Only Show Favorites")
+                    }.onTapGesture {
+                        if (showFavorites) {
+                            refreshOnExit = true
+                        } else {
+                            viewModel.showFavorites()
+                        }
+                    }
+                    
                     Button {
                         showingTypesPopover = true
                     } label: {

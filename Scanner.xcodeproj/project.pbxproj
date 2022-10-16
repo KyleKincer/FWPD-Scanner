@@ -60,7 +60,7 @@
 		EB64E79228F6328400721DD0 /* ScanModeUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
-		EB7E41F628F72FDC0007347E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */; };
+		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
 		EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */; };
 		EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00628F8F23900B0C5AC /* TVMapView.swift */; };
 		EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
@@ -102,6 +102,7 @@
 		EBB721F928F7249800435375 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBB721F828F7249800435375 /* FirebaseAnalytics */; };
 		EBB721FB28F7249800435375 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBB721FA28F7249800435375 /* FirebaseMessaging */; };
 		EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */; };
+		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
 		EBF51F9E28F662F500488B2D /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */; };
@@ -181,7 +182,7 @@
 		EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeUpgradeView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
-		EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
 		EB8FD00628F8F23900B0C5AC /* TVMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapView.swift; sourceTree = "<group>"; };
 		EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModel.swift; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 		EBB721F128F7178600435375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EBB721F228F7229200435375 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMapAnnotationView.swift; sourceTree = "<group>"; };
+		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
 		EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
@@ -278,7 +280,7 @@
 		E202F441278E84A7009C0B13 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				EB7E41F528F72FDC0007347E /* Launch Screen.storyboard */,
+				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				E26449552796666100685DAB /* Info.plist */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
@@ -428,6 +430,7 @@
 			children = (
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */,
+				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
@@ -597,7 +600,7 @@
 			files = (
 				E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */,
 				E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */,
-				EB7E41F628F72FDC0007347E /* Launch Screen.storyboard in Resources */,
+				EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */,
 				EBB721F328F7229200435375 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
+				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
 				E2644954279650CD00685DAB /* AlertItem.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
@@ -903,7 +907,7 @@
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -938,7 +942,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
@@ -949,7 +953,7 @@
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -960,7 +964,7 @@
 				MARKETING_VERSION = 2.0;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1091,7 +1095,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
@@ -1103,7 +1107,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1158,7 +1162,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
@@ -1170,7 +1174,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;

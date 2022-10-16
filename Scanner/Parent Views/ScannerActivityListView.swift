@@ -25,7 +25,7 @@ struct ScannerActivityListView: View {
                 NavigationView {
                     Section {
                     List(viewModel.activities) { activity in
-                            ActivityRowView(activity: activity)
+                        ActivityRowView(activity: activity, viewModel: viewModel)
                             
                         if (activity == viewModel.activities.last) {
                             Section {

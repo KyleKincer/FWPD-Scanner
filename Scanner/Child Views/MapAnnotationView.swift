@@ -15,18 +15,33 @@ struct MapAnnotationView: View {
     
     
     var body: some View {
-        Image(systemName: "exclamationmark.triangle.fill")
-            .foregroundColor(chosenActivity == activity ? .blue : .red)
-            .onTapGesture {
-                withAnimation {
-                    if (chosenActivity == activity) {
-                        chosenActivity = nil
-                    } else {
-                        chosenActivity = activity
+        if (activity.bookmarked) {
+            Image(systemName: "bookmark.fill")
+                .foregroundColor(chosenActivity == activity ? .blue : .red)
+                .onTapGesture {
+                    withAnimation {
+                        if (chosenActivity == activity) {
+                            chosenActivity = nil
+                        } else {
+                            chosenActivity = activity
+                        }
                     }
                 }
-            }
-            .scaleEffect(chosenActivity == activity ? 2 : 1)
+                .scaleEffect(chosenActivity == activity ? 2 : 1)
+        } else {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundColor(chosenActivity == activity ? .blue : .red)
+                .onTapGesture {
+                    withAnimation {
+                        if (chosenActivity == activity) {
+                            chosenActivity = nil
+                        } else {
+                            chosenActivity = activity
+                        }
+                    }
+                }
+                .scaleEffect(chosenActivity == activity ? 2 : 1)
+        }
     }
 }
 

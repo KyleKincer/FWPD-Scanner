@@ -9,12 +9,14 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
+import CoreData
 
 class MM : ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 }
 
 final class ScannerActivityListViewModel: ObservableObject {
+    @Environment(\.managedObjectContext) var moc
     @Published var locationManager: LocationManager = LocationManager()
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
@@ -162,4 +164,32 @@ final class ScannerActivityListViewModel: ObservableObject {
             self.activities[i].distance = nil
         }
     }
+    
+    func saveBookmark(_ controlNumber: String) {
+        let bookmark = Bookmark(context: moc)
+        bookmark.id = UUID()
+        bookmark.controlNumber = controlNumber
+        
+        try? moc.save()
+    }
+    
+    func deleteBookmark(_ controlNumber: String) {
+        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
+        if let results = try? moc.fetch(request) {
+            for object in results {
+                moc.delete(object)
+            }
+        }
+        try? moc.save()
+    }
+    
+//    func showFavorites() {
+//        var isBookmarked: Bool {
+//            Get all the favorites into an array
+//            Set self.activities = favoritesArray
+//        }
+//    }
 }
+
+

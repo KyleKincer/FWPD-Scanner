@@ -10,14 +10,9 @@ import MapKit
 import CoreLocation
 
 struct ScannerActivityDetailView: View {
-    private let activity: Scanner.Activity
-    @ObservedObject var viewModel: ScannerActivityDetailViewModel
+    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @Binding var activity : Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
-    
-    init(activity: Scanner.Activity) {
-        self.activity = activity
-        self.viewModel = ScannerActivityDetailViewModel(activity: self.activity)
-    }
     
     var body: some View {
         VStack {
@@ -27,6 +22,21 @@ struct ScannerActivityDetailView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer()
+                
+                Button (action: {
+                    activity.bookmarked.toggle()
+                }, label: {
+                    VStack {
+                        Text(activity.bookmarked ? "Remove Bookmark" : "Bookmark")
+                        if (activity.bookmarked) {
+                            Image(systemName: "bookmark.fill")
+                        } else {
+                            Image(systemName: "bookmark")
+                        }
+                    }
+                    .foregroundColor(activity.bookmarked ? .red : .blue)
+                })
+                .padding(.bottom)
             }
             
             Group {
@@ -69,31 +79,7 @@ struct ScannerActivityDetailView: View {
                 Spacer()
             }
             
-            ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $viewModel.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode, annotationItems: [activity]) { activity in
-                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .accentColor)
-                }
-                .frame(height: 300, alignment: .top)
-                .cornerRadius(20)
-                .padding(.horizontal)
-                
-                Button() {
-                    let url = URL(string: "maps://?saddr=&daddr=\(activity.latitude),\(activity.longitude)")
-                    if UIApplication.shared.canOpenURL(url!) {
-                        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                    }
-                } label: {
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 15)
-                        HStack {
-                            Text("Open in Maps").fontWeight(.semibold)
-                            Image(systemName: "arrowshape.turn.up.right")
-                        }
-                        .tint(.white)
-                    }.frame(width: 200, height: 45)
-                        .padding(.bottom)
-                }
-            }
+            DetailMapView(viewModel: viewModel, activity: activity)
         }
         .padding(.top, 30).padding(.bottom, 15)
         .navigationBarTitleDisplayMode(.inline)
@@ -103,6 +89,6 @@ struct ScannerActivityDetailView: View {
 
 struct ScannerActivityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ScannerActivityDetailView(activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
+        ScannerActivityDetailView(viewModel: ScannerActivityListViewModel(), activity: .constant(Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))
     }
 }

@@ -9,22 +9,24 @@ import SwiftUI
 import CoreData
 
 struct ActivityRowView: View {
-    let activity: Scanner.Activity
+    @State var activity: Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
-    var isBookmarked: Bool {
-        get {
-            let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
-            request.predicate = NSPredicate(format: "controlNumber = %@", activity.controlNumber)
-            let results = try? moc.fetch(request)
-            let bookmarked = results?.count==1
-            print(bookmarked)
-            return bookmarked
-        }
-    }
+    @ObservedObject var viewModel : ScannerActivityListViewModel
+    
+//    var isBookmarked: Bool {
+//        get {
+//            let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+//            request.predicate = NSPredicate(format: "controlNumber = %@", activity.controlNumber)
+//            let results = try? moc.fetch(request)
+//            let bookmarked = results?.count==1
+//            print(bookmarked)
+//            return bookmarked
+//        }
+//    }
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
-        NavigationLink(destination: {ScannerActivityDetailView(activity: activity)}) {
+        NavigationLink(destination: {ScannerActivityDetailView(viewModel: viewModel, activity: $activity)}) {
             VStack(spacing: 5) {
                 if (showDistance && activity.distance != nil) {
                     HStack {
@@ -99,15 +101,15 @@ struct ActivityRowView: View {
                     }
                 }
             }
-        }.foregroundColor(isBookmarked ? .blue : .white)
+        }.foregroundColor(activity.bookmarked ? .blue : .white)
         .swipeActions {
-            Button(isBookmarked ? "Delete" : "Bookmark") {
-                if isBookmarked {
-                    deleteBookmark(activity.controlNumber)
+            Button(activity.bookmarked ? "Delete" : "Bookmark") {
+                if activity.bookmarked {
+                    activity.bookmarked = false
                 } else {
-                    saveBookmark(activity.controlNumber)
+                    activity.bookmarked = true
                 }
-            }.tint(isBookmarked ? .red : .accentColor)
+            }.tint(activity.bookmarked ? .red : .accentColor)
         }
     }
     
@@ -133,7 +135,7 @@ struct ActivityRowView: View {
 
 struct ActivityRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRowView(activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
+        ActivityRowView(activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842), viewModel: ScannerActivityListViewModel())
             .frame(width: 200, height: 100)
     }
 }

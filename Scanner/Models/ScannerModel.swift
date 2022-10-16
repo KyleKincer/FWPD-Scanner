@@ -20,6 +20,7 @@ struct Scanner {
         let latitude: Double
         var date: Date? = nil
         var distance: Double? = nil
+        var bookmarked : Bool = false
 
         enum CodingKeys: String, CodingKey {
             // the API gives us control_number
