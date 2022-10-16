@@ -11,6 +11,16 @@ import CoreData
 struct ActivityRowView: View {
     let activity: Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
+    var isBookmarked: Bool {
+        get {
+            let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+            request.predicate = NSPredicate(format: "controlNumber = %@", activity.controlNumber)
+            let results = try? moc.fetch(request)
+            let bookmarked = results?.count==1
+            print(bookmarked)
+            return bookmarked
+        }
+    }
     @Environment(\.managedObjectContext) var moc
     
     var body: some View {
@@ -89,26 +99,16 @@ struct ActivityRowView: View {
                     }
                 }
             }
-        }.foregroundColor(isBookmarked(activity.controlNumber) ? .blue : .white)
+        }.foregroundColor(isBookmarked ? .blue : .white)
         .swipeActions {
-            let bookmarked = isBookmarked(activity.controlNumber)
-            Button(bookmarked ? "Delete" : "Bookmark") {
-                if bookmarked {
+            Button(isBookmarked ? "Delete" : "Bookmark") {
+                if isBookmarked {
                     deleteBookmark(activity.controlNumber)
                 } else {
                     saveBookmark(activity.controlNumber)
                 }
-            }.tint(bookmarked ? .red : .accentColor)
+            }.tint(isBookmarked ? .red : .accentColor)
         }
-    }
-    
-    func isBookmarked(_ controlNumber: String) -> Bool {
-        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
-        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
-        let results = try? moc.fetch(request)
-        let bookmarked = results?.count==1
-        print(bookmarked)
-        return bookmarked
     }
     
     func saveBookmark(_ controlNumber: String) {
