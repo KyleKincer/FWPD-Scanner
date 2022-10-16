@@ -28,6 +28,7 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published var serverResponsive = true
     @Published var isLoading = false
     @Published var mapModel = MM()
+    @FetchRequest(sortDescriptors: []) var bookmarks: FetchedResults<Bookmark>
     private var storedPages : [Int] = []
     private var currentPage = 1
     
