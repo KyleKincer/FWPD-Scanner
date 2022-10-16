@@ -97,7 +97,7 @@ final class ScannerActivityListViewModel: ObservableObject {
         }
     }
     
-    func filterOutDuplicates() -> Void {
+    func filterOutDuplicates() {
         let activityIDs = (self.activities).compactMap { $0.id }
         let uniqueIDs = Array(Set(activityIDs))
         var uniqueActivities = [Scanner.Activity]()

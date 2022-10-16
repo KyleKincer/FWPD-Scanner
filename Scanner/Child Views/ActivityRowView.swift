@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ActivityRowView: View {
     let activity: Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
+    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         NavigationLink(destination: {ScannerActivityDetailView(activity: activity)}) {
@@ -87,11 +89,45 @@ struct ActivityRowView: View {
                     }
                 }
             }
-        }.swipeActions {
-            Button("Bookmark") {
-                
-            }.tint(.accentColor)
+        }.foregroundColor(isBookmarked(activity.controlNumber) ? .blue : .white)
+        .swipeActions {
+            let bookmarked = isBookmarked(activity.controlNumber)
+            Button(bookmarked ? "Delete" : "Bookmark") {
+                if bookmarked {
+                    deleteBookmark(activity.controlNumber)
+                } else {
+                    saveBookmark(activity.controlNumber)
+                }
+            }.tint(bookmarked ? .red : .accentColor)
         }
+    }
+    
+    func isBookmarked(_ controlNumber: String) -> Bool {
+        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
+        let results = try? moc.fetch(request)
+        let bookmarked = results?.count==1
+        print(bookmarked)
+        return bookmarked
+    }
+    
+    func saveBookmark(_ controlNumber: String) {
+        let bookmark = Bookmark(context: moc)
+        bookmark.id = UUID()
+        bookmark.controlNumber = controlNumber
+        
+        try? moc.save()
+    }
+    
+    func deleteBookmark(_ controlNumber: String) {
+        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
+        if let results = try? moc.fetch(request) {
+            for object in results {
+                moc.delete(object)
+            }
+        }
+        try? moc.save()
     }
 }
 
