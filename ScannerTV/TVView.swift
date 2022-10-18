@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TVView: View {
     @AppStorage("onboarding") var onboarding = true
-    @StateObject var viewModel = ScannerActivityListViewModel()
+    @StateObject var viewModel = MainViewModel()
     
     var body: some View {
         if (onboarding) {

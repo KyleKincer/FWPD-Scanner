@@ -11,7 +11,7 @@ struct TVMainView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var showMap = false
     @State var showLocationDisclaimer = false
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State var mapView = MapViewModel()
     @State var chosenActivity = Scanner.Activity(id: 0, timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
     
@@ -118,6 +118,6 @@ struct TVMainView: View {
 
 struct TVMainView_Previews: PreviewProvider {
     static var previews: some View {
-        TVMainView(viewModel: ScannerActivityListViewModel())
+        TVMainView(viewModel: MainViewModel())
     }
 }

@@ -10,7 +10,7 @@ import MapKit
 
 struct TVMapView: View {
     @State var mapModel = MapViewModel()
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
@@ -28,6 +28,6 @@ struct TVMapView: View {
 
 struct TVMapView_Previews: PreviewProvider {
     static var previews: some View {
-        TVMapView(viewModel: ScannerActivityListViewModel())
+        TVMapView(viewModel: MainViewModel())
     }
 }

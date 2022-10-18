@@ -10,7 +10,7 @@ import SwiftUI
 import WatchKit
 
 struct WatchListView: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State var showMap = false
     @State var showSettings = false
     var watch = WKInterfaceDevice()
@@ -127,6 +127,6 @@ struct WatchListView: View {
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchListView(viewModel: ScannerActivityListViewModel())
+        WatchListView(viewModel: MainViewModel())
     }
 }

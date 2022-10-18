@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpandedSizeView: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State private var showCoffee = false
     @State private var showFilter = false
     @State private var showScanMenu = false
@@ -49,7 +49,7 @@ struct ExpandedSizeView: View {
 
 struct ExpandedSizeView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedSizeView(viewModel: ScannerActivityListViewModel())
+        ExpandedSizeView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

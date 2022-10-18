@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NaturesList: View {
-    var viewModel: ScannerActivityListViewModel
+    var viewModel: MainViewModel
     @State var selection = Set<Int>()
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -68,6 +68,6 @@ struct NaturesList: View {
 
 struct NaturesList_Previews: PreviewProvider {
     static var previews: some View {
-        NaturesList(viewModel: ScannerActivityListViewModel(), selection: ScannerActivityListViewModel().selectedNatures)
+        NaturesList(viewModel: MainViewModel(), selection: MainViewModel().selectedNatures)
     }
 }

@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F442278E84A7009C0B13 /* ScannerApp.swift */; };
-		E202F445278E84A7009C0B13 /* ScannerActivityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */; };
+		E202F445278E84A7009C0B13 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F444278E84A7009C0B13 /* ListView.swift */; };
 		E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F446278E84A8009C0B13 /* Assets.xcassets */; };
 		E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F449278E84A8009C0B13 /* Preview Assets.xcassets */; };
 		E202F45127907868009C0B13 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		E202F4532790C46F009C0B13 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
-		E24522BE279134F200EFBB3E /* ScannerActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */; };
+		E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
+		E24522BE279134F200EFBB3E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* DetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		E264494E2794B56700685DAB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
@@ -42,7 +42,7 @@
 		EB57DA1628E78D0C0031B68A /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
 		EB57DA1828E78D0D0031B68A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1728E78D0D0031B68A /* Assets.xcassets */; };
 		EB57DA1B28E78D0D0031B68A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */; };
-		EB57DA2228E78E240031B68A /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
+		EB57DA2228E78E240031B68A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
 		EB57DA2328E78E270031B68A /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EB57DA2428E78E2B0031B68A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EB57DA2528E78E2B0031B68A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
@@ -64,25 +64,23 @@
 		EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */; };
 		EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00628F8F23900B0C5AC /* TVMapView.swift */; };
 		EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
-		EB98F88328E8C3FF009AC6B1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */; };
-		EB98F88428E8C3FF009AC6B1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */; };
 		EB98F88728E8C3FF009AC6B1 /* WidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */; };
 		EB98F88928E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */; };
 		EB98F88E28E8C400009AC6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB98F88D28E8C400009AC6B1 /* Assets.xcassets */; };
-		EB98F89028E8C400009AC6B1 /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88C28E8C3FF009AC6B1 /* WidgetExtension.intentdefinition */; };
-		EB98F89128E8C400009AC6B1 /* WidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88C28E8C3FF009AC6B1 /* WidgetExtension.intentdefinition */; };
 		EB98F89428E8C400009AC6B1 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EB98F89A28E8C4C6009AC6B1 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89928E8C4C6009AC6B1 /* TopView.swift */; };
 		EB98F89B28E8C4F1009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
 		EB98F89C28E8C535009AC6B1 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB98F89E28E8C757009AC6B1 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89D28E8C757009AC6B1 /* BottomView.swift */; };
 		EB98F8A028E8CAD0009AC6B1 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89F28E8CACF009AC6B1 /* LockScreenView.swift */; };
+		EBA0645828FF479D00B42676 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */; };
+		EBA0645B28FF479F00B42676 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */; };
 		EBB721CA28F6F55800435375 /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721C928F6F55800435375 /* ScannerTVApp.swift */; };
 		EBB721CC28F6F55800435375 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721CB28F6F55800435375 /* TVView.swift */; };
 		EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721CD28F6F55900435375 /* Assets.xcassets */; };
 		EBB721D128F6F55900435375 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721D028F6F55900435375 /* Preview Assets.xcassets */; };
 		EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EBB721D828F6F56100435375 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* ListViewModel.swift */; };
+		EBB721D828F6F56100435375 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
 		EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EBB721DA28F6F56600435375 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
@@ -136,19 +134,18 @@
 /* Begin PBXFileReference section */
 		E202F43F278E84A7009C0B13 /* Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E202F442278E84A7009C0B13 /* ScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerApp.swift; sourceTree = "<group>"; };
-		E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityListView.swift; sourceTree = "<group>"; };
+		E202F444278E84A7009C0B13 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E202F446278E84A8009C0B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E202F449278E84A8009C0B13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E202F45027907868009C0B13 /* ScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerModel.swift; sourceTree = "<group>"; };
-		E202F4522790C46F009C0B13 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
-		E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActivityDetailView.swift; sourceTree = "<group>"; };
+		E202F4522790C46F009C0B13 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E24522BD279134F200EFBB3E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E24522D12791F69400EFBB3E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E264494F2796487200685DAB /* ActivityRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRowView.swift; sourceTree = "<group>"; };
 		E264495127964D8B00685DAB /* ActError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActError.swift; sourceTree = "<group>"; };
 		E2644953279650CD00685DAB /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
-		E26449552796666100685DAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E264495627986B0700685DAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E264495B2798C4E800685DAB /* CoffeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeView.swift; sourceTree = "<group>"; };
 		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
@@ -182,6 +179,7 @@
 		EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeUpgradeView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
+		EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScannerRelease.entitlements; sourceTree = "<group>"; };
 		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
 		EB8FD00628F8F23900B0C5AC /* TVMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapView.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 		EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionBundle.swift; sourceTree = "<group>"; };
 		EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
-		EB98F88C28E8C3FF009AC6B1 /* WidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		EB98F88D28E8C400009AC6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB98F88F28E8C400009AC6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB98F89928E8C4C6009AC6B1 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
@@ -238,8 +235,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB98F88428E8C3FF009AC6B1 /* SwiftUI.framework in Frameworks */,
-				EB98F88328E8C3FF009AC6B1 /* WidgetKit.framework in Frameworks */,
+				EBA0645828FF479D00B42676 /* SwiftUI.framework in Frameworks */,
+				EBA0645B28FF479F00B42676 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,9 +277,9 @@
 		E202F441278E84A7009C0B13 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */,
 				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
-				E26449552796666100685DAB /* Info.plist */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
@@ -334,7 +331,7 @@
 		EB57406D28E61A5E009FDA3D /* Parent Views */ = {
 			isa = PBXGroup;
 			children = (
-				E202F444278E84A7009C0B13 /* ScannerActivityListView.swift */,
+				E202F444278E84A7009C0B13 /* ListView.swift */,
 				EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */,
 				EB3A359228F5FEDE009625D0 /* ScanModeSettingsView.swift */,
 				EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */,
@@ -351,7 +348,7 @@
 			children = (
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
-				E202F4522790C46F009C0B13 /* ListViewModel.swift */,
+				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
@@ -407,7 +404,6 @@
 			children = (
 				EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */,
 				EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */,
-				EB98F88C28E8C3FF009AC6B1 /* WidgetExtension.intentdefinition */,
 				EB98F89828E8C4A2009AC6B1 /* LockScreenViews */,
 				EB98F88D28E8C400009AC6B1 /* Assets.xcassets */,
 				EB98F88F28E8C400009AC6B1 /* Info.plist */,
@@ -429,7 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
-				E24522BD279134F200EFBB3E /* ScannerActivityDetailView.swift */,
+				E24522BD279134F200EFBB3E /* DetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
@@ -647,9 +643,9 @@
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
-				E24522BE279134F200EFBB3E /* ScannerActivityDetailView.swift in Sources */,
+				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
-				E202F445278E84A7009C0B13 /* ScannerActivityListView.swift in Sources */,
+				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
 				E2C0EDBB28FC3FC0005D7989 /* Scanner.xcdatamodeld in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
@@ -665,7 +661,7 @@
 				EB64E79228F6328400721DD0 /* ScanModeUpgradeView.swift in Sources */,
 				E264495C2798C4E800685DAB /* CoffeeView.swift in Sources */,
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
-				E202F4532790C46F009C0B13 /* ListViewModel.swift in Sources */,
+				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
 				E264495227964D8B00685DAB /* ActError.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
@@ -673,7 +669,6 @@
 				EBF51FC228F66D3500488B2D /* ScanModeComingView.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
 				EB3A359328F5FEDE009625D0 /* ScanModeSettingsView.swift in Sources */,
-				EB98F89128E8C400009AC6B1 /* WidgetExtension.intentdefinition in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
 				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
@@ -685,7 +680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB57DA2228E78E240031B68A /* ListViewModel.swift in Sources */,
+				EB57DA2228E78E240031B68A /* MainViewModel.swift in Sources */,
 				EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */,
 				EB62D7F128E7A7D7005A76E7 /* WatchMapAnnotationView.swift in Sources */,
 				EB62D7F628E7B83D005A76E7 /* WatchScannerApp.swift in Sources */,
@@ -712,7 +707,6 @@
 			files = (
 				EB98F89C28E8C535009AC6B1 /* ScannerModel.swift in Sources */,
 				EB98F89B28E8C4F1009AC6B1 /* AttributeModel.swift in Sources */,
-				EB98F89028E8C400009AC6B1 /* WidgetExtension.intentdefinition in Sources */,
 				EB98F89E28E8C757009AC6B1 /* BottomView.swift in Sources */,
 				EB98F8A028E8CAD0009AC6B1 /* LockScreenView.swift in Sources */,
 				EB98F89A28E8C4C6009AC6B1 /* TopView.swift in Sources */,
@@ -741,7 +735,7 @@
 				EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */,
 				EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */,
 				EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */,
-				EBB721D828F6F56100435375 /* ListViewModel.swift in Sources */,
+				EBB721D828F6F56100435375 /* MainViewModel.swift in Sources */,
 				EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */,
 				EBB721DA28F6F56600435375 /* Constants.swift in Sources */,
 				EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */,
@@ -896,7 +890,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Scanner/Info.plist;
@@ -918,7 +912,7 @@
 				MARKETING_VERSION = 2.0;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -937,7 +931,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
@@ -1064,7 +1058,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
@@ -1076,7 +1070,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1128,7 +1122,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScannerTV/Info.plist;
@@ -1140,7 +1134,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;

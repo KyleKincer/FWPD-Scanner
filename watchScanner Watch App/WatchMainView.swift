@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchMainView: View {
-    @StateObject var viewModel = ScannerActivityListViewModel()
+    @StateObject var viewModel = MainViewModel()
     @State var showMap = false
 
     var body: some View {

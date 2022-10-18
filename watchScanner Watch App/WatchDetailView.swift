@@ -11,11 +11,11 @@ import CoreLocation
 
 struct WatchDetailView: View {
     private let activity: Scanner.Activity
-    @ObservedObject var viewModel: ScannerActivityDetailViewModel
+    @ObservedObject var viewModel: DetailViewModel
     
     init(activity: Scanner.Activity) {
         self.activity = activity
-        self.viewModel = ScannerActivityDetailViewModel(activity: self.activity)
+        self.viewModel = DetailViewModel(activity: self.activity)
     }
     
     var body: some View {

@@ -1,5 +1,5 @@
 //
-//  ScannerActivityListViewModel.swift
+//  MainViewModel.swift
 //  Scanner
 //
 //  Created by Kyle Kincer on 1/13/22.
@@ -15,7 +15,7 @@ class MM : ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 }
 
-final class ScannerActivityListViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
     @Environment(\.managedObjectContext) var moc
     @Published var locationManager: LocationManager = LocationManager()
     @Published var model: Scanner
@@ -30,6 +30,8 @@ final class ScannerActivityListViewModel: ObservableObject {
     @Published var serverResponsive = true
     @Published var isLoading = false
     @Published var mapModel = MM()
+    @Published var bookmarkCount = 0
+    @Published var showBookmarks = false
     @FetchRequest(sortDescriptors: []) var bookmarks: FetchedResults<Bookmark>
     private var storedPages : [Int] = []
     private var currentPage = 1
@@ -43,6 +45,7 @@ final class ScannerActivityListViewModel: ObservableObject {
     
     func refresh() {
         print("Refreshing Activities")
+        self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
         self.storedPages.removeAll() // clear out page log
@@ -99,7 +102,7 @@ final class ScannerActivityListViewModel: ObservableObject {
         }
     }
     
-    func filterOutDuplicates() {
+    func filterOutDuplicates() { // Currently broken
         let activityIDs = (self.activities).compactMap { $0.id }
         let uniqueIDs = Array(Set(activityIDs))
         var uniqueActivities = [Scanner.Activity]()
@@ -171,6 +174,7 @@ final class ScannerActivityListViewModel: ObservableObject {
         bookmark.controlNumber = controlNumber
         
         try? moc.save()
+        self.bookmarkCount+=1
     }
     
     func deleteBookmark(_ controlNumber: String) {
@@ -182,14 +186,45 @@ final class ScannerActivityListViewModel: ObservableObject {
             }
         }
         try? moc.save()
+        self.bookmarkCount-=1
     }
     
-//    func showFavorites() {
-//        var isBookmarked: Bool {
-//            Get all the favorites into an array
-//            Set self.activities = favoritesArray
-//        }
-//    }
+    func getBookmarks() { // Very much a prototype method
+        self.showBookmarks = true
+        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
+        if let results = try? moc.fetch(request) {
+            var bookmarks : [Scanner.Activity] = []
+            for object in results {
+                NetworkManager.shared.getActivity(controlNum: object.controlNumber!) { [self] result in
+                    DispatchQueue.main.async {
+                        switch result {
+                            
+                        case .success(let activity):
+                            print("Bookmark retrieved!")
+                            self.serverResponsive = true // No problem connecting to server
+                            bookmarks.append(contentsOf: activity)
+                            self.activities = bookmarks
+                            
+                        case .failure(let error):
+                            print("Failed to retrieve a bookmark!")
+                            self.serverResponsive = false // Indicate problem connecting to the server
+                            
+                            switch error {
+                            case .invalidURL:
+                                self.alertItem = AlertContext.invalidURL
+                            case .unableToComplete:
+                                self.alertItem = AlertContext.unableToComplete
+                            case .invalidResponse:
+                                self.alertItem = AlertContext.invalidResponse
+                            case .invalidData:
+                                self.alertItem = AlertContext.invalidData
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 

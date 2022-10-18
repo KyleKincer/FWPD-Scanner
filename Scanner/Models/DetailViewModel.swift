@@ -1,5 +1,5 @@
 //
-//  ScannerActivityDetailViewModel.swift
+//  DetailViewModel.swift
 //  Scanner
 //
 //  Created by Kyle Kincer on 1/16/22.
@@ -8,7 +8,7 @@
 import MapKit
 import SwiftUI
 
-final class ScannerActivityDetailViewModel: ObservableObject {
+final class DetailViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion()
     @Published var activityCoordinates: CLLocationCoordinate2D
     @Published var userTrackingMode: MapUserTrackingMode = .follow

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterSettings: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State var refreshOnExit = false
     @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State var dateTo = Date()
@@ -57,6 +57,12 @@ struct FilterSettings: View {
                     }
                 }
                 
+                if (useLocation) {
+                    Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filteirng by distance!") {
+                        
+                    }
+                }
+                
                 Section("Date") {
                     Toggle(isOn: $useDate) {
                         Text("Filter By Date Range")
@@ -68,13 +74,15 @@ struct FilterSettings: View {
                 }
                 
                 Section("Filter By Activity Type") {
-                    Toggle(isOn: showFavorites) {
-                        Text("Only Show Favorites")
-                    }.onTapGesture {
-                        if (showFavorites) {
-                            refreshOnExit = true
-                        } else {
-                            viewModel.showFavorites()
+                    if (viewModel.bookmarkCount > 0) {
+                        Toggle(isOn: $showFavorites) {
+                            Text("Only Show Favorites")
+                        }.onTapGesture {
+                            if (showFavorites) {
+                                refreshOnExit = true
+                            } else {
+                                viewModel.getBookmarks()
+                            }
                         }
                     }
                     
@@ -158,6 +166,6 @@ struct FilterSettings: View {
 
 struct FilterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        FilterSettings(viewModel: ScannerActivityListViewModel())
+        FilterSettings(viewModel: MainViewModel())
     }
 }

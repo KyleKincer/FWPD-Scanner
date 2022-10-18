@@ -11,7 +11,7 @@ struct TVNavBarView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
     
@@ -142,6 +142,6 @@ struct TVNavBarView: View {
 
 struct TVNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TVNavBarView(showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: ScannerActivityListViewModel())
+        TVNavBarView(showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
     }
 }

@@ -41,12 +41,7 @@ class LiveActivityHelper {
                 contentState: initialState,
                 pushType: nil)
             
-            guard let latestActivity else {
-                print("Error: Could not initialize the live activity with ID: \(latestActivity?.id ?? "NO ID")")
-                return
-            }
-            
-            print("Live Activity Started with ID: \(latestActivity.id). Awaiting police activity.")
+            print("Live Activity Started!")
         } catch (let error) {
             print("Error: \(error.localizedDescription)")
         }

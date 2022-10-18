@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
-    @StateObject var viewModel = ScannerActivityListViewModel()
+    @StateObject var viewModel = MainViewModel()
     
     @AppStorage("showDistance") var showDistance = true
     @AppStorage("onboarding") var onboarding = true

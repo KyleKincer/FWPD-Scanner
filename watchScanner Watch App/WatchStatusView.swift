@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchStatusView: View {
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State private var isAnimating = false
     @Environment(\.colorScheme) var colorScheme
     
@@ -84,6 +84,6 @@ struct WatchStatusView: View {
 
 struct WatchStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchStatusView(viewModel: ScannerActivityListViewModel())
+        WatchStatusView(viewModel: MainViewModel())
     }
 }

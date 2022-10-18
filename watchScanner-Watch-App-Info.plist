@@ -6,15 +6,5 @@
 	<array>
 		<string>maps</string>
 	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
-		<string>location</string>
-	</array>
-	<key>WKBackgroundModes</key>
-	<array>
-		<string>App downloads content from network </string>
-	</array>
 </dict>
 </plist>

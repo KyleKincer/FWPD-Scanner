@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchSettingsView: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State private var refreshOnExit = false
     
     @AppStorage("useLocation") var useLocation = false
@@ -72,6 +72,6 @@ struct WatchSettingsView: View {
 
 struct WatchSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchSettingsView(viewModel: ScannerActivityListViewModel())
+        WatchSettingsView(viewModel: MainViewModel())
     }
 }

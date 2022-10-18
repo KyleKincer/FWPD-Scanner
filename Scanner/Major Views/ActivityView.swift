@@ -14,7 +14,7 @@ struct ActivityView: View {
     @State private var showFilter = false
     @State var status = 0
     @State var chosenActivity : Scanner.Activity?
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     
     var body: some View {
         switch sizeClass {
@@ -41,7 +41,7 @@ struct ActivityView: View {
                             StatusView(viewModel: viewModel)
                                 .onTapGesture {
                                     if (!viewModel.serverResponsive) {
-                                        withAnimation (.linear(duration: 0.5)) {
+                                        withAnimation {
                                             viewModel.serverResponsive = true
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                 viewModel.serverResponsive = false
@@ -56,11 +56,11 @@ struct ActivityView: View {
                         } else {
                             if #available(iOS 16.0, *) {
                                 NavigationStack {
-                                    ScannerActivityListView(viewModel: viewModel, showMap: showMap)
+                                    ListView(viewModel: viewModel, showMap: showMap)
                                 }
                                 
                             } else {
-                                ScannerActivityListView(viewModel: viewModel, showMap: showMap)
+                                ListView(viewModel: viewModel, showMap: showMap)
                             }
                         }
                     }
@@ -161,7 +161,7 @@ struct ActivityView: View {
                         chosenActivity = nil
                     }
                     } else {
-                        ScannerActivityListView(viewModel: viewModel, showMap: showMap)
+                        ListView(viewModel: viewModel, showMap: showMap)
                     }
                 }
             }
@@ -171,6 +171,6 @@ struct ActivityView: View {
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(showMap: .constant(false), viewModel: ScannerActivityListViewModel())
+        ActivityView(showMap: .constant(false), viewModel: MainViewModel())
     }
 }

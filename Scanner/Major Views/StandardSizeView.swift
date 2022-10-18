@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StandardSizeView: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State var showCoffee = false
     @State var showFilter = false
     @State var showScanMenu = false
@@ -37,22 +37,24 @@ struct StandardSizeView: View {
                 FilterSettings(viewModel: viewModel)
             }
         }
-//        .sheet(isPresented: $showScanMenu) {
-//            if #available(iOS 16.1, *) {
-//                ScanModeSettingsView()
-//                    .presentationDetents([.fraction(0.8)])
-//            } else {
-//                ScanModeUpgradeView()
-//            }
-//        }
+        
         .sheet(isPresented: $showScanMenu) {
             if #available(iOS 16.1, *) {
-                ScanModeComingView()
-                    .presentationDetents([.fraction(0.5)])
+                ScanModeSettingsView()
+                    .presentationDetents([.fraction(0.8)])
             } else {
-                ScanModeComingView()
+                ScanModeUpgradeView()
             }
         }
+        
+//        .sheet(isPresented: $showScanMenu) {
+//            if #available(iOS 16.1, *) {
+//                ScanModeComingView()
+//                    .presentationDetents([.fraction(0.5)])
+//            } else {
+//                ScanModeComingView()
+//            }
+//        }
         .sheet(isPresented: $showLocationDisclaimer) {
             if #available(iOS 16.1, *) {
                 LocationDisclaimerView()
@@ -66,6 +68,6 @@ struct StandardSizeView: View {
 
 struct StandardSizeView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardSizeView(viewModel: ScannerActivityListViewModel(), showCoffee: false, showMap: false)
+        StandardSizeView(viewModel: MainViewModel(), showCoffee: false, showMap: false)
     }
 }

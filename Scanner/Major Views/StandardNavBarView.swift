@@ -13,7 +13,7 @@ struct StandardNavBarView: View {
     @Binding var showMap : Bool
     @Binding var showCoffee : Bool
     @Binding var showLocationDisclaimer: Bool
-    @State var viewModel : ScannerActivityListViewModel
+    @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -171,6 +171,6 @@ struct StandardNavBarView: View {
 
 struct StandardNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: ScannerActivityListViewModel())
+        StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
     }
 }

@@ -11,6 +11,9 @@ import SwiftUI
 @main
 struct WidgetExtensionBundle: WidgetBundle {
     var body: some Widget {
-        WidgetExtensionLiveActivity()
+        
+        if #available(iOS 16.1, *) {
+            LatestLiveActivity()
+        }
     }
 }

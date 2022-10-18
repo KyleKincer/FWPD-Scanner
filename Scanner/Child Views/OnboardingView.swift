@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = false
     
@@ -48,6 +48,7 @@ struct OnboardingView: View {
                     Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding()
                     
                     Text("If you are experiencing an emergency, dial 911.")
                         .fontWeight(.bold)
@@ -79,6 +80,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(viewModel: ScannerActivityListViewModel())
+        OnboardingView(viewModel: MainViewModel())
     }
 }

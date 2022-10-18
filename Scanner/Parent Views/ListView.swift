@@ -1,5 +1,5 @@
 //
-//  ScannerActivityListView.swift
+//  ListView.swift
 //  Scanner
 //
 //  Created by Kyle Kincer on 1/11/22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ScannerActivityListView: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+struct ListView: View {
+    @ObservedObject var viewModel: MainViewModel
     @Environment(\.scenePhase) var scenePhase
     @State var showingRefreshReminder = false
     @State var showRefreshReminderOnActive = false
@@ -56,7 +56,7 @@ struct ScannerActivityListView: View {
                             }
                         }
                     }
-                    .navigationTitle("Recent Events")
+                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : "Recent Activity")
                     .navigationBarTitleDisplayMode(.automatic)
                     .refreshable {
                         withAnimation {
@@ -119,8 +119,8 @@ struct ScannerActivityListView: View {
     }
 }
 
-struct ScannerActivityListView_Previews: PreviewProvider {
+struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ScannerActivityListView(viewModel: ScannerActivityListViewModel(), showMap: false)
+        ListView(viewModel: MainViewModel(), showMap: false)
     }
 }

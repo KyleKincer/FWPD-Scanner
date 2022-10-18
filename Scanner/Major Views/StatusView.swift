@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StatusView: View {
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State private var isAnimating = false
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("onboarding") var onboarding = false
@@ -123,6 +123,6 @@ struct StatusView: View {
 
 struct StatusView_Previews: PreviewProvider {
     static var previews: some View {
-        StatusView(viewModel: ScannerActivityListViewModel())
+        StatusView(viewModel: MainViewModel())
     }
 }

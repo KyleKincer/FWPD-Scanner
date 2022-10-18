@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpandedFilterSettings: View {
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @State private var refreshOnExit = false
     @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State var dateTo = Date()
@@ -124,7 +124,7 @@ struct ExpandedFilterSettings: View {
 
 struct ExpandedFilterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedFilterSettings(viewModel: ScannerActivityListViewModel())
+        ExpandedFilterSettings(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

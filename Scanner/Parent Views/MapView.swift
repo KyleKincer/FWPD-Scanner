@@ -12,7 +12,7 @@ struct MapView: View {
     @State var mapModel = MapViewModel()
     @Binding var chosenActivity : Scanner.Activity?
     @Binding var activities : [Scanner.Activity]
-    @ObservedObject var viewModel: ScannerActivityListViewModel
+    @ObservedObject var viewModel: MainViewModel
     @Environment(\.colorScheme) var colorScheme
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
@@ -149,6 +149,6 @@ struct MapView: View {
 
 //struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MapView(chosenActivity: .constant(nil), viewModel: ScannerActivityListViewModel())
+//        MapView(chosenActivity: .constant(nil), viewModel: MainViewModel())
 //    }
 //}

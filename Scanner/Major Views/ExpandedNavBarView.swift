@@ -13,7 +13,7 @@ struct ExpandedNavBarView: View {
     @Binding var showMap : Bool
     @Binding var showCoffee : Bool
     @Binding var showLocationDisclaimer: Bool
-    @State var viewModel : ScannerActivityListViewModel
+    @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -144,7 +144,7 @@ struct ExpandedNavBarView: View {
 
 struct ExpandedNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: ScannerActivityListViewModel())
+        ExpandedNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

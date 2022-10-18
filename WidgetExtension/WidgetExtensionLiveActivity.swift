@@ -9,7 +9,7 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct WidgetExtensionLiveActivity: Widget {
+struct LatestLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LatestAttribute.self) { context in
             // Lock screen live activity

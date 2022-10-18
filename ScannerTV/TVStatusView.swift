@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TVStatusView: View {
-    @ObservedObject var viewModel : ScannerActivityListViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State private var isAnimating = false
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("onboarding") var onboarding = false
@@ -124,6 +124,6 @@ struct TVStatusView: View {
 
 struct TVStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        TVStatusView(viewModel: ScannerActivityListViewModel())
+        TVStatusView(viewModel: MainViewModel())
     }
 }

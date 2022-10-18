@@ -13,6 +13,40 @@ class NetworkManager: NSObject {
     static let shared = NetworkManager()
     private override init() {}
     
+    func getActivity(controlNum: String, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
+        let url = URL(string: "\(Constants.ACTIVITY_URL)/\(controlNum)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print(url)
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let _ =  error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            do {
+                let decodedResponse = try JSONDecoder().decode([Scanner.Activity].self, from: data)
+                completed(.success(decodedResponse))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+    }
+    
     func getActivities(page: Int, per_page: Int = 25, dateFrom: Date? = nil, dateTo: Date? = nil, natures: Set<Int>? = nil, location: CLLocation? = nil, radius: Double? = nil, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
         let formatter = DateFormatter()
         let dateFromStr: String
