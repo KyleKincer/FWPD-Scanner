@@ -38,23 +38,24 @@ struct StandardSizeView: View {
             }
         }
         
+//        .sheet(isPresented: $showScanMenu) {
+//            if #available(iOS 16.1, *) {
+//                ScanModeSettingsView()
+//                    .presentationDetents([.fraction(0.8)])
+//            } else {
+//                ScanModeUpgradeView()
+//            }
+//        }
+        
         .sheet(isPresented: $showScanMenu) {
             if #available(iOS 16.1, *) {
-                ScanModeSettingsView()
-                    .presentationDetents([.fraction(0.8)])
+                ScanModeComingView()
+                    .presentationDetents([.fraction(0.5)])
             } else {
-                ScanModeUpgradeView()
+                ScanModeComingView()
             }
         }
         
-//        .sheet(isPresented: $showScanMenu) {
-//            if #available(iOS 16.1, *) {
-//                ScanModeComingView()
-//                    .presentationDetents([.fraction(0.5)])
-//            } else {
-//                ScanModeComingView()
-//            }
-//        }
         .sheet(isPresented: $showLocationDisclaimer) {
             if #available(iOS 16.1, *) {
                 LocationDisclaimerView()

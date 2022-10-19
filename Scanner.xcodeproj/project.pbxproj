@@ -64,17 +64,21 @@
 		EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */; };
 		EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00628F8F23900B0C5AC /* TVMapView.swift */; };
 		EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
-		EB98F88728E8C3FF009AC6B1 /* WidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */; };
-		EB98F88928E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */; };
-		EB98F88E28E8C400009AC6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB98F88D28E8C400009AC6B1 /* Assets.xcassets */; };
-		EB98F89428E8C400009AC6B1 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EB98F89A28E8C4C6009AC6B1 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89928E8C4C6009AC6B1 /* TopView.swift */; };
-		EB98F89B28E8C4F1009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
-		EB98F89C28E8C535009AC6B1 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EB98F89E28E8C757009AC6B1 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89D28E8C757009AC6B1 /* BottomView.swift */; };
-		EB98F8A028E8CAD0009AC6B1 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F89F28E8CACF009AC6B1 /* LockScreenView.swift */; };
-		EBA0645828FF479D00B42676 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */; };
-		EBA0645B28FF479F00B42676 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */; };
+		EBA0646228FF4C2F00B42676 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */; };
+		EBA0646328FF4C2F00B42676 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */; };
+		EBA0646628FF4C2F00B42676 /* scannerWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0646528FF4C2F00B42676 /* scannerWidgetsBundle.swift */; };
+		EBA0646828FF4C2F00B42676 /* scannerWidgetsLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0646728FF4C2F00B42676 /* scannerWidgetsLiveActivity.swift */; };
+		EBA0646A28FF4C2F00B42676 /* scannerWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0646928FF4C2F00B42676 /* scannerWidgets.swift */; };
+		EBA0646C28FF4C3000B42676 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBA0646B28FF4C3000B42676 /* Assets.xcassets */; };
+		EBA0647028FF4C3000B42676 /* scannerWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EBA0647428FF4C9D00B42676 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
+		EBA0647528FF4CE300B42676 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
+		EBA0647928FF4D1E00B42676 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647628FF4D1E00B42676 /* TopView.swift */; };
+		EBA0647A28FF4D1E00B42676 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647728FF4D1E00B42676 /* BottomView.swift */; };
+		EBA0647C28FF4D2D00B42676 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647828FF4D1E00B42676 /* LockScreenView.swift */; };
+		EBA0647D28FF4D3000B42676 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647728FF4D1E00B42676 /* BottomView.swift */; };
+		EBA0647E28FF4D3200B42676 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647828FF4D1E00B42676 /* LockScreenView.swift */; };
+		EBA0647F28FF4D3400B42676 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA0647628FF4D1E00B42676 /* TopView.swift */; };
 		EBB721CA28F6F55800435375 /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721C928F6F55800435375 /* ScannerTVApp.swift */; };
 		EBB721CC28F6F55800435375 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721CB28F6F55800435375 /* TVView.swift */; };
 		EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721CD28F6F55900435375 /* Assets.xcassets */; };
@@ -94,7 +98,6 @@
 		EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */; };
 		EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBB721F328F7229200435375 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBB721F228F7229200435375 /* GoogleService-Info.plist */; };
-		EBB721F428F7229600435375 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBB721F228F7229200435375 /* GoogleService-Info.plist */; };
 		EBB721F528F7229700435375 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBB721F228F7229200435375 /* GoogleService-Info.plist */; };
 		EBB721F628F7229700435375 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBB721F228F7229200435375 /* GoogleService-Info.plist */; };
 		EBB721F928F7249800435375 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBB721F828F7249800435375 /* FirebaseAnalytics */; };
@@ -108,12 +111,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EB98F89228E8C400009AC6B1 /* PBXContainerItemProxy */ = {
+		EBA0646E28FF4C3000B42676 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E202F437278E84A7009C0B13 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EB98F88128E8C3FF009AC6B1;
-			remoteInfo = WidgetExtensionExtension;
+			remoteGlobalIDString = EBA0646028FF4C2F00B42676;
+			remoteInfo = scannerWidgetsExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -124,7 +127,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				EB98F89428E8C400009AC6B1 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				EBA0647028FF4C3000B42676 /* scannerWidgetsExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,14 +189,15 @@
 		EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModel.swift; sourceTree = "<group>"; };
 		EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionBundle.swift; sourceTree = "<group>"; };
-		EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
-		EB98F88D28E8C400009AC6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EB98F88F28E8C400009AC6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB98F89928E8C4C6009AC6B1 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
-		EB98F89D28E8C757009AC6B1 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
-		EB98F89F28E8CACF009AC6B1 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
+		EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = scannerWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA0646528FF4C2F00B42676 /* scannerWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scannerWidgetsBundle.swift; sourceTree = "<group>"; };
+		EBA0646728FF4C2F00B42676 /* scannerWidgetsLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scannerWidgetsLiveActivity.swift; sourceTree = "<group>"; };
+		EBA0646928FF4C2F00B42676 /* scannerWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scannerWidgets.swift; sourceTree = "<group>"; };
+		EBA0646B28FF4C3000B42676 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EBA0646D28FF4C3000B42676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBA0647628FF4D1E00B42676 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		EBA0647728FF4D1E00B42676 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		EBA0647828FF4D1E00B42676 /* LockScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		EBB721C728F6F55800435375 /* ScannerTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScannerTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB721C928F6F55800435375 /* ScannerTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTVApp.swift; sourceTree = "<group>"; };
 		EBB721CB28F6F55800435375 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
@@ -231,12 +235,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB98F87F28E8C3FF009AC6B1 /* Frameworks */ = {
+		EBA0645E28FF4C2F00B42676 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBA0645828FF479D00B42676 /* SwiftUI.framework in Frameworks */,
-				EBA0645B28FF479F00B42676 /* WidgetKit.framework in Frameworks */,
+				EBA0646328FF4C2F00B42676 /* SwiftUI.framework in Frameworks */,
+				EBA0646228FF4C2F00B42676 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +260,8 @@
 				EBB721F228F7229200435375 /* GoogleService-Info.plist */,
 				E202F441278E84A7009C0B13 /* Scanner */,
 				EB57DA1228E78D0C0031B68A /* watchScanner Watch App */,
-				EB98F88528E8C3FF009AC6B1 /* WidgetExtension */,
 				EBB721C828F6F55800435375 /* ScannerTV */,
+				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 			);
@@ -268,8 +272,8 @@
 			children = (
 				E202F43F278E84A7009C0B13 /* Scanner.app */,
 				EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */,
-				EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */,
 				EBB721C728F6F55800435375 /* ScannerTV.app */,
+				EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,8 +291,8 @@
 				EB57406D28E61A5E009FDA3D /* Parent Views */,
 				EBB42E4428F65D2100F32BD8 /* Child Views */,
 				E202F446278E84A8009C0B13 /* Assets.xcassets */,
-				E202F448278E84A8009C0B13 /* Preview Content */,
 				E2C0EDB928FC3FC0005D7989 /* Scanner.xcdatamodeld */,
+				E202F448278E84A8009C0B13 /* Preview Content */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -304,12 +308,12 @@
 		E264494C2794B55000685DAB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E264495627986B0700685DAB /* Constants.swift */,
+				E2C0EDBC28FC4048005D7989 /* DataController.swift */,
 				E24522D12791F69400EFBB3E /* LocationManager.swift */,
 				E264494D2794B56700685DAB /* NetworkManager.swift */,
 				E264495127964D8B00685DAB /* ActError.swift */,
 				E2644953279650CD00685DAB /* AlertItem.swift */,
-				E264495627986B0700685DAB /* Constants.swift */,
-				E2C0EDBC28FC4048005D7989 /* DataController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -347,9 +351,9 @@
 			isa = PBXGroup;
 			children = (
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
-				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
 				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
+				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
 			path = Models;
@@ -399,26 +403,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EB98F88528E8C3FF009AC6B1 /* WidgetExtension */ = {
+		EBA0646428FF4C2F00B42676 /* scannerWidgets */ = {
 			isa = PBXGroup;
 			children = (
-				EB98F88628E8C3FF009AC6B1 /* WidgetExtensionBundle.swift */,
-				EB98F88828E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift */,
-				EB98F89828E8C4A2009AC6B1 /* LockScreenViews */,
-				EB98F88D28E8C400009AC6B1 /* Assets.xcassets */,
-				EB98F88F28E8C400009AC6B1 /* Info.plist */,
+				EBA0646528FF4C2F00B42676 /* scannerWidgetsBundle.swift */,
+				EBA0646728FF4C2F00B42676 /* scannerWidgetsLiveActivity.swift */,
+				EBA0647728FF4D1E00B42676 /* BottomView.swift */,
+				EBA0647828FF4D1E00B42676 /* LockScreenView.swift */,
+				EBA0647628FF4D1E00B42676 /* TopView.swift */,
+				EBA0646928FF4C2F00B42676 /* scannerWidgets.swift */,
+				EBA0646B28FF4C3000B42676 /* Assets.xcassets */,
+				EBA0646D28FF4C3000B42676 /* Info.plist */,
 			);
-			path = WidgetExtension;
-			sourceTree = "<group>";
-		};
-		EB98F89828E8C4A2009AC6B1 /* LockScreenViews */ = {
-			isa = PBXGroup;
-			children = (
-				EB98F89F28E8CACF009AC6B1 /* LockScreenView.swift */,
-				EB98F89928E8C4C6009AC6B1 /* TopView.swift */,
-				EB98F89D28E8C757009AC6B1 /* BottomView.swift */,
-			);
-			path = LockScreenViews;
+			path = scannerWidgets;
 			sourceTree = "<group>";
 		};
 		EBB42E4428F65D2100F32BD8 /* Child Views */ = {
@@ -479,7 +476,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EB98F89328E8C400009AC6B1 /* PBXTargetDependency */,
+				EBA0646F28FF4C3000B42676 /* PBXTargetDependency */,
 			);
 			name = Scanner;
 			packageProductDependencies = (
@@ -507,21 +504,21 @@
 			productReference = EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EB98F88128E8C3FF009AC6B1 /* WidgetExtensionExtension */ = {
+		EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB98F89528E8C400009AC6B1 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */;
+			buildConfigurationList = EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */;
 			buildPhases = (
-				EB98F87E28E8C3FF009AC6B1 /* Sources */,
-				EB98F87F28E8C3FF009AC6B1 /* Frameworks */,
-				EB98F88028E8C3FF009AC6B1 /* Resources */,
+				EBA0645D28FF4C2F00B42676 /* Sources */,
+				EBA0645E28FF4C2F00B42676 /* Frameworks */,
+				EBA0645F28FF4C2F00B42676 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WidgetExtensionExtension;
-			productName = WidgetExtensionExtension;
-			productReference = EB98F88228E8C3FF009AC6B1 /* WidgetExtensionExtension.appex */;
+			name = scannerWidgetsExtension;
+			productName = scannerWidgetsExtension;
+			productReference = EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		EBB721C628F6F55800435375 /* ScannerTV */ = {
@@ -557,7 +554,7 @@
 					EB57DA1028E78D0C0031B68A = {
 						CreatedOnToolsVersion = 14.1;
 					};
-					EB98F88128E8C3FF009AC6B1 = {
+					EBA0646028FF4C2F00B42676 = {
 						CreatedOnToolsVersion = 14.1;
 					};
 					EBB721C628F6F55800435375 = {
@@ -583,8 +580,8 @@
 			targets = (
 				E202F43E278E84A7009C0B13 /* Scanner */,
 				EB57DA1028E78D0C0031B68A /* watchScanner Watch App */,
-				EB98F88128E8C3FF009AC6B1 /* WidgetExtensionExtension */,
 				EBB721C628F6F55800435375 /* ScannerTV */,
+				EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -611,12 +608,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB98F88028E8C3FF009AC6B1 /* Resources */ = {
+		EBA0645F28FF4C2F00B42676 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB98F88E28E8C400009AC6B1 /* Assets.xcassets in Resources */,
-				EBB721F428F7229600435375 /* GoogleService-Info.plist in Resources */,
+				EBA0646C28FF4C3000B42676 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,9 +642,11 @@
 				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
 				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
+				EBA0647A28FF4D1E00B42676 /* BottomView.swift in Sources */,
 				E2C0EDBB28FC3FC0005D7989 /* Scanner.xcdatamodeld in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
+				EBA0647928FF4D1E00B42676 /* TopView.swift in Sources */,
 				EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */,
 				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
 				E2C0EDBD28FC4048005D7989 /* DataController.swift in Sources */,
@@ -669,6 +667,7 @@
 				EBF51FC228F66D3500488B2D /* ScanModeComingView.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
 				EB3A359328F5FEDE009625D0 /* ScanModeSettingsView.swift in Sources */,
+				EBA0647E28FF4D3200B42676 /* LockScreenView.swift in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
 				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
@@ -701,17 +700,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB98F87E28E8C3FF009AC6B1 /* Sources */ = {
+		EBA0645D28FF4C2F00B42676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB98F89C28E8C535009AC6B1 /* ScannerModel.swift in Sources */,
-				EB98F89B28E8C4F1009AC6B1 /* AttributeModel.swift in Sources */,
-				EB98F89E28E8C757009AC6B1 /* BottomView.swift in Sources */,
-				EB98F8A028E8CAD0009AC6B1 /* LockScreenView.swift in Sources */,
-				EB98F89A28E8C4C6009AC6B1 /* TopView.swift in Sources */,
-				EB98F88928E8C3FF009AC6B1 /* WidgetExtensionLiveActivity.swift in Sources */,
-				EB98F88728E8C3FF009AC6B1 /* WidgetExtensionBundle.swift in Sources */,
+				EBA0647428FF4C9D00B42676 /* AttributeModel.swift in Sources */,
+				EBA0647C28FF4D2D00B42676 /* LockScreenView.swift in Sources */,
+				EBA0647528FF4CE300B42676 /* ScannerModel.swift in Sources */,
+				EBA0646828FF4C2F00B42676 /* scannerWidgetsLiveActivity.swift in Sources */,
+				EBA0647D28FF4D3000B42676 /* BottomView.swift in Sources */,
+				EBA0646A28FF4C2F00B42676 /* scannerWidgets.swift in Sources */,
+				EBA0647F28FF4D3400B42676 /* TopView.swift in Sources */,
+				EBA0646628FF4C2F00B42676 /* scannerWidgetsBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,10 +745,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EB98F89328E8C400009AC6B1 /* PBXTargetDependency */ = {
+		EBA0646F28FF4C3000B42676 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB98F88128E8C3FF009AC6B1 /* WidgetExtensionExtension */;
-			targetProxy = EB98F89228E8C400009AC6B1 /* PBXContainerItemProxy */;
+			target = EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */;
+			targetProxy = EBA0646E28FF4C3000B42676 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1049,7 +1049,7 @@
 			};
 			name = Release;
 		};
-		EB98F89628E8C400009AC6B1 /* Debug */ = {
+		EBA0647228FF4C3000B42676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1060,8 +1060,8 @@
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_FILE = scannerWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = scannerWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1070,9 +1070,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.scannerWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1080,7 +1079,7 @@
 			};
 			name = Debug;
 		};
-		EB98F89728E8C400009AC6B1 /* Release */ = {
+		EBA0647328FF4C3000B42676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1091,8 +1090,8 @@
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_FILE = scannerWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = scannerWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1101,9 +1100,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.WidgetExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickmolargik.Scanner.scannerWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1209,11 +1207,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB98F89528E8C400009AC6B1 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */ = {
+		EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EB98F89628E8C400009AC6B1 /* Debug */,
-				EB98F89728E8C400009AC6B1 /* Release */,
+				EBA0647228FF4C3000B42676 /* Debug */,
+				EBA0647328FF4C3000B42676 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

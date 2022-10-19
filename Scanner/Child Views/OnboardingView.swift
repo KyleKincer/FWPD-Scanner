@@ -64,9 +64,9 @@ struct OnboardingView: View {
                 }, label: {
                     ZStack {
                         Capsule()
-                            .frame(width: 150, height: 75)
+                            .frame(width: 250, height: 75)
                         
-                        Text("Let's Go")
+                        Text("Let's Get Scanning!")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }

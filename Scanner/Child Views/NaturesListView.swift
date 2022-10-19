@@ -33,6 +33,7 @@ struct NaturesList: View {
                 } label: {
                     Text("Clear")
                 }
+                .disabled(selection.count == 0)
             }
             .padding()
             

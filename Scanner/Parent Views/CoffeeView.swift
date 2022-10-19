@@ -13,9 +13,9 @@ struct CoffeeView: View {
     var body: some View {
         VStack {
             Capsule()
-                    .fill(Color.secondary)
-                    .frame(width: 30, height: 3)
-                    .padding(10)
+                .fill(Color.secondary)
+                .frame(width: 30, height: 3)
+                .padding(10)
             
             Spacer()
             
@@ -52,7 +52,7 @@ struct CoffeeView: View {
                     .frame(width: 150, height: 50)
                     .padding(10)
                 
-                Link("Click here ☕️", destination: URL(string: "https://www.buymeacoffee.com/kylekincer")!)
+                Link("Click Here", destination: URL(string: "https://www.buymeacoffee.com/kylekincer")!)
                     .foregroundColor(.white)
                 
             }

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ActError: Error {
     case invalidURL
     case unableToComplete

@@ -35,7 +35,6 @@ struct MapView: View {
             if (chosenActivity != nil) {
                 Group {
                     VStack {
-                        
                         HStack {
                             Spacer()
                             

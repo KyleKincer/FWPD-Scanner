@@ -52,35 +52,35 @@ struct ListView: View {
                                     }
                                         
                                 }
-                                }
                             }
-                        }
-                    }
-                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : "Recent Activity")
-                    .navigationBarTitleDisplayMode(.automatic)
-                    .refreshable {
-                        withAnimation {
-                            viewModel.refresh()
-                            showingRefreshReminder = false
-                        }
-                    }
-                    .onChange(of: scenePhase) { newPhase in
-                        switch newPhase {
-                            
-                        case .background:
-                            showRefreshReminderOnActive = true
-                        case .active:
-                            if showRefreshReminderOnActive {
-                                withAnimation(.spring()) {showingRefreshReminder = true}
-                            }
-                        case .inactive:
-                            print("shrug")
-                        @unknown default:
-                            print("shrug")
                         }
                     }
                 }
+                .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : "Recent Activity")
+                .navigationBarTitleDisplayMode(.automatic)
+                .refreshable {
+                    withAnimation {
+                        viewModel.refresh()
+                        showingRefreshReminder = false
+                    }
+                }
+                .onChange(of: scenePhase) { newPhase in
+                    switch newPhase {
+                        
+                    case .background:
+                        showRefreshReminderOnActive = true
+                    case .active:
+                        if showRefreshReminderOnActive {
+                            withAnimation(.spring()) {showingRefreshReminder = true}
+                        }
+                    case .inactive:
+                        print("shrug")
+                    @unknown default:
+                        print("shrug")
+                    }
+                }
             }
+        }
             
             if showingRefreshReminder {
                 VStack {
@@ -109,11 +109,13 @@ struct ListView: View {
                                 if value.translation.height < 0 {
                                     withAnimation(.spring()) {showingRefreshReminder = false}
                                 }
-                            })
+                            }
+                    )
                     
                     Spacer()
                     
-                }.transition(.move(edge: .top))
+                }
+                .transition(.move(edge: .top))
             }
         }
     }
