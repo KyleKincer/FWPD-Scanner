@@ -215,41 +215,44 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    //getBookmark
+    //getBookmarks
     func getBookmarks() {
         self.showBookmarks = true
         self.activities = []
+        var controlNums = ""
         let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
         
         if (bookmarks?.count ?? 0 > 0) {
-            for mark in bookmarks! {
-                // get the bookmark's activity
-                NetworkManager.shared.getActivity(controlNum: mark) { [self] result in
-                    DispatchQueue.main.async {
-                        switch result {
-                            
-                        case .success(let activity):
-                            print("Bookmark retrieved.")
-                            self.serverResponsive = true
-                            self.activities.append(contentsOf: activity)
-                            self.addDatesToActivities(self.activities)
-                            self.addDistancesToActivities(self.activities)
-                            
-                        case .failure(let error):
-                            print("Failed to retrieve a bookmark")
-                            self.serverResponsive = false // Indicate problem connecting to the server
-                            
-                            switch error {
-                            case .invalidURL:
-                                self.alertItem = AlertContext.invalidURL
-                            case .unableToComplete:
-                                self.alertItem = AlertContext.unableToComplete
-                            case .invalidResponse:
-                                self.alertItem = AlertContext.invalidResponse
-                            case .invalidData:
-                                self.alertItem = AlertContext.invalidData
-                            }
-                        }
+            for bookmark in bookmarks ?? [""] {
+                // Create CSV String
+                controlNums = controlNums + bookmark + ","
+            }
+            controlNums.removeLast()
+            
+            
+            NetworkManager.shared.getActivitySet(controlNums: controlNums) { [self] result in
+                switch result {
+                    
+                case .success(let activities):
+                    print("Bookmarks retrieved")
+                    self.serverResponsive = true
+                    self.activities.append(contentsOf: activities)
+                    self.addDatesToActivities(self.activities)
+                    self.addDistancesToActivities(self.activities)
+                    
+                case .failure(let error):
+                    print("Failed to retrieve bookmarks")
+                    self.serverResponsive = false // Indicate problem connecting to the server
+                    
+                    switch error {
+                    case .invalidURL:
+                        self.alertItem = AlertContext.invalidURL
+                    case .unableToComplete:
+                        self.alertItem = AlertContext.unableToComplete
+                    case .invalidResponse:
+                        self.alertItem = AlertContext.invalidResponse
+                    case .invalidData:
+                        self.alertItem = AlertContext.invalidData
                     }
                 }
             }
