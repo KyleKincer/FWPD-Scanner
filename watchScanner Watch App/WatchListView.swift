@@ -19,16 +19,14 @@ struct WatchListView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    if (viewModel.isRefreshing) {
+                    if (viewModel.isRefreshing && !showMap) {
                         WatchStatusView(viewModel: viewModel)
                             .onTapGesture {
                                 if (!viewModel.serverResponsive) {
-                                    withAnimation (.linear(duration: 0.5)) {
-                                        viewModel.serverResponsive = true
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                            viewModel.serverResponsive = false
-                                            viewModel.refresh()
-                                        }
+                                    viewModel.serverResponsive = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        viewModel.serverResponsive = false
+                                        viewModel.refresh()
                                     }
                                 }
                             }
@@ -95,7 +93,7 @@ struct WatchListView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: geometry.size.width / 2 - 10, height: 65)
-                                .foregroundColor(.orange)
+                                .foregroundColor(viewModel.serverResponsive ? .orange : .gray)
                                 .cornerRadius(5)
                             Image(systemName: "gear")
                                 .foregroundColor(.white)
@@ -113,6 +111,7 @@ struct WatchListView: View {
                                 viewModel.refresh()
                             }
                         }
+                        .disabled(!viewModel.serverResponsive)
                     }
                     .padding(.bottom, -60)
                     .padding(.horizontal, 0)

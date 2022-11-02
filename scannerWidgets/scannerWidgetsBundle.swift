@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct scannerWidgetsBundle: WidgetBundle {
     var body: some Widget {
-        //scannerWidgets()
+        scannerWidgets()
         scannerWidgetsLiveActivity()
     }
 }

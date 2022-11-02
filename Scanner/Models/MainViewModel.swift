@@ -16,7 +16,6 @@ class MM : ObservableObject {
 }
 
 final class MainViewModel: ObservableObject {
-    @Environment(\.managedObjectContext) var moc
     @Published var locationManager: LocationManager = LocationManager()
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
@@ -30,9 +29,9 @@ final class MainViewModel: ObservableObject {
     @Published var serverResponsive = true
     @Published var isLoading = false
     @Published var mapModel = MM()
-    @Published var bookmarkCount = 0
     @Published var showBookmarks = false
-    @FetchRequest(sortDescriptors: []) var bookmarks: FetchedResults<Bookmark>
+    @Published var bookmarkCount = 0
+    let defaults = UserDefaults.standard
     private var storedPages : [Int] = []
     private var currentPage = 1
     
@@ -40,6 +39,8 @@ final class MainViewModel: ObservableObject {
         print("Initializing list view model")
         model = Scanner()
         locationManager.checkIfLocationServicesIsEnabled()
+        self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
+        print("Have \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
     }
     
@@ -56,6 +57,20 @@ final class MainViewModel: ObservableObject {
         }
         
         self.getActivities() // get first batch of activities
+    }
+    
+    func getActivity(controlNum: String) {
+        NetworkManager.shared.getActivity(controlNum: controlNum) { result in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let activity):
+                    print(activity)
+                case .failure(let error):
+                    print("Failed to retrieve activity \(controlNum) - \(String(error.localizedDescription)).")
+                }
+            }
+        }
     }
     
     func getActivities() {
@@ -77,9 +92,9 @@ final class MainViewModel: ObservableObject {
                     self.isRefreshing = false
                     self.storedPages.append(self.currentPage)
                     self.activities.append(contentsOf: newActivities)
-//                    self.filterOutDuplicates()
                     self.addDatesToActivities(self.activities)
                     self.addDistancesToActivities(self.activities)
+                    self.bookmarkCount = self.defaults.object(forKey: "bookmarkCount") as? Int ?? 0
                     
                 case .failure(let error):
                     print("Failed to retrieve Page \(self.currentPage)!")
@@ -100,19 +115,6 @@ final class MainViewModel: ObservableObject {
                 }
             }
         }
-    }
-    
-    func filterOutDuplicates() { // Currently broken
-        let activityIDs = (self.activities).compactMap { $0.id }
-        let uniqueIDs = Array(Set(activityIDs))
-        var uniqueActivities = [Scanner.Activity]()
-        
-        for activityID in uniqueIDs {
-            uniqueActivities.append(self.activities.first(where: {$0.id == activityID})!) // pile up all unique activities
-        }
-        
-        self.activities = uniqueActivities
-        return
     }
     
     func getMoreActivities() {
@@ -168,45 +170,73 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func saveBookmark(_ controlNumber: String) {
-        let bookmark = Bookmark(context: moc)
-        bookmark.id = UUID()
-        bookmark.controlNumber = controlNumber
-        
-        try? moc.save()
-        self.bookmarkCount+=1
+    
+    // Bookmark Controls
+    
+    //addBookmark
+    func addBookmark(bookmark : Scanner.Activity) {
+        var bookmarks = defaults.object(forKey: "Bookmarks") as? [String] ?? []
+        bookmarks.append(String(bookmark.controlNumber))
+        defaults.set(bookmarks, forKey: "Bookmarks")
+        self.bookmarkCount = defaults.object(forKey: "bookmarkCount") as? Int ?? 0
+        self.bookmarkCount += 1
+        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
     }
     
-    func deleteBookmark(_ controlNumber: String) {
-        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
-        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
-        if let results = try? moc.fetch(request) {
-            for object in results {
-                moc.delete(object)
-            }
-        }
-        try? moc.save()
+    
+    //removeBookmark
+    func removeBookmark(bookmark : Scanner.Activity) {
+        var bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
+        bookmarks?.removeAll { $0 == bookmark.controlNumber}
+        defaults.set(bookmarks, forKey: "Bookmarks")
+        self.bookmarkCount = defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         self.bookmarkCount-=1
+        if self.bookmarkCount < 0 {
+            self.bookmarkCount = 0
+        }
+        defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
+        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        if self.bookmarkCount == 0 && self.showBookmarks {
+            self.showBookmarks = false
+            self.refresh()
+        }
     }
     
-    func getBookmarks() { // Very much a prototype method
+    //checkBookmark
+    func checkBookmark(bookmark : Scanner.Activity) -> Bool {
+        let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
+        let index = bookmarks?.firstIndex {$0 == bookmark.controlNumber}
+        
+        if index != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    //getBookmark
+    func getBookmarks() {
         self.showBookmarks = true
-        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
-        if let results = try? moc.fetch(request) {
-            var bookmarks : [Scanner.Activity] = []
-            for object in results {
-                NetworkManager.shared.getActivity(controlNum: object.controlNumber!) { [self] result in
+        self.activities = []
+        let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
+        
+        if (bookmarks?.count ?? 0 > 0) {
+            for mark in bookmarks! {
+                // get the bookmark's activity
+                NetworkManager.shared.getActivity(controlNum: mark) { [self] result in
                     DispatchQueue.main.async {
                         switch result {
                             
                         case .success(let activity):
-                            print("Bookmark retrieved!")
-                            self.serverResponsive = true // No problem connecting to server
-                            bookmarks.append(contentsOf: activity)
-                            self.activities = bookmarks
+                            print("Bookmark retrieved.")
+                            self.serverResponsive = true
+                            self.activities.append(contentsOf: activity)
+                            self.addDatesToActivities(self.activities)
+                            self.addDistancesToActivities(self.activities)
                             
                         case .failure(let error):
-                            print("Failed to retrieve a bookmark!")
+                            print("Failed to retrieve a bookmark")
                             self.serverResponsive = false // Indicate problem connecting to the server
                             
                             switch error {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterSettings: View {
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     @State var dateTo = Date()
@@ -74,22 +74,24 @@ struct FilterSettings: View {
                 }
                 
                 Section("Filter By Activity Type") {
-                    if (viewModel.bookmarkCount > 0) {
-                        Toggle(isOn: $showFavorites) {
-                            Text("Only Show Favorites")
-                        }.onTapGesture {
-                            if (showFavorites) {
-                                refreshOnExit = true
-                            } else {
-                                viewModel.getBookmarks()
-                            }
+                    Text("Bookmarks Saved: \(viewModel.bookmarkCount)")
+                    Toggle(isOn: $viewModel.showBookmarks) {
+                        Text("Only Show Bookmarks")
+
+                    }.onTapGesture {
+                        if (viewModel.showBookmarks) {
+                            viewModel.showBookmarks = false
+                            viewModel.refresh()
+                            
+                        } else {
+                            viewModel.getBookmarks()
                         }
-                    }
+                    }.disabled(viewModel.bookmarkCount == 0)
                     
                     Button {
                         showingTypesPopover = true
                     } label: {
-                        Text(viewModel.selectedNatures.isEmpty ? "Select Activity Types" : "Types (\(viewModel.selectedNatures.count))")
+                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Activity Types" : "Types: (\(viewModel.selectedNatures.count))")
                     }
                 }
             }
@@ -128,7 +130,6 @@ struct FilterSettings: View {
             }
         }
         .onDisappear {
-            print("didDisappear")
             if dateFrom > dateTo {
                 viewModel.dateFrom = dateTo
             } else {
@@ -138,10 +139,10 @@ struct FilterSettings: View {
             if refreshOnExit {
                 refreshOnExit = false
                 viewModel.refresh()
+                print("Refreshed")
             }
         }
         .onAppear {
-            print("didAppear")
             refreshOnExit = false
             justAppeared1 = true
             justAppeared2 = true

@@ -48,7 +48,7 @@ struct ScanModeComingView: View {
             Spacer()
             
 
-            Text("Coming soon after the release of iOS 16.1 in Fall 2022!")
+            Text("Coming... eventually 🫠")
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             

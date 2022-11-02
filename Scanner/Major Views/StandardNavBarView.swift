@@ -28,21 +28,6 @@ struct StandardNavBarView: View {
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
                             impactMed.impactOccurred()
                         withAnimation {
-                            showFilter.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "camera.filters")
-                            .font(.system(size: 25))
-                            .foregroundColor(.green)
-                            .shadow(radius: 2)
-                    })
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
-                        withAnimation {
                             showMap.toggle()
                         }
                     }, label: {
@@ -58,6 +43,22 @@ struct StandardNavBarView: View {
                                 .shadow(radius: 2)
                         }
                     })
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
+                        withAnimation {
+                            showFilter.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "camera.filters")
+                            .font(.system(size: 25))
+                            .shadow(radius: 2)
+                    })
+                    .disabled(!viewModel.serverResponsive)
+                    .foregroundColor(viewModel.serverResponsive ? .green : .gray)
                     
                     Spacer()
                     
@@ -89,15 +90,15 @@ struct StandardNavBarView: View {
                         if (scanning) {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 25))
-                                .foregroundColor(.red)
                                 .shadow(radius: 2)
                         } else {
                             Image(systemName: "triangle")
                                 .font(.system(size: 25))
-                                .foregroundColor(.red)
                                 .shadow(radius: 2)
                         }
                     })
+                    .disabled(!viewModel.serverResponsive)
+                    .foregroundColor(viewModel.serverResponsive ? .red : .gray)
                     
                     Spacer()
                     
@@ -129,6 +130,8 @@ struct StandardNavBarView: View {
                             .foregroundColor(.green)
                             .shadow(radius: 2)
                     })
+                    .disabled(!viewModel.serverResponsive)
+                    .opacity(viewModel.serverResponsive ? 1 : 0)
                     
                     Spacer()
                     
@@ -149,6 +152,8 @@ struct StandardNavBarView: View {
                                 .shadow(radius: 2)
                         }
                     })
+                    .disabled(!viewModel.serverResponsive)
+                    .opacity(viewModel.serverResponsive ? 1 : 0)
                     
                     Spacer()
                     
@@ -160,6 +165,8 @@ struct StandardNavBarView: View {
                             .foregroundColor(.orange)
                             .shadow(radius: 2)
                     })
+                    .disabled(!viewModel.serverResponsive)
+                    .opacity(viewModel.serverResponsive ? 1 : 0)
                 }
                 .padding([.leading, .trailing])
                 

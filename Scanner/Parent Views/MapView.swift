@@ -118,23 +118,40 @@ struct MapView: View {
                         
                     } else {
                         
-                        Button() {
-                            withAnimation {
-                                viewModel.getMoreActivities()
+                        if (!viewModel.showBookmarks) {
+                            Button() {
+                                withAnimation {
+                                    viewModel.getMoreActivities()
+                                }
+                            } label: {
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .foregroundColor(.blue)
+                                    
+                                    HStack {
+                                        Text("Get More").fontWeight(.semibold)
+                                        Image(systemName: "plus.magnifyingglass")
+                                    }
+                                    .tint(.white)
+                                }
+                                .frame(width: 120, height: 33)
+                                .padding(.bottom)
                             }
-                        } label: {
-                            ZStack{
+                        }
+                        
+                        if (viewModel.showBookmarks) {
+                            ZStack {
                                 RoundedRectangle(cornerRadius: 15)
                                     .foregroundColor(.blue)
                                 
                                 HStack {
-                                    Text("Get More").fontWeight(.semibold)
-                                    Image(systemName: "plus.magnifyingglass")
+                                    Text((viewModel.bookmarkCount > 0) ? "Showing Bookmarks" : "No Bookmarks")
                                 }
                                 .tint(.white)
                             }
-                            .frame(width: 120, height: 33)
+                            .frame(width: 200, height: 33)
                             .padding(.bottom)
+                            
                         }
                     }
                 
@@ -146,8 +163,8 @@ struct MapView: View {
     }
 }
 
-//struct MapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapView(chosenActivity: .constant(nil), viewModel: MainViewModel())
-//    }
-//}
+struct MapView_Previews: PreviewProvider {
+    static var previews: some View {
+        MapView(chosenActivity: .constant(nil), activities: .constant([]), viewModel: MainViewModel())
+    }
+}

@@ -71,6 +71,9 @@ struct OnboardingView: View {
                             .fontWeight(.bold)
                     }
                 }).padding(.bottom, 50)
+                    .onAppear {
+                        onboarding = true
+                    }
                 
                 Spacer()
             }

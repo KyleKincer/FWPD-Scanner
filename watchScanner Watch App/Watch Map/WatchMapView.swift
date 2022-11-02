@@ -11,6 +11,7 @@ import MapKit
 struct WatchMapView: View {
     @State var mapModel = MapViewModel()
     @ObservedObject var viewModel: MainViewModel
+    var watch = WKInterfaceDevice()
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -23,9 +24,10 @@ struct WatchMapView: View {
             
             VStack {
                 HStack {
+                    Spacer()
+                    
                     ZStack {
                         Circle()
-                            .frame(width: 50, height: 50)
                             .foregroundColor(.blue)
                         if (viewModel.isLoading) {
                             ProgressView()
@@ -33,20 +35,21 @@ struct WatchMapView: View {
                             Image(systemName: "goforward.plus")
                                 .foregroundColor(.white)
                                 .font(.system(size: 30))
-                                .onTapGesture {
-                                    if (!viewModel.isLoading) {
-                                        withAnimation (.easeInOut(duration: 0.5)){
-                                            viewModel.getMoreActivities()
-                                        }
-                                    }
-                                }
+                                
                         }
                     }
-                    
-                    
-                    Spacer()
+                    .frame(width: 50, height: 50)
+                    .onTapGesture {
+                        if (!viewModel.isLoading) {
+                            withAnimation (.easeInOut(duration: 0.5)){
+                                watch.play(.success)
+                                viewModel.getMoreActivities()
+                            }
+                        }
+                    }
                 }.padding(.leading)
             }
+            
         }
     }
 }

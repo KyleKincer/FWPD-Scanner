@@ -17,11 +17,6 @@ struct LatestAttribute: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         var activity: Scanner.Activity
     }
-    
-    @available(iOS 16.1, *)
-    func update(using contentState: Activity<LatestAttribute>.ContentState) async {
-        
-    }
 }
 
 @available(iOS 16.1, *)
@@ -44,7 +39,7 @@ class LiveActivityHelper {
             latestActivity = try Activity<LatestAttribute>.request(
                 attributes: latestAttribute,
                 contentState: initialState,
-                pushType: .token)
+                pushType: nil)
             
             guard let latestActivity else {
                 print("Error: Could not initialize the live activity with ID: \(latestActivity?.id ?? "NO ID")")
@@ -77,7 +72,7 @@ class LiveActivityHelper {
                 return
             }
             
-            await latestActivity.end(using: stoppingLatest, dismissalPolicy: .immediate)
+            await latestActivity.end(using: stoppingLatest, dismissalPolicy: .default)
         }
     }
 }

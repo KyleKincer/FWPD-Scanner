@@ -12,7 +12,6 @@ struct ActivityRowView: View {
     @State var activity: Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
     @ObservedObject var viewModel : MainViewModel
-    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         NavigationLink(destination: {DetailView(viewModel: viewModel, activity: $activity)}) {
@@ -36,7 +35,8 @@ struct ActivityRowView: View {
                     }
                     
                     HStack {
-                        Image(systemName: "mappin.and.ellipse")
+                        Image(systemName: activity.bookmarked ? "bookmark.fill" : "mappin.and.ellipse")
+                            .foregroundColor(activity.bookmarked ? .yellow : .white)
                         Text("\(String(format: "%g", round(10 * activity.distance!) / 10)) miles away")
                         
                         Spacer()
@@ -90,37 +90,28 @@ struct ActivityRowView: View {
                     }
                 }
             }
-        }.foregroundColor(activity.bookmarked ? .blue : .white)
-        .swipeActions {
-            Button(activity.bookmarked ? "Remove Mark" : "Bookmark") {
-                if activity.bookmarked {
-                    activity.bookmarked = false
-                    viewModel.deleteBookmark(activity.controlNumber)
-                } else {
-                    activity.bookmarked = true
-                    viewModel.saveBookmark(activity.controlNumber)
-                }
-            }.tint(activity.bookmarked ? .red : .accentColor)
         }
-    }
-    
-    func saveBookmark(_ controlNumber: String) {
-        let bookmark = Bookmark(context: moc)
-        bookmark.id = UUID()
-        bookmark.controlNumber = controlNumber
-        
-        try? moc.save()
-    }
-    
-    func deleteBookmark(_ controlNumber: String) {
-        let request: NSFetchRequest<Bookmark> = Bookmark.fetchRequest()
-        request.predicate = NSPredicate(format: "controlNumber = %@", controlNumber)
-        if let results = try? moc.fetch(request) {
-            for object in results {
-                moc.delete(object)
+            .swipeActions {
+                Button(activity.bookmarked ? "Unmark" : "Bookmark") {
+                    if activity.bookmarked {
+                        activity.bookmarked = false
+                        viewModel.removeBookmark(bookmark: activity)
+                        if (viewModel.showBookmarks) {
+                            withAnimation {
+                                viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                            }
+                        } 
+                    } else {
+                        activity.bookmarked = true
+                        viewModel.addBookmark(bookmark: activity)
+                    }
+                }.tint(activity.bookmarked ? .red : .yellow)
             }
-        }
-        try? moc.save()
+        
+            .onAppear {
+                let bookmarkState = viewModel.checkBookmark(bookmark: activity)
+                activity.bookmarked = bookmarkState
+            }
     }
 }
 

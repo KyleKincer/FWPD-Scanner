@@ -77,11 +77,12 @@ struct StatusView: View {
                     }
                     .frame(width: 200, height: 200)
                     
-                    
-                    Text("Scanning")
-                        .font(.system(size: 40))
-                        .italic()
-                        .bold()
+                    if (!onboarding) {
+                        Text("Scanning")
+                            .font(.system(size: 40))
+                            .italic()
+                            .bold()
+                    }
                     
                 }
             } else {
@@ -101,12 +102,12 @@ struct StatusView: View {
                         if (colorScheme == .light) {
                             Image("launchicon")
                                 .colorInvert()
-                                .scaleEffect(0.2)
+                                .scaleEffect(0.1)
                                 .mask(Circle().frame(width: 70, height: 70))
                             
                         } else {
                             Image("launchicon")
-                                .scaleEffect(0.2)
+                                .scaleEffect(0.1)
                                 .mask(Circle().frame(width: 130, height: 130))
                             
                         }

@@ -13,35 +13,19 @@ struct MapAnnotationView: View {
     @State var activity : Scanner.Activity
     @Binding var chosenActivity : Scanner.Activity?
     
-    
     var body: some View {
-        if (activity.bookmarked) {
-            Image(systemName: "bookmark.fill")
-                .foregroundColor(chosenActivity == activity ? .blue : .red)
-                .onTapGesture {
-                    withAnimation {
-                        if (chosenActivity == activity) {
-                            chosenActivity = nil
-                        } else {
-                            chosenActivity = activity
-                        }
+        Image(systemName: "exclamationmark.triangle.fill")
+            .foregroundColor(chosenActivity == activity ? .blue : (activity.bookmarked ? .yellow : .red))
+            .onTapGesture {
+                withAnimation {
+                    if (chosenActivity == activity) {
+                        chosenActivity = nil
+                    } else {
+                        chosenActivity = activity
                     }
                 }
-                .scaleEffect(chosenActivity == activity ? 2 : 1)
-        } else {
-            Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundColor(chosenActivity == activity ? .blue : .red)
-                .onTapGesture {
-                    withAnimation {
-                        if (chosenActivity == activity) {
-                            chosenActivity = nil
-                        } else {
-                            chosenActivity = activity
-                        }
-                    }
-                }
-                .scaleEffect(chosenActivity == activity ? 2 : 1)
-        }
+            }
+            .scaleEffect(chosenActivity == activity ? 2 : 1)
     }
 }
 

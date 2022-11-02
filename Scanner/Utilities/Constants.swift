@@ -11,7 +11,7 @@ import MapKit
 enum Constants {
     // Activity API
     static let API_URL = "https://api.kylekincer.com"
-//    static let API_URL = "http://127.0.0.1:5000"
+    //static let API_URL = "http://10.0.0.178:80"
     static let ACTIVITY_URL = API_URL + "/activity"
     static let NATURE_URL = API_URL + "/nature"
     

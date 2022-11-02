@@ -111,43 +111,47 @@ struct ActivityView: View {
                                             }
                                         }
                                         
-                                        Section {
-                                            if (viewModel.isLoading) {
-                                                ProgressView()
-                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                    .listRowSeparator(.hidden)
-                                            } else {
-                                                Text("Tap for More")
-                                                    .bold()
-                                                    .italic()
-                                                    .foregroundColor(.blue)
-                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                    .onTapGesture {
+                                        if (!viewModel.showBookmarks) {
+                                            Section {
+                                                if (viewModel.isLoading) {
+                                                    ProgressView()
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                        .listRowSeparator(.hidden)
+                                                } else {
+                                                    Text("Tap for More")
+                                                        .bold()
+                                                        .italic()
+                                                        .foregroundColor(.blue)
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                        .onTapGesture {
                                                             if (!viewModel.isLoading) {
                                                                 viewModel.getMoreActivities()
                                                             }
-                                                    }
-                                                    .padding(.trailing, -2)
+                                                        }
+                                                        .padding(.trailing, -2)
+                                                }
+                                                
                                             }
-                                            
                                         }
                                     }
                                 }
                             }
-                            .navigationTitle(showFilter ? "Filters" : "Recent Events")
+                            .navigationTitle(showFilter ? "Filters" : (viewModel.showBookmarks ? "Bookmarks" : "Recent Activity"))
                             .navigationBarBackButtonHidden()
                             .toolbar {
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button(action: {
-                                        withAnimation {
-                                            showFilter.toggle()
-                                        }
-                                    }, label: {
-                                        Image(systemName: "camera.filters")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(.green)
-                                            .shadow(radius: 2)
-                                    })
+                                if (viewModel.serverResponsive) {
+                                    ToolbarItem(placement: .navigationBarTrailing) {
+                                        Button(action: {
+                                            withAnimation {
+                                                showFilter.toggle()
+                                            }
+                                        }, label: {
+                                            Image(systemName: "camera.filters")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(.green)
+                                                .shadow(radius: 2)
+                                        })
+                                    }
                                 }
                             }
                         }

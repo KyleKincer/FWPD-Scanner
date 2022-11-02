@@ -23,8 +23,6 @@
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		E264495C2798C4E800685DAB /* CoffeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495B2798C4E800685DAB /* CoffeeView.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
-		E2C0EDBB28FC3FC0005D7989 /* Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2C0EDB928FC3FC0005D7989 /* Scanner.xcdatamodeld */; };
-		E2C0EDBD28FC4048005D7989 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0EDBC28FC4048005D7989 /* DataController.swift */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
@@ -108,6 +106,7 @@
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
 		EBF51F9E28F662F500488B2D /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */; };
 		EBF51FC228F66D3500488B2D /* ScanModeComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51FC128F66D3500488B2D /* ScanModeComingView.swift */; };
+		EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,8 +152,6 @@
 		E264495B2798C4E800685DAB /* CoffeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeView.swift; sourceTree = "<group>"; };
 		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		E2C0EDBA28FC3FC0005D7989 /* Scanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scanner.xcdatamodel; sourceTree = "<group>"; };
-		E2C0EDBC28FC4048005D7989 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -216,6 +213,7 @@
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
 		EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
 		EBF51FC128F66D3500488B2D /* ScanModeComingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeComingView.swift; sourceTree = "<group>"; };
+		EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scanner.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */,
+				EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */,
 				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
@@ -291,7 +290,6 @@
 				EB57406D28E61A5E009FDA3D /* Parent Views */,
 				EBB42E4428F65D2100F32BD8 /* Child Views */,
 				E202F446278E84A8009C0B13 /* Assets.xcassets */,
-				E2C0EDB928FC3FC0005D7989 /* Scanner.xcdatamodeld */,
 				E202F448278E84A8009C0B13 /* Preview Content */,
 			);
 			path = Scanner;
@@ -309,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				E264495627986B0700685DAB /* Constants.swift */,
-				E2C0EDBC28FC4048005D7989 /* DataController.swift */,
 				E24522D12791F69400EFBB3E /* LocationManager.swift */,
 				E264494D2794B56700685DAB /* NetworkManager.swift */,
 				E264495127964D8B00685DAB /* ActError.swift */,
@@ -337,12 +334,12 @@
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
 				EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */,
+				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
 				EB3A359228F5FEDE009625D0 /* ScanModeSettingsView.swift */,
 				EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */,
 				EBF51FC128F66D3500488B2D /* ScanModeComingView.swift */,
-				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
-				E264495B2798C4E800685DAB /* CoffeeView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
+				E264495B2798C4E800685DAB /* CoffeeView.swift */,
 			);
 			path = "Parent Views";
 			sourceTree = "<group>";
@@ -351,10 +348,10 @@
 			isa = PBXGroup;
 			children = (
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
-				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
+				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -643,13 +640,11 @@
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
 				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
 				EBA0647A28FF4D1E00B42676 /* BottomView.swift in Sources */,
-				E2C0EDBB28FC3FC0005D7989 /* Scanner.xcdatamodeld in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
 				EBA0647928FF4D1E00B42676 /* TopView.swift in Sources */,
 				EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */,
 				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
-				E2C0EDBD28FC4048005D7989 /* DataController.swift in Sources */,
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
@@ -671,6 +666,7 @@
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
 				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
+				EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */,
 				EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1075,7 +1071,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1105,7 +1101,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1252,12 +1248,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		E2C0EDB928FC3FC0005D7989 /* Scanner.xcdatamodeld */ = {
+		EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E2C0EDBA28FC3FC0005D7989 /* Scanner.xcdatamodel */,
+				EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */,
 			);
-			currentVersion = E2C0EDBA28FC3FC0005D7989 /* Scanner.xcdatamodel */;
+			currentVersion = EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */;
 			path = Scanner.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -11,10 +11,18 @@ import MapKit
 struct DetailMapView: View {
     @State var viewModel: MainViewModel
     @State var activity : Scanner.Activity
+    @State var manager = CLLocationManager()
+    @StateObject var managerDelegate = locationDelegate()
+    
+    
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(coordinateRegion: $viewModel.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [activity]) { activity in
+            Map(coordinateRegion: $managerDelegate.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .none, annotationItems: [activity]) { activity in
                 MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .accentColor)
+            }
+            .onAppear {
+                manager.delegate = managerDelegate
+                managerDelegate.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
             }
             
             Button() {
@@ -34,6 +42,38 @@ struct DetailMapView: View {
                     .padding(.bottom)
             }
         }
+    }
+}
+
+class locationDelegate: NSObject,ObservableObject,CLLocationManagerDelegate{
+    // From here and down is new
+    @Published var location: CLLocation?
+
+    @State var hasSetRegion = false
+
+    @Published var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 38.898150, longitude: -77.034340),
+        span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+    )
+
+    // Checking authorization status...
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+
+        if manager.authorizationStatus == .authorizedWhenInUse{
+            print("Authorized")
+            manager.startUpdatingLocation()
+        } else {
+            print("not authorized")
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // pins.append(Pin(location:locations.last!))
+
+        // From here and down is new
+
     }
 }
 
