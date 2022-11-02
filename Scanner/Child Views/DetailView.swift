@@ -36,10 +36,20 @@ struct DetailView: View {
                                     activity.bookmarked = false
                                     isBookmarked = false
                                     viewModel.removeBookmark(bookmark: activity)
+                                    if (viewModel.showBookmarks) {
+                                        withAnimation {
+                                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                                        }
+                                    }
                                 } else {
                                     activity.bookmarked = true
                                     isBookmarked = true
                                     viewModel.addBookmark(bookmark: activity)
+                                    if (viewModel.showBookmarks) {
+                                        withAnimation {
+                                            viewModel.activities.append(activity)
+                                        }
+                                    }
                                 }
                             }
                             

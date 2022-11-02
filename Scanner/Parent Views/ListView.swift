@@ -72,15 +72,15 @@ struct ListView: View {
                     //Bookmarks
                     if (viewModel.activities == []) {
                         VStack {
-                            Text("Gathering bookmarks...")
+                            Text("Gathering Bookmarks")
                                 .font(.system(size: 25))
                                 .padding(.bottom)
                             
                             ZStack {
-                                ProgressView()
-                                    .scaleEffect(3)
                                 Image(systemName: "bookmark")
                                     .foregroundColor(.yellow)
+                                    .font(.system(size: 40))
+                                    .padding()
                             }
                         }
                     } else {
