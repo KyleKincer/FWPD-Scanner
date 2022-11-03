@@ -78,8 +78,7 @@ struct ExpandedNavBarView: View {
             .frame(width: 150, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.blue))
-
-            Spacer()
+            .padding(.horizontal)
             
             if #available(macCatalyst 11.0, *) {
                 Button(action: {
@@ -115,8 +114,7 @@ struct ExpandedNavBarView: View {
                 .background(RoundedRectangle(cornerRadius: 20)
                     .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.green))
                 .disabled(!viewModel.serverResponsive)
-                
-                Spacer()
+                .padding(.horizontal)
                 
             }
             
@@ -135,6 +133,7 @@ struct ExpandedNavBarView: View {
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.orange))
             .shadow(radius: 2)
+            .padding(.horizontal)
         }
         .padding([.leading, .trailing])
         
