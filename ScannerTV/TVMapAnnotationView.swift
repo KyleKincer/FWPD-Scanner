@@ -23,7 +23,7 @@ struct TVMapAnnotationView: View {
             
             VStack {
                 HStack {
-                    Text(activity.nature)
+                    Text(activity.nature == "" ? "Unknown" : activity.nature)
                         .padding(.trailing, -8)
                         .lineLimit(1)
                         .foregroundColor(.black)

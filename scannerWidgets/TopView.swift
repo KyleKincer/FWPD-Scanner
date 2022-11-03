@@ -23,7 +23,7 @@ struct TopView: View {
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: false)
                         
-                        Text(state.activity.nature)
+                        Text(state.activity.nature == "" ? "Unknown" : state.activity.nature)
                             .font(.system(size: 30))
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: false)

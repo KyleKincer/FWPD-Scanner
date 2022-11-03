@@ -11,19 +11,22 @@ struct WatchRowView: View {
     let activity: Scanner.Activity
     var body: some View {
         NavigationLink(destination: {WatchDetailView(activity: activity)}) {
-            VStack(alignment: .center, spacing: 2) {
-                    Text(activity.nature.capitalized)
+            VStack(alignment: .center) {
+                    Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                         .font(.body)
                         .fontWeight(.semibold)
                         .lineLimit(1)
+                        .padding(.horizontal)
                                   
                 Text(activity.date ?? Date(), style: .relative)
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .lineLimit(1)
+                        .padding(.horizontal)
                 
                 Text(activity.address)
                     .lineLimit(1)
+                    .padding(.horizontal)
             }
         }
         .navigationTitle("Scanner")

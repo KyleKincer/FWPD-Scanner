@@ -18,7 +18,7 @@ struct ActivityRowView: View {
             VStack(spacing: 5) {
                 if (showDistance && activity.distance ?? 0 > 0.0 && !viewModel.showBookmarks) {
                     HStack {
-                        Text(activity.nature.capitalized)
+                        Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                             .font(.body)
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.leading)
@@ -55,7 +55,7 @@ struct ActivityRowView: View {
                 } else {
                     
                     HStack {
-                        Text(activity.nature.capitalized)
+                        Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                             .font(.body)
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.leading)
@@ -114,10 +114,6 @@ struct ActivityRowView: View {
             .onAppear {
                 let bookmarkState = viewModel.checkBookmark(bookmark: activity)
                 activity.bookmarked = bookmarkState
-                if (activity.bookmarked) {
-                    print(activity.timestamp)
-                    print(activity.distance)
-                }
             }
     }
 }

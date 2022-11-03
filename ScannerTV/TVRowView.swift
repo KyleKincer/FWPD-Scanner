@@ -32,7 +32,7 @@ struct TVRowView: View {
                 
                 VStack(spacing: 5) {
                     HStack {
-                        Text(activity.nature.capitalized)
+                        Text(activity.nature == "" ? "Unknown" : activity.nature)
                             .font(.body)
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.leading)

@@ -21,7 +21,7 @@ struct DetailView: View {
         GeometryReader { geometry in
             VStack {
                 Group { // header
-                    Text(activity.nature)
+                    Text(activity.nature == "" ? "Unknown" : activity.nature)
                         .font(.largeTitle)
                         .italic()
                         .multilineTextAlignment(.center)

@@ -54,7 +54,7 @@ struct MapView: View {
                         
                         Spacer()
                         
-                        Text(chosenActivity!.nature)
+                        Text(chosenActivity!.nature == "" ? "Unknown" : chosenActivity!.nature)
                             .italic()
                             .bold()
                             .padding(.trailing, -8)

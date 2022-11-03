@@ -19,7 +19,7 @@ struct TVActivityDetailView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
-            Text(activity.nature)
+            Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                 .font(.system(size: 70))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

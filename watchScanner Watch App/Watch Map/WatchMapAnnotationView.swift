@@ -15,47 +15,14 @@ struct WatchMapAnnotationView: View {
     
     var body: some View {
         ZStack {
-//            Rectangle()
-//                .frame(width: 190, height: 100)
-//                .foregroundColor(.white)
-//                .opacity(showDetails ? 0.75 : 0)
-//                .cornerRadius(15)
-//
-//           VStack {
-//                HStack {
-//                    Text(activity.nature)
-//                        .padding(.trailing, -8)
-//                        .lineLimit(1)
-//                        .foregroundColor(.black)
-//                        .opacity(showDetails ? 1: 0)
-//                        .font(.system(size: 10))
-//                }
-//                HStack {
-//                    Text(activity.address)
-//                        .padding(.trailing, -8)
-//                        .lineLimit(1)
-//                        .foregroundColor(.black)
-//                        .font(.system(size: 10))
-//                }
-//                .opacity(showDetails ? 1 : 0)
-                
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.red)
-                    .onTapGesture {
-                        withAnimation (.linear){
-                            showDetails.toggle()
-                            viewModel.region.center = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
-                        }
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundColor(.red)
+                .onTapGesture {
+                    withAnimation (.linear){
+                        showDetails.toggle()
+                        viewModel.region.center = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
                     }
-                
-//                HStack {
-//                    Text(activity.timestamp)
-//                        .padding(.trailing, -8.5)
-//                        .foregroundColor(.black)
-//                        .font(.system(size: 12))
-//                }
-//                .opacity(showDetails ? 1 : 0)
-//           }
+            }
         }
     }
 }
