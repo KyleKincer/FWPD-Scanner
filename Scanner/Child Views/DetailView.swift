@@ -76,9 +76,11 @@ struct DetailView: View {
                             Image(systemName: "clock")
                         })
                     
-                    Text("\(activity.date ?? Date(), style: .relative) ago")
-                        .padding(.horizontal)
-                        .padding(.bottom, 3)
+                    if (!viewModel.showBookmarks) {
+                        Text("\(activity.date ?? Date(), style: .relative) ago")
+                            .padding(.horizontal)
+                            .padding(.bottom, 3)
+                    }
                     
                     Label(title: {
                         Text(activity.address)}, icon: {
@@ -87,7 +89,7 @@ struct DetailView: View {
                         })
                     .padding(.horizontal)
                     
-                    if (showDistance) {
+                    if (showDistance && !viewModel.showBookmarks) {
                         Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
                             .padding(.horizontal)
                             .padding(.bottom, 3)

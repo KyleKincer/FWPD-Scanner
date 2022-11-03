@@ -60,6 +60,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #4 in ActivityRowView.body.getter:ActivityRowView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel.activities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewModel.addDatesToActivities(_:):MainViewModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "MainViewModel.addBookmark(bookmark:):MainViewModel.swift">
          <PersistentStrings>
             <PersistentString
@@ -79,6 +90,12 @@
          contextName = "closure #8 in FilterSettings.body.getter:FilterSettingsView.swift">
          <PersistentStrings>
             <PersistentString
+               value = "viewModel.locationEnabled">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.activities">
+            </PersistentString>
+            <PersistentString
                value = "refreshOnExit">
             </PersistentString>
          </PersistentStrings>
@@ -87,13 +104,21 @@
          contextName = "closure #1 in closure #1 in MainViewModel.getActivities():MainViewModel.swift">
       </ContextState>
       <ContextState
-         contextName = "ScannerActivityListViewModel.getMoreActivities():ListViewModel.swift">
-      </ContextState>
-      <ContextState
          contextName = "ScannerActivityListViewModel.filterOutDuplicates():ListViewModel.swift">
          <PersistentStrings>
             <PersistentString
                value = "uniqueActivities.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScannerActivityListViewModel.getMoreActivities():ListViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MainViewModel.getBookmarks():MainViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "controlNums">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -110,6 +135,14 @@
       </ContextState>
       <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in ScannerActivityListView.body.getter:ScannerActivityListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainViewModel.getBookmarks():MainViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bookmarkCount">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

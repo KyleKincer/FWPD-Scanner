@@ -73,6 +73,10 @@ struct OnboardingView: View {
                 }).padding(.bottom, 50)
                     .onAppear {
                         onboarding = true
+                        viewModel.locationManager.requestAlwaysAuthorization()
+                    }
+                    .onDisappear {
+                        viewModel.refresh()
                     }
                 
                 Spacer()

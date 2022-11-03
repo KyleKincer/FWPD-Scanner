@@ -16,7 +16,7 @@ struct ActivityRowView: View {
     var body: some View {
         NavigationLink(destination: {DetailView(viewModel: viewModel, activity: $activity)}) {
             VStack(spacing: 5) {
-                if (showDistance && activity.distance != nil) {
+                if (showDistance && activity.distance ?? 0 > 0.0 && !viewModel.showBookmarks) {
                     HStack {
                         Text(activity.nature.capitalized)
                             .font(.body)
@@ -37,7 +37,7 @@ struct ActivityRowView: View {
                     HStack {
                         Image(systemName: activity.bookmarked ? "bookmark.fill" : "mappin.and.ellipse")
                             .foregroundColor(activity.bookmarked ? .yellow : .white)
-                        Text("\(String(format: "%g", round(10 * activity.distance!) / 10)) miles away")
+                        Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
                         
                         Spacer()
                         
@@ -61,19 +61,22 @@ struct ActivityRowView: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
+                            .foregroundColor(activity.bookmarked ? .yellow : .white)
                         
                         Spacer()
                     }
                     
-                    HStack {
-                        Text("\(activity.date ?? Date(), style: .relative) ago")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.trailing)
-                            .lineLimit(1)
-                        
-                        Spacer()
-                        
+                    if (!viewModel.showBookmarks) {
+                        HStack {
+                            Text("\(activity.date ?? Date(), style: .relative) ago")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.trailing)
+                                .lineLimit(1)
+                            
+                            Spacer()
+                            
+                        }
                     }
                     
                     HStack {
@@ -111,6 +114,10 @@ struct ActivityRowView: View {
             .onAppear {
                 let bookmarkState = viewModel.checkBookmark(bookmark: activity)
                 activity.bookmarked = bookmarkState
+                if (activity.bookmarked) {
+                    print(activity.timestamp)
+                    print(activity.distance)
+                }
             }
     }
 }

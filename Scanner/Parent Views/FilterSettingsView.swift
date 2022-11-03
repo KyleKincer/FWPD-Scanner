@@ -42,24 +42,28 @@ struct FilterSettings: View {
                 Section("Location") {
                     Text("This app only works for Fort Wayne, IN")
                         .multilineTextAlignment(.center)
-                    Toggle("Show Distance From You", isOn: $showDistance)
-                    Toggle(isOn: $useLocation) {
-                        Text("Filter By Distance")
-                    }
-                    if useLocation {
-                        VStack {
-                            HStack {
-                                Text("Radius: \(String(format: "%g", (round(radius * 10)) / 10)) mi")
-                                Spacer()
+                    
+                    
+                    if viewModel.locationEnabled {
+                        Toggle("Show Distance From You", isOn: $showDistance)
+                        Toggle(isOn: $useLocation) {
+                            Text("Filter By Distance")
+                        }
+                        if useLocation {
+                            VStack {
+                                HStack {
+                                    Text("Radius: \(String(format: "%g", (round(radius * 10)) / 10)) mi")
+                                    Spacer()
+                                }
+                                Slider(value: $radius, in: 0.1...5)
                             }
-                            Slider(value: $radius, in: 0.1...5)
                         }
                     }
-                }
-                
-                if (useLocation) {
-                    Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filteirng by distance!") {
-                        
+                    
+                    if (useLocation) {
+                        Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
+                            
+                        }
                     }
                 }
                 
@@ -77,16 +81,16 @@ struct FilterSettings: View {
                     Text("Bookmarks Saved: \(viewModel.bookmarkCount)")
                     Toggle(isOn: $viewModel.showBookmarks) {
                         Text("Only Show Bookmarks")
+                    }
+                    .disabled(viewModel.bookmarkCount == 0)
+                    .onChange(of: viewModel.showBookmarks) { _ in
+                            if (viewModel.showBookmarks) {
+                                viewModel.getBookmarks()
 
-                    }.onTapGesture {
-                        if (viewModel.showBookmarks) {
-                            viewModel.showBookmarks = false
-                            viewModel.refresh()
-                            
-                        } else {
-                            viewModel.getBookmarks()
+                            } else {
+                                viewModel.refresh()
+                            }
                         }
-                    }.disabled(viewModel.bookmarkCount == 0)
                     
                     Button {
                         showingTypesPopover = true
