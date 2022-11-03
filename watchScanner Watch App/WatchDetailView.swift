@@ -48,7 +48,7 @@ struct WatchDetailView: View {
                         .scaledToFit()
                         
                         if activity.distance != nil {
-                            Text(", \(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
+                            Text("\(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
                                 .font(.footnote)
                         }
                         
