@@ -58,6 +58,7 @@ final class MainViewModel: ObservableObject {
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("Have \(self.bookmarkCount) bookmark(s)!")
         self.getActivities()
+        self.getNatures()
     }
     
     func refresh() {
