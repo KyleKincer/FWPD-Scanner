@@ -58,11 +58,11 @@ struct FilterSettings: View {
                                 Slider(value: $radius, in: 0.1...5)
                             }
                         }
-                    }
-                    
-                    if (useLocation) {
-                        Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
-                            
+                        
+                        if (useLocation) {
+                            Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
+                                
+                            }
                         }
                     }
                 }

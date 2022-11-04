@@ -36,10 +36,49 @@ struct DetailMapView: View {
                     HStack {
                         Text("Open in Maps").fontWeight(.semibold)
                         Image(systemName: "arrowshape.turn.up.right")
+                        
                     }
                     .tint(.white)
                 }.frame(width: 200, height: 45)
                     .padding(.bottom)
+            }
+                    
+            HStack {
+                
+                Spacer()
+                
+                Button(action: {
+                        activity.bookmarked.toggle()
+                        
+                        if (activity.bookmarked) {
+                            viewModel.addBookmark(bookmark: activity)
+                            if (viewModel.showBookmarks) {
+                                withAnimation {
+                                    viewModel.activities.append(activity)
+                                }
+                            }
+                            
+                        } else {
+                            viewModel.removeBookmark(bookmark: activity)
+                            if (viewModel.showBookmarks) {
+                                withAnimation {
+                                    viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                                }
+                            }
+                        }
+                        
+                    }, label: {
+                        ZStack {
+                            Circle()
+                                .frame(width: 45, height: 45)
+                                .foregroundColor(.blue)
+                            
+                            Image(systemName: activity.bookmarked ? "bookmark.fill" : "bookmark")
+                                .foregroundColor(activity.bookmarked ? .yellow : .white)
+                        }
+                    })
+                .padding(.bottom)
+                .padding(.trailing)
             }
         }
     }

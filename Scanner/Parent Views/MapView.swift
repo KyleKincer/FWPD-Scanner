@@ -29,7 +29,6 @@ struct MapView: View {
                 }
             }
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .top, endPoint: .bottom))
             .edgesIgnoringSafeArea(.all)
             
             if (chosenActivity != nil) {
@@ -114,7 +113,7 @@ struct MapView: View {
                             ProgressView()
                         }
                         .frame(width: 120, height: 33)
-                        .padding(.bottom)
+                        .padding(.bottom, 30)
                         
                     } else {
                         
@@ -130,12 +129,12 @@ struct MapView: View {
                                     
                                     HStack {
                                         Text("Get More").fontWeight(.semibold)
-                                        Image(systemName: "plus.magnifyingglass")
+                                        Image(systemName: "goforward.plus")
                                     }
                                     .tint(.white)
                                 }
                                 .frame(width: 120, height: 33)
-                                .padding(.bottom)
+                                .padding(.bottom, 30)
                             }
                         }
                         
@@ -150,7 +149,7 @@ struct MapView: View {
                                 .tint(.white)
                             }
                             .frame(width: 200, height: 33)
-                            .padding(.bottom)
+                            .padding(.bottom, 30)
                             
                         }
                     }

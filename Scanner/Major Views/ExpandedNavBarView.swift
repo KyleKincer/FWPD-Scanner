@@ -58,7 +58,7 @@ struct ExpandedNavBarView: View {
                                 .foregroundColor(.blue)
                                 .transition(.opacity)
                             
-                            Text("Show List")
+                            Text("List View")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                             
@@ -68,7 +68,7 @@ struct ExpandedNavBarView: View {
                                 .foregroundColor(.blue)
                                 .transition(.opacity)
                             
-                            Text("Show Map")
+                            Text("Map View")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                         }

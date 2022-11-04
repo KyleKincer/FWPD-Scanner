@@ -60,15 +60,12 @@ struct ExpandedFilterSettings: View {
                             viewModel.getBookmarks()
                         }
                     }.disabled(viewModel.bookmarkCount == 0)
-                    
-                    Text("Natures:")
-                    
+
                     ForEach(viewModel.natures) { nature in
                         Text(nature.name.capitalized)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
                     }
-                    
                 }
             }
         }

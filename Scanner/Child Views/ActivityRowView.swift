@@ -36,7 +36,8 @@ struct ActivityRowView: View {
                     
                     HStack {
                         Image(systemName: activity.bookmarked ? "bookmark.fill" : "mappin.and.ellipse")
-                            .foregroundColor(activity.bookmarked ? .yellow : .white)
+                            .foregroundColor(activity.bookmarked ? .yellow : .primary)
+                        
                         Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
                         
                         Spacer()
@@ -61,7 +62,7 @@ struct ActivityRowView: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
-                            .foregroundColor(activity.bookmarked ? .yellow : .white)
+                            .foregroundColor(activity.bookmarked ? .yellow : .primary)
                         
                         Spacer()
                     }

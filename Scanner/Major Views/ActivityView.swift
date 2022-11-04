@@ -130,7 +130,6 @@ struct ActivityView: View {
                                                         }
                                                         .padding(.trailing, -2)
                                                 }
-                                                
                                             }
                                         }
                                     }

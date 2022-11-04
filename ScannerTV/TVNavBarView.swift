@@ -28,7 +28,9 @@ struct TVNavBarView: View {
                     .italic()
                     .font(.largeTitle)
                     .shadow(radius: 2)
+                    .lineLimit(1)
                     .foregroundColor(Color("ModeOpposite"))
+                    .fixedSize(horizontal: true, vertical: true)
             })
             
             Spacer()
@@ -74,7 +76,7 @@ struct TVNavBarView: View {
                 
                 ZStack {
                     HStack {
-                        Image(systemName: "plus.magnifyingglass")
+                        Image(systemName: "goforward.plus")
                             .font(.system(size: 40))
                             .foregroundColor(.red)
                             .transition(.opacity)
@@ -121,7 +123,7 @@ struct TVNavBarView: View {
                                 .foregroundColor(.blue)
                                 .transition(.opacity)
                             
-                            Text("Show Map")
+                            Text("Map View")
                                 .foregroundColor(.black)
                                 .transition(.opacity)
                         }

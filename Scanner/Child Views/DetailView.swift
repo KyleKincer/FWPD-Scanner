@@ -28,40 +28,40 @@ struct DetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
                         .padding(.bottom, 5)
-                    
-                    if (sizeClass == .compact) {
-                        Button (action: {
-                            withAnimation {
-                                if (activity.bookmarked) {
-                                    activity.bookmarked = false
-                                    isBookmarked = false
-                                    viewModel.removeBookmark(bookmark: activity)
-                                    if (viewModel.showBookmarks) {
-                                        withAnimation {
-                                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
-                                        }
-                                    }
-                                } else {
-                                    activity.bookmarked = true
-                                    isBookmarked = true
-                                    viewModel.addBookmark(bookmark: activity)
-                                    if (viewModel.showBookmarks) {
-                                        withAnimation {
-                                            viewModel.activities.append(activity)
-                                        }
-                                    }
-                                }
-                            }
-                            
-                        }, label: {
-                            VStack {
-                                Image(systemName: "bookmark.circle.fill")
-                            }
-                            .font(.system(size: 40))
-                            .foregroundColor(isBookmarked ? .yellow : .gray)
-                        })
-                            .padding(.bottom, 5)
-                    }
+//                    
+//                    if (sizeClass == .compact) {
+//                        Button (action: {
+//                            withAnimation {
+//                                if (activity.bookmarked) {
+//                                    activity.bookmarked = false
+//                                    isBookmarked = false
+//                                    viewModel.removeBookmark(bookmark: activity)
+//                                    if (viewModel.showBookmarks) {
+//                                        withAnimation {
+//                                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+//                                        }
+//                                    }
+//                                } else {
+//                                    activity.bookmarked = true
+//                                    isBookmarked = true
+//                                    viewModel.addBookmark(bookmark: activity)
+//                                    if (viewModel.showBookmarks) {
+//                                        withAnimation {
+//                                            viewModel.activities.append(activity)
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                            
+//                        }, label: {
+//                            VStack {
+//                                Image(systemName: "bookmark.circle.fill")
+//                            }
+//                            .font(.system(size: 40))
+//                            .foregroundColor(isBookmarked ? .yellow : .gray)
+//                        })
+//                            .padding(.bottom, 5)
+//                    }
                     
                     
                     Label(title: {

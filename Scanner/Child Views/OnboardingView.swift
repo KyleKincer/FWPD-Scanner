@@ -12,7 +12,7 @@ struct OnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel : MainViewModel
     @AppStorage("onboarding") var onboarding = true
-    @State var isAnimating = false
+    @State var isAnimating = true
     
     var body: some View {
         ZStack {
@@ -65,6 +65,7 @@ struct OnboardingView: View {
                     ZStack {
                         Capsule()
                             .frame(width: 250, height: 75)
+                            .foregroundColor(.blue)
                         
                         Text("Let's Get Scanning!")
                             .foregroundColor(.white)
@@ -82,6 +83,7 @@ struct OnboardingView: View {
                 Spacer()
             }
         }.padding()
+            .transition(.opacity)
     }
 }
 
