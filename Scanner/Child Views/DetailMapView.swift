@@ -13,6 +13,7 @@ struct DetailMapView: View {
     @State var activity : Scanner.Activity
     @State var manager = CLLocationManager()
     @StateObject var managerDelegate = locationDelegate()
+    @Environment(\.horizontalSizeClass) var sizeClass
     
     
     var body: some View {
@@ -42,12 +43,14 @@ struct DetailMapView: View {
                 }.frame(width: 200, height: 45)
                     .padding(.bottom)
             }
+            
+            if (sizeClass == .compact) {
+                
+                HStack {
                     
-            HStack {
-                
-                Spacer()
-                
-                Button(action: {
+                    Spacer()
+                    
+                    Button(action: {
                         activity.bookmarked.toggle()
                         
                         if (activity.bookmarked) {
@@ -77,8 +80,9 @@ struct DetailMapView: View {
                                 .foregroundColor(activity.bookmarked ? .yellow : .white)
                         }
                     })
-                .padding(.bottom)
-                .padding(.trailing)
+                    .padding(.bottom)
+                    .padding(.trailing)
+                }
             }
         }
     }
