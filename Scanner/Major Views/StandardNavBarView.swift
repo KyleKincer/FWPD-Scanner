@@ -105,13 +105,21 @@ struct StandardNavBarView: View {
                     Button(action: {
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
                             impactMed.impactOccurred()
-                        showCoffee.toggle()
+                        viewModel.showBookmarks.toggle()
                     }, label: {
-                        Image(systemName: "cup.and.saucer")
+                        Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
                             .shadow(radius: 2)
-                    })
+                    }).disabled(viewModel.bookmarkCount == 0)
+                        .onChange(of: viewModel.showBookmarks) { _ in
+                                if (viewModel.showBookmarks) {
+                                    viewModel.getBookmarks()
+
+                                } else {
+                                    viewModel.refresh()
+                                }
+                            }
                 }
                 .padding([.leading, .trailing])
                 
