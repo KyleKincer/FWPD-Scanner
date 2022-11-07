@@ -11,7 +11,6 @@ struct ExpandedNavBarView: View {
     @Binding var showScanMenu : Bool
     @Binding var showFilter : Bool
     @Binding var showMap : Bool
-    @Binding var showCoffee : Bool
     @Binding var showLocationDisclaimer: Bool
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
@@ -119,17 +118,32 @@ struct ExpandedNavBarView: View {
             }
             
             Button(action: {
-                showCoffee.toggle()
+                withAnimation {
+                    viewModel.showBookmarks.toggle()
+                }
+                if (viewModel.showBookmarks) {
+                    viewModel.getBookmarks()
+
+                } else {
+                    viewModel.refresh()
+                }
             }, label: {
                 ZStack {
+                    
                     HStack {
-                        Image(systemName: "cup.and.saucer")
+                        
+                        Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
+                            .shadow(radius: 2)
+                        
+                        Text(viewModel.showBookmarks ? "Show All" : "Bookmarks")
+                            .foregroundColor(.primary)
+                            .transition(.opacity)
                     }
                 }
             })
-            .frame(width: 50, height: 35)
+            .frame(width: 150, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.orange))
             .shadow(radius: 2)
@@ -144,7 +158,7 @@ struct ExpandedNavBarView: View {
 
 struct ExpandedNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
+        ExpandedNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

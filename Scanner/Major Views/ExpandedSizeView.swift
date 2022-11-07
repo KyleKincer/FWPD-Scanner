@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExpandedSizeView: View {
     @ObservedObject var viewModel: MainViewModel
-    @State private var showCoffee = false
     @State private var showFilter = false
     @State private var showScanMenu = false
     @State private var showMap = false
@@ -17,21 +16,13 @@ struct ExpandedSizeView: View {
 
     var body: some View {
         VStack {
-            ExpandedNavBarView(showScanMenu: $showScanMenu, showFilter: $showFilter, showMap: $showMap, showCoffee: $showCoffee, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
+            ExpandedNavBarView(showScanMenu: $showScanMenu, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
             
             Divider()
                 .padding(0)
             
             ActivityView(showMap: $showMap, viewModel: viewModel)
                 .padding(.top, -8)
-        }
-        .sheet(isPresented: $showCoffee) {
-            if #available(iOS 16.0, *) {
-                CoffeeView(showCoffee: $showCoffee)
-                    .presentationDetents([.fraction(0.1)])
-            } else {
-                CoffeeView(showCoffee: $showCoffee)
-            }
         }
         .sheet(isPresented: $showLocationDisclaimer) {
             if #available(iOS 16.0, *) {

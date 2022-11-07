@@ -10,7 +10,7 @@ import MapKit
 
 struct DetailMapView: View {
     @State var viewModel: MainViewModel
-    @State var activity : Scanner.Activity
+    @Binding var activity : Scanner.Activity
     @State var manager = CLLocationManager()
     @StateObject var managerDelegate = locationDelegate()
     @Environment(\.horizontalSizeClass) var sizeClass
@@ -23,7 +23,7 @@ struct DetailMapView: View {
             }
             .onAppear {
                 manager.delegate = managerDelegate
-                managerDelegate.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+                managerDelegate.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             }
             
             Button() {
@@ -122,6 +122,6 @@ class locationDelegate: NSObject,ObservableObject,CLLocationManagerDelegate{
 
 struct DetailMapView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailMapView(viewModel: MainViewModel(), activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
+        DetailMapView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))
     }
 }

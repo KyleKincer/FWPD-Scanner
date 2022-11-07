@@ -11,7 +11,6 @@ struct StandardNavBarView: View {
     @Binding var showScanMenu : Bool
     @Binding var showFilter : Bool
     @Binding var showMap : Bool
-    @Binding var showCoffee : Bool
     @Binding var showLocationDisclaimer: Bool
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
@@ -103,11 +102,17 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
-                        showCoffee.toggle()
+                        withAnimation {
+                            viewModel.showBookmarks.toggle()
+                        }
+                        if (viewModel.showBookmarks) {
+                            viewModel.getBookmarks()
+
+                        } else {
+                            viewModel.refresh()
+                        }
                     }, label: {
-                        Image(systemName: "cup.and.saucer")
+                        Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
                             .shadow(radius: 2)
@@ -158,15 +163,21 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
-                        showCoffee.toggle()
+                        withAnimation {
+                            viewModel.showBookmarks.toggle()
+                        }
+                        if (viewModel.showBookmarks) {
+                            viewModel.getBookmarks()
+
+                        } else {
+                            viewModel.refresh()
+                        }
                     }, label: {
-                        Image(systemName: "cup.and.saucer")
+                        Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
                             .shadow(radius: 2)
                     })
-                    .disabled(!viewModel.serverResponsive)
-                    .opacity(viewModel.serverResponsive ? 1 : 0)
                 }
                 .padding([.leading, .trailing])
                 
@@ -178,6 +189,6 @@ struct StandardNavBarView: View {
 
 struct StandardNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showCoffee: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
+        StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
     }
 }

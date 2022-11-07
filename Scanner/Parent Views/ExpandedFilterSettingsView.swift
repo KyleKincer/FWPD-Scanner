@@ -46,21 +46,6 @@ struct ExpandedFilterSettings: View {
                 }
                 
                 Section ("Filter By Activity") {
-                    
-                    Text("Bookmarks Saved: \(viewModel.bookmarkCount)")
-                    Toggle(isOn: $viewModel.showBookmarks) {
-                        Text("Only Show Bookmarks")
-
-                    }.onTapGesture {
-                        if (viewModel.showBookmarks) {
-                            viewModel.showBookmarks = false
-                            viewModel.refresh()
-                            
-                        } else {
-                            viewModel.getBookmarks()
-                        }
-                    }.disabled(viewModel.bookmarkCount == 0)
-
                     ForEach(viewModel.natures) { nature in
                         Text(nature.name.capitalized)
                             .lineLimit(1)

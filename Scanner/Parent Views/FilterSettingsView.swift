@@ -78,24 +78,10 @@ struct FilterSettings: View {
                 }
                 
                 Section("Filter By Activity Type") {
-                    Text("Bookmarks Saved: \(viewModel.bookmarkCount)")
-                    Toggle(isOn: $viewModel.showBookmarks) {
-                        Text("Only Show Bookmarks")
-                    }
-                    .disabled(viewModel.bookmarkCount == 0)
-                    .onChange(of: viewModel.showBookmarks) { _ in
-                            if (viewModel.showBookmarks) {
-                                viewModel.getBookmarks()
-
-                            } else {
-                                viewModel.refresh()
-                            }
-                        }
-                    
                     Button {
                         showingTypesPopover = true
                     } label: {
-                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Activity Types" : "Types: (\(viewModel.selectedNatures.count))")
+                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
                     }
                 }
             }
