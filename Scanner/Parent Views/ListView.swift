@@ -70,7 +70,7 @@ struct ListView: View {
                 } else {
                     
                     //Bookmarks
-                    if (viewModel.activities == [] && viewModel.showBookmarks) {
+                    if (viewModel.activities == []) {
                         VStack {
                             if (viewModel.bookmarkCount == 0) {
                                 Text("No Bookmarks Saved")
