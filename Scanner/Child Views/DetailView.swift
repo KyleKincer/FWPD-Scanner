@@ -29,41 +29,6 @@ struct DetailView: View {
                         .padding(.horizontal)
                         .padding(.bottom, 5)
                     
-                    if (sizeClass == .compact) {
-                        Button (action: {
-                            withAnimation {
-                                if (activity.bookmarked) {
-                                    activity.bookmarked = false
-                                    isBookmarked = false
-                                    viewModel.removeBookmark(bookmark: activity)
-                                    if (viewModel.showBookmarks) {
-                                        withAnimation {
-                                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
-                                        }
-                                    }
-                                } else {
-                                    activity.bookmarked = true
-                                    isBookmarked = true
-                                    viewModel.addBookmark(bookmark: activity)
-                                    if (viewModel.showBookmarks) {
-                                        withAnimation {
-                                            viewModel.activities.append(activity)
-                                        }
-                                    }
-                                }
-                            }
-                            
-                        }, label: {
-                            VStack {
-                                Image(systemName: "bookmark.circle.fill")
-                            }
-                            .font(.system(size: 40))
-                            .foregroundColor(isBookmarked ? .yellow : .gray)
-                        })
-                            .padding(.bottom, 5)
-                    }
-                    
-                    
                     Label(title: {
                         Text(activity.controlNumber)}, icon: {
                             Image(systemName: "info.circle")
@@ -96,7 +61,7 @@ struct DetailView: View {
                     }
                 }
                 
-                DetailMapView(viewModel: viewModel, activity: activity)
+                DetailMapView(viewModel: viewModel, activity: $activity)
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
                     .edgesIgnoringSafeArea(.all)
                     .onAppear {

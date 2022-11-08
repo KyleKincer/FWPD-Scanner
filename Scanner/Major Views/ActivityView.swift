@@ -94,6 +94,17 @@ struct ActivityView: View {
                                         }
                                     
                                     Spacer()
+                                } else if (viewModel.showBookmarks && (viewModel.activities == [])) {
+                                    VStack {
+                                        Text(viewModel.bookmarkCount == 0 ? "No Bookmarks Saved" : "Gathering Bookmarks")
+                                            .foregroundColor(.primary)
+                                            .font(.system(size: 25))
+                                            .padding()
+                                        Image(systemName: "bookmark")
+                                            .foregroundColor(.orange)
+                                            .font(.system(size: 20))
+                                    }
+                                    
                                 } else {
                                     if (showFilter) {
                                         ExpandedFilterSettings(viewModel: viewModel)
@@ -130,7 +141,6 @@ struct ActivityView: View {
                                                         }
                                                         .padding(.trailing, -2)
                                                 }
-                                                
                                             }
                                         }
                                     }

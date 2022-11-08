@@ -72,13 +72,17 @@ struct ListView: View {
                     //Bookmarks
                     if (viewModel.activities == []) {
                         VStack {
-                            Text("Gathering Bookmarks")
-                                .font(.system(size: 25))
-                                .padding(.bottom)
+                            if (viewModel.bookmarkCount == 0) {
+                                Text("No Bookmarks Saved")
+                                    .font(.system(size: 25))
+                            } else {
+                                Text("Gathering Bookmarks")
+                                    .font(.system(size: 25))
+                            }
                             
                             ZStack {
                                 Image(systemName: "bookmark")
-                                    .foregroundColor(.yellow)
+                                    .foregroundColor(.orange)
                                     .font(.system(size: 40))
                                     .padding()
                             }

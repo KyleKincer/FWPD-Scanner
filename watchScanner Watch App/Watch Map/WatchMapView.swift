@@ -14,7 +14,7 @@ struct WatchMapView: View {
     var watch = WKInterfaceDevice()
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .topLeading) {
             Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: viewModel.activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                     WatchMapAnnotationView(viewModel: viewModel, activity: activity)
@@ -24,7 +24,7 @@ struct WatchMapView: View {
             
             VStack {
                 HStack {
-                    Spacer()
+                    
                     
                     ZStack {
                         Circle()
@@ -35,10 +35,12 @@ struct WatchMapView: View {
                             Image(systemName: "goforward.plus")
                                 .foregroundColor(.white)
                                 .font(.system(size: 30))
+                                .padding(.bottom, 2)
                                 
                         }
                     }
-                    .frame(width: 50, height: 50)
+                    
+                    .frame(width: 45, height: 45)
                     .onTapGesture {
                         if (!viewModel.isLoading) {
                             withAnimation (.easeInOut(duration: 0.5)){
@@ -48,6 +50,7 @@ struct WatchMapView: View {
                         }
                     }
                 }.padding(.leading)
+                    .padding(.trailing, 4)
             }
             
         }

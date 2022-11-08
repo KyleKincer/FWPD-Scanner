@@ -12,6 +12,7 @@ import CoreLocation
 struct WatchDetailView: View {
     private let activity: Scanner.Activity
     @ObservedObject var viewModel: DetailViewModel
+    @State private var showDetails = true
     
     init(activity: Scanner.Activity) {
         self.activity = activity
@@ -26,6 +27,11 @@ struct WatchDetailView: View {
                 MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .red)
                 
             }.ignoresSafeArea(.all)
+                .onTapGesture(perform: {
+                    withAnimation (.easeInOut(duration: 2.0)) {
+                        showDetails = true
+                    }
+                })
             
             
             VStack {
@@ -36,16 +42,12 @@ struct WatchDetailView: View {
                         .cornerRadius(10)
                     
                     VStack {
-                        HStack {
-                            Image(systemName: "mappin.and.ellipse")
-                            
-                            Text(activity.address)
-                                .padding(.trailing, -8)
-                                .lineLimit(1)
-                                .font(.system(size: 8))
-                        }
-                        .frame(width: 180)
-                        .scaledToFit()
+                        Text(activity.address)
+                            .lineLimit(1)
+                            .font(.system(size: 10))
+                            .frame(width: 180)
+                            .scaledToFit()
+                            .padding(.bottom, 1)
                         
                         if activity.distance != nil {
                             Text("\(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
@@ -76,6 +78,12 @@ struct WatchDetailView: View {
                     .padding()
                 }
                 .padding(.top, 75)
+                .onTapGesture(perform: {
+                    withAnimation (.easeInOut) {
+                        showDetails = false
+                    }
+                })
+                .opacity(showDetails ? 100 : 0)
             }
         }
     }

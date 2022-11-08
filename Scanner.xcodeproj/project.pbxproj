@@ -21,7 +21,6 @@
 		E264495227964D8B00685DAB /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
 		E2644954279650CD00685DAB /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
-		E264495C2798C4E800685DAB /* CoffeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495B2798C4E800685DAB /* CoffeeView.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
@@ -144,7 +143,6 @@
 		E264495127964D8B00685DAB /* ActError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActError.swift; sourceTree = "<group>"; };
 		E2644953279650CD00685DAB /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		E264495627986B0700685DAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E264495B2798C4E800685DAB /* CoffeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeView.swift; sourceTree = "<group>"; };
 		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
@@ -330,7 +328,6 @@
 				EB64E79128F6328400721DD0 /* ScanModeUpgradeView.swift */,
 				EBF51FC128F66D3500488B2D /* ScanModeComingView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
-				E264495B2798C4E800685DAB /* CoffeeView.swift */,
 			);
 			path = "Parent Views";
 			sourceTree = "<group>";
@@ -637,7 +634,6 @@
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
 				EB64E79228F6328400721DD0 /* ScanModeUpgradeView.swift in Sources */,
-				E264495C2798C4E800685DAB /* CoffeeView.swift in Sources */,
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
@@ -869,7 +865,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
@@ -915,7 +911,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
@@ -962,7 +958,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchScanner Watch App/watchScanner Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"watchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
@@ -1001,7 +997,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchScanner Watch App/watchScanner Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"watchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
@@ -1038,7 +1034,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;
@@ -1068,7 +1064,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;
@@ -1099,7 +1095,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
@@ -1133,7 +1129,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;

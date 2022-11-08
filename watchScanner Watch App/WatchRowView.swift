@@ -10,23 +10,47 @@ import SwiftUI
 struct WatchRowView: View {
     let activity: Scanner.Activity
     var body: some View {
-        NavigationLink(destination: {WatchDetailView(activity: activity)}) {
-            VStack(alignment: .center) {
-                    Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                        .padding(.horizontal)
-                                  
-                Text(activity.date ?? Date(), style: .relative)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                        .padding(.horizontal)
-                
-                Text(activity.address)
-                    .lineLimit(1)
-                    .padding(.horizontal)
+        VStack(alignment: .center) {
+            NavigationLink(destination: {WatchDetailView(activity: activity)}) {
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
+                            .font(.system(size: 12))
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                        
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Text(activity.address)
+                            .lineLimit(1)
+                            .font(.system(size: 11))
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                        
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Text("\(activity.date ?? Date(), style: .relative) ago")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                        
+                    }
+                }
             }
         }
         .navigationTitle("Scanner")

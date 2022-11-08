@@ -58,11 +58,11 @@ struct FilterSettings: View {
                                 Slider(value: $radius, in: 0.1...5)
                             }
                         }
-                    }
-                    
-                    if (useLocation) {
-                        Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
-                            
+                        
+                        if (useLocation) {
+                            Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
+                                
+                            }
                         }
                     }
                 }
@@ -78,24 +78,10 @@ struct FilterSettings: View {
                 }
                 
                 Section("Filter By Activity Type") {
-                    Text("Bookmarks Saved: \(viewModel.bookmarkCount)")
-                    Toggle(isOn: $viewModel.showBookmarks) {
-                        Text("Only Show Bookmarks")
-                    }
-                    .disabled(viewModel.bookmarkCount == 0)
-                    .onChange(of: viewModel.showBookmarks) { _ in
-                            if (viewModel.showBookmarks) {
-                                viewModel.getBookmarks()
-
-                            } else {
-                                viewModel.refresh()
-                            }
-                        }
-                    
                     Button {
                         showingTypesPopover = true
                     } label: {
-                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Activity Types" : "Types: (\(viewModel.selectedNatures.count))")
+                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
                     }
                 }
             }
