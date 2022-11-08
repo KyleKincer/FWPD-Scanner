@@ -95,27 +95,45 @@ struct ActivityRowView: View {
                 }
             }
         }
-            .swipeActions {
-                Button(activity.bookmarked ? "Unmark" : "Bookmark") {
-                    if activity.bookmarked {
-                        activity.bookmarked = false
-                        viewModel.removeBookmark(bookmark: activity)
-                        if (viewModel.showBookmarks) {
-                            withAnimation {
-                                viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
-                            }
-                        } 
-                    } else {
-                        activity.bookmarked = true
-                        viewModel.addBookmark(bookmark: activity)
+        .contextMenu {
+            Button {
+                if activity.bookmarked {
+                    activity.bookmarked = false
+                    viewModel.removeBookmark(bookmark: activity)
+                    if (viewModel.showBookmarks) {
+                        withAnimation {
+                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                        }
                     }
-                }.tint(activity.bookmarked ? .red : .orange)
+                } else {
+                    activity.bookmarked = true
+                    viewModel.addBookmark(bookmark: activity)
+                }
+            } label: {
+                Text("Toggle Bookmark")
             }
-        
-            .onAppear {
-                let bookmarkState = viewModel.checkBookmark(bookmark: activity)
-                activity.bookmarked = bookmarkState
-            }
+        }
+        .swipeActions {
+            Button(activity.bookmarked ? "Unmark" : "Bookmark") {
+                if activity.bookmarked {
+                    activity.bookmarked = false
+                    viewModel.removeBookmark(bookmark: activity)
+                    if (viewModel.showBookmarks) {
+                        withAnimation {
+                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                        }
+                    }
+                } else {
+                    activity.bookmarked = true
+                    viewModel.addBookmark(bookmark: activity)
+                }
+            }.tint(activity.bookmarked ? .red : .orange)
+        }
+    
+        .onAppear {
+            let bookmarkState = viewModel.checkBookmark(bookmark: activity)
+            activity.bookmarked = bookmarkState
+        }
     }
 }
 
