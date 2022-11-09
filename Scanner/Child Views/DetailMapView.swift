@@ -27,6 +27,7 @@ struct DetailMapView: View {
             }
             
             Button() {
+                playHaptic()
                 let url = URL(string: "maps://?saddr=&daddr=\(activity.latitude),\(activity.longitude)")
                 if UIApplication.shared.canOpenURL(url!) {
                     UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -51,6 +52,7 @@ struct DetailMapView: View {
                     Spacer()
                     
                     Button(action: {
+                        playHaptic()
                         activity.bookmarked.toggle()
                         
                         if (activity.bookmarked) {

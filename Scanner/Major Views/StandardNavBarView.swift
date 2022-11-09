@@ -24,8 +24,7 @@ struct StandardNavBarView: View {
                 
                 HStack (alignment: .center) {
                     Button(action: {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
+                        playHaptic()
                         withAnimation {
                             showMap.toggle()
                         }
@@ -46,8 +45,7 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
+                        playHaptic()
                         withAnimation {
                             showFilter.toggle()
                         }
@@ -68,8 +66,7 @@ struct StandardNavBarView: View {
                         .shadow(radius: 2)
                         .foregroundColor(Color("ModeOpposite"))
                         .onTapGesture {
-                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                impactMed.impactOccurred()
+                            playHaptic()
                             showLocationDisclaimer = true
                         }
                         .onLongPressGesture {
@@ -80,8 +77,7 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
+                        playHaptic()
                         withAnimation {
                             showScanMenu.toggle()
                         }
@@ -102,6 +98,7 @@ struct StandardNavBarView: View {
                     Spacer()
                     
                     Button(action: {
+                        playHaptic()
                         withAnimation {
                             viewModel.showBookmarks.toggle()
                         }
@@ -191,4 +188,10 @@ struct StandardNavBarView_Previews: PreviewProvider {
     static var previews: some View {
         StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
     }
+}
+
+
+func playHaptic() {
+    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
 }

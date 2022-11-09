@@ -60,6 +60,7 @@ struct OnboardingView: View {
                 }
                 
                 Button(action: {
+                    playHaptic()
                     onboarding = false
                 }, label: {
                     ZStack {

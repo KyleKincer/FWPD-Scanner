@@ -119,6 +119,7 @@ struct MapView: View {
                         
                         if (!viewModel.showBookmarks) {
                             Button() {
+                                playHaptic()
                                 withAnimation {
                                     viewModel.getMoreActivities()
                                 }
