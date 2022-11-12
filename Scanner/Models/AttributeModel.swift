@@ -32,7 +32,7 @@ class LiveActivityHelper {
 
         // Initialize the models
         let latestAttribute = LatestAttribute()
-        let initialState = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: 0, timestamp: "", nature: "Scanning for Activity", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
+        let initialState = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: "0", timestamp: "", nature: "Scanning for Activity", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
         
         // Tell iOS that there is a new activity started
         do {
@@ -66,7 +66,7 @@ class LiveActivityHelper {
     
     func end() {
         Task {
-            let stoppingLatest = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: 0, timestamp: "", nature: "Scanning Ended", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
+            let stoppingLatest = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: "0", timestamp: "", nature: "Scanning Ended", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
             
             guard let latestActivity else {
                 return

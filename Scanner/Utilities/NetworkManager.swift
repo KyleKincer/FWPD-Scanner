@@ -7,12 +7,47 @@
 
 import Foundation
 import CoreLocation
+import FirebaseCore
+import FirebaseFirestore
 
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
-    private override init() {}
+    private override init() {
+    }
     
+    //Firebase
+    let db = Firestore.firestore()
+    
+    //Firebase Rewrite
+    func getActivities2() {
+        print("Gathering Activities From Firestore")
+        db.collection("activities").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting activities: \(err)")
+            } else {
+                for activity in querySnapshot!.documents {
+                    print("\(activity.documentID)")
+                    print("\(activity.data())")
+                    let id = activity.documentID
+                    let data = activity.data()
+                    let location = data["location"] as? String ?? "UNKNOWN"
+                    let address = data["address"] as? String ?? ""
+                    let timestamp = data["timestamp"] as? String ?? ""
+                    let controlNumber = data["control_number"] as? String ?? ""
+                    let geohash = data["geohash"] as? String ?? ""
+                    let longitude = data["longitude"] as? Double ?? 0.0
+                    let nature = data["nature"] as? String ?? "UNKNOWN"
+                    let latitude = data["latitude"] as? Double ?? 0.0
+                    let thisActivity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude)
+                }
+            }
+        }
+    }
+    
+    
+    
+    //Legacy Backend
     func getActivity(controlNum: String, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
         let url = URL(string: "\(Constants.ACTIVITY_URL)/\(controlNum)")!
         var request = URLRequest(url: url)

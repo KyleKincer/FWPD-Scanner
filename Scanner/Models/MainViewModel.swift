@@ -22,6 +22,7 @@ final class MainViewModel: ObservableObject {
     @Published var activities = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
     @Published var selectedNatures = Set<Int>() { didSet{ refresh() }}
+    @Published var notificationNatures = Set<Int>() { didSet{ refresh() }}
     @Published var dateFrom = Date()
     @Published var dateTo = Date()
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
@@ -32,6 +33,9 @@ final class MainViewModel: ObservableObject {
     @Published var mapModel = MM()
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
+
+    
+    
     let defaults = UserDefaults.standard
     private var storedPages : [Int] = []
     private var currentPage = 1
@@ -59,6 +63,10 @@ final class MainViewModel: ObservableObject {
         print("Have \(self.bookmarkCount) bookmark(s)!")
         self.getActivities()
         self.getNatures()
+        
+        print("Trying Firestore")
+        NetworkManager.shared.getActivities2()
+        
     }
     
     func refresh() {

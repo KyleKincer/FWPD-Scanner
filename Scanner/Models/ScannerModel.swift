@@ -10,7 +10,7 @@ import Foundation
 
 struct Scanner {
     struct Activity: Identifiable, Decodable, Equatable, Hashable, Encodable {
-        var id: Int
+        var id: String
         let timestamp: String
         let nature: String
         let address: String

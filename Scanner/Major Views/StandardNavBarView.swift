@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StandardNavBarView: View {
-    @Binding var showScanMenu : Bool
+    @Binding var showNotificationSheet : Bool
     @Binding var showFilter : Bool
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
@@ -79,7 +79,7 @@ struct StandardNavBarView: View {
                     Button(action: {
                         playHaptic()
                         withAnimation {
-                            showScanMenu.toggle()
+                            showNotificationSheet.toggle()
                         }
                     }, label: {
                         if (scanning) {
@@ -186,7 +186,7 @@ struct StandardNavBarView: View {
 
 struct StandardNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
+        StandardNavBarView(showNotificationSheet: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
     }
 }
 
