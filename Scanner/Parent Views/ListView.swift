@@ -26,7 +26,7 @@ struct ListView: View {
                 if (!viewModel.showBookmarks) {
                     NavigationView {
                         Section {
-                            List(viewModel.activities) { activity in
+                            List(viewModel.activities, id: \.self) { activity in
                                 ActivityRowView(activity: activity, viewModel: viewModel)
                                 
                                 if (activity == viewModel.activities.last) {
@@ -83,7 +83,7 @@ struct ListView: View {
                     } else {
                         NavigationView {
                             Section {
-                                List(viewModel.bookmarks) { activity in
+                                List(viewModel.bookmarks, id: \.self) { activity in
                                     ActivityRowView(activity: activity, viewModel: viewModel)
                                 }
                             }

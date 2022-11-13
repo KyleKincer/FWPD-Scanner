@@ -14,7 +14,8 @@ struct NewNotificationSettingsView: View {
     @AppStorage("scanOn") var scanning = false
     @State var helper = LiveActivityHelper()
     @State var selectAll = true
-    @State var selection = Set<Int>()
+    @State var selection = Set<String
+    >()
     @State var showScanningInfo = false
     @Binding var showNotificationSheet : Bool
     
@@ -125,7 +126,8 @@ struct NewNotificationSettingsView: View {
     }
 }
 
-@MainActor func updateSubscription(viewModel: MainViewModel, selection: Set<Int>) {
+@MainActor
+func updateSubscription(viewModel: MainViewModel, selection: Set<String>) {
     viewModel.notificationNatures = selection
     
     // Do all the backend stuff

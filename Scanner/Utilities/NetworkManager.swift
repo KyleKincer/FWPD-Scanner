@@ -303,20 +303,27 @@ class NetworkManager {
         print(document.documentID)
         let id = document.documentID
         let data = document.data()
-        let name = data["name"] as? String ?? "UNKNOWN"
-        let nature = Scanner.Nature(id: id, name: name)
+        let natureName = data["nature"] as? String ?? "UNKNOWN"
+        let nature = Scanner.Nature(id: id, name: natureName)
         return nature
     }
     
     // Get natures from Firestore
     func getNatures() async throws -> [Scanner.Nature] {
         var natures : [Scanner.Nature] = []
-        let query = try await db.collection("natures")
-            .order(by: "name", descending: true)
-            .getDocuments()
         
-        for nature in query.documents {
-            natures.append(self.makeNature(document: nature))
+        do {
+            let query = try await db.collection("natures")
+                .whereField("nature", isNotEqualTo: "")
+                .order(by: "nature", descending: false)
+                .getDocuments()
+            
+            for nature in query.documents {
+                print(nature.documentID)
+                natures.append(self.makeNature(document: nature))
+            }
+        } catch {
+            print("Error getting natures: \(error.localizedDescription)")
         }
         return natures
     }

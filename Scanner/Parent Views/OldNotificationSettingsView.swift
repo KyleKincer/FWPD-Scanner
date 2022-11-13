@@ -12,7 +12,7 @@ struct OldNotificationSettingsView: View {
     @AppStorage("enableLiveActivities") var live = true
     @AppStorage("scanOn") var scanning = false
     @State var selectAll = true
-    @State var selection = Set<Int>()
+    @State var selection = Set<String>()
     @Binding var showNotificationSheet : Bool
     
     var body: some View {

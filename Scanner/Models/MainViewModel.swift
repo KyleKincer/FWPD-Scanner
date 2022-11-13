@@ -23,8 +23,8 @@ final class MainViewModel: ObservableObject {
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
-    @Published var selectedNatures = Set<Int>() { didSet{ refresh() }}
-    @Published var notificationNatures = Set<Int>() { didSet{ refresh() }}
+    @Published var selectedNatures = Set<String>() { didSet{ refresh() }}
+    @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
     @Published var dateFrom = Date()
     @Published var dateTo = Date()
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
@@ -86,10 +86,7 @@ final class MainViewModel: ObservableObject {
                 }
             }
         }
-        
-        if (self.natures.count == 0) {
-            self.getNatures()
-        }
+        self.getNatures()
         self.getBookmarks()
     }
     
@@ -126,7 +123,7 @@ final class MainViewModel: ObservableObject {
                 //Get natures if there aren't any
                 let newNatures = try await self.networkManager.getNatures()
                 if (newNatures.count > 0) {
-                    self.natures.append(contentsOf: newNatures)
+                    self.natures = newNatures
                     print("Got natures")
                 }
             }

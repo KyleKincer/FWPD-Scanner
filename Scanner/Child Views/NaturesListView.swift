@@ -9,8 +9,9 @@ import SwiftUI
 
 struct NaturesList: View {
     var viewModel: MainViewModel
-    @State var selection = Set<Int>()
+    @State var selection = Set<String>()
     @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) private var editMode
     var body: some View {
         VStack {
             HStack {
@@ -49,6 +50,8 @@ struct NaturesList: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                    
                     Button {
                         selection.removeAll()
                     } label: {
