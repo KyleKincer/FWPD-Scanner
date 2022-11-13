@@ -111,7 +111,7 @@ class NetworkManager {
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFromStr)
                     .whereField("timestamp", isLessThanOrEqualTo: dateToStr)
                     .order(by: "timestamp", descending: true)
-                    .limit(to: 1000)
+                    .limit(to: 25)
                     .getDocuments()
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last

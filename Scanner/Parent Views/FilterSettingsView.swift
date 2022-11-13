@@ -99,7 +99,7 @@ struct FilterSettings: View {
                         Button {
                             showingTypesPopover = true
                         } label: {
-                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count-1))")
                         }
                     }
                 }
