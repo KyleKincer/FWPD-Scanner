@@ -21,7 +21,7 @@ struct ActivityView: View {
             case .compact:
             ZStack {
                 if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
+                    MapView(chosenActivity: $chosenActivity, activities: (viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities), viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                 }
                 
@@ -72,7 +72,7 @@ struct ActivityView: View {
         default:
             VStack {
                 if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
+                    MapView(chosenActivity: $chosenActivity, activities: viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities, viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                     
                 } else {
@@ -94,7 +94,7 @@ struct ActivityView: View {
                                         }
                                     
                                     Spacer()
-                                } else if (viewModel.showBookmarks && (viewModel.activities == [])) {
+                                } else if (viewModel.showBookmarks) {
                                     VStack {
                                         Text(viewModel.bookmarkCount == 0 ? "No Bookmarks Saved" : "Gathering Bookmarks")
                                             .foregroundColor(.primary)
@@ -110,16 +110,8 @@ struct ActivityView: View {
                                         ExpandedFilterSettings(viewModel: viewModel)
                                         
                                     } else {
-                                            List(viewModel.activities) { activity in
-                                                ActivityRowView(activity: activity, viewModel: viewModel)
-                                                
-                                                if (activity == viewModel.activities.last && viewModel.isLoading) {
-                                                    
-                                                }
-                                            }.refreshable {
-                                            withAnimation {
-                                                viewModel.refresh()
-                                            }
+                                        List(viewModel.bookmarks) { activity in
+                                            ActivityRowView(activity: activity, viewModel: viewModel)
                                         }
                                         
                                         if (!viewModel.showBookmarks) {

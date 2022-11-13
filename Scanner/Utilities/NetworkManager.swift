@@ -148,7 +148,6 @@ class NetworkManager {
         
         
         //Bout damn time
-        
         return activities
     }
     
@@ -269,11 +268,10 @@ class NetworkManager {
             }
             
         } catch {
-            print("Error getting activitires: \(error.localizedDescription)")
+            print("Error getting activities: \(error.localizedDescription)")
         }
 
         //Bout damn time
-        
         return activities
     }
     
@@ -298,7 +296,7 @@ class NetworkManager {
             }
         }
         
-        return activities
+        return activities.sorted(by: { $0.timestamp > $1.timestamp })
     }
     
     func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
@@ -322,5 +320,4 @@ class NetworkManager {
         }
         return natures
     }
-
 }

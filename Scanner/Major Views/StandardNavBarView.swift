@@ -104,9 +104,6 @@ struct StandardNavBarView: View {
                         }
                         if (viewModel.showBookmarks) {
                             viewModel.getBookmarks()
-
-                        } else {
-                            viewModel.refresh()
                         }
                     }, label: {
                         Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
@@ -165,9 +162,6 @@ struct StandardNavBarView: View {
                         }
                         if (viewModel.showBookmarks) {
                             viewModel.getBookmarks()
-
-                        } else {
-                            viewModel.refresh()
                         }
                     }, label: {
                         Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")

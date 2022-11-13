@@ -68,15 +68,10 @@ struct ListView: View {
                 } else {
                     
                     //Bookmarks
-                    if (viewModel.activities == []) {
+                    if (viewModel.bookmarks.count == 0) {
                         VStack {
-                            if (viewModel.bookmarkCount == 0) {
-                                Text("No Bookmarks Saved")
-                                    .font(.system(size: 25))
-                            } else {
-                                Text("Gathering Bookmarks")
-                                    .font(.system(size: 25))
-                            }
+                            Text("No Bookmarks Saved")
+                                .font(.system(size: 25))
                             
                             ZStack {
                                 Image(systemName: "bookmark")
@@ -88,7 +83,7 @@ struct ListView: View {
                     } else {
                         NavigationView {
                             Section {
-                                List(viewModel.activities) { activity in
+                                List(viewModel.bookmarks) { activity in
                                     ActivityRowView(activity: activity, viewModel: viewModel)
                                 }
                             }

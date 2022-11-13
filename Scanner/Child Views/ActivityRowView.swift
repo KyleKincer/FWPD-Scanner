@@ -16,7 +16,7 @@ struct ActivityRowView: View {
     var body: some View {
         NavigationLink(destination: {DetailView(viewModel: viewModel, activity: $activity)}) {
             VStack(spacing: 5) {
-                if (showDistance && activity.distance ?? 0 > 0.0 && !viewModel.showBookmarks) {
+                if (showDistance && activity.distance ?? 0 > 0.0) {
                     HStack {
                         Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                             .font(.body)
@@ -66,18 +66,15 @@ struct ActivityRowView: View {
                         
                         Spacer()
                     }
-                    
-                    if (!viewModel.showBookmarks) {
-                        HStack {
-                            Text("\(activity.date ?? Date(), style: .relative) ago")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                                .multilineTextAlignment(.trailing)
-                                .lineLimit(1)
-                            
-                            Spacer()
-                            
-                        }
+
+                    HStack {
+                        Text("\(activity.date ?? Date(), style: .relative) ago")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(1)
+                        
+                        Spacer()
                     }
                     
                     HStack {
@@ -120,7 +117,7 @@ struct ActivityRowView: View {
                     viewModel.removeBookmark(bookmark: activity)
                     if (viewModel.showBookmarks) {
                         withAnimation {
-                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                            viewModel.bookmarks.removeAll { $0.controlNumber == activity.controlNumber }
                         }
                     }
                 } else {
