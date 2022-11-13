@@ -116,7 +116,7 @@ class NetworkManager {
                     activities.append(self.makeActivity(document: document))
                 }
                 
-            } else if (filterByNature) {
+            } else if (filterByNature && selectedNatures.count>0) {
                 // Natures
                 print("Filtering by Nature")
                 
