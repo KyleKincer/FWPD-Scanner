@@ -12,6 +12,8 @@ struct NaturesList: View {
     @State var selection = Set<String>()
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
+    @AppStorage("selectedNatures") var selectedNatures = String()
+    
     var body: some View {
         VStack {
             HStack {
@@ -39,7 +41,7 @@ struct NaturesList: View {
             .padding()
             
             List(selection: $selection, content: {
-                ForEach(viewModel.natures) { nature in
+                ForEach(viewModel.natures, id: \.name) { nature in
                     Text(nature.name.capitalized)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
@@ -60,10 +62,15 @@ struct NaturesList: View {
                 }
             }
             .onAppear {
-                selection = viewModel.selectedNatures
+                let selectionArray = selectedNatures.components(separatedBy: ", ")
+                selection = Set(selectionArray)
+                viewModel.selectedNatures = selection
+                
             }
             .onDisappear {
                 viewModel.selectedNatures = selection
+                viewModel.selectedNaturesString = Array(selection)
+                selectedNatures = Array(selection).joined(separator: ", ")
             }
         }
         .interactiveDismissDisabled()

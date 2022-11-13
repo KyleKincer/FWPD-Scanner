@@ -95,10 +95,12 @@ struct FilterSettings: View {
                             refreshOnExit = true
                         }
                     
-                    Button {
-                        showingTypesPopover = true
-                    } label: {
-                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
+                    if (viewModel.useNature) {
+                        Button {
+                            showingTypesPopover = true
+                        } label: {
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
+                        }
                     }
                 }
             }
@@ -111,11 +113,6 @@ struct FilterSettings: View {
             refreshOnExit = false
             justAppeared1 = true
             justAppeared2 = true
-            if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
-                || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
-                dateFrom = viewModel.dateFrom
-                dateTo = viewModel.dateTo
-            }
         }
         .onDisappear {
             if dateFrom > dateTo {

@@ -26,31 +26,48 @@ struct ListView: View {
                 if (!viewModel.showBookmarks) {
                     NavigationView {
                         Section {
-                            List(viewModel.activities, id: \.self) { activity in
-                                ActivityRowView(activity: activity, viewModel: viewModel)
-                                
-                                if (activity == viewModel.activities.last) {
-                                    Section {
-                                        if (viewModel.isLoading) {
-                                            ProgressView()
-                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                .listRowSeparator(.hidden)
-                                        } else {
-                                            HStack {
-                                                Spacer()
-                                                
-                                                Text("Tap for More")
-                                                    .bold()
-                                                    .italic()
-                                                    .foregroundColor(.blue)
+                            if (viewModel.activities.count == 0) {
+                                VStack {
+                                    Text("No Matches Found")
+                                        .font(.system(size: 25))
+                                    
+                                    Text("Adjust your filter settings")
+                                        .font(.system(size: 15))
+                                    
+                                    ZStack {
+                                        Image(systemName: "doc.text.magnifyingglass")
+                                            .foregroundColor(.blue)
+                                            .font(.system(size: 40))
+                                            .padding()
+                                    }
+                                }
+                            } else {
+                                List(viewModel.activities, id: \.self) { activity in
+                                    ActivityRowView(activity: activity, viewModel: viewModel)
+                                    
+                                    if (activity == viewModel.activities.last) {
+                                        Section {
+                                            if (viewModel.isLoading) {
+                                                ProgressView()
                                                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .listRowSeparator(.hidden)
+                                            } else {
+                                                HStack {
+                                                    Spacer()
+                                                    
+                                                    Text("Tap for More")
+                                                        .bold()
+                                                        .italic()
+                                                        .foregroundColor(.blue)
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    
+                                                    Spacer()
+                                                }
+                                                .onTapGesture {
+                                                    viewModel.getMoreActivities()
+                                                }
                                                 
-                                                Spacer()
                                             }
-                                            .onTapGesture {
-                                                viewModel.getMoreActivities()
-                                            }
-                                            
                                         }
                                     }
                                 }

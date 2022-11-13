@@ -34,6 +34,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
     @AppStorage("radius") var radius = 0.0
+    @AppStorage("selectedNatures") var selectedNaturesUD = String()
     
     // View States
     @Published var isRefreshing = false
@@ -66,6 +67,10 @@ final class MainViewModel: ObservableObject {
         } else {
             print("Location services are not enabled")
         }
+        
+        let selectionArray = selectedNaturesUD.components(separatedBy: ", ")
+        self.selectedNatures = Set(selectionArray)
+        self.selectedNaturesString = Array(selectedNatures)
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("Found \(self.bookmarkCount) bookmark(s)!")
