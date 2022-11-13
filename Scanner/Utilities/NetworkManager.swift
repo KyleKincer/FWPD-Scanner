@@ -11,8 +11,7 @@ import FirebaseFirestore
 
 class NetworkManager {
     var lastDocument : QueryDocumentSnapshot?
-    let db = Firestore.firestore()
-    //Firestore Initialization
+    let db = Firestore.firestore() //Firestore Initialization
 
     // Converts Firestore document into a single activity
     func makeActivity(document: QueryDocumentSnapshot) -> Scanner.Activity {
@@ -31,6 +30,7 @@ class NetworkManager {
         return activity
     }
     
+    //Get first 25 activities from Firestore
     func getFirstActivities(dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String] = [], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
         var activities = [Scanner.Activity]()
@@ -65,7 +65,6 @@ class NetworkManager {
         }
 
         print("Gathering Activities from Firestore")
-        
         
         do {
             
@@ -153,6 +152,7 @@ class NetworkManager {
         return activities
     }
     
+    // Get 25 more activities from Firestore
     func getMoreActivities(dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String] = [], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
         var activities = [Scanner.Activity]()
@@ -187,7 +187,6 @@ class NetworkManager {
         }
 
         print("Getting more activities from Firestore")
-        
         
         do {
             
@@ -272,20 +271,56 @@ class NetworkManager {
         } catch {
             print("Error getting activitires: \(error.localizedDescription)")
         }
-        
-        
+
         //Bout damn time
         
         return activities
     }
-
-    func getActivity(controlNum: String, completed: @escaping (Result<[Scanner.Activity], ActError>) -> Void) {
+    
+    // Get one single activity from Firestore
+    func getActivity(controlNumber: String) async throws -> Scanner.Activity {
+        let query = try await db.collection("activities")
+            .whereField("control_number", isEqualTo: controlNumber)
+            .order(by: "timestamp", descending: true)
+            .getDocuments()
+        let activity = self.makeActivity(document: query.documents.first!)
         
+        return activity
     }
     
-    func getNatures(completed: @escaping (Result<[Scanner.Nature], ActError>) -> Void) {
+    // Get a defined array of activites from their control numbers
+    func getActivitySet(controlNumbers: [String]) async throws -> [Scanner.Activity] {
+        var activities : [Scanner.Activity] = []
         
+        for controlNum in controlNumbers {
+            do {
+                try await activities.append(self.getActivity(controlNumber: controlNum))
+            }
+        }
         
+        return activities
+    }
+    
+    func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
+        print(document.documentID)
+        let id = document.documentID
+        let data = document.data()
+        let name = data["name"] as? String ?? "UNKNOWN"
+        let nature = Scanner.Nature(id: id, name: name)
+        return nature
+    }
+    
+    // Get natures from Firestore
+    func getNatures() async throws -> [Scanner.Nature] {
+        var natures : [Scanner.Nature] = []
+        let query = try await db.collection("natures")
+            .order(by: "name", descending: true)
+            .getDocuments()
+        
+        for nature in query.documents {
+            natures.append(self.makeNature(document: nature))
+        }
+        return natures
     }
 
 }

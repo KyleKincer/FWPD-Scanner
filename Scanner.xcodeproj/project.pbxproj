@@ -18,8 +18,6 @@
 		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		E264494E2794B56700685DAB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
 		E26449502796487200685DAB /* ActivityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494F2796487200685DAB /* ActivityRowView.swift */; };
-		E264495227964D8B00685DAB /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
-		E2644954279650CD00685DAB /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
@@ -27,37 +25,16 @@
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
-		EB35DCD6292071C0005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCD5292071C0005B6658 /* FirebaseFirestore */; };
 		EB35DCDA292071E2005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCD9292071E2005B6658 /* FirebaseFirestore */; };
 		EB35DCDC292071E9005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCDB292071E9005B6658 /* FirebaseFirestore */; };
-		EB35DCDD29207704005B6658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB35DCDE29207705005B6658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
-		EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */; };
 		EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */; };
 		EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */; };
-		EB4E805A28FA55C900F396C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406728E6166E009FDA3D /* StandardNavBarView.swift */; };
 		EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406928E617A0009FDA3D /* ActivityView.swift */; };
 		EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */; };
-		EB57DA1628E78D0C0031B68A /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
-		EB57DA1828E78D0D0031B68A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1728E78D0D0031B68A /* Assets.xcassets */; };
-		EB57DA1B28E78D0D0031B68A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */; };
-		EB57DA2228E78E240031B68A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
-		EB57DA2328E78E270031B68A /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
-		EB57DA2428E78E2B0031B68A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
-		EB57DA2528E78E2B0031B68A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
-		EB57DA2628E78E2B0031B68A /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
-		EB57DA2728E78E2B0031B68A /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
-		EB62D7E728E79A80005A76E7 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EB62D7E928E79ADD005A76E7 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
-		EB62D7EA28E79BB6005A76E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
-		EB62D7ED28E79D47005A76E7 /* WatchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */; };
-		EB62D7EF28E79D9B005A76E7 /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
-		EB62D7F128E7A7D7005A76E7 /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
-		EB62D7F428E7A810005A76E7 /* WatchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */; };
-		EB62D7F628E7B83D005A76E7 /* WatchScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F528E7B83D005A76E7 /* WatchScannerApp.swift */; };
 		EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
@@ -95,8 +72,6 @@
 		EBB721DA28F6F56600435375 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		EBB721DC28F6F56600435375 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
-		EBB721DD28F6F56600435375 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644953279650CD00685DAB /* AlertItem.swift */; };
-		EBB721DE28F6F56600435375 /* ActError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495127964D8B00685DAB /* ActError.swift */; };
 		EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E028F6FA6E00435375 /* TVOnboardingView.swift */; };
 		EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E228F6FDEC00435375 /* TVMainView.swift */; };
 		EBB721E528F6FE6E00435375 /* TVNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E428F6FE6E00435375 /* TVNavBarView.swift */; };
@@ -107,7 +82,6 @@
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
-		EBF51F9E28F662F500488B2D /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */; };
 		EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -148,8 +122,6 @@
 		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E264494F2796487200685DAB /* ActivityRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRowView.swift; sourceTree = "<group>"; };
-		E264495127964D8B00685DAB /* ActError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActError.swift; sourceTree = "<group>"; };
-		E2644953279650CD00685DAB /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		E264495627986B0700685DAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -165,7 +137,6 @@
 		EB57406728E6166E009FDA3D /* StandardNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardNavBarView.swift; sourceTree = "<group>"; };
 		EB57406928E617A0009FDA3D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
-		EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watchScanner Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB57DA1528E78D0C0031B68A /* WatchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMainView.swift; sourceTree = "<group>"; };
 		EB57DA1728E78D0D0031B68A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -226,14 +197,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB57DA0E28E78D0C0031B68A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB35DCD6292071C0005B6658 /* FirebaseFirestore in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EBA0645E28FF4C2F00B42676 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,9 +222,9 @@
 			isa = PBXGroup;
 			children = (
 				E202F441278E84A7009C0B13 /* Scanner */,
-				EB57DA1228E78D0C0031B68A /* watchScanner Watch App */,
-				EBB721C828F6F55800435375 /* ScannerTV */,
 				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
+				EBB721C828F6F55800435375 /* ScannerTV */,
+				EB57DA1228E78D0C0031B68A /* watchScanner Watch App */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 			);
@@ -271,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				E202F43F278E84A7009C0B13 /* Scanner.app */,
-				EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */,
 				EBB721C728F6F55800435375 /* ScannerTV.app */,
 				EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */,
 			);
@@ -309,11 +271,9 @@
 		E264494C2794B55000685DAB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E264495627986B0700685DAB /* Constants.swift */,
-				E24522D12791F69400EFBB3E /* LocationManager.swift */,
 				E264494D2794B56700685DAB /* NetworkManager.swift */,
-				E264495127964D8B00685DAB /* ActError.swift */,
-				E2644953279650CD00685DAB /* AlertItem.swift */,
+				E24522D12791F69400EFBB3E /* LocationManager.swift */,
+				E264495627986B0700685DAB /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -348,8 +308,8 @@
 		EB57406E28E61A70009FDA3D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				E202F45027907868009C0B13 /* ScannerModel.swift */,
+				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
@@ -485,26 +445,6 @@
 			productReference = E202F43F278E84A7009C0B13 /* Scanner.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EB57DA1028E78D0C0031B68A /* watchScanner Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EB57DA1E28E78D0D0031B68A /* Build configuration list for PBXNativeTarget "watchScanner Watch App" */;
-			buildPhases = (
-				EB57DA0D28E78D0C0031B68A /* Sources */,
-				EB57DA0E28E78D0C0031B68A /* Frameworks */,
-				EB57DA0F28E78D0C0031B68A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "watchScanner Watch App";
-			packageProductDependencies = (
-				EB35DCD5292071C0005B6658 /* FirebaseFirestore */,
-			);
-			productName = "watchScanner Watch App";
-			productReference = EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
 		EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */;
@@ -558,9 +498,6 @@
 					E202F43E278E84A7009C0B13 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					EB57DA1028E78D0C0031B68A = {
-						CreatedOnToolsVersion = 14.1;
-					};
 					EBA0646028FF4C2F00B42676 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -586,7 +523,6 @@
 			projectRoot = "";
 			targets = (
 				E202F43E278E84A7009C0B13 /* Scanner */,
-				EB57DA1028E78D0C0031B68A /* watchScanner Watch App */,
 				EBB721C628F6F55800435375 /* ScannerTV */,
 				EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */,
 			);
@@ -602,16 +538,6 @@
 				EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */,
 				E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */,
 				EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EB57DA0F28E78D0C0031B68A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB57DA1B28E78D0D0031B68A /* Preview Assets.xcassets in Resources */,
-				EB57DA1828E78D0D0031B68A /* Assets.xcassets in Resources */,
-				EB35DCDD29207704005B6658 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,7 +569,6 @@
 			files = (
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
-				E2644954279650CD00685DAB /* AlertItem.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
@@ -666,7 +591,6 @@
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
-				E264495227964D8B00685DAB /* ActError.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
@@ -677,31 +601,6 @@
 				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
 				EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */,
 				EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EB57DA0D28E78D0C0031B68A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB57DA2228E78E240031B68A /* MainViewModel.swift in Sources */,
-				EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */,
-				EB62D7F128E7A7D7005A76E7 /* WatchMapAnnotationView.swift in Sources */,
-				EB62D7F628E7B83D005A76E7 /* WatchScannerApp.swift in Sources */,
-				EB62D7ED28E79D47005A76E7 /* WatchDetailView.swift in Sources */,
-				EB62D7E728E79A80005A76E7 /* ScannerModel.swift in Sources */,
-				EB57DA2528E78E2B0031B68A /* NetworkManager.swift in Sources */,
-				EB57DA2428E78E2B0031B68A /* Constants.swift in Sources */,
-				EB57DA1628E78D0C0031B68A /* WatchMainView.swift in Sources */,
-				EB57DA2728E78E2B0031B68A /* ActError.swift in Sources */,
-				EBF51F9E28F662F500488B2D /* WatchSettingsView.swift in Sources */,
-				EB62D7EA28E79BB6005A76E7 /* LocationManager.swift in Sources */,
-				EB62D7EF28E79D9B005A76E7 /* WatchRowView.swift in Sources */,
-				EB4E805A28FA55C900F396C5 /* DetailViewModel.swift in Sources */,
-				EB62D7E928E79ADD005A76E7 /* WatchListView.swift in Sources */,
-				EB62D7F428E7A810005A76E7 /* WatchMapView.swift in Sources */,
-				EB57DA2628E78E2B0031B68A /* AlertItem.swift in Sources */,
-				EB57DA2328E78E270031B68A /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,7 +623,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBB721DD28F6F56600435375 /* AlertItem.swift in Sources */,
 				EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */,
 				EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */,
 				EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */,
@@ -732,7 +630,6 @@
 				EBB721CC28F6F55800435375 /* TVView.swift in Sources */,
 				EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */,
 				EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */,
-				EBB721DE28F6F56600435375 /* ActError.swift in Sources */,
 				EBB721DC28F6F56600435375 /* NetworkManager.swift in Sources */,
 				EBB721ED28F7067900435375 /* TVRowView.swift in Sources */,
 				EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */,
@@ -976,84 +873,6 @@
 			};
 			name = Release;
 		};
-		EB57DA1C28E78D0D0031B68A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = "watchScanner Watch App/watchScanner Watch App.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_ASSET_PATHS = "\"watchScanner Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "watchScanner-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchScanner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Debug;
-		};
-		EB57DA1D28E78D0D0031B68A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = "watchScanner Watch App/watchScanner Watch App.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_ASSET_PATHS = "\"watchScanner Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "watchScanner-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to filter nearby activity.";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchScanner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Release;
-		};
 		EBA0647228FF4C3000B42676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1203,15 +1022,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB57DA1E28E78D0D0031B68A /* Build configuration list for PBXNativeTarget "watchScanner Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EB57DA1C28E78D0D0031B68A /* Debug */,
-				EB57DA1D28E78D0D0031B68A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1244,11 +1054,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EB35DCD5292071C0005B6658 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
 		EB35DCD9292071E2005B6658 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

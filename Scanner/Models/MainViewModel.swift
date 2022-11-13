@@ -27,7 +27,6 @@ final class MainViewModel: ObservableObject {
     @Published var dateFrom = Date()
     @Published var dateTo = Date()
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
-    @Published private var alertItem: AlertItem?
     @Published var isRefreshing = false
     @Published var serverResponsive = true
     @Published var isLoading = false
@@ -35,7 +34,6 @@ final class MainViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     let networkManager = NetworkManager()
-    
     let defaults = UserDefaults.standard
     private var storedPages : [Int] = []
     private var currentPage = 1
@@ -63,8 +61,6 @@ final class MainViewModel: ObservableObject {
         print("Have \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
         //self.getNatures()
-        
-        
     }
     
     func refresh() {
@@ -74,10 +70,7 @@ final class MainViewModel: ObservableObject {
         self.activities.removeAll() // clear out stored activities
         self.storedPages.removeAll() // clear out page log
         self.currentPage = 1 // prep us to get page #1
-        
-        if natures.isEmpty {
-            //self.getNatures() // get natures if first time using app
-        }
+        self.natures.removeAll() // remove all natures
         
         Task.init {
             do {
@@ -95,6 +88,10 @@ final class MainViewModel: ObservableObject {
                     self.isRefreshing = false
                 }
             }
+        }
+        
+        Task.init {
+            // get natures
         }
     }
     
