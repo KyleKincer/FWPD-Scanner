@@ -15,6 +15,7 @@ class MM : ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 }
 
+@MainActor
 final class MainViewModel: ObservableObject {
     @Published var locationManager: CLLocationManager = CLLocationManager()
     @Published var locationEnabled: Bool = false
@@ -33,8 +34,7 @@ final class MainViewModel: ObservableObject {
     @Published var mapModel = MM()
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
-
-    
+    let networkManager = NetworkManager()
     
     let defaults = UserDefaults.standard
     private var storedPages : [Int] = []
@@ -61,11 +61,9 @@ final class MainViewModel: ObservableObject {
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("Have \(self.bookmarkCount) bookmark(s)!")
-        self.getActivities()
-        self.getNatures()
+        self.refresh()
+        //self.getNatures()
         
-        print("Trying Firestore")
-        NetworkManager.shared.getActivities2()
         
     }
     
@@ -78,98 +76,79 @@ final class MainViewModel: ObservableObject {
         self.currentPage = 1 // prep us to get page #1
         
         if natures.isEmpty {
-            self.getNatures() // get natures if first time using app
+            //self.getNatures() // get natures if first time using app
         }
         
-        self.getActivities() // get first batch of activities
-    }
-    
-    func getActivity(controlNum: String) {
-        NetworkManager.shared.getActivity(controlNum: controlNum) { result in
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let activity):
-                    print(activity)
-                case .failure(let error):
-                    print("Failed to retrieve activity \(controlNum) - \(String(error.localizedDescription)).")
+        Task.init {
+            do {
+                let newActivities = try await self.networkManager.getFirstActivities()
+                if (newActivities.count > 0) {
+                    self.activities.append(contentsOf: newActivities)
+                    print("Got activities")
+                    self.serverResponsive = true
+                    self.addDatesToActivities()
+                    self.addDistancesToActivities()
+                    self.isRefreshing = false
+                } else {
+                    print("Got zero activities")
+                    self.serverResponsive = false
+                    self.isRefreshing = false
                 }
             }
         }
     }
     
-    func getActivities() {
+    func getActivity(controlNum: String) {
+        
+    }
+        
+    
+    
+    func getMoreActivities() {
         let radius = UserDefaults.standard.double(forKey: "radius")
         var location: CLLocation? = nil
         if UserDefaults.standard.bool(forKey: "useLocation") {
             location = self.locationManager.location
         }
-        
-        NetworkManager.shared.getActivities(page: currentPage, dateFrom: dateFrom, dateTo: dateTo, natures: selectedNatures, location: location, radius: radius) { [self] result in
-            
-            DispatchQueue.main.async {
-                switch result {
-                    
-                case .success(let newActivities):
-                    print("Page \(self.currentPage) retrieved!")
-                    self.serverResponsive = true // No problem connecting to server
-                    self.isLoading = false
-                    self.isRefreshing = false
-                    self.storedPages.append(self.currentPage)
+        self.isLoading = true
+        Task.init {
+            do {
+                let newActivities = try await self.networkManager.getMoreActivities(location: location, radius: radius)
+                
+                if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
+                    print("Got activities")
+                    self.serverResponsive = true
                     self.addDatesToActivities()
                     self.addDistancesToActivities()
-                    self.bookmarkCount = self.defaults.object(forKey: "bookmarkCount") as? Int ?? 0
-                    
-                case .failure(let error):
-                    print("Failed to retrieve Page \(self.currentPage)!")
-                    self.serverResponsive = false // Indicate problem connecting to the server
-                    
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
-                    }
-                    
-                    self.getActivities() // Try again until we get some more activities
+                    self.isLoading = false
+                } else {
+                    print("Got zero activities")
                 }
             }
         }
-    }
-    
-    func getMoreActivities() {
-        self.isLoading = true
-        self.currentPage+=1
-        print("Asking for page \(self.currentPage) of activities...")
-        self.getActivities()
-        return
     }
     
     func getNatures() {
-        NetworkManager.shared.getNatures { [self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let natures):
-                    self.natures = natures
-                case .failure(let error):
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
-                    }
-                }
-            }
-        }
+//        NetworkManager.shared.getNatures { [self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let natures):
+//                    self.natures = natures
+//                case .failure(let error):
+//                    switch error {
+//                    case .invalidURL:
+//                        self.alertItem = AlertContext.invalidURL
+//                    case .unableToComplete:
+//                        self.alertItem = AlertContext.unableToComplete
+//                    case .invalidResponse:
+//                        self.alertItem = AlertContext.invalidResponse
+//                    case .invalidData:
+//                        self.alertItem = AlertContext.invalidData
+//                    }
+//                }
+//            }
+//        }
     }
     
     func addDatesToActivities() {
@@ -242,48 +221,6 @@ final class MainViewModel: ObservableObject {
     
     //getBookmarks
     func getBookmarks() {
-        self.showBookmarks = true
-        self.activities = []
-        var controlNums = ""
-        let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
-        
-        if (bookmarks?.count ?? 0 > 0) {
-            for bookmark in bookmarks ?? [""] {
-                // Create CSV String
-                controlNums = controlNums + bookmark + ","
-            }
-            
-            NetworkManager.shared.getActivitySet(controlNums: controlNums) { [self] result in
-                switch result {
-                    
-                case .success(var bookmarkList):
-                    print("Bookmarks retrieved")
-                    
-                    
-                    for i in bookmarkList.indices {
-                        bookmarkList[i].bookmarked = true
-                    }
-                    self.activities = bookmarkList
-                    self.addDistancesToActivities()
-                    self.addDatesToActivities()
-                    print("Done")
-                    
-                case .failure(let error):
-                    print("Failed to retrieve bookmarks")
-                    self.serverResponsive = false // Indicate problem connecting to the server
-                    
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
-                    }
-                }
-            }
-        }
+
     }
 }

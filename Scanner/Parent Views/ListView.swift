@@ -48,9 +48,7 @@ struct ListView: View {
                                                 Spacer()
                                             }
                                             .onTapGesture {
-                                                if (activity == viewModel.activities.last && !viewModel.isLoading) {
-                                                    viewModel.getMoreActivities()
-                                                }
+                                                viewModel.getMoreActivities()
                                             }
                                             
                                         }

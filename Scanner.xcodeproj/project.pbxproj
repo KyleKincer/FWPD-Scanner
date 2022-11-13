@@ -27,6 +27,11 @@
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
+		EB35DCD6292071C0005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCD5292071C0005B6658 /* FirebaseFirestore */; };
+		EB35DCDA292071E2005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCD9292071E2005B6658 /* FirebaseFirestore */; };
+		EB35DCDC292071E9005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCDB292071E9005B6658 /* FirebaseFirestore */; };
+		EB35DCDD29207704005B6658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
+		EB35DCDE29207705005B6658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
 		EB397D3128F8E8DE00E7178F /* WatchStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */; };
 		EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */; };
@@ -225,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB35DCD6292071C0005B6658 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +240,7 @@
 			files = (
 				EBA0646328FF4C2F00B42676 /* SwiftUI.framework in Frameworks */,
 				EBA0646228FF4C2F00B42676 /* WidgetKit.framework in Frameworks */,
+				EB35DCDC292071E9005B6658 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB35DCDA292071E2005B6658 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +498,9 @@
 			dependencies = (
 			);
 			name = "watchScanner Watch App";
+			packageProductDependencies = (
+				EB35DCD5292071C0005B6658 /* FirebaseFirestore */,
+			);
 			productName = "watchScanner Watch App";
 			productReference = EB57DA1128E78D0C0031B68A /* watchScanner Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -507,6 +518,9 @@
 			dependencies = (
 			);
 			name = scannerWidgetsExtension;
+			packageProductDependencies = (
+				EB35DCDB292071E9005B6658 /* FirebaseFirestore */,
+			);
 			productName = scannerWidgetsExtension;
 			productReference = EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -524,6 +538,9 @@
 			dependencies = (
 			);
 			name = ScannerTV;
+			packageProductDependencies = (
+				EB35DCD9292071E2005B6658 /* FirebaseFirestore */,
+			);
 			productName = ScannerTV;
 			productReference = EBB721C728F6F55800435375 /* ScannerTV.app */;
 			productType = "com.apple.product-type.application";
@@ -594,6 +611,7 @@
 			files = (
 				EB57DA1B28E78D0D0031B68A /* Preview Assets.xcassets in Resources */,
 				EB57DA1828E78D0D0031B68A /* Assets.xcassets in Resources */,
+				EB35DCDD29207704005B6658 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +630,7 @@
 			files = (
 				EBB721D128F6F55900435375 /* Preview Assets.xcassets in Resources */,
 				EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */,
+				EB35DCDE29207705005B6658 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1225,6 +1244,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EB35DCD5292071C0005B6658 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EB35DCD9292071E2005B6658 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EB35DCDB292071E9005B6658 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		EBA6ECD42920130C00805610 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -135,9 +135,7 @@ struct ActivityView: View {
                                                         .foregroundColor(.blue)
                                                         .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                         .onTapGesture {
-                                                            if (!viewModel.isLoading) {
-                                                                viewModel.getMoreActivities()
-                                                            }
+                                                            viewModel.getMoreActivities()
                                                         }
                                                         .padding(.trailing, -2)
                                                 }

@@ -94,7 +94,7 @@ struct StatusView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: true, vertical: false)
                     
-                    Text("Tap To Refresh")
+                    Text("Update the App or Tap To Refresh")
                         .italic()
                         .bold()
                     

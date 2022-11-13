@@ -13,7 +13,7 @@ struct TVMainView: View {
     @State var showLocationDisclaimer = false
     @ObservedObject var viewModel : MainViewModel
     @State var mapView = MapViewModel()
-    @State var chosenActivity = Scanner.Activity(id: 0, timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
+    @State var chosenActivity = Scanner.Activity(id: "0", timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
     
     var body: some View {
         ZStack {
@@ -65,9 +65,7 @@ struct TVMainView: View {
                                                         .foregroundColor(.blue)
                                                         .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                         .onTapGesture {
-                                                            if (activity == viewModel.activities.last && !viewModel.isLoading) {
-                                                                viewModel.getMoreActivities()
-                                                            }
+                                                            viewModel.getMoreActivities()
                                                         }
                                                 }
                                             }
@@ -83,7 +81,7 @@ struct TVMainView: View {
                         
                         Spacer()
                         
-                        if (chosenActivity.id == 0) {
+                        if (chosenActivity.id == "0") {
                             
                             VStack (alignment: .center){
                                 Spacer()

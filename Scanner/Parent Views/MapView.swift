@@ -120,9 +120,8 @@ struct MapView: View {
                         if (!viewModel.showBookmarks) {
                             Button() {
                                 playHaptic()
-                                withAnimation {
-                                    viewModel.getMoreActivities()
-                                }
+                                viewModel.getMoreActivities()
+                                
                             } label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 15)

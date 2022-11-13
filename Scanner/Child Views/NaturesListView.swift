@@ -22,7 +22,7 @@ struct NaturesList: View {
                 
                 Spacer()
                 
-                Text("Select Activites")
+                Text("Select Natures")
                     .fontWeight(.semibold)
                     .italic()
                 

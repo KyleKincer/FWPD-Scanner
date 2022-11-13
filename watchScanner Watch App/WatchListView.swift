@@ -52,9 +52,7 @@ struct WatchListView: View {
                                                     .foregroundColor(.blue)
                                                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                     .onTapGesture {
-                                                        if (activity == viewModel.activities.last && !viewModel.isLoading) {
-                                                            viewModel.getMoreActivities()
-                                                        }
+                                                        viewModel.getMoreActivities()
                                                     }
                                             }
                                             
