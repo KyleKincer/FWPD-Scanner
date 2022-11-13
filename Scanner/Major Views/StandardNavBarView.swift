@@ -54,8 +54,7 @@ struct StandardNavBarView: View {
                             .font(.system(size: 25))
                             .shadow(radius: 2)
                     })
-                    .disabled(!viewModel.serverResponsive)
-                    .foregroundColor(viewModel.serverResponsive ? .green : .gray)
+                    .foregroundColor(.green)
                     
                     Spacer()
                     
@@ -92,8 +91,7 @@ struct StandardNavBarView: View {
                                 .shadow(radius: 2)
                         }
                     })
-                    .disabled(!viewModel.serverResponsive)
-                    .foregroundColor(viewModel.serverResponsive ? .red : .gray)
+                    .foregroundColor(.red)
                     
                     Spacer()
                     
@@ -129,8 +127,6 @@ struct StandardNavBarView: View {
                             .foregroundColor(.green)
                             .shadow(radius: 2)
                     })
-                    .disabled(!viewModel.serverResponsive)
-                    .opacity(viewModel.serverResponsive ? 1 : 0)
                     
                     Spacer()
                     
@@ -151,8 +147,6 @@ struct StandardNavBarView: View {
                                 .shadow(radius: 2)
                         }
                     })
-                    .disabled(!viewModel.serverResponsive)
-                    .opacity(viewModel.serverResponsive ? 1 : 0)
                     
                     Spacer()
                     

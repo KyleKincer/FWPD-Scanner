@@ -56,7 +56,7 @@ struct ListView: View {
                                 }
                             }
                         }
-                        .navigationTitle("Recent Activity")
+                        .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                         .navigationBarTitleDisplayMode(.automatic)
                         .refreshable {
                             withAnimation {

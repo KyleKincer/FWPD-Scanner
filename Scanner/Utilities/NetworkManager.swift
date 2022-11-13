@@ -15,7 +15,6 @@ class NetworkManager {
 
     // Converts Firestore document into a single activity
     func makeActivity(document: QueryDocumentSnapshot) -> Scanner.Activity {
-        print(document.documentID)
         let id = document.documentID
         let data = document.data()
         let location = data["location"] as? String ?? "UNKNOWN"
@@ -31,7 +30,7 @@ class NetworkManager {
     }
     
     //Get first 25 activities from Firestore
-    func getFirstActivities(dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String] = [], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
+    func getFirstActivities(filterByDate: Bool, filterByLocation: Bool, filterByNature: Bool, dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
         var activities = [Scanner.Activity]()
         let formatter = DateFormatter()
@@ -68,26 +67,30 @@ class NetworkManager {
         
         do {
             
-            if (radius ?? 0.0 > 0.0 && dateFrom != nil && dateTo != nil && selectedNatures.count > 0) {
+            if (filterByLocation && filterByDate && filterByNature) {
                 // Distance + DateRange + Natures
+                print("Filtering by Location, Date, and Nature")
                 
                 
                 
-                
-            } else if (radius ?? 0.0 > 0.0 && dateFrom != nil && dateTo != nil) {
+            } else if (filterByLocation && filterByDate) {
                 // Distance + DateRange
+                print("Filtering by Location and Date")
                 
                 
                 
                 
-            } else if (radius ?? 0.0 > 0.0 && selectedNatures.count > 0) {
+            } else if (filterByLocation && filterByNature) {
                 // Distance + Natures
+                print("Filtering by Location and Nature")
                 
                 
                 
                 
-            } else if (dateFrom != nil && dateTo != nil && selectedNatures.count > 0) {
+            } else if (filterByDate && filterByNature) {
                 // DateRange + Natures
+                print("Filtering by Date and Nature")
+                
                 let query = try await db.collection("activities")
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFromStr)
                     .whereField("timestamp", isLessThanOrEqualTo: dateToStr)
@@ -100,13 +103,17 @@ class NetworkManager {
                     activities.append(self.makeActivity(document: document))
                 }
                 
-            } else if (radius ?? 0.0 > 0.0) {
+            } else if (filterByLocation) {
                 // Distance
+                print("Filtering by Location")
                 
                 
                 
-            } else if (dateFrom != nil && dateTo != nil) {
+                
+            } else if (filterByDate) {
                 // DateRange
+                print("Filtering by Date")
+                
                 let query = try await db.collection("activities")
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFromStr)
                     .whereField("timestamp", isLessThanOrEqualTo: dateToStr)
@@ -118,8 +125,10 @@ class NetworkManager {
                     activities.append(self.makeActivity(document: document))
                 }
                 
-            } else if (selectedNatures.count > 0) {
+            } else if (filterByNature) {
                 // Natures
+                print("Filtering by Nature")
+                
                 let query = try await db.collection("activities")
                     .whereField("nature", in: selectedNatures)
                     .order(by: "timestamp", descending: true)
@@ -132,6 +141,8 @@ class NetworkManager {
                 
             } else {
                 // No filters
+                print("No Filters")
+                
                 let query = try await db.collection("activities")
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
@@ -152,7 +163,7 @@ class NetworkManager {
     }
     
     // Get 25 more activities from Firestore
-    func getMoreActivities(dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String] = [], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
+    func getMoreActivities(filterByDate: Bool, filterByLocation: Bool, filterByNature: Bool, dateFrom: Date? = nil, dateTo: Date? = nil, selectedNatures: [String], location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
         var activities = [Scanner.Activity]()
         let formatter = DateFormatter()
@@ -300,7 +311,6 @@ class NetworkManager {
     }
     
     func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
-        print(document.documentID)
         let id = document.documentID
         let data = document.data()
         let natureName = data["nature"] as? String ?? "UNKNOWN"
@@ -319,7 +329,6 @@ class NetworkManager {
                 .getDocuments()
             
             for nature in query.documents {
-                print(nature.documentID)
                 natures.append(self.makeNature(document: nature))
             }
         } catch {

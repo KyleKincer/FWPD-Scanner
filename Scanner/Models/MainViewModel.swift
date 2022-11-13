@@ -9,32 +9,43 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
-import CoreData
-
-class MM : ObservableObject {
-    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-}
 
 @MainActor
 final class MainViewModel: ObservableObject {
-    @Published var locationManager: CLLocationManager = CLLocationManager()
-    @Published var locationEnabled: Bool = false
+    // Main Model
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
+    
+    // Location and Map
+    @Published var locationManager: CLLocationManager = CLLocationManager()
+    @Published var locationEnabled: Bool = false
+    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+    
+    // Filters
     @Published var selectedNatures = Set<String>() { didSet{ refresh() }}
+    @Published var selectedNaturesString = [String]()
     @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
+    @Published var notificationNaturesString = [String]()
     @Published var dateFrom = Date()
     @Published var dateTo = Date()
-    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+    @AppStorage("useLocation") var useLocation = false
+    @AppStorage("useDate") var useDate = false
+    @AppStorage("useNature") var useNature = false
+    @AppStorage("radius") var radius = 0.0
+    
+    // View States
     @Published var isRefreshing = false
     @Published var serverResponsive = true
     @Published var isLoading = false
-    @Published var mapModel = MM()
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
-    let networkManager = NetworkManager()
+    
+    // Network
+    @Published var networkManager = NetworkManager()
+    
+    // UserDefaults
     let defaults = UserDefaults.standard
     
     init() {
@@ -47,7 +58,7 @@ final class MainViewModel: ObservableObject {
                     print("No access to location")
                     self.locationEnabled = false
                 case .authorizedAlways, .authorizedWhenInUse:
-                    print("Access")
+                    print("Access to location confirmed")
                     self.locationEnabled = true
                 @unknown default:
                     break
@@ -57,7 +68,7 @@ final class MainViewModel: ObservableObject {
         }
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
-        print("Have \(self.bookmarkCount) bookmark(s)!")
+        print("Found \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
     }
     
@@ -71,7 +82,7 @@ final class MainViewModel: ObservableObject {
         Task.init {
             do {
                 // Get first set of activities
-                let newActivities = try await self.networkManager.getFirstActivities()
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, selectedNatures: self.selectedNaturesString)
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
                     print("Got activities")
@@ -100,7 +111,7 @@ final class MainViewModel: ObservableObject {
         self.isLoading = true
         Task.init {
             do {
-                let newActivities = try await self.networkManager.getMoreActivities(location: location, radius: radius)
+                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, selectedNatures: self.selectedNaturesString)
                 
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
@@ -111,6 +122,7 @@ final class MainViewModel: ObservableObject {
                     self.isLoading = false
                 } else {
                     print("Got zero activities")
+                    self.isLoading = false
                 }
             }
         }

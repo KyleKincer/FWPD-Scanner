@@ -16,12 +16,6 @@ struct FilterSettings: View {
     @State var justAppeared1 = false
     @State var justAppeared2 = false
     @State var showFavorites = false
-    
-    @AppStorage("useLocation") var useLocation = false
-    @AppStorage("useDate") var useDate = false
-    @AppStorage("radius") var radius = 0.0
-    @AppStorage("showDistance") var showDistance = true
-    
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -44,40 +38,63 @@ struct FilterSettings: View {
                         .multilineTextAlignment(.center)
                     
                     
-                    if viewModel.locationEnabled {
-                        Toggle("Show Distance From You", isOn: $showDistance)
-                        Toggle(isOn: $useLocation) {
-                            Text("Filter By Distance")
-                        }
-                        if useLocation {
+                    if (viewModel.locationEnabled) {
+                        Toggle("Filter By Distance", isOn: $viewModel.useLocation)
+                            .onChange(of: viewModel.useLocation) { _ in
+                                refreshOnExit = true
+                            }
+                        
+                        if (viewModel.useLocation) {
                             VStack {
                                 HStack {
-                                    Text("Radius: \(String(format: "%g", (round(radius * 10)) / 10)) mi")
+                                    Text("Radius: \(String(format: "%g", (round(viewModel.radius * 10)) / 10)) mi")
                                     Spacer()
                                 }
-                                Slider(value: $radius, in: 0.1...5)
-                            }
-                        }
-                        
-                        if (useLocation) {
-                            Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
+                                Slider(value: $viewModel.radius, in: 0.1...5)
+                                    .onChange(of: viewModel.radius) { _ in
+                                        refreshOnExit = true
+                                    }
                                 
+                                Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {}
                             }
                         }
                     }
                 }
                 
                 Section("Date") {
-                    Toggle(isOn: $useDate) {
-                        Text("Filter By Date Range")
-                    }
-                    if useDate {
+                    Toggle("Filter By Date", isOn: $viewModel.useDate)
+                        .onChange(of: viewModel.useDate) { _ in
+                            refreshOnExit = true
+                        }
+                    
+                    if (viewModel.useDate) {
                         DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
+                            .onChange(of: dateFrom) {newValue in
+                                if (!justAppeared1) {
+                                    refreshOnExit = true
+                                } else {
+                                    justAppeared1 = false
+                                }
+                            }
+                        
+                        
                         DatePicker("To", selection: $dateTo, in: oldestDate...Date(), displayedComponents: .date)
+                            .onChange(of: dateTo) {newValue in
+                                if (!justAppeared2) {
+                                    refreshOnExit = true
+                                } else {
+                                    justAppeared2 = false
+                                }
+                            }
                     }
                 }
                 
-                Section("Filter By Activity Type") {
+                Section("Nature") {
+                    Toggle("Filter By Natures", isOn: $viewModel.useNature)
+                        .onChange(of: viewModel.useNature) { _ in
+                            refreshOnExit = true
+                        }
+                    
                     Button {
                         showingTypesPopover = true
                     } label: {
@@ -90,33 +107,14 @@ struct FilterSettings: View {
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
         }
-        .onChange(of: useLocation) { _ in
-            refreshOnExit = true
-        }
-        .onChange(of: radius) { _ in
-            if useLocation {
-                refreshOnExit = true
-            }
-            viewModel.refresh()
-        }
-        .onChange(of: showDistance) { newValue in
-            if !newValue {
-                viewModel.clearDistancesFromActivities()
-            }
-            viewModel.refresh()
-        }
-        .onChange(of: dateFrom) {newValue in
-            if (!justAppeared1) {
-                refreshOnExit = true
-            } else {
-                justAppeared1 = false
-            }
-        }
-        .onChange(of: dateTo) {newValue in
-            if (!justAppeared2) {
-                refreshOnExit = true
-            } else {
-                justAppeared2 = false
+        .onAppear {
+            refreshOnExit = false
+            justAppeared1 = true
+            justAppeared2 = true
+            if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
+                || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
+                dateFrom = viewModel.dateFrom
+                dateTo = viewModel.dateTo
             }
         }
         .onDisappear {
@@ -129,28 +127,9 @@ struct FilterSettings: View {
             if refreshOnExit {
                 refreshOnExit = false
                 viewModel.refresh()
-                print("Refreshed")
+                print("Refreshed via Filters")
             }
-        }
-        .onAppear {
-            refreshOnExit = false
-            justAppeared1 = true
-            justAppeared2 = true
-            if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
-                || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
-                dateFrom = viewModel.dateFrom
-                dateTo = viewModel.dateTo
-            }
-        }
-    }
-    
-    func clearAllFilters() {
-        withAnimation {
-            useLocation = false
-            useDate = false
-            viewModel.selectedNatures.removeAll()
-            dateFrom = Date()
-            dateTo = Date()
+            viewModel.selectedNaturesString = Array(viewModel.selectedNatures)
         }
     }
 }
