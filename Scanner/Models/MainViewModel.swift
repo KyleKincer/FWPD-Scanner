@@ -82,7 +82,7 @@ final class MainViewModel: ObservableObject {
         Task.init {
             do {
                 // Get first set of activities
-                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, selectedNatures: self.selectedNaturesString)
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString)
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
                     print("Got activities")
@@ -111,7 +111,7 @@ final class MainViewModel: ObservableObject {
         self.isLoading = true
         Task.init {
             do {
-                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, selectedNatures: self.selectedNaturesString)
+                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString)
                 
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
