@@ -209,7 +209,7 @@ struct ExpandedFilterSettings: View {
                 if refreshOnExit {
                     refreshOnExit = false
                     viewModel.refresh()
-                    print("Refreshed via Filters")
+                    print("R - Refreshed via Filters")
                 }
             }
             .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {

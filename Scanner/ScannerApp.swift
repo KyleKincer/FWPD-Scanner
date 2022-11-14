@@ -26,6 +26,9 @@ struct ScannerApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onAppear {
+                    print("! --- APP STARTING")
+                }
         }
     }
 }

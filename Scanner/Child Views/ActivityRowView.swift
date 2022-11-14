@@ -95,16 +95,18 @@ struct ActivityRowView: View {
         .contextMenu {
             Button {
                 if activity.bookmarked {
-                    activity.bookmarked = false
-                    viewModel.removeBookmark(bookmark: activity)
-                    if (viewModel.showBookmarks) {
-                        withAnimation {
+                    withAnimation {
+                        activity.bookmarked = false
+                        viewModel.removeBookmark(bookmark: activity)
+                        if (viewModel.showBookmarks) {
                             viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
                         }
                     }
                 } else {
-                    activity.bookmarked = true
-                    viewModel.addBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = true
+                        viewModel.addBookmark(bookmark: activity)
+                    }
                 }
             } label: {
                 Text("Toggle Bookmark")
@@ -113,16 +115,20 @@ struct ActivityRowView: View {
         .swipeActions {
             Button(activity.bookmarked ? "Unmark" : "Bookmark") {
                 if activity.bookmarked {
-                    activity.bookmarked = false
-                    viewModel.removeBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = false
+                        viewModel.removeBookmark(bookmark: activity)
+                    }
                     if (viewModel.showBookmarks) {
                         withAnimation {
                             viewModel.bookmarks.removeAll { $0.controlNumber == activity.controlNumber }
                         }
                     }
                 } else {
-                    activity.bookmarked = true
-                    viewModel.addBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = true
+                        viewModel.addBookmark(bookmark: activity)
+                    }
                 }
             }.tint(activity.bookmarked ? .red : .orange)
         }

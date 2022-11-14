@@ -100,10 +100,10 @@ class locationDelegate: NSObject,ObservableObject,CLLocationManagerDelegate{
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 
         if manager.authorizationStatus == .authorizedWhenInUse{
-            print("Authorized")
+            print("G - Location Authorized")
             manager.startUpdatingLocation()
         } else {
-            print("not authorized")
+            print("X - Location Not Authorized")
             manager.requestWhenInUseAuthorization()
         }
     }

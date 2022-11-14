@@ -50,22 +50,22 @@ final class MainViewModel: ObservableObject {
     let defaults = UserDefaults.standard
     
     init() {
-        print("Initializing list view model")
+        print("I - Initializing list view model")
         model = Scanner()
         
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
                 case .notDetermined, .restricted, .denied:
-                    print("No access to location")
+                    print("X - Failed to get location")
                     self.locationEnabled = false
                 case .authorizedAlways, .authorizedWhenInUse:
-                    print("Access to location confirmed")
+                    print("G - Succeeded in getting location ")
                     self.locationEnabled = true
                 @unknown default:
                     break
             }
         } else {
-            print("Location services are not enabled")
+            print("X - Location services are disabled by user")
         }
         
         let selectionArray = selectedNaturesUD.components(separatedBy: ", ")
@@ -73,11 +73,11 @@ final class MainViewModel: ObservableObject {
         self.selectedNaturesString = Array(selectedNatures)
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
-        print("Found \(self.bookmarkCount) bookmark(s)!")
+        print("G - Found \(self.bookmarkCount) bookmark(s)!")
     }
     
     func refresh() {
-        print("Refreshing")
+        print("R --- Refreshing")
         self.showBookmarks = false
         self.isRefreshing = true
         self.isLoading = true
@@ -92,17 +92,23 @@ final class MainViewModel: ObservableObject {
                 let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
-                    print("Got activities")
-                    self.serverResponsive = true
-                    self.addDatesToActivities(setName: "activities")
-                    self.addDistancesToActivities(setName: "activities")
-                    self.isRefreshing = false
-                    self.isLoading = false
+                    print("+ --- Got activities")
+                    
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(setName: "activities")
+                        self.addDistancesToActivities(setName: "activities")
+                        self.isRefreshing = false
+                        self.isLoading = false
+                    }
                 } else {
-                    print("Got zero activities")
-                    self.serverResponsive = false
-                    self.isRefreshing = false
-                    self.isLoading = false
+                    print("+ --- Got zero activities")
+                    
+                    withAnimation {
+                        self.serverResponsive = false
+                        self.isRefreshing = false
+                        self.isLoading = false
+                    }
                 }
             }
         }
@@ -117,21 +123,29 @@ final class MainViewModel: ObservableObject {
         if UserDefaults.standard.bool(forKey: "useLocation") {
             location = self.locationManager.location
         }
-        self.isLoading = true
+        
+        withAnimation {
+            self.isLoading = true
+        }
+        
         Task.init {
             do {
                 let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
                 
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
-                    print("Got activities")
-                    self.serverResponsive = true
-                    self.addDatesToActivities(setName: "activities")
-                    self.addDistancesToActivities(setName: "activities")
-                    self.isLoading = false
+                    print("+ --- Got more activities")
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(setName: "activities")
+                        self.addDistancesToActivities(setName: "activities")
+                        self.isLoading = false
+                    }
                 } else {
-                    print("Got zero activities")
-                    self.isLoading = false
+                    print("+ --- Got more but zero activities")
+                    withAnimation {
+                        self.isLoading = false
+                    }
                 }
             }
         }
@@ -145,7 +159,9 @@ final class MainViewModel: ObservableObject {
                 let newNatures = try await self.networkManager.getNatures()
                 if (newNatures.count > 0) {
                     self.natures = newNatures
-                    print("Got natures")
+                    print("+ --- Got natures")
+                } else {
+                    print("+ --- Got zero natures")
                 }
             }
         }
@@ -160,6 +176,7 @@ final class MainViewModel: ObservableObject {
                 set[i].date = formatter.date(from: set[i].timestamp)
             }
             self.activities = set
+            print("G - Set dates on activities")
             
         } else {
             var set = self.bookmarks
@@ -167,6 +184,7 @@ final class MainViewModel: ObservableObject {
                 set[i].date = formatter.date(from: set[i].timestamp)
             }
             self.bookmarks = set
+            print("G - Set dates on bookmarks")
         }
     }
     
@@ -179,6 +197,7 @@ final class MainViewModel: ObservableObject {
                         from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
                 }
                 self.activities = set
+                print("G - Set distances on activities")
             } else {
                 var set = self.bookmarks
                 for i in set.indices {
@@ -186,6 +205,7 @@ final class MainViewModel: ObservableObject {
                         from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
                 }
                 self.bookmarks = set
+                print("G - Set distances on bookmarks")
             }
         }
     }
@@ -209,7 +229,7 @@ final class MainViewModel: ObservableObject {
         
         self.bookmarkCount = defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         self.bookmarkCount += 1
-        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
     }
     
@@ -228,7 +248,7 @@ final class MainViewModel: ObservableObject {
             self.bookmarkCount = 0
         }
         defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
-        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         if self.bookmarkCount == 0 && self.showBookmarks {
             self.showBookmarks = false
             self.refresh()
@@ -258,9 +278,11 @@ final class MainViewModel: ObservableObject {
                     self.bookmarks = bookmarks
                     self.addDatesToActivities(setName: "bookmarks")
                     self.addDistancesToActivities(setName: "bookmarks")
-                    print("Got bookmarks")
+                    print("+ --- Got bookmark entries from Firebase")
                 }
             }
+        } else {
+            print("+ --- All bookmarks already accounted for")
         }
     }
 }

@@ -64,7 +64,6 @@ struct WatchSettingsView: View {
             }
         }
         .onAppear {
-            print("didAppear")
             refreshOnExit = false
         }
     }

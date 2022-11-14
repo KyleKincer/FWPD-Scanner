@@ -18,7 +18,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         else {
             // TODO: Make this into an alert
-            print("Location services are disabled")
+            print("X - Location services are disabled")
         }
     }
     

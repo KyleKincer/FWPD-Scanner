@@ -40,12 +40,12 @@ class NetworkManager {
         let queryBounds = GFUtils.queryBounds(forLocation: center ?? CLLocationCoordinate2D(latitude: 00.0, longitude: 00.0), withRadius: distance)
         
         // Prepare natures
-        print("Gathering Activities from Firestore")
+        print("+ --- Gathering Activities from Firestore")
         
         do {
             if (filterByLocation) {
                 // Distance
-                print("Filtering by Location")
+                print("F -- Filtering by Location")
                 
                 let queries = queryBounds.map { bound -> Query in
                     return db.collection("activities")
@@ -88,7 +88,7 @@ class NetworkManager {
                 
             } else if (filterByDate) {
                 // DateRange
-                print("Filtering by Date")
+                print("F -- Filtering by Date")
                 
                 let query = try await db.collection("activities")
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFrom)
@@ -105,7 +105,7 @@ class NetworkManager {
                 
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
-                print("Filtering by Nature")
+                print("F -- Filtering by Nature")
                 
                 let query = try await db.collection("activities")
                     .whereField("nature", in: selectedNatures!)
@@ -121,7 +121,7 @@ class NetworkManager {
                 
             } else {
                 // No filters
-                print("No Filters")
+                print("F -- No Filters")
                 
                 let query = try await db.collection("activities")
                     .order(by: "timestamp", descending: true)
@@ -136,7 +136,7 @@ class NetworkManager {
             }
             
         } catch {
-            print("Error getting activities: \(error.localizedDescription)")
+            print("X - Error getting activities: \(error.localizedDescription)")
         }
         
         
@@ -155,12 +155,12 @@ class NetworkManager {
         let center = location?.coordinate
         let queryBounds = GFUtils.queryBounds(forLocation: center ?? CLLocationCoordinate2D(latitude: 00.0, longitude: 00.0), withRadius: distance)
 
-        print("Getting more activities from Firestore")
+        print("+ --- Getting more activities from Firestore")
         
         do {
             if (filterByLocation) {
                 // Distance
-                print("Filtering by Location")
+                print("F -- Filtering by Location")
                 
                 let queries = queryBounds.map { bound -> Query in
                     return db.collection("activities")
@@ -204,7 +204,7 @@ class NetworkManager {
                 
             } else if (filterByDate) {
                 // DateRange
-                print("Filtering by Date")
+                print("F -- Filtering by Date")
                 
                 let query = try await db.collection("activities")
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFrom)
@@ -222,7 +222,7 @@ class NetworkManager {
                 
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
-                print("Filtering By Nature")
+                print("F -- Filtering By Nature")
                 
                 let query = try await db.collection("activities")
                     .whereField("nature", in: selectedNatures!)
@@ -239,7 +239,7 @@ class NetworkManager {
                 
             } else {
                 // No filters
-                print("No Filters")
+                print("F -- No Filters")
                 
                 let query = try await db.collection("activities")
                     .order(by: "timestamp", descending: true)
@@ -255,7 +255,7 @@ class NetworkManager {
             }
             
         } catch {
-            print("Error getting activities: \(error.localizedDescription)")
+            print("X - Error getting activities: \(error.localizedDescription)")
         }
 
         //Bout damn time
@@ -307,7 +307,7 @@ class NetworkManager {
                 natures.append(self.makeNature(document: nature))
             }
         } catch {
-            print("Error getting natures: \(error.localizedDescription)")
+            print("X - Error getting natures: \(error.localizedDescription)")
         }
         return natures
     }

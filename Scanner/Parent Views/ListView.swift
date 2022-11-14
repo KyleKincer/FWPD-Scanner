@@ -120,9 +120,9 @@ struct ListView: View {
                         withAnimation(.spring()) {showingRefreshReminder = true}
                     }
                 case .inactive:
-                    print("shrug")
+                    print("G - App Inactive (shrug)")
                 @unknown default:
-                    print("shrug")
+                    print("G - App Inactive (shrug)")
                 }
             }
             if showingRefreshReminder && !viewModel.showBookmarks {

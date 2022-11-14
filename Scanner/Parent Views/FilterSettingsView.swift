@@ -157,7 +157,7 @@ struct FilterSettings: View {
             if refreshOnExit {
                 refreshOnExit = false
                 viewModel.refresh()
-                print("Refreshed via Filters")
+                print("R - Refreshed via Filters")
             }
         }
     }
