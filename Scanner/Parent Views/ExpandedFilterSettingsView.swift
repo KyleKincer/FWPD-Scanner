@@ -202,6 +202,12 @@ struct ExpandedFilterSettings: View {
                 viewModel.dateFrom = formatter.string(from: dateFrom)
                 formatter.dateFormat = "yyyy-MM-dd 23:59:59"
                 viewModel.dateTo = formatter.string(from: dateTo)
+                
+                if (selection.count == 0) {
+                    viewModel.useNature = false
+                    selection.insert("None")
+                }
+                
                 viewModel.selectedNatures = selection
                 viewModel.selectedNaturesString = Array(selection)
                 viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
