@@ -28,13 +28,13 @@ final class MainViewModel: ObservableObject {
     @Published var selectedNaturesString = [String]()
     @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
     @Published var notificationNaturesString = [String]()
-    @Published var dateFrom = Date()
-    @Published var dateTo = Date()
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
     @AppStorage("radius") var radius = 0.0
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
+    @AppStorage("dateFrom") var dateFrom = String()
+    @AppStorage("dateTo") var dateTo = String()
     
     // View States
     @Published var isRefreshing = false
@@ -74,20 +74,20 @@ final class MainViewModel: ObservableObject {
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("Found \(self.bookmarkCount) bookmark(s)!")
-        self.refresh()
     }
     
     func refresh() {
         print("Refreshing")
         self.showBookmarks = false
         self.isRefreshing = true
+        self.isLoading = true
         self.activities.removeAll() // clear out stored activities
         self.bookmarks.removeAll() // clear out bookmark records
         
         Task.init {
             do {
                 // Get first set of activities
-                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString)
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
                     print("Got activities")
@@ -95,10 +95,12 @@ final class MainViewModel: ObservableObject {
                     self.addDatesToActivities(setName: "activities")
                     self.addDistancesToActivities(setName: "activities")
                     self.isRefreshing = false
+                    self.isLoading = false
                 } else {
                     print("Got zero activities")
                     self.serverResponsive = false
                     self.isRefreshing = false
+                    self.isLoading = false
                 }
             }
         }
@@ -116,7 +118,7 @@ final class MainViewModel: ObservableObject {
         self.isLoading = true
         Task.init {
             do {
-                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString)
+                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
                 
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)

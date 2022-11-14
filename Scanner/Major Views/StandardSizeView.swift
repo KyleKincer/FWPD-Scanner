@@ -31,12 +31,16 @@ struct StandardSizeView: View {
             }
         }
         
-        .fullScreenCover(isPresented: $showNotificationSheet) {
-            if #available(iOS 16.1, *) {
-                NewNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
-            } else {
-                OldNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
-            }
+//        .fullScreenCover(isPresented: $showNotificationSheet) {
+//            if #available(iOS 16.1, *) {
+//                NewNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
+//            } else {
+//                OldNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
+//            }
+//        }
+        
+        .sheet(isPresented: $showNotificationSheet) {
+            NotificationsComingView()
         }
 
         .sheet(isPresented: $showLocationDisclaimer) {

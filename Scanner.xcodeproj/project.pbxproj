@@ -82,6 +82,7 @@
 		EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */; };
 		EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */; };
+		EBC421192922CD5200A3F75B /* NotificationsComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC421182922CD5200A3F75B /* NotificationsComingView.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
@@ -192,6 +193,7 @@
 		EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVActivityDetailView.swift; sourceTree = "<group>"; };
 		EBB721F128F7178600435375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMapAnnotationView.swift; sourceTree = "<group>"; };
+		EBC421182922CD5200A3F75B /* NotificationsComingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsComingView.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -243,7 +245,6 @@
 				7E66E339AE1A06D60B4DF099 /* Pods-scannerWidgetsExtension.debug.xcconfig */,
 				03421CF8C13CF71C0336BB10 /* Pods-scannerWidgetsExtension.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -415,6 +416,7 @@
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
+				EBC421182922CD5200A3F75B /* NotificationsComingView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
@@ -707,6 +709,7 @@
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
+				EBC421192922CD5200A3F75B /* NotificationsComingView.swift in Sources */,
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,

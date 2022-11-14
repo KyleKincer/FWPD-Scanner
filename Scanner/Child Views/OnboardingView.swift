@@ -39,6 +39,7 @@ struct OnboardingView: View {
                     StatusView(viewModel: viewModel)
                         .scaleEffect(0.5)
                         .frame(width: 400, height: 100)
+                        .padding()
                     
                     Spacer()
                     

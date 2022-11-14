@@ -10,11 +10,11 @@ import SwiftUI
 struct FilterSettings: View {
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
-    @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    @State var dateTo = Date()
     @State var showingTypesPopover = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
+    @State var dateFrom = Date()
+    @State var dateTo = Date()
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -31,6 +31,11 @@ struct FilterSettings: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
             
+            Text("Only one Scanner Filter Category may be applied.")
+                .multilineTextAlignment(.center)
+                .font(.subheadline)
+                .padding()
+            
             List {
                 Section("Location") {
                     Text("This app only works for Fort Wayne, IN")
@@ -38,8 +43,14 @@ struct FilterSettings: View {
                     
                     if (viewModel.locationEnabled) {
                         Toggle("Filter By Distance", isOn: $viewModel.useLocation)
-                            .onChange(of: viewModel.useLocation) { _ in
-                                refreshOnExit = true
+                            .onChange(of: viewModel.useLocation) { newValue in
+                                withAnimation {
+                                    refreshOnExit = true
+                                    if (newValue) {
+                                        viewModel.useDate = false
+                                        viewModel.useNature = false
+                                    }
+                                }
                             }
                         
                         if (viewModel.useLocation) {
@@ -61,17 +72,25 @@ struct FilterSettings: View {
                 
                 Section("Date") {
                     Toggle("Filter By Date", isOn: $viewModel.useDate)
-                        .onChange(of: viewModel.useDate) { _ in
+                        .onChange(of: viewModel.useDate) { newValue in
                             refreshOnExit = true
+                            if (newValue) {
+                                withAnimation {
+                                    viewModel.useLocation = false
+                                    viewModel.useNature = false
+                                }
+                            }
                         }
                     
                     if (viewModel.useDate) {
                         DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
                             .onChange(of: dateFrom) {newValue in
-                                if (!justAppeared1) {
-                                    refreshOnExit = true
-                                } else {
-                                    justAppeared1 = false
+                                withAnimation {
+                                    if (!justAppeared1) {
+                                        refreshOnExit = true
+                                    } else {
+                                        justAppeared1 = false
+                                    }
                                 }
                             }
                         
@@ -89,15 +108,23 @@ struct FilterSettings: View {
                 
                 Section("Nature") {
                     Toggle("Filter By Natures", isOn: $viewModel.useNature)
-                        .onChange(of: viewModel.useNature) { _ in
+                        .onChange(of: viewModel.useNature) { newValue in
                             refreshOnExit = true
+                            withAnimation {
+                                if (newValue) {
+                                    viewModel.useDate = false
+                                    viewModel.useLocation = false
+                                }
+                            }
                         }
                     
                     if (viewModel.useNature) {
                         Button {
-                            showingTypesPopover = true
+                            withAnimation {
+                                showingTypesPopover = true
+                            }
                         } label: {
-                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count-1))")
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
                         }
                     }
                 }
@@ -108,17 +135,22 @@ struct FilterSettings: View {
             NaturesList(viewModel: viewModel)
         }
         .onAppear {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd 00:00:01"
+            dateFrom = formatter.date(from: viewModel.dateFrom) ?? Date()
+            formatter.dateFormat = "yyyy-MM-dd 23:59:59"
+            dateTo = formatter.date(from: viewModel.dateTo) ?? Date()
             refreshOnExit = false
             justAppeared1 = true
             justAppeared2 = true
         }
         .onDisappear {
-            if dateFrom > dateTo {
-                viewModel.dateFrom = dateTo
-            } else {
-                viewModel.dateFrom = dateFrom
-            }
-            viewModel.dateTo = dateTo
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd 00:00:01"
+            viewModel.dateFrom = formatter.string(from: dateFrom)
+            formatter.dateFormat = "yyyy-MM-dd 23:59:59"
+            viewModel.dateTo = formatter.string(from: dateTo)
+
             if refreshOnExit {
                 refreshOnExit = false
                 viewModel.refresh()

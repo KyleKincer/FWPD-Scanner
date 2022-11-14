@@ -69,9 +69,7 @@ struct DetailView: View {
                     }
                     .onDisappear {
                         viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
-                    }
-                
-                
+                    } 
             }
             .padding(.top, 30)
             .navigationBarTitleDisplayMode(.inline)
@@ -79,9 +77,6 @@ struct DetailView: View {
             .onAppear {
                 isBookmarked = activity.bookmarked
             }
-            .onTapGesture(perform: {
-                isBookmarked = activity.bookmarked
-            })
         }
     }
 }

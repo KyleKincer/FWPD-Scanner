@@ -120,12 +120,6 @@ struct ExpandedNavBarView: View {
                 withAnimation {
                     viewModel.showBookmarks.toggle()
                 }
-                if (viewModel.showBookmarks) {
-                    viewModel.getBookmarks()
-
-                } else {
-                    viewModel.refresh()
-                }
             }, label: {
                 ZStack {
                     

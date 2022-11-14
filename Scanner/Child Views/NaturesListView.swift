@@ -13,11 +13,17 @@ struct NaturesList: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
     @AppStorage("selectedNatures") var selectedNatures = String()
+    @State var tenSet = Set<String>()
+    @State var showNatureAlert = false
     
     var body: some View {
         VStack {
             HStack {
                 Button {
+                    if (selection.count == 0) {
+                        viewModel.useNature = false
+                        selection.insert("None")
+                    }
                     dismiss()
                 } label: {
                     Text("Apply")
@@ -46,21 +52,21 @@ struct NaturesList: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                 }
+                
+                .onChange(of: selection, perform: { latestSelection in
+                    if (latestSelection.count == 10) {
+                        tenSet = latestSelection
+                    }
+                    if (latestSelection.count >= 11) {
+                        showNatureAlert = true
+                        selection = tenSet
+                    }
+                    
+                })
             })
             .environment(\.editMode, .constant(EditMode.active))
             .navigationBarTitle(Text("Types"))
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                    
-                    Button {
-                        selection.removeAll()
-                    } label: {
-                        Text("Clear")
-                    }
-                }
-            }
             .onAppear {
                 let selectionArray = selectedNatures.components(separatedBy: ", ")
                 selection = Set(selectionArray)
@@ -74,6 +80,9 @@ struct NaturesList: View {
             }
         }
         .interactiveDismissDisabled()
+        .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
+            Button("OK", role: .cancel) { }
+                }
     }
 }
 

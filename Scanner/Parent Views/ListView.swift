@@ -26,7 +26,7 @@ struct ListView: View {
                 if (!viewModel.showBookmarks) {
                     NavigationView {
                         Section {
-                            if (viewModel.activities.count == 0) {
+                            if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
                                 VStack {
                                     Text("No Matches Found")
                                         .font(.system(size: 25))

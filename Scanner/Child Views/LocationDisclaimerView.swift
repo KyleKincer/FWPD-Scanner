@@ -41,6 +41,7 @@ struct LocationDisclaimerView: View {
             Text("\(version) build \(build)")
                 .foregroundColor(.gray)
                 .font(.footnote)
+                .padding()
         }
     }
 }
