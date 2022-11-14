@@ -79,6 +79,7 @@ struct OnboardingView: View {
                         viewModel.locationManager.requestAlwaysAuthorization()
                     }
                     .onDisappear {
+                        viewModel.selectedNaturesUD.removeAll()
                         viewModel.refresh()
                     }
                 

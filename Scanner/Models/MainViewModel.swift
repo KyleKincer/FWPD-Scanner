@@ -32,9 +32,9 @@ final class MainViewModel: ObservableObject {
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
     @AppStorage("radius") var radius = 0.0
-    @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @AppStorage("dateFrom") var dateFrom = String()
     @AppStorage("dateTo") var dateTo = String()
+    @AppStorage("selectedNatures") var selectedNaturesUD = String()
     
     // View States
     @Published var isRefreshing = false
@@ -83,6 +83,8 @@ final class MainViewModel: ObservableObject {
         self.isLoading = true
         self.activities.removeAll() // clear out stored activities
         self.bookmarks.removeAll() // clear out bookmark records
+            
+        
         
         Task.init {
             do {

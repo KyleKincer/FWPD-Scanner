@@ -84,7 +84,7 @@ struct FilterSettings: View {
                     
                     if (viewModel.useDate) {
                         DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
-                            .onChange(of: dateFrom) {newValue in
+                            .onChange(of: dateFrom) { newValue in
                                 withAnimation {
                                     if (!justAppeared1) {
                                         refreshOnExit = true
@@ -96,7 +96,7 @@ struct FilterSettings: View {
                         
                         
                         DatePicker("To", selection: $dateTo, in: oldestDate...Date(), displayedComponents: .date)
-                            .onChange(of: dateTo) {newValue in
+                            .onChange(of: dateTo) { newValue in
                                 if (!justAppeared2) {
                                     refreshOnExit = true
                                 } else {
@@ -109,9 +109,9 @@ struct FilterSettings: View {
                 Section("Nature") {
                     Toggle("Filter By Natures", isOn: $viewModel.useNature)
                         .onChange(of: viewModel.useNature) { newValue in
-                            refreshOnExit = true
                             withAnimation {
                                 if (newValue) {
+                                    refreshOnExit = true
                                     viewModel.useDate = false
                                     viewModel.useLocation = false
                                 }
@@ -124,7 +124,7 @@ struct FilterSettings: View {
                                 showingTypesPopover = true
                             }
                         } label: {
-                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: \(viewModel.selectedNatures.first == "None" ? viewModel.selectedNatures.count - 1 : viewModel.selectedNatures.count)")
                         }
                     }
                 }
@@ -133,6 +133,9 @@ struct FilterSettings: View {
         }
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
+                .onDisappear {
+                    refreshOnExit = false
+                }
         }
         .onAppear {
             let formatter = DateFormatter()
@@ -156,7 +159,6 @@ struct FilterSettings: View {
                 viewModel.refresh()
                 print("Refreshed via Filters")
             }
-            viewModel.selectedNaturesString = Array(viewModel.selectedNatures)
         }
     }
 }

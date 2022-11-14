@@ -12,7 +12,6 @@ struct NaturesList: View {
     @State var selection = Set<String>()
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
-    @AppStorage("selectedNatures") var selectedNatures = String()
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
     
@@ -42,7 +41,7 @@ struct NaturesList: View {
                 } label: {
                     Text("Clear")
                 }
-                .disabled(selection.count == 0)
+                .disabled(selection.count == 0 || selection.first == "None")
             }
             .padding()
             
@@ -68,7 +67,7 @@ struct NaturesList: View {
             .navigationBarTitle(Text("Types"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                let selectionArray = selectedNatures.components(separatedBy: ", ")
+                let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                 selection = Set(selectionArray)
                 viewModel.selectedNatures = selection
                 
@@ -76,7 +75,7 @@ struct NaturesList: View {
             .onDisappear {
                 viewModel.selectedNatures = selection
                 viewModel.selectedNaturesString = Array(selection)
-                selectedNatures = Array(selection).joined(separator: ", ")
+                viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
             }
         }
         .interactiveDismissDisabled()

@@ -18,7 +18,6 @@ struct ExpandedFilterSettings: View {
     @State var dateTo = Date()
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
-    @AppStorage("selectedNatures") var selectedNatures = String()
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
@@ -151,7 +150,7 @@ struct ExpandedFilterSettings: View {
                             } label: {
                                 Text("Clear")
                             }
-                            .disabled(selection.count == 0)
+                            .disabled(selection.count == 0 || selection.first == "None")
                         }
                         .padding()
                         
@@ -165,7 +164,7 @@ struct ExpandedFilterSettings: View {
                         .environment(\.editMode, .constant(EditMode.active))
                         .frame(height: 800)
                         .onAppear {
-                            let selectionArray = selectedNatures.components(separatedBy: ", ")
+                            let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                             selection = Set(selectionArray)
                             viewModel.selectedNatures = selection
                         }
@@ -191,7 +190,7 @@ struct ExpandedFilterSettings: View {
                 dateTo = formatter.date(from: viewModel.dateTo) ?? Date()
                 justAppeared1 = true
                 justAppeared2 = true
-                let selectionArray = selectedNatures.components(separatedBy: ", ")
+                let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                 selection = Set(selectionArray)
                 viewModel.selectedNatures = selection
                 refreshOnExit = false
@@ -205,7 +204,7 @@ struct ExpandedFilterSettings: View {
                 viewModel.dateTo = formatter.string(from: dateTo)
                 viewModel.selectedNatures = selection
                 viewModel.selectedNaturesString = Array(selection)
-                selectedNatures = Array(selection).joined(separator: ", ")
+                viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
                 
                 if refreshOnExit {
                     refreshOnExit = false
