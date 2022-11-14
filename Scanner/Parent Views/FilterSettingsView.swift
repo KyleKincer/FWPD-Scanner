@@ -109,9 +109,9 @@ struct FilterSettings: View {
                 Section("Nature") {
                     Toggle("Filter By Natures", isOn: $viewModel.useNature)
                         .onChange(of: viewModel.useNature) { newValue in
+                            refreshOnExit = true
                             withAnimation {
                                 if (newValue) {
-                                    refreshOnExit = true
                                     viewModel.useDate = false
                                     viewModel.useLocation = false
                                 }

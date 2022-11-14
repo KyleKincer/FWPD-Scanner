@@ -45,7 +45,7 @@ struct ListView: View {
                                 List(viewModel.activities, id: \.self) { activity in
                                     ActivityRowView(activity: activity, viewModel: viewModel)
                                     
-                                    if (activity == viewModel.activities.last) {
+                                    if (activity == viewModel.activities.last && !viewModel.useLocation) {
                                         Section {
                                             if (viewModel.isLoading) {
                                                 ProgressView()
@@ -128,7 +128,10 @@ struct ListView: View {
             if showingRefreshReminder && !viewModel.showBookmarks {
                 VStack {
                     Button() {
-                        viewModel.refresh()
+                        withAnimation {
+                            playHaptic()
+                            viewModel.refresh()
+                        }
                         withAnimation(.spring()) {showingRefreshReminder.toggle()}
                     } label: {
                         ZStack{

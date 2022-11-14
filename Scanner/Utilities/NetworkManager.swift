@@ -50,7 +50,7 @@ class NetworkManager {
                 let queries = queryBounds.map { bound -> Query in
                     return db.collection("activities")
                         .order(by: "geohash")
-                        .limit(to: 25)
+                        .limit(to: 400)
                         .start(at: [bound.startValue])
                         .end(at: [bound.endValue])
                 }
@@ -139,7 +139,6 @@ class NetworkManager {
             print("X - Error getting activities: \(error.localizedDescription)")
         }
         
-        
         //Bout damn time
         return activities
     }
@@ -148,7 +147,7 @@ class NetworkManager {
     func getMoreActivities(filterByDate: Bool, filterByLocation: Bool, filterByNature: Bool, dateFrom: String, dateTo: String, selectedNatures: [String]? = nil, location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
         var activities = [Scanner.Activity]()
-        var selectedNatures = selectedNatures
+        let selectedNatures = selectedNatures
     
         // Prepare location filters
         let distance = (radius ?? 0) / 0.621371 * 1000
@@ -160,46 +159,47 @@ class NetworkManager {
         do {
             if (filterByLocation) {
                 // Distance
-                print("F -- Filtering by Location")
+                print("F -- Filtering by Location / Rejected")
                 
-                let queries = queryBounds.map { bound -> Query in
-                    return db.collection("activities")
-                        .order(by: "geohash")
-                        .limit(to: 25)
-                        .start(at: [bound.startValue])
-                        .end(at: [bound.endValue])
-                }
-                
-                var matchingDocs = [QueryDocumentSnapshot]()
-                
-                for queryStatement in queries {
-                    let query = try await queryStatement.getDocuments()
-                    
-                    for document in query.documents {
-                        let lat = document.data()["latitude"] as? Double ?? 0
-                        let lng = document.data()["longitude"] as? Double ?? 0
-                        let coordinates = CLLocation(latitude: lat, longitude: lng)
-                        let centerPoint = CLLocation(latitude: center!.latitude , longitude: center!.longitude )
-
-                        // We have to filter out a few false positives due to GeoHash accuracy, but
-                        // most will match
-                        let eventDistance = GFUtils.distance(from: centerPoint, to: coordinates)
-                        if eventDistance <= distance {
-                            matchingDocs.append(document)
-                        }
-                    }
-                    
-                    if (matchingDocs.count > 0) {
-                        self.lastDocument = matchingDocs.last
-                    }
-                    
-                    for document in matchingDocs {
-                        activities.append(self.makeActivity(document: document))
-                    }
-                    matchingDocs = []
-                }
-                
-                activities.append(contentsOf: activities.sorted(by: { $0.timestamp > $1.timestamp }))
+//                let queries = queryBounds.map { bound -> Query in
+//                    return db.collection("activities")
+//                        .order(by: "geohash")
+//                        .limit(to: 25)
+//                        .start(at: [bound.startValue])
+//                        .start(afterDocument: self.lastDocument!)
+//                        .end(at: [bound.endValue])
+//                }
+//                
+//                var matchingDocs = [QueryDocumentSnapshot]()
+//                
+//                for queryStatement in queries {
+//                    let query = try await queryStatement.getDocuments()
+//                    
+//                    for document in query.documents {
+//                        let lat = document.data()["latitude"] as? Double ?? 0
+//                        let lng = document.data()["longitude"] as? Double ?? 0
+//                        let coordinates = CLLocation(latitude: lat, longitude: lng)
+//                        let centerPoint = CLLocation(latitude: center!.latitude , longitude: center!.longitude )
+//
+//                        // We have to filter out a few false positives due to GeoHash accuracy, but
+//                        // most will match
+//                        let eventDistance = GFUtils.distance(from: centerPoint, to: coordinates)
+//                        if eventDistance <= distance {
+//                            matchingDocs.append(document)
+//                        }
+//                    }
+//                    
+//                    if (matchingDocs.count > 0) {
+//                        self.lastDocument = matchingDocs.last
+//                    }
+//                    
+//                    for document in matchingDocs {
+//                        activities.append(self.makeActivity(document: document))
+//                    }
+//                    matchingDocs = []
+//                }
+//                
+//                activities.append(contentsOf: activities.sorted(by: { $0.timestamp > $1.timestamp }))
                 
                 
             } else if (filterByDate) {
