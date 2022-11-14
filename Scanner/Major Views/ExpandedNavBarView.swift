@@ -99,7 +99,7 @@ struct ExpandedNavBarView: View {
                         HStack {
                             Image(systemName: "camera.filters")
                                 .font(.system(size: 25))
-                                .foregroundColor(viewModel.serverResponsive ? .green : .gray)
+                                .foregroundColor(.green)
                                 .transition(.opacity)
                             
                             Text("Apply Filters")
@@ -112,7 +112,6 @@ struct ExpandedNavBarView: View {
                 .frame(width: 150, height: 35)
                 .background(RoundedRectangle(cornerRadius: 20)
                     .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.green))
-                .disabled(!viewModel.serverResponsive)
                 .padding(.horizontal)
                 
             }

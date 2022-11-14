@@ -33,7 +33,18 @@ struct ExpandedSizeView: View {
             }
         }
         .sheet(isPresented: $showFilter) {
-            ExpandedFilterSettings(viewModel: viewModel)
+            VStack {
+                Text("Activity Filters")
+                    .fontWeight(.black)
+                    .italic()
+                    .font(.largeTitle)
+                    .shadow(radius: 2)
+                    .foregroundColor(Color("ModeOpposite"))
+                    .padding(.top)
+                
+                ExpandedFilterSettings(viewModel: viewModel)
+            }
+            
         }
     }
 }

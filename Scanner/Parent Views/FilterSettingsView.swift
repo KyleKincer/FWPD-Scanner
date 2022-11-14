@@ -15,7 +15,6 @@ struct FilterSettings: View {
     @State var showingTypesPopover = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
-    @State var showFavorites = false
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -36,7 +35,6 @@ struct FilterSettings: View {
                 Section("Location") {
                     Text("This app only works for Fort Wayne, IN")
                         .multilineTextAlignment(.center)
-                    
                     
                     if (viewModel.locationEnabled) {
                         Toggle("Filter By Distance", isOn: $viewModel.useLocation)

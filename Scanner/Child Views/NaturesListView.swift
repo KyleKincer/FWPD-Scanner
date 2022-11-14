@@ -20,7 +20,7 @@ struct NaturesList: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Close")
+                    Text("Apply")
                 }
                 
                 Spacer()

@@ -19,7 +19,8 @@ struct StandardSizeView: View {
         VStack {
             StandardNavBarView(showNotificationSheet: $showNotificationSheet, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
             
-            ActivityView(showMap: $showMap, viewModel: viewModel)
+            ActivityView(showMap: $showMap, viewModel: viewModel
+            )
             
         }.sheet(isPresented: $showFilter) {
             if #available(iOS 16.0, *) {
