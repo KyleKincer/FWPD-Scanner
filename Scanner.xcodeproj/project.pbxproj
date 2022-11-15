@@ -34,13 +34,15 @@
 		EB15897629242B110009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15897529242B110009F60D /* Preview Assets.xcassets */; };
 		EB15897B29242B370009F60D /* WatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897929242B370009F60D /* WatchDataModel.swift */; };
 		EB15897C29242B370009F60D /* NetworkManagerWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897A29242B370009F60D /* NetworkManagerWatch.swift */; };
-		EB15897D29242B460009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EB15898029242B4E0009F60D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EB15898129242B4F0009F60D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */; };
 		EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
+		EB15898529242D390009F60D /* NotificationsComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15898429242D390009F60D /* NotificationsComingView.swift */; };
+		EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
+		EB1589912924323D0009F60D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589902924323D0009F60D /* NetworkManager.swift */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
@@ -92,7 +94,6 @@
 		EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EBB721DA28F6F56600435375 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
-		EBB721DC28F6F56600435375 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494D2794B56700685DAB /* NetworkManager.swift */; };
 		EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E028F6FA6E00435375 /* TVOnboardingView.swift */; };
 		EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E228F6FDEC00435375 /* TVMainView.swift */; };
 		EBB721E528F6FE6E00435375 /* TVNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E428F6FE6E00435375 /* TVNavBarView.swift */; };
@@ -161,6 +162,9 @@
 		EB15897529242B110009F60D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB15897929242B370009F60D /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
 		EB15897A29242B370009F60D /* NetworkManagerWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerWatch.swift; sourceTree = "<group>"; };
+		EB15898429242D390009F60D /* NotificationsComingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsComingView.swift; sourceTree = "<group>"; };
+		EB15898B292430D80009F60D /* GeoFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GeoFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB1589902924323D0009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -371,6 +375,14 @@
 			path = "watchScanner Watch App/Models";
 			sourceTree = SOURCE_ROOT;
 		};
+		EB15898F2924322F0009F60D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB1589902924323D0009F60D /* NetworkManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		EB57406B28E61A20009FDA3D /* Major Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +405,7 @@
 				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
 				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
 				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
+				EB15898429242D390009F60D /* NotificationsComingView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
 			);
 			path = "Parent Views";
@@ -422,6 +435,7 @@
 		EB98F86828E8C3B7009AC6B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB15898B292430D80009F60D /* GeoFire.framework */,
 				EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */,
 				EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */,
 				E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */,
@@ -471,6 +485,7 @@
 				EBB721E428F6FE6E00435375 /* TVNavBarView.swift */,
 				EB8FD00628F8F23900B0C5AC /* TVMapView.swift */,
 				EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */,
+				EB15898F2924322F0009F60D /* Models */,
 				EBB721EC28F7067900435375 /* TVRowView.swift */,
 				EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */,
 				EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */,
@@ -760,6 +775,7 @@
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
+				EB15898529242D390009F60D /* NotificationsComingView.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
 				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
@@ -805,8 +821,8 @@
 				EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */,
 				EB15896929242A720009F60D /* WatchListView.swift in Sources */,
 				EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */,
-				EB15897D29242B460009F60D /* ScannerModel.swift in Sources */,
 				EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */,
+				EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */,
 				EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */,
 				EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */,
 				EB15896A29242A720009F60D /* WatchRowView.swift in Sources */,
@@ -836,6 +852,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB1589912924323D0009F60D /* NetworkManager.swift in Sources */,
 				EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */,
 				EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */,
 				EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */,
@@ -843,7 +860,6 @@
 				EBB721CC28F6F55800435375 /* TVView.swift in Sources */,
 				EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */,
 				EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */,
-				EBB721DC28F6F56600435375 /* NetworkManager.swift in Sources */,
 				EBB721ED28F7067900435375 /* TVRowView.swift in Sources */,
 				EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */,
 				EBB721CA28F6F55800435375 /* ScannerTVApp.swift in Sources */,
