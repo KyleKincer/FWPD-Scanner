@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WatchSettingsView: View {
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: MainViewModelWatch
     @State private var refreshOnExit = false
     
     @AppStorage("useLocation") var useLocation = false
@@ -20,47 +20,23 @@ struct WatchSettingsView: View {
     var body: some View {
         VStack {
             List {
-                Section("Activity Filters") {
-                    Text("This app only works for Fort Wayne, IN")
-                    Toggle("Show Distance From You", isOn: $showDistance)
-                    Toggle(isOn: $useLocation) {
-                        Text("Filter By Distance")
-                            .onTapGesture {
-                                viewModel.refresh()
-                            }
-                    }
-                    if useLocation {
-                        VStack {
-                            HStack {
-                                Text("Radius: \(String(format: "%g", (round(radius * 10)) / 10)) mi")
-                                Spacer()
-                            }
-                            Slider(value: $radius, in: 0.1...5)
-                        }
-                    }
+                Section("This app only works for Fort Wayne, IN") {}
+                Section("Sound and Vibration") {
+                    Toggle("Enable Haptics and Sound", isOn: $viewModel.hapticsEnabled)
                 }
             }
-            .padding(.top, -15)
-        }
-        .onChange(of: useLocation) { _ in
-            refreshOnExit = true
-        }
-        .onChange(of: radius) { _ in
-            if useLocation {
-                refreshOnExit = true
-            }
-            viewModel.refresh()
+            .padding(.top)
         }
         .onChange(of: showDistance) { newValue in
             if !newValue {
                 viewModel.clearDistancesFromActivities()
             }
-            viewModel.refresh()
+            viewModel.refreshWatch()
         }
         .onDisappear {
             if refreshOnExit {
                 refreshOnExit = false
-                viewModel.refresh()
+                viewModel.refreshWatch()
             }
         }
         .onAppear {
@@ -71,6 +47,6 @@ struct WatchSettingsView: View {
 
 struct WatchSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchSettingsView(viewModel: MainViewModel())
+        WatchSettingsView(viewModel: MainViewModelWatch())
     }
 }

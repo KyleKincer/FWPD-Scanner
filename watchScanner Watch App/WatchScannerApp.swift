@@ -1,29 +1,17 @@
 //
 //  WatchScannerApp.swift
-//  watchScanner Watch App
+//  WatchScanner Watch App
 //
-//  Created by Nick Molargik on 9/30/22.
+//  Created by Nick Molargik on 11/15/22.
 //
 
 import SwiftUI
-import Combine
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions
-                     launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        return true
-    }
-}
 
 @main
-struct ScannerApp: App {
-    
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+struct WatchScanner_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-           WatchMainView()
+            WatchMainView()
         }
     }
 }

@@ -23,6 +23,24 @@
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 		EAA940BEBDCB0FF959949C17 /* Pods_scannerWidgetsExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673132D6587E7C28732BD43D /* Pods_scannerWidgetsExtension.framework */; };
+		EB15896929242A720009F60D /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
+		EB15896A29242A720009F60D /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
+		EB15896B29242A720009F60D /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
+		EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */; };
+		EB15896D29242A720009F60D /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */; };
+		EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */; };
+		EB15897229242AA20009F60D /* WatchScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897129242AA20009F60D /* WatchScannerApp.swift */; };
+		EB15897429242AB60009F60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15897329242AB60009F60D /* Assets.xcassets */; };
+		EB15897629242B110009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15897529242B110009F60D /* Preview Assets.xcassets */; };
+		EB15897B29242B370009F60D /* WatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897929242B370009F60D /* WatchDataModel.swift */; };
+		EB15897C29242B370009F60D /* NetworkManagerWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897A29242B370009F60D /* NetworkManagerWatch.swift */; };
+		EB15897D29242B460009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
+		EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
+		EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
+		EB15898029242B4E0009F60D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
+		EB15898129242B4F0009F60D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
+		EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */; };
+		EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
@@ -82,7 +100,6 @@
 		EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */; };
 		EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */; };
-		EBC421192922CD5200A3F75B /* NotificationsComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC421182922CD5200A3F75B /* NotificationsComingView.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
@@ -138,6 +155,12 @@
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		E4126EF435D5649C86E63EB0 /* Pods_ScannerTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScannerTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB15895B29242A550009F60D /* WatchScanner Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchScanner Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB15897129242AA20009F60D /* WatchScannerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchScannerApp.swift; sourceTree = "<group>"; };
+		EB15897329242AB60009F60D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB15897529242B110009F60D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB15897929242B370009F60D /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
+		EB15897A29242B370009F60D /* NetworkManagerWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerWatch.swift; sourceTree = "<group>"; };
 		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -151,15 +174,11 @@
 		EB57406928E617A0009FDA3D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		EB57DA1528E78D0C0031B68A /* WatchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMainView.swift; sourceTree = "<group>"; };
-		EB57DA1728E78D0D0031B68A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EB57DA3028E792340031B68A /* watchScanner Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchScanner Watch App.entitlements"; sourceTree = "<group>"; };
 		EB62D7E828E79ADD005A76E7 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
 		EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDetailView.swift; sourceTree = "<group>"; };
 		EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRowView.swift; sourceTree = "<group>"; };
 		EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMapAnnotationView.swift; sourceTree = "<group>"; };
 		EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMapView.swift; sourceTree = "<group>"; };
-		EB62D7F528E7B83D005A76E7 /* WatchScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScannerApp.swift; sourceTree = "<group>"; };
 		EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedFilterSettingsView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
@@ -193,7 +212,6 @@
 		EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVActivityDetailView.swift; sourceTree = "<group>"; };
 		EBB721F128F7178600435375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMapAnnotationView.swift; sourceTree = "<group>"; };
-		EBC421182922CD5200A3F75B /* NotificationsComingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsComingView.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -209,6 +227,13 @@
 				EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */,
 				EBA6ECD52920130C00805610 /* FirebaseFirestore in Frameworks */,
 				08875E1AB8E55DE2DC319B50 /* Pods_Scanner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB15895829242A550009F60D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +279,7 @@
 				E202F441278E84A7009C0B13 /* Scanner */,
 				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
 				EBB721C828F6F55800435375 /* ScannerTV */,
-				EB57DA1228E78D0C0031B68A /* watchScanner Watch App */,
+				EB15895C29242A550009F60D /* WatchScanner Watch App */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 				4FF1AD4D21DDA7CE589A35A0 /* Pods */,
@@ -267,6 +292,7 @@
 				E202F43F278E84A7009C0B13 /* Scanner.app */,
 				EBB721C728F6F55800435375 /* ScannerTV.app */,
 				EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */,
+				EB15895B29242A550009F60D /* WatchScanner Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,6 +335,42 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		EB15895C29242A550009F60D /* WatchScanner Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				EB15897829242B370009F60D /* Models */,
+				EB15897129242AA20009F60D /* WatchScannerApp.swift */,
+				EB57DA1528E78D0C0031B68A /* WatchMainView.swift */,
+				EB62D7E828E79ADD005A76E7 /* WatchListView.swift */,
+				EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */,
+				EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */,
+				EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */,
+				EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */,
+				EB15897329242AB60009F60D /* Assets.xcassets */,
+				EB7D4BEC28E8DAB300A5B81D /* Watch Map */,
+				EB15896329242A550009F60D /* Preview Content */,
+			);
+			path = "WatchScanner Watch App";
+			sourceTree = "<group>";
+		};
+		EB15896329242A550009F60D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EB15897529242B110009F60D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EB15897829242B370009F60D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB15897929242B370009F60D /* WatchDataModel.swift */,
+				EB15897A29242B370009F60D /* NetworkManagerWatch.swift */,
+			);
+			name = Models;
+			path = "watchScanner Watch App/Models";
+			sourceTree = SOURCE_ROOT;
+		};
 		EB57406B28E61A20009FDA3D /* Major Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,32 +408,6 @@
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		EB57DA1228E78D0C0031B68A /* watchScanner Watch App */ = {
-			isa = PBXGroup;
-			children = (
-				EB57DA3028E792340031B68A /* watchScanner Watch App.entitlements */,
-				EB62D7F528E7B83D005A76E7 /* WatchScannerApp.swift */,
-				EB57DA1528E78D0C0031B68A /* WatchMainView.swift */,
-				EB62D7E828E79ADD005A76E7 /* WatchListView.swift */,
-				EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */,
-				EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */,
-				EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */,
-				EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */,
-				EB7D4BEC28E8DAB300A5B81D /* Watch Map */,
-				EB57DA1728E78D0D0031B68A /* Assets.xcassets */,
-				EB57DA1928E78D0D0031B68A /* Preview Content */,
-			);
-			path = "watchScanner Watch App";
-			sourceTree = "<group>";
-		};
-		EB57DA1928E78D0D0031B68A /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				EB57DA1A28E78D0D0031B68A /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		EB7D4BEC28E8DAB300A5B81D /* Watch Map */ = {
@@ -416,7 +452,6 @@
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
-				EBC421182922CD5200A3F75B /* NotificationsComingView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
@@ -482,6 +517,23 @@
 			productReference = E202F43F278E84A7009C0B13 /* Scanner.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EB15895A29242A550009F60D /* WatchScanner Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB15896829242A550009F60D /* Build configuration list for PBXNativeTarget "WatchScanner Watch App" */;
+			buildPhases = (
+				EB15895729242A550009F60D /* Sources */,
+				EB15895829242A550009F60D /* Frameworks */,
+				EB15895929242A550009F60D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchScanner Watch App";
+			productName = "WatchScanner Watch App";
+			productReference = EB15895B29242A550009F60D /* WatchScanner Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */;
@@ -537,6 +589,9 @@
 					E202F43E278E84A7009C0B13 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					EB15895A29242A550009F60D = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					EBA0646028FF4C2F00B42676 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -564,6 +619,7 @@
 				E202F43E278E84A7009C0B13 /* Scanner */,
 				EBB721C628F6F55800435375 /* ScannerTV */,
 				EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */,
+				EB15895A29242A550009F60D /* WatchScanner Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -577,6 +633,15 @@
 				EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */,
 				E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */,
 				EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB15895929242A550009F60D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB15897629242B110009F60D /* Preview Assets.xcassets in Resources */,
+				EB15897429242AB60009F60D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,7 +774,6 @@
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
-				EBC421192922CD5200A3F75B /* NotificationsComingView.swift in Sources */,
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
@@ -727,6 +791,29 @@
 				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
 				EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */,
 				EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB15895729242A550009F60D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB15896B29242A720009F60D /* WatchMainView.swift in Sources */,
+				EB15898129242B4F0009F60D /* LocationManager.swift in Sources */,
+				EB15897229242AA20009F60D /* WatchScannerApp.swift in Sources */,
+				EB15897B29242B370009F60D /* WatchDataModel.swift in Sources */,
+				EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */,
+				EB15896929242A720009F60D /* WatchListView.swift in Sources */,
+				EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */,
+				EB15897D29242B460009F60D /* ScannerModel.swift in Sources */,
+				EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */,
+				EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */,
+				EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */,
+				EB15896A29242A720009F60D /* WatchRowView.swift in Sources */,
+				EB15898029242B4E0009F60D /* Constants.swift in Sources */,
+				EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */,
+				EB15897C29242B370009F60D /* NetworkManagerWatch.swift in Sources */,
+				EB15896D29242A720009F60D /* WatchSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1088,68 @@
 			};
 			name = Release;
 		};
+		EB15896629242A550009F60D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = PFJ824B57Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchScanner;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		EB15896729242A550009F60D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = PFJ824B57Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchScanner;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
 		EBA0647228FF4C3000B42676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E66E339AE1A06D60B4DF099 /* Pods-scannerWidgetsExtension.debug.xcconfig */;
@@ -1150,6 +1299,15 @@
 			buildConfigurations = (
 				E202F44E278E84A8009C0B13 /* Debug */,
 				E202F44F278E84A8009C0B13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB15896829242A550009F60D /* Build configuration list for PBXNativeTarget "WatchScanner Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB15896629242A550009F60D /* Debug */,
+				EB15896729242A550009F60D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -10,8 +10,7 @@ import MapKit
 
 struct WatchMapView: View {
     @State var mapModel = MapViewModel()
-    @ObservedObject var viewModel: MainViewModel
-    var watch = WKInterfaceDevice()
+    @ObservedObject var viewModel: MainViewModelWatch
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -44,8 +43,8 @@ struct WatchMapView: View {
                     .onTapGesture {
                         if (!viewModel.isLoading) {
                             withAnimation (.easeInOut(duration: 0.5)){
-                                watch.play(.success)
-                                viewModel.getMoreActivities()
+                                viewModel.playHaptic()
+                                viewModel.getMoreActiviesWatch()
                             }
                         }
                     }
@@ -59,6 +58,6 @@ struct WatchMapView: View {
 
 struct WatchMapView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchMapView(viewModel: MainViewModel())
+        WatchMapView(viewModel: MainViewModelWatch())
     }
 }

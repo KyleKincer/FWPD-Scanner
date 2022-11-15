@@ -7,10 +7,9 @@
 //
 
 import SwiftUI
-import WatchKit
 
 struct WatchListView: View {
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: MainViewModelWatch
     @State var showMap = false
     @State var showSettings = false
     var watch = WKInterfaceDevice()
@@ -26,7 +25,7 @@ struct WatchListView: View {
                                     viewModel.serverResponsive = true
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         viewModel.serverResponsive = false
-                                        viewModel.refresh()
+                                        viewModel.refreshWatch()
                                     }
                                 }
                             }
@@ -52,17 +51,17 @@ struct WatchListView: View {
                                                     .foregroundColor(.blue)
                                                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                     .onTapGesture {
-                                                        viewModel.getMoreActivities()
+                                                        viewModel.getMoreActiviesWatch()
+                                                        
                                                     }
+                                                }
                                             }
-                                            
-                                        }
                                         }
                                     }
                                 }
                             }.refreshable {
                                 withAnimation {
-                                    viewModel.refresh()
+                                    viewModel.refreshWatch()
                                 }
                             }
                             .navigationBarTitleDisplayMode(.inline)
@@ -84,7 +83,7 @@ struct WatchListView: View {
                         .onTapGesture {
                             withAnimation {
                                 showMap.toggle()
-                                watch.play(.success)
+                                viewModel.playHaptic()
                             }
                         }
                         
@@ -100,13 +99,13 @@ struct WatchListView: View {
                         .onTapGesture {
                             withAnimation {
                                 showSettings.toggle()
-                                watch.play(.success)
+                                viewModel.playHaptic()
                             }
                             
                         }
                         .onLongPressGesture {
                             withAnimation {
-                                viewModel.refresh()
+                                viewModel.refreshWatch()
                             }
                         }
                         .disabled(!viewModel.serverResponsive)
@@ -124,6 +123,6 @@ struct WatchListView: View {
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchListView(viewModel: MainViewModel())
+        WatchListView(viewModel: MainViewModelWatch())
     }
 }

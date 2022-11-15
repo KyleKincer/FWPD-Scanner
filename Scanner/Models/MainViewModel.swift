@@ -75,7 +75,7 @@ final class MainViewModel: ObservableObject {
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
     }
-    
+       
     func refresh() {
         print("R --- Refreshing")
         self.showBookmarks = false
@@ -83,9 +83,7 @@ final class MainViewModel: ObservableObject {
         self.isLoading = true
         self.activities.removeAll() // clear out stored activities
         self.bookmarks.removeAll() // clear out bookmark records
-            
-        
-        
+ 
         Task.init {
             do {
                 // Get first set of activities
