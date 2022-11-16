@@ -26,7 +26,7 @@ struct ListView: View {
                 if (!viewModel.showBookmarks) {
                     NavigationView {
                         Section {
-                            if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
+                            if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing && viewModel.serverResponsive) {
                                 VStack {
                                     Text("No Matches Found")
                                         .font(.system(size: 25))
@@ -115,10 +115,12 @@ struct ListView: View {
                     
                 case .background:
                     showRefreshReminderOnActive = true
+                    viewModel.getBookmarks()
                 case .active:
                     if showRefreshReminderOnActive {
                         withAnimation(.spring()) {showingRefreshReminder = true}
                     }
+                    viewModel.getBookmarks()
                 case .inactive:
                     print("G - App Inactive (shrug)")
                 @unknown default:

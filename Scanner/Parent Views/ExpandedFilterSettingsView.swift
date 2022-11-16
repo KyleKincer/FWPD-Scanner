@@ -218,6 +218,7 @@ struct ExpandedFilterSettings: View {
                     print("R - Refreshed via Filters")
                 }
             }
+            .frame(width: 500)
             .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
                 Button("OK", role: .cancel) { }
                     }

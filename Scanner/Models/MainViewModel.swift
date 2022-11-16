@@ -80,9 +80,7 @@ final class MainViewModel: ObservableObject {
         print("R --- Refreshing")
         self.showBookmarks = false
         self.isRefreshing = true
-        self.isLoading = true
         self.activities.removeAll() // clear out stored activities
-        self.bookmarks.removeAll() // clear out bookmark records
  
         Task.init {
             do {
@@ -97,7 +95,6 @@ final class MainViewModel: ObservableObject {
                         self.addDatesToActivities(setName: "activities")
                         self.addDistancesToActivities(setName: "activities")
                         self.isRefreshing = false
-                        self.isLoading = false
                     }
                 } else {
                     print("+ --- Got zero activities")
@@ -105,7 +102,6 @@ final class MainViewModel: ObservableObject {
                     withAnimation {
                         self.serverResponsive = false
                         self.isRefreshing = false
-                        self.isLoading = false
                     }
                 }
             }

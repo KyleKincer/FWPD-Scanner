@@ -34,7 +34,7 @@ struct ActivityView: View {
                             .edgesIgnoringSafeArea(.all)
                     }
                     VStack {
-                        if (viewModel.isRefreshing) {
+                        if (viewModel.isRefreshing || (!viewModel.showBookmarks && !viewModel.serverResponsive)) {
                             
                             Spacer()
                             
@@ -79,7 +79,7 @@ struct ActivityView: View {
                     if #available(iOS 16.0, *) {
                         NavigationSplitView {
                             VStack {
-                                if (viewModel.isRefreshing) {
+                                if (viewModel.isRefreshing || (!viewModel.showBookmarks && !viewModel.serverResponsive)) {
                                     Spacer()
                                     
                                     StatusView(viewModel: viewModel)
@@ -96,7 +96,7 @@ struct ActivityView: View {
                                     Spacer()
                                 } else if (viewModel.showBookmarks) {
                                     VStack {
-                                        if (viewModel.bookmarkCount == 0) {
+                                        if (viewModel.bookmarks.count == 0) {
                                             Text("No Bookmarks Saved")
                                                 .foregroundColor(.primary)
                                                 .font(.system(size: 25))

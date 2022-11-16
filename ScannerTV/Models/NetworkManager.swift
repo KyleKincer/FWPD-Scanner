@@ -43,7 +43,7 @@ class NetworkManager {
             let query = try await db.collection("activities")
                 .order(by: "timestamp", descending: true)
                 .limit(to: 25)
-                .getDocuments()
+                .getDocuments(source: .server)
             if (query.documents.count > 0) {
                 self.lastDocument = query.documents.last
             }
@@ -81,7 +81,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -98,7 +98,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -114,7 +114,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -136,7 +136,7 @@ class NetworkManager {
         let query = try await db.collection("activities")
             .whereField("control_number", isEqualTo: controlNumber)
             .order(by: "timestamp", descending: true)
-            .getDocuments()
+            .getDocuments(source: .server)
         let activity = self.makeActivity(document: query.documents.first!)
         
         return activity
@@ -170,7 +170,7 @@ class NetworkManager {
         do {
             let query = try await db.collection("natures")
                 .order(by: "nature", descending: false)
-                .getDocuments()
+                .getDocuments(source: .server)
             
             for nature in query.documents {
                 natures.append(self.makeNature(document: nature))

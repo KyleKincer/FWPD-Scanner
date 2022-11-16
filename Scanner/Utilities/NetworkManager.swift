@@ -26,6 +26,7 @@ class NetworkManager {
         let nature = data["nature"] as? String ?? "UNKNOWN"
         let latitude = data["latitude"] as? Double ?? 0.0
         let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude)
+        
         return activity
     }
     
@@ -58,7 +59,7 @@ class NetworkManager {
                 var matchingDocs = [QueryDocumentSnapshot]()
                 
                 for queryStatement in queries {
-                    let query = try await queryStatement.getDocuments()
+                    let query = try await queryStatement.getDocuments(source: .server)
                     
                     for document in query.documents {
                         let lat = document.data()["latitude"] as? Double ?? 0
@@ -94,7 +95,7 @@ class NetworkManager {
                     .whereField("timestamp", isLessThanOrEqualTo: dateTo)
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -112,7 +113,7 @@ class NetworkManager {
                     .whereField("nature", in: selectedNatures!)
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -129,7 +130,7 @@ class NetworkManager {
                 let query = try await db.collection("activities")
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -170,7 +171,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -187,7 +188,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -203,7 +204,7 @@ class NetworkManager {
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
-                    .getDocuments()
+                    .getDocuments(source: .server)
                 if (query.documents.count > 0) {
                     self.lastDocument = query.documents.last
                 }
@@ -225,7 +226,7 @@ class NetworkManager {
         let query = try await db.collection("activities")
             .whereField("control_number", isEqualTo: controlNumber)
             .order(by: "timestamp", descending: true)
-            .getDocuments()
+            .getDocuments(source: .server)
         let activity = self.makeActivity(document: query.documents.first!)
         
         return activity
@@ -258,7 +259,7 @@ class NetworkManager {
         do {
             let query = try await db.collection("natures")
                 .order(by: "nature", descending: false)
-                .getDocuments()
+                .getDocuments(source: .server)
             
             for nature in query.documents {
                 natures.append(self.makeNature(document: nature))
