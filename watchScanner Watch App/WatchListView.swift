@@ -97,9 +97,11 @@ struct WatchListView: View {
                                 .padding(.bottom, 40)
                         }
                         .onTapGesture {
+                            withAnimation {
+                                viewModel.playHaptic()
                                 viewModel.refreshWatch()
-
-                        }
+                            }
+                         }
                         .onLongPressGesture {
                             withAnimation {
                                 viewModel.playHaptic()

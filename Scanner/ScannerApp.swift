@@ -17,7 +17,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-
 @main
 struct ScannerApp: App {
     // Register app delegate for Firebase setup
