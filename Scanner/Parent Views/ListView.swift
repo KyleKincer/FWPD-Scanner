@@ -55,7 +55,7 @@ struct ListView: View {
                                                 HStack {
                                                     Spacer()
                                                     
-                                                    Text("Tap for More")
+                                                    Text("Get More")
                                                         .bold()
                                                         .italic()
                                                         .foregroundColor(.blue)
