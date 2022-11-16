@@ -18,65 +18,60 @@ struct TVActivityDetailView: View {
     }
     
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack (alignment: .center) {
             Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
+                .italic()
                 .font(.system(size: 70))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-            
-            Spacer()
-            
+                .padding(.bottom, 25)
+
             HStack {
-                VStack (alignment: .leading) {
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                        
-                        Text(activity.address).padding(.trailing, -8).lineLimit(1)
-                        if activity.distance != nil {
-                            Text(", \(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        Image(systemName: "clock")
-                        Text("\(activity.timestamp) (").padding(.trailing, -8.5)
-                        Text(activity.date ?? Date(), style: .relative).padding(.trailing, -3)
-                        Text("ago)")
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        Image(systemName: "location")
-                        Text(activity.location)
-                    }
-                    
-                    Spacer()
+                
+                Spacer()
+                
+                Image(systemName: "mappin.and.ellipse")
+                
+                Text(activity.address).padding(.trailing, -8).lineLimit(1)
+                if activity.distance != nil {
+                    Text(", \(String(format: "%g", round(10 * activity.distance!) / 10)) mi away")
                 }
                 
-                VStack {
-                    
-                    Spacer()
-                    
-                    Map(coordinateRegion: $viewModel.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode, annotationItems: [activity]) { activity in
-                        MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .accentColor)
-                    }
-                    .frame(height: 400, alignment: .top)
-                    .cornerRadius(20)
-                    .padding(.horizontal)
-                    .focusable(false)
-                    
-                    Spacer()
-                    
-                }
-
+                Spacer()
+                
+                Image(systemName: "location")
+                Text(activity.location)
+                
+                Spacer()
             }
+            
+            Divider()
+            
+            HStack {
+                
+                Spacer()
+                
+                Image(systemName: "clock")
+                Text("\(activity.timestamp)")
+                    .padding(.trailing)
+                
+                Text(activity.date ?? Date(), style: .relative)
+                    .padding(.leading)
+                Text("ago")
+                    .padding(.leading, -15)
+                
+                Spacer()
+            }
+            
+            Map(coordinateRegion: $viewModel.region, interactionModes: .all, showsUserLocation: true, userTrackingMode: $viewModel.userTrackingMode, annotationItems: [activity]) { activity in
+                MapMarker(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), tint: .accentColor)
+            }
+
+            .cornerRadius(20)
+            .padding(.horizontal)
+            .focusable(false)
         }
-        .padding()
+        .padding(.leading)
     }
 }
 

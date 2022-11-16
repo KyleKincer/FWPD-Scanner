@@ -45,7 +45,7 @@ struct TVMapAnnotationView: View {
                 
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundColor(.red)
-                    .onTapGesture {
+                    .onLongPressGesture(minimumDuration: 0.01) {
                         showDetails.toggle()
                         viewModel.region.center = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
                     }

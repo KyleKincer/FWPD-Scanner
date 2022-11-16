@@ -10,7 +10,7 @@ import MapKit
 
 struct WatchMapView: View {
     @State var mapModel = MapViewModel()
-    @ObservedObject var viewModel: MainViewModelWatch
+    @ObservedObject var viewModel: WatchViewModel
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -58,6 +58,6 @@ struct WatchMapView: View {
 
 struct WatchMapView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchMapView(viewModel: MainViewModelWatch())
+        WatchMapView(viewModel: WatchViewModel())
     }
 }

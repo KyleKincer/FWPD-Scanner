@@ -6,24 +6,20 @@
 //
 import Foundation
 import SwiftUI
-import CoreLocation
 import MapKit
 import WatchKit
 
 @MainActor
-final class MainViewModelWatch: ObservableObject {
+final class WatchViewModel: ObservableObject {
     // Main Model
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     var watch = WKInterfaceDevice()
     
     // Location and Map
-    @Published var locationManager: CLLocationManager = CLLocationManager()
-    @Published var locationEnabled: Bool = false
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     
     // Filters
-    @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
     @AppStorage("radius") var radius = 0.0
@@ -39,7 +35,7 @@ final class MainViewModelWatch: ObservableObject {
     @Published var hapticsEnabled = true
     
     // Network
-    @Published var networkManagerWatch = NetworkManagerWatch()
+    @Published var networkManager = NetworkManager()
     
     // UserDefaults
     let defaults = UserDefaults.standard
@@ -47,22 +43,6 @@ final class MainViewModelWatch: ObservableObject {
     init() {
         print("I - Initializing list view model")
         model = Scanner()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            switch locationManager.authorizationStatus {
-            case .notDetermined, .restricted, .denied:
-                print("X - Failed to get location")
-                self.locationEnabled = false
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("G - Succeeded in getting location ")
-                self.locationEnabled = true
-            @unknown default:
-                break
-            }
-        } else {
-            print("X - Location services are disabled by user")
-        }
-        
         self.refreshWatch()
         
     }
@@ -72,12 +52,12 @@ final class MainViewModelWatch: ObservableObject {
         self.isRefreshing = true
         self.isLoading = true
         self.activities.removeAll()
+        self.networkManager = NetworkManager()
         
         Task.init {
             do {
-                self.activities = try await self.networkManagerWatch.getActivities()
+                self.activities = try await self.networkManager.getActivities()
                 self.addDatesToActivities(setName: "activities")
-                self.addDistancesToActivities(setName: "activities")
                 self.isLoading = false
                 self.isRefreshing = false
             }
@@ -90,10 +70,9 @@ final class MainViewModelWatch: ObservableObject {
         
         Task.init {
             do {
-                let newActivities = try await self.networkManagerWatch.getMoreActivities()
+                let newActivities = try await self.networkManager.getMoreActivities()
                 self.activities.append(contentsOf: newActivities)
                 self.addDatesToActivities(setName: "activities")
-                self.addDistancesToActivities(setName: "activities")
                 self.isLoading = false
             }
         }
@@ -108,18 +87,6 @@ final class MainViewModelWatch: ObservableObject {
         }
         self.activities = set
         print("G - Set dates on activities")
-    }
-    
-    func addDistancesToActivities(setName: String) {
-        if let location = self.locationManager.location {
-            var set = self.activities
-            for i in set.indices {
-                set[i].distance = ((location.distance(
-                    from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
-            }
-            self.activities = set
-            print("G - Set distances on activities")
-        }
     }
     
     func clearDistancesFromActivities() {

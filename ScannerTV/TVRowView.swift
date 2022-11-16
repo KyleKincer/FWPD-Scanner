@@ -72,7 +72,7 @@ struct TVRowView: View {
         }
         .focusable()
         .focused($focused)
-        .onTapGesture {
+        .onLongPressGesture(minimumDuration: 0.01) {
             chosenActivity = activity
         }
     }

@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct WatchListView: View {
-    @ObservedObject var viewModel: MainViewModelWatch
+    @ObservedObject var viewModel: WatchViewModel
     @State var showMap = false
-    @State var showSettings = false
     var watch = WKInterfaceDevice()
+    @AppStorage("onboarding") var onboarding = true
     
     var body: some View {
         GeometryReader { geometry in
@@ -92,20 +92,18 @@ struct WatchListView: View {
                                 .frame(width: geometry.size.width / 2 - 10, height: 65)
                                 .foregroundColor(viewModel.serverResponsive ? .orange : .gray)
                                 .cornerRadius(5)
-                            Image(systemName: "gear")
+                            Image(systemName: "arrow.clockwise")
                                 .foregroundColor(.white)
                                 .padding(.bottom, 40)
                         }
                         .onTapGesture {
-                            withAnimation {
-                                showSettings.toggle()
-                                viewModel.playHaptic()
-                            }
-                            
+                                viewModel.refreshWatch()
+
                         }
                         .onLongPressGesture {
                             withAnimation {
-                                viewModel.refreshWatch()
+                                viewModel.playHaptic()
+                                onboarding = true
                             }
                         }
                         .disabled(!viewModel.serverResponsive)
@@ -114,15 +112,12 @@ struct WatchListView: View {
                     .padding(.horizontal, 0)
                 }
             }
-            .sheet(isPresented: $showSettings, content: {
-                WatchSettingsView(viewModel: viewModel)
-            })
         }
     }
 }
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchListView(viewModel: MainViewModelWatch())
+        WatchListView(viewModel: WatchViewModel())
     }
 }

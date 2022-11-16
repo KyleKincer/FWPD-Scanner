@@ -39,7 +39,7 @@ struct StandardSizeView: View {
 //            }
 //        }
         
-        .sheet(isPresented: $showNotificationSheet) {
+        .fullScreenCover(isPresented: $showNotificationSheet) {
             NotificationsComingView()
         }
 

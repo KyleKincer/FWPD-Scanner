@@ -29,65 +29,9 @@ struct TVNavBarView: View {
                     .font(.largeTitle)
                     .shadow(radius: 2)
                     .lineLimit(1)
-                    .foregroundColor(Color("ModeOpposite"))
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .fixedSize(horizontal: true, vertical: true)
             })
-            
-            Spacer()
-            
-            Button(action: {
-                withAnimation (.linear) {
-                    if (!viewModel.serverResponsive) {
-                        withAnimation (.linear(duration: 0.5)) {
-                            viewModel.serverResponsive = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                viewModel.serverResponsive = false
-                                viewModel.refresh()
-                            }
-                        }
-                    } else {
-                        viewModel.refresh()
-                    }
-                }
-            }, label: {
-                
-                ZStack {
-                    HStack {
-                        Image(systemName: "arrow.clockwise")
-                            .font(.system(size: 40))
-                            .foregroundColor(.yellow)
-                            .transition(.opacity)
-                        
-                        Text("Refresh")
-                            .foregroundColor(.black)
-                            .transition(.opacity)
-                    }
-                }
-            })
-            .frame(width: 400)
-            
-            Button(action: {
-                withAnimation (.linear) {
-                    if (!viewModel.isLoading) {
-                        viewModel.getMoreActivities()
-                    }
-                }
-            }, label: {
-                
-                ZStack {
-                    HStack {
-                        Image(systemName: "goforward.plus")
-                            .font(.system(size: 40))
-                            .foregroundColor(.red)
-                            .transition(.opacity)
-                        
-                        Text("Get More")
-                            .foregroundColor(.black)
-                            .transition(.opacity)
-                    }
-                }
-            })
-            .frame(width: 400)
             
             Spacer()
             
@@ -131,8 +75,38 @@ struct TVNavBarView: View {
                 }
             })
             .frame(width: 400)
+            .padding(.trailing, 40)
             
-            Spacer()
+            Button(action: {
+                withAnimation (.linear) {
+                    if (!viewModel.serverResponsive) {
+                        withAnimation (.linear(duration: 0.5)) {
+                            viewModel.serverResponsive = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                viewModel.serverResponsive = false
+                                viewModel.refresh()
+                            }
+                        }
+                    } else {
+                        viewModel.refresh()
+                    }
+                }
+            }, label: {
+                
+                ZStack {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 40))
+                            .foregroundColor(.yellow)
+                            .transition(.opacity)
+                        
+                        Text("Refresh")
+                            .foregroundColor(.black)
+                            .transition(.opacity)
+                    }
+                }
+            })
+            .frame(width: 400)
             
         }
         .padding(30)

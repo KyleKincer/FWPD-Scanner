@@ -10,7 +10,7 @@ import MapKit
 
 struct WatchMapAnnotationView: View {
     @State private var showDetails = false
-    @ObservedObject var viewModel : MainViewModelWatch
+    @ObservedObject var viewModel : WatchViewModel
     @State var activity: Scanner.Activity
     
     var body: some View {
@@ -29,7 +29,7 @@ struct WatchMapAnnotationView: View {
 
 struct WatchMapAnnotationView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchMapAnnotationView(viewModel: MainViewModelWatch(), activity: Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
+        WatchMapAnnotationView(viewModel: WatchViewModel(), activity: Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842))
             .frame(width: 30, height: 30)
     }
 }

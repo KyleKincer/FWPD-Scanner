@@ -10,7 +10,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class NetworkManagerWatch {
+class NetworkManager {
     var session = URLSession.shared
     var pageToken = String()
     

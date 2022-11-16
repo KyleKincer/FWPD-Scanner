@@ -31,7 +31,6 @@ class NetworkManager {
     //Get first 25 activities from Firestore
     func getFirstActivities(filterByDate: Bool, filterByLocation: Bool, filterByNature: Bool, dateFrom: String, dateTo: String, selectedNatures: [String]?, location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         var activities = [Scanner.Activity]()
-        var selectedNatures = selectedNatures
         
         // Prepare natures
         print("+ --- Gathering Activities from Firestore")
@@ -71,48 +70,7 @@ class NetworkManager {
             if (filterByLocation) {
                 // Distance
                 print("F -- Filtering by Location / Rejected")
-                
-//                let queries = queryBounds.map { bound -> Query in
-//                    return db.collection("activities")
-//                        .order(by: "geohash")
-//                        .limit(to: 25)
-//                        .start(at: [bound.startValue])
-//                        .start(afterDocument: self.lastDocument!)
-//                        .end(at: [bound.endValue])
-//                }
-//
-//                var matchingDocs = [QueryDocumentSnapshot]()
-//
-//                for queryStatement in queries {
-//                    let query = try await queryStatement.getDocuments()
-//
-//                    for document in query.documents {
-//                        let lat = document.data()["latitude"] as? Double ?? 0
-//                        let lng = document.data()["longitude"] as? Double ?? 0
-//                        let coordinates = CLLocation(latitude: lat, longitude: lng)
-//                        let centerPoint = CLLocation(latitude: center!.latitude , longitude: center!.longitude )
-//
-//                        // We have to filter out a few false positives due to GeoHash accuracy, but
-//                        // most will match
-//                        let eventDistance = GFUtils.distance(from: centerPoint, to: coordinates)
-//                        if eventDistance <= distance {
-//                            matchingDocs.append(document)
-//                        }
-//                    }
-//
-//                    if (matchingDocs.count > 0) {
-//                        self.lastDocument = matchingDocs.last
-//                    }
-//
-//                    for document in matchingDocs {
-//                        activities.append(self.makeActivity(document: document))
-//                    }
-//                    matchingDocs = []
-//                }
-//
-//                activities.append(contentsOf: activities.sorted(by: { $0.timestamp > $1.timestamp }))
-                
-                
+
             } else if (filterByDate) {
                 // DateRange
                 print("F -- Filtering by Date")
@@ -200,7 +158,7 @@ class NetworkManager {
     func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
         let id = document.documentID
         let data = document.data()
-        var natureName = data["nature"] as? String ?? ""
+        let natureName = data["nature"] as? String ?? ""
         let nature = Scanner.Nature(id: id, name: natureName)
         return nature
     }

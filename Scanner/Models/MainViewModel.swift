@@ -116,12 +116,6 @@ final class MainViewModel: ObservableObject {
     
     // Get next 25 activities from Firestore
     func getMoreActivities() {
-        let radius = UserDefaults.standard.double(forKey: "radius")
-        var location: CLLocation? = nil
-        if UserDefaults.standard.bool(forKey: "useLocation") {
-            location = self.locationManager.location
-        }
-        
         withAnimation {
             self.isLoading = true
         }

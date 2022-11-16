@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		08875E1AB8E55DE2DC319B50 /* Pods_Scanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */; };
-		207122B8D5E9B9357785676A /* Pods_ScannerTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4126EF435D5649C86E63EB0 /* Pods_ScannerTV.framework */; };
 		E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F442278E84A7009C0B13 /* ScannerApp.swift */; };
 		E202F445278E84A7009C0B13 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F444278E84A7009C0B13 /* ListView.swift */; };
 		E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F446278E84A8009C0B13 /* Assets.xcassets */; };
@@ -27,13 +26,12 @@
 		EB15896A29242A720009F60D /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
 		EB15896B29242A720009F60D /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
 		EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */; };
-		EB15896D29242A720009F60D /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */; };
 		EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */; };
 		EB15897229242AA20009F60D /* WatchScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897129242AA20009F60D /* WatchScannerApp.swift */; };
 		EB15897429242AB60009F60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15897329242AB60009F60D /* Assets.xcassets */; };
 		EB15897629242B110009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15897529242B110009F60D /* Preview Assets.xcassets */; };
-		EB15897B29242B370009F60D /* WatchDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897929242B370009F60D /* WatchDataModel.swift */; };
-		EB15897C29242B370009F60D /* NetworkManagerWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897A29242B370009F60D /* NetworkManagerWatch.swift */; };
+		EB15897B29242B370009F60D /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897929242B370009F60D /* WatchViewModel.swift */; };
+		EB15897C29242B370009F60D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15897A29242B370009F60D /* NetworkManager.swift */; };
 		EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		EB15898029242B4E0009F60D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
@@ -42,19 +40,37 @@
 		EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
 		EB15898529242D390009F60D /* NotificationsComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15898429242D390009F60D /* NotificationsComingView.swift */; };
 		EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EB1589912924323D0009F60D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589902924323D0009F60D /* NetworkManager.swift */; };
+		EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB158992292538D20009F60D /* WatchOnboardingView.swift */; };
+		EB15899B292544080009F60D /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15899A292544080009F60D /* ScannerTVApp.swift */; };
+		EB15899F292544080009F60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15899E292544080009F60D /* Assets.xcassets */; };
+		EB1589A2292544080009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1589A1292544080009F60D /* Preview Assets.xcassets */; };
+		EB1589A82925446E0009F60D /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589A62925446E0009F60D /* TVActivityDetailView.swift */; };
+		EB1589A92925446E0009F60D /* TVRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589A72925446E0009F60D /* TVRowView.swift */; };
+		EB1589B1292544790009F60D /* TVMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AA292544790009F60D /* TVMapAnnotationView.swift */; };
+		EB1589B2292544790009F60D /* TVNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AB292544790009F60D /* TVNavBarView.swift */; };
+		EB1589B3292544790009F60D /* TVMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AC292544790009F60D /* TVMainView.swift */; };
+		EB1589B4292544790009F60D /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AD292544790009F60D /* TVMapView.swift */; };
+		EB1589B5292544790009F60D /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AE292544790009F60D /* TVView.swift */; };
+		EB1589B6292544790009F60D /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589AF292544790009F60D /* TVStatusView.swift */; };
+		EB1589B7292544790009F60D /* TVOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589B0292544790009F60D /* TVOnboardingView.swift */; };
+		EB1589B9292544B50009F60D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB1589B8292544B50009F60D /* FirebaseFirestore */; };
+		EB1589BA292544CA0009F60D /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
+		EB1589BB292544D50009F60D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
+		EB1589BC292544E40009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
+		EB1589BF292544F60009F60D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589BE292544F60009F60D /* NetworkManager.swift */; };
+		EB1589C0292545190009F60D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
+		EB1589C1292545290009F60D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
+		EB1589C2292545F90009F60D /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
+		EB1589C32925482C0009F60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
 		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
-		EB35DCDA292071E2005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCD9292071E2005B6658 /* FirebaseFirestore */; };
 		EB35DCDC292071E9005B6658 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB35DCDB292071E9005B6658 /* FirebaseFirestore */; };
-		EB35DCDE29207705005B6658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
 		EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */; };
 		EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */; };
-		EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406728E6166E009FDA3D /* StandardNavBarView.swift */; };
 		EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406928E617A0009FDA3D /* ActivityView.swift */; };
 		EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */; };
@@ -62,8 +78,6 @@
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
-		EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */; };
-		EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD00628F8F23900B0C5AC /* TVMapView.swift */; };
 		EB98F86228E8BB3E009AC6B1 /* AttributeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */; };
 		EBA0646228FF4C2F00B42676 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */; };
 		EBA0646328FF4C2F00B42676 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */; };
@@ -85,22 +99,6 @@
 		EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBA6ECD62920130C00805610 /* FirebaseMessaging */; };
 		EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EBA6ECDA292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
-		EBB721CA28F6F55800435375 /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721C928F6F55800435375 /* ScannerTVApp.swift */; };
-		EBB721CC28F6F55800435375 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721CB28F6F55800435375 /* TVView.swift */; };
-		EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721CD28F6F55900435375 /* Assets.xcassets */; };
-		EBB721D128F6F55900435375 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB721D028F6F55900435375 /* Preview Assets.xcassets */; };
-		EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
-		EBB721D828F6F56100435375 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
-		EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
-		EBB721DA28F6F56600435375 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
-		EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
-		EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E028F6FA6E00435375 /* TVOnboardingView.swift */; };
-		EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E228F6FDEC00435375 /* TVMainView.swift */; };
-		EBB721E528F6FE6E00435375 /* TVNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721E428F6FE6E00435375 /* TVNavBarView.swift */; };
-		EBB721ED28F7067900435375 /* TVRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721EC28F7067900435375 /* TVRowView.swift */; };
-		EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */; };
-		EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
-		EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
@@ -160,11 +158,25 @@
 		EB15897129242AA20009F60D /* WatchScannerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchScannerApp.swift; sourceTree = "<group>"; };
 		EB15897329242AB60009F60D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB15897529242B110009F60D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EB15897929242B370009F60D /* WatchDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataModel.swift; sourceTree = "<group>"; };
-		EB15897A29242B370009F60D /* NetworkManagerWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerWatch.swift; sourceTree = "<group>"; };
+		EB15897929242B370009F60D /* WatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
+		EB15897A29242B370009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EB15898429242D390009F60D /* NotificationsComingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsComingView.swift; sourceTree = "<group>"; };
 		EB15898B292430D80009F60D /* GeoFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GeoFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB1589902924323D0009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EB158992292538D20009F60D /* WatchOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchOnboardingView.swift; path = "watchScanner Watch App/WatchOnboardingView.swift"; sourceTree = SOURCE_ROOT; };
+		EB158998292544080009F60D /* ScannerTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScannerTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB15899A292544080009F60D /* ScannerTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTVApp.swift; sourceTree = "<group>"; };
+		EB15899E292544080009F60D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB1589A1292544080009F60D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB1589A62925446E0009F60D /* TVActivityDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVActivityDetailView.swift; sourceTree = "<group>"; };
+		EB1589A72925446E0009F60D /* TVRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVRowView.swift; sourceTree = "<group>"; };
+		EB1589AA292544790009F60D /* TVMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapAnnotationView.swift; sourceTree = "<group>"; };
+		EB1589AB292544790009F60D /* TVNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVNavBarView.swift; sourceTree = "<group>"; };
+		EB1589AC292544790009F60D /* TVMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMainView.swift; sourceTree = "<group>"; };
+		EB1589AD292544790009F60D /* TVMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapView.swift; sourceTree = "<group>"; };
+		EB1589AE292544790009F60D /* TVView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
+		EB1589AF292544790009F60D /* TVStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
+		EB1589B0292544790009F60D /* TVOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVOnboardingView.swift; sourceTree = "<group>"; };
+		EB1589BE292544F60009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -188,8 +200,6 @@
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
 		EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScannerRelease.entitlements; sourceTree = "<group>"; };
 		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
-		EB8FD00628F8F23900B0C5AC /* TVMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVMapView.swift; sourceTree = "<group>"; };
 		EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModel.swift; sourceTree = "<group>"; };
 		EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -204,22 +214,9 @@
 		EBA0647828FF4D1E00B42676 /* LockScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldNotificationSettingsView.swift; sourceTree = "<group>"; };
 		EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EBB721C728F6F55800435375 /* ScannerTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScannerTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBB721C928F6F55800435375 /* ScannerTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTVApp.swift; sourceTree = "<group>"; };
-		EBB721CB28F6F55800435375 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
-		EBB721CD28F6F55900435375 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EBB721D028F6F55900435375 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EBB721E028F6FA6E00435375 /* TVOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVOnboardingView.swift; sourceTree = "<group>"; };
-		EBB721E228F6FDEC00435375 /* TVMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMainView.swift; sourceTree = "<group>"; };
-		EBB721E428F6FE6E00435375 /* TVNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVNavBarView.swift; sourceTree = "<group>"; };
-		EBB721EC28F7067900435375 /* TVRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVRowView.swift; sourceTree = "<group>"; };
-		EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVActivityDetailView.swift; sourceTree = "<group>"; };
-		EBB721F128F7178600435375 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMapAnnotationView.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
-		EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
 		EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scanner.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +238,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB158995292544080009F60D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1589B9292544B50009F60D /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBA0645E28FF4C2F00B42676 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,15 +254,6 @@
 				EBA0646228FF4C2F00B42676 /* WidgetKit.framework in Frameworks */,
 				EB35DCDC292071E9005B6658 /* FirebaseFirestore in Frameworks */,
 				EAA940BEBDCB0FF959949C17 /* Pods_scannerWidgetsExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EBB721C428F6F55800435375 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB35DCDA292071E2005B6658 /* FirebaseFirestore in Frameworks */,
-				207122B8D5E9B9357785676A /* Pods_ScannerTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,9 +277,10 @@
 			isa = PBXGroup;
 			children = (
 				E202F441278E84A7009C0B13 /* Scanner */,
-				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
-				EBB721C828F6F55800435375 /* ScannerTV */,
+				EB158999292544080009F60D /* ScannerTV */,
 				EB15895C29242A550009F60D /* WatchScanner Watch App */,
+				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
+				EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 				4FF1AD4D21DDA7CE589A35A0 /* Pods */,
@@ -294,9 +291,9 @@
 			isa = PBXGroup;
 			children = (
 				E202F43F278E84A7009C0B13 /* Scanner.app */,
-				EBB721C728F6F55800435375 /* ScannerTV.app */,
 				EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */,
 				EB15895B29242A550009F60D /* WatchScanner Watch App.app */,
+				EB158998292544080009F60D /* ScannerTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,7 +306,6 @@
 				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
-				EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */,
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
 				EB57406B28E61A20009FDA3D /* Major Views */,
@@ -348,10 +344,11 @@
 				EB62D7E828E79ADD005A76E7 /* WatchListView.swift */,
 				EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */,
 				EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */,
+				EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */,
+				EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */,
 				EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */,
-				EBF51F9D28F662F500488B2D /* WatchSettingsView.swift */,
+				EB158992292538D20009F60D /* WatchOnboardingView.swift */,
 				EB15897329242AB60009F60D /* Assets.xcassets */,
-				EB7D4BEC28E8DAB300A5B81D /* Watch Map */,
 				EB15896329242A550009F60D /* Preview Content */,
 			);
 			path = "WatchScanner Watch App";
@@ -368,17 +365,45 @@
 		EB15897829242B370009F60D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EB15897929242B370009F60D /* WatchDataModel.swift */,
-				EB15897A29242B370009F60D /* NetworkManagerWatch.swift */,
+				EB15897929242B370009F60D /* WatchViewModel.swift */,
+				EB15897A29242B370009F60D /* NetworkManager.swift */,
 			);
 			name = Models;
 			path = "watchScanner Watch App/Models";
 			sourceTree = SOURCE_ROOT;
 		};
-		EB15898F2924322F0009F60D /* Models */ = {
+		EB158999292544080009F60D /* ScannerTV */ = {
 			isa = PBXGroup;
 			children = (
-				EB1589902924323D0009F60D /* NetworkManager.swift */,
+				EB1589BD292544F60009F60D /* Models */,
+				EB15899A292544080009F60D /* ScannerTVApp.swift */,
+				EB1589AE292544790009F60D /* TVView.swift */,
+				EB1589AC292544790009F60D /* TVMainView.swift */,
+				EB1589A62925446E0009F60D /* TVActivityDetailView.swift */,
+				EB1589AB292544790009F60D /* TVNavBarView.swift */,
+				EB1589A72925446E0009F60D /* TVRowView.swift */,
+				EB1589AA292544790009F60D /* TVMapAnnotationView.swift */,
+				EB1589AD292544790009F60D /* TVMapView.swift */,
+				EB1589B0292544790009F60D /* TVOnboardingView.swift */,
+				EB1589AF292544790009F60D /* TVStatusView.swift */,
+				EB15899E292544080009F60D /* Assets.xcassets */,
+				EB1589A0292544080009F60D /* Preview Content */,
+			);
+			path = ScannerTV;
+			sourceTree = "<group>";
+		};
+		EB1589A0292544080009F60D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EB1589A1292544080009F60D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EB1589BD292544F60009F60D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB1589BE292544F60009F60D /* NetworkManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -423,15 +448,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		EB7D4BEC28E8DAB300A5B81D /* Watch Map */ = {
-			isa = PBXGroup;
-			children = (
-				EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */,
-				EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */,
-			);
-			path = "Watch Map";
-			sourceTree = "<group>";
-		};
 		EB98F86828E8C3B7009AC6B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,35 +489,6 @@
 				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
 			);
 			path = "Child Views";
-			sourceTree = "<group>";
-		};
-		EBB721C828F6F55800435375 /* ScannerTV */ = {
-			isa = PBXGroup;
-			children = (
-				EBB721F128F7178600435375 /* Info.plist */,
-				EBB721C928F6F55800435375 /* ScannerTVApp.swift */,
-				EBB721CB28F6F55800435375 /* TVView.swift */,
-				EBB721E228F6FDEC00435375 /* TVMainView.swift */,
-				EBB721E428F6FE6E00435375 /* TVNavBarView.swift */,
-				EB8FD00628F8F23900B0C5AC /* TVMapView.swift */,
-				EB8FD00428F8EF8F00B0C5AC /* TVStatusView.swift */,
-				EB15898F2924322F0009F60D /* Models */,
-				EBB721EC28F7067900435375 /* TVRowView.swift */,
-				EBB721EE28F706BD00435375 /* TVActivityDetailView.swift */,
-				EBB721FC28F7262600435375 /* TVMapAnnotationView.swift */,
-				EBB721E028F6FA6E00435375 /* TVOnboardingView.swift */,
-				EBB721CD28F6F55900435375 /* Assets.xcassets */,
-				EBB721CF28F6F55900435375 /* Preview Content */,
-			);
-			path = ScannerTV;
-			sourceTree = "<group>";
-		};
-		EBB721CF28F6F55900435375 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				EBB721D028F6F55900435375 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,6 +536,26 @@
 			productReference = EB15895B29242A550009F60D /* WatchScanner Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EB158997292544080009F60D /* ScannerTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB1589A3292544080009F60D /* Build configuration list for PBXNativeTarget "ScannerTV" */;
+			buildPhases = (
+				EB158994292544080009F60D /* Sources */,
+				EB158995292544080009F60D /* Frameworks */,
+				EB158996292544080009F60D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScannerTV;
+			packageProductDependencies = (
+				EB1589B8292544B50009F60D /* FirebaseFirestore */,
+			);
+			productName = ScannerTV;
+			productReference = EB158998292544080009F60D /* ScannerTV.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */;
@@ -570,27 +577,6 @@
 			productReference = EBA0646128FF4C2F00B42676 /* scannerWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		EBB721C628F6F55800435375 /* ScannerTV */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EBB721D428F6F55900435375 /* Build configuration list for PBXNativeTarget "ScannerTV" */;
-			buildPhases = (
-				4302F9CDCE6380CA4770AAF0 /* [CP] Check Pods Manifest.lock */,
-				EBB721C328F6F55800435375 /* Sources */,
-				EBB721C428F6F55800435375 /* Frameworks */,
-				EBB721C528F6F55800435375 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ScannerTV;
-			packageProductDependencies = (
-				EB35DCD9292071E2005B6658 /* FirebaseFirestore */,
-			);
-			productName = ScannerTV;
-			productReference = EBB721C728F6F55800435375 /* ScannerTV.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -607,10 +593,10 @@
 					EB15895A29242A550009F60D = {
 						CreatedOnToolsVersion = 14.1;
 					};
-					EBA0646028FF4C2F00B42676 = {
+					EB158997292544080009F60D = {
 						CreatedOnToolsVersion = 14.1;
 					};
-					EBB721C628F6F55800435375 = {
+					EBA0646028FF4C2F00B42676 = {
 						CreatedOnToolsVersion = 14.1;
 					};
 				};
@@ -632,9 +618,9 @@
 			projectRoot = "";
 			targets = (
 				E202F43E278E84A7009C0B13 /* Scanner */,
-				EBB721C628F6F55800435375 /* ScannerTV */,
 				EBA0646028FF4C2F00B42676 /* scannerWidgetsExtension */,
 				EB15895A29242A550009F60D /* WatchScanner Watch App */,
+				EB158997292544080009F60D /* ScannerTV */,
 			);
 		};
 /* End PBXProject section */
@@ -660,6 +646,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB158996292544080009F60D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1589A2292544080009F60D /* Preview Assets.xcassets in Resources */,
+				EB15899F292544080009F60D /* Assets.xcassets in Resources */,
+				EB1589C32925482C0009F60D /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBA0645F28FF4C2F00B42676 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,41 +665,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBB721C528F6F55800435375 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EBB721D128F6F55900435375 /* Preview Assets.xcassets in Resources */,
-				EBB721CE28F6F55900435375 /* Assets.xcassets in Resources */,
-				EB35DCDE29207705005B6658 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4302F9CDCE6380CA4770AAF0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ScannerTV-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5A72AD442C0384427E564D4C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -817,19 +781,43 @@
 				EB15896B29242A720009F60D /* WatchMainView.swift in Sources */,
 				EB15898129242B4F0009F60D /* LocationManager.swift in Sources */,
 				EB15897229242AA20009F60D /* WatchScannerApp.swift in Sources */,
-				EB15897B29242B370009F60D /* WatchDataModel.swift in Sources */,
+				EB15897B29242B370009F60D /* WatchViewModel.swift in Sources */,
 				EB15897F29242B4C0009F60D /* MapViewModel.swift in Sources */,
 				EB15896929242A720009F60D /* WatchListView.swift in Sources */,
 				EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */,
 				EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */,
 				EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */,
+				EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */,
 				EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */,
 				EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */,
 				EB15896A29242A720009F60D /* WatchRowView.swift in Sources */,
 				EB15898029242B4E0009F60D /* Constants.swift in Sources */,
 				EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */,
-				EB15897C29242B370009F60D /* NetworkManagerWatch.swift in Sources */,
-				EB15896D29242A720009F60D /* WatchSettingsView.swift in Sources */,
+				EB15897C29242B370009F60D /* NetworkManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB158994292544080009F60D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1589A92925446E0009F60D /* TVRowView.swift in Sources */,
+				EB1589B2292544790009F60D /* TVNavBarView.swift in Sources */,
+				EB1589A82925446E0009F60D /* TVActivityDetailView.swift in Sources */,
+				EB1589B4292544790009F60D /* TVMapView.swift in Sources */,
+				EB1589B5292544790009F60D /* TVView.swift in Sources */,
+				EB1589C0292545190009F60D /* MainViewModel.swift in Sources */,
+				EB1589B7292544790009F60D /* TVOnboardingView.swift in Sources */,
+				EB1589BA292544CA0009F60D /* MapViewModel.swift in Sources */,
+				EB1589C2292545F90009F60D /* LocationDisclaimerView.swift in Sources */,
+				EB1589B1292544790009F60D /* TVMapAnnotationView.swift in Sources */,
+				EB1589BC292544E40009F60D /* ScannerModel.swift in Sources */,
+				EB1589B6292544790009F60D /* TVStatusView.swift in Sources */,
+				EB1589BF292544F60009F60D /* NetworkManager.swift in Sources */,
+				EB15899B292544080009F60D /* ScannerTVApp.swift in Sources */,
+				EB1589B3292544790009F60D /* TVMainView.swift in Sources */,
+				EB1589BB292544D50009F60D /* Constants.swift in Sources */,
+				EB1589C1292545290009F60D /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,31 +833,6 @@
 				EBA0646A28FF4C2F00B42676 /* scannerWidgets.swift in Sources */,
 				EBA0647F28FF4D3400B42676 /* TopView.swift in Sources */,
 				EBA0646628FF4C2F00B42676 /* scannerWidgetsBundle.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EBB721C328F6F55800435375 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB1589912924323D0009F60D /* NetworkManager.swift in Sources */,
-				EBB721EF28F706BD00435375 /* TVActivityDetailView.swift in Sources */,
-				EBB721E128F6FA6E00435375 /* TVOnboardingView.swift in Sources */,
-				EB4E805B28FA55CA00F396C5 /* DetailViewModel.swift in Sources */,
-				EBB721E528F6FE6E00435375 /* TVNavBarView.swift in Sources */,
-				EBB721CC28F6F55800435375 /* TVView.swift in Sources */,
-				EBB721FD28F7262600435375 /* TVMapAnnotationView.swift in Sources */,
-				EBB721E328F6FDEC00435375 /* TVMainView.swift in Sources */,
-				EBB721ED28F7067900435375 /* TVRowView.swift in Sources */,
-				EBB721F028F7142700435375 /* LocationDisclaimerView.swift in Sources */,
-				EBB721CA28F6F55800435375 /* ScannerTVApp.swift in Sources */,
-				EBB721D528F6F56100435375 /* ScannerModel.swift in Sources */,
-				EB8FD00528F8EF8F00B0C5AC /* TVStatusView.swift in Sources */,
-				EBB721D928F6F56100435375 /* MapViewModel.swift in Sources */,
-				EBB721D828F6F56100435375 /* MainViewModel.swift in Sources */,
-				EB8FD00728F8F23900B0C5AC /* TVMapView.swift in Sources */,
-				EBB721DA28F6F56600435375 /* Constants.swift in Sources */,
-				EBB721DB28F6F56600435375 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1129,66 @@
 			};
 			name = Release;
 		};
+		EB1589A4292544080009F60D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
+				DEVELOPMENT_TEAM = PFJ824B57Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+			};
+			name = Debug;
+		};
+		EB1589A5292544080009F60D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
+				DEVELOPMENT_TEAM = PFJ824B57Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+			};
+			name = Release;
+		};
 		EBA0647228FF4C3000B42676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E66E339AE1A06D60B4DF099 /* Pods-scannerWidgetsExtension.debug.xcconfig */;
@@ -1228,76 +1251,6 @@
 			};
 			name = Release;
 		};
-		EBB721D228F6F55900435375 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B97BC00A5C8A6487333453D4 /* Pods-ScannerTV.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ScannerTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 16.0;
-			};
-			name = Debug;
-		};
-		EBB721D328F6F55900435375 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 904831919DBEDA0C7E646D0E /* Pods-ScannerTV.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PFJ824B57Q;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ScannerTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Scanner;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 16.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1328,20 +1281,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		EB1589A3292544080009F60D /* Build configuration list for PBXNativeTarget "ScannerTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB1589A4292544080009F60D /* Debug */,
+				EB1589A5292544080009F60D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EBA0647128FF4C3000B42676 /* Build configuration list for PBXNativeTarget "scannerWidgetsExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EBA0647228FF4C3000B42676 /* Debug */,
 				EBA0647328FF4C3000B42676 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EBB721D428F6F55900435375 /* Build configuration list for PBXNativeTarget "ScannerTV" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EBB721D228F6F55900435375 /* Debug */,
-				EBB721D328F6F55900435375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1360,7 +1313,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EB35DCD9292071E2005B6658 /* FirebaseFirestore */ = {
+		EB1589B8292544B50009F60D /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
