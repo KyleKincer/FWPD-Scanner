@@ -22,7 +22,6 @@ class NetworkManager {
         let (data, response) = try await URLSession.shared.data(for: request)
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
         do {
-            print(String(data: data, encoding: .utf8)!)
             let decoder = JSONDecoder()
             decoder.dataDecodingStrategy = .base64
         
@@ -55,7 +54,6 @@ class NetworkManager {
 
             let documents = decoded.documents
             var activities = [Scanner.Activity]()
-            print(documents.count)
             for document in documents {
                 let activity = Scanner.Activity(id: document.name.replacingOccurrences(of: "rojects/fwpd-api/databases/(default)/documents/activities/", with: ""), timestamp: document.fields.timestamp.stringValue, nature: document.fields
                     .nature.stringValue, address: document.fields.address.stringValue, location: document.fields.location.stringValue, controlNumber: document.fields.control_number.stringValue, longitude: document.fields.longitude.doubleValue, latitude: document.fields.latitude.doubleValue)

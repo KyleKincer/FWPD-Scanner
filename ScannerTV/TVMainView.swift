@@ -48,6 +48,9 @@ struct TVMainView: View {
                                             }
                                         }
                                     }
+                                
+                                Spacer()
+
                             } else {
                                 Section {
                                     List(viewModel.activities) { activity in
