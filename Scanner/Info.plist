@@ -6,6 +6,8 @@
 	<array>
 		<string>maps</string>
 	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
 	<key>UIApplicationSupportsMultipleScenes</key>
 	<string>NO</string>
 </dict>

@@ -123,7 +123,9 @@ struct MapView: View {
                                     ProgressView()
                                 } else {
                                     HStack {
-                                        Text("Get More").fontWeight(.semibold)
+                                        Text("Get More")
+                                            .fontWeight(.semibold)
+                                        
                                         Image(systemName: "goforward.plus")
                                     }
                                     .tint(.white)
