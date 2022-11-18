@@ -1,18 +1,17 @@
 //
 //  WatchScannerApp.swift
-//  watchScanner Watch App
+//  WatchScanner Watch App
 //
-//  Created by Nick Molargik on 9/30/22.
+//  Created by Nick Molargik on 11/15/22.
 //
 
 import SwiftUI
-import Combine
 
 @main
-struct ScannerApp: App {
+struct WatchScanner_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-           WatchMainView()
+            WatchMainView()
         }
     }
 }

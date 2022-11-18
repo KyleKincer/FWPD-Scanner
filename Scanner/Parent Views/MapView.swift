@@ -105,54 +105,51 @@ struct MapView: View {
                     
                     Spacer()
                     
-                    if (viewModel.isLoading) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .foregroundColor(.blue)
-                            
-                            ProgressView()
-                        }
-                        .frame(width: 120, height: 33)
-                        .padding(.bottom, 30)
-                        
-                    } else {
-                        
-                        if (!viewModel.showBookmarks) {
-                            Button() {
+                    if (!viewModel.showBookmarks) {
+                        Button() {
+                            playHaptic()
+                            if (!viewModel.isLoading) {
                                 withAnimation {
                                     viewModel.getMoreActivities()
                                 }
-                            } label: {
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .foregroundColor(.blue)
-                                    
+                            }
+                            
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(.blue)
+                                
+                                if (viewModel.isLoading) {
+                                    ProgressView()
+                                } else {
                                     HStack {
-                                        Text("Get More").fontWeight(.semibold)
+                                        Text("Get More")
+                                            .fontWeight(.semibold)
+                                        
                                         Image(systemName: "goforward.plus")
                                     }
                                     .tint(.white)
                                 }
-                                .frame(width: 120, height: 33)
-                                .padding(.bottom, 30)
                             }
-                        }
-                        
-                        if (viewModel.showBookmarks) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundColor(.blue)
-                                
-                                HStack {
-                                    Text((viewModel.bookmarkCount > 0) ? "Showing Bookmarks" : "No Bookmarks")
-                                }
-                                .tint(.white)
-                            }
-                            .frame(width: 200, height: 33)
+                            .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
                             .padding(.bottom, 30)
-                            
                         }
                     }
+                    
+                    if (viewModel.showBookmarks) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.blue)
+                            
+                            HStack {
+                                Text((viewModel.bookmarkCount > 0) ? "Showing Bookmarks" : "No Bookmarks")
+                            }
+                            .tint(.white)
+                        }
+                        .frame(width: 200, height: 33)
+                        .padding(.bottom, 30)
+                            
+                        }
                 
                     Spacer()
                 

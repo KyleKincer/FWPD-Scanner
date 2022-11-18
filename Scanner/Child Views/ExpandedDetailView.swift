@@ -19,7 +19,6 @@ struct ExpandedDetailView: View {
     }
 }
         
-
 struct ExpandedDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ExpandedDetailView(showMap: .constant(false), mapModel: MapViewModel(), viewModel: MainViewModel())

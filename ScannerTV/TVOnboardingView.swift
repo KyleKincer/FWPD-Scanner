@@ -35,11 +35,12 @@ struct TVOnboardingView: View {
                             .italic()
                         
                         Text("Scanner")
+                            .italic()
+                            .bold()
                             .font(.system(size: 100))
-                            .fontWeight(.black)
                             .font(.largeTitle)
                             .shadow(radius: 2)
-                            .foregroundColor(Color("ModeOpposite"))
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                     }
                     
                     Spacer()
@@ -47,13 +48,13 @@ struct TVOnboardingView: View {
                     VStack {
                         if (colorScheme == .light) {
                             Image("launchicon")
-                                .scaleEffect(self.isAnimating ? 0.3 : 0.5)
+                                .scaleEffect(self.isAnimating ? 1 : 3)
                                 .frame(width: 100, height: 100)
                                 .colorInvert()
                             
                         } else {
                             Image("launchicon")
-                                .scaleEffect(self.isAnimating ? 0.3 : 0.5)
+                                .scaleEffect(self.isAnimating ? 1 : 3)
                                 .frame(width: 100, height: 100)
                         }
                     }.onAppear {
@@ -88,12 +89,12 @@ struct TVOnboardingView: View {
                 Button(action: {
                     onboarding = false
                 }, label: {
-                    ZStack {
-                        Text("Let's Go")
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                    }
+                    Text("Let's Go")
+                        .foregroundColor(.blue)
+                        .fontWeight(.bold)
                 })
+                .padding()
+                .foregroundColor(colorScheme == .dark ? .white : .black)
             }
         }
     }

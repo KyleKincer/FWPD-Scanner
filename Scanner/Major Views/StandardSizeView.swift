@@ -10,16 +10,17 @@ import SwiftUI
 struct StandardSizeView: View {
     @ObservedObject var viewModel: MainViewModel
     @State var showFilter = false
-    @State var showScanMenu = false
+    @State var showNotificationSheet = false
     @State var showMap = false
     @State var showDebug = false
     @State var showLocationDisclaimer = false
     
     var body: some View {
         VStack {
-            StandardNavBarView(showScanMenu: $showScanMenu, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
+            StandardNavBarView(showNotificationSheet: $showNotificationSheet, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
             
-            ActivityView(showMap: $showMap, viewModel: viewModel)
+            ActivityView(showMap: $showMap, viewModel: viewModel
+            )
             
         }.sheet(isPresented: $showFilter) {
             if #available(iOS 16.0, *) {
@@ -30,24 +31,18 @@ struct StandardSizeView: View {
             }
         }
         
-//        .sheet(isPresented: $showScanMenu) {
+//        .fullScreenCover(isPresented: $showNotificationSheet) {
 //            if #available(iOS 16.1, *) {
-//                ScanModeSettingsView()
-//                    .presentationDetents([.fraction(0.8)])
+//                NewNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
 //            } else {
-//                ScanModeUpgradeView()
+//                OldNotificationSettingsView(viewModel: viewModel, showNotificationSheet: $showNotificationSheet)
 //            }
 //        }
         
-        .sheet(isPresented: $showScanMenu) {
-            if #available(iOS 16.1, *) {
-                ScanModeComingView()
-                    .presentationDetents([.fraction(0.5)])
-            } else {
-                ScanModeComingView()
-            }
+        .sheet(isPresented: $showNotificationSheet) {
+            NotificationsComingView()
         }
-        
+
         .sheet(isPresented: $showLocationDisclaimer) {
             if #available(iOS 16.1, *) {
                 LocationDisclaimerView()

@@ -7,13 +7,12 @@
 //
 
 import SwiftUI
-import WatchKit
 
 struct WatchListView: View {
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: WatchViewModel
     @State var showMap = false
-    @State var showSettings = false
     var watch = WKInterfaceDevice()
+    @AppStorage("onboarding") var onboarding = true
     
     var body: some View {
         GeometryReader { geometry in
@@ -26,7 +25,7 @@ struct WatchListView: View {
                                     viewModel.serverResponsive = true
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         viewModel.serverResponsive = false
-                                        viewModel.refresh()
+                                        viewModel.refreshWatch()
                                     }
                                 }
                             }
@@ -52,19 +51,17 @@ struct WatchListView: View {
                                                     .foregroundColor(.blue)
                                                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                     .onTapGesture {
-                                                        if (activity == viewModel.activities.last && !viewModel.isLoading) {
-                                                            viewModel.getMoreActivities()
-                                                        }
+                                                        viewModel.getMoreActiviesWatch()
+                                                        
                                                     }
+                                                }
                                             }
-                                            
-                                        }
                                         }
                                     }
                                 }
                             }.refreshable {
                                 withAnimation {
-                                    viewModel.refresh()
+                                    viewModel.refreshWatch()
                                 }
                             }
                             .navigationBarTitleDisplayMode(.inline)
@@ -86,7 +83,7 @@ struct WatchListView: View {
                         .onTapGesture {
                             withAnimation {
                                 showMap.toggle()
-                                watch.play(.success)
+                                viewModel.playHaptic()
                             }
                         }
                         
@@ -95,20 +92,20 @@ struct WatchListView: View {
                                 .frame(width: geometry.size.width / 2 - 10, height: 65)
                                 .foregroundColor(viewModel.serverResponsive ? .orange : .gray)
                                 .cornerRadius(5)
-                            Image(systemName: "gear")
+                            Image(systemName: "arrow.clockwise")
                                 .foregroundColor(.white)
                                 .padding(.bottom, 40)
                         }
                         .onTapGesture {
                             withAnimation {
-                                showSettings.toggle()
-                                watch.play(.success)
+                                viewModel.playHaptic()
+                                viewModel.refreshWatch()
                             }
-                            
-                        }
+                         }
                         .onLongPressGesture {
                             withAnimation {
-                                viewModel.refresh()
+                                viewModel.playHaptic()
+                                onboarding = true
                             }
                         }
                         .disabled(!viewModel.serverResponsive)
@@ -117,15 +114,12 @@ struct WatchListView: View {
                     .padding(.horizontal, 0)
                 }
             }
-            .sheet(isPresented: $showSettings, content: {
-                WatchSettingsView(viewModel: viewModel)
-            })
         }
     }
 }
 
 struct WatchListView_Previews: PreviewProvider {
     static var previews: some View {
-        WatchListView(viewModel: MainViewModel())
+        WatchListView(viewModel: WatchViewModel())
     }
 }

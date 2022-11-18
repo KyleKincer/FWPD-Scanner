@@ -79,7 +79,7 @@ struct scannerWidgetsLiveActivity: Widget {
                         .font(.caption)
                         
                     } compactTrailing: {
-                        if (context.state.activity.id != 0) {
+                        if (context.state.activity.id != "0") {
                             Text(context.state.activity.date ?? Date(), style: .relative)
                                 .font(.system(size: 10))
                                 .frame(width: 40)
@@ -89,7 +89,7 @@ struct scannerWidgetsLiveActivity: Widget {
                         }
                             
                     } minimal: {
-                        if (context.state.activity.id != 0) {
+                        if (context.state.activity.id != "0") {
                             Image(systemName: "exclamationmark.triangle")
                                 .foregroundColor(.red)
                                 .frame(width: 20)

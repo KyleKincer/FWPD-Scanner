@@ -39,6 +39,7 @@ struct OnboardingView: View {
                     StatusView(viewModel: viewModel)
                         .scaleEffect(0.5)
                         .frame(width: 400, height: 100)
+                        .padding()
                     
                     Spacer()
                     
@@ -47,19 +48,21 @@ struct OnboardingView: View {
                     
                     Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
                         .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
+                        .fixedSize(horizontal: false, vertical: false)
+                        .padding(.horizontal, 30)
                     
                     Text("If you are experiencing an emergency, dial 911.")
                         .fontWeight(.bold)
-                        .padding()
                         .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .fixedSize(horizontal: false, vertical: false)
+                        .padding(.horizontal, 30)
+                        .padding(.top)
                                     
                     Spacer()
                 }
                 
                 Button(action: {
+                    playHaptic()
                     onboarding = false
                 }, label: {
                     ZStack {
@@ -77,6 +80,7 @@ struct OnboardingView: View {
                         viewModel.locationManager.requestAlwaysAuthorization()
                     }
                     .onDisappear {
+                        viewModel.selectedNaturesUD.removeAll()
                         viewModel.refresh()
                     }
                 

@@ -9,174 +9,191 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
-import CoreData
 
-class MM : ObservableObject {
-    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-}
-
+@MainActor
 final class MainViewModel: ObservableObject {
-    @Published var locationManager: CLLocationManager = CLLocationManager()
-    @Published var locationEnabled: Bool = false
+    // Main Model
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
+    @Published var bookmarks = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
-    @Published var selectedNatures = Set<Int>() { didSet{ refresh() }}
-    @Published var dateFrom = Date()
-    @Published var dateTo = Date()
+    
+    // Location and Map
+    @Published var locationManager: CLLocationManager = CLLocationManager()
+    @Published var locationEnabled: Bool = false
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
-    @Published private var alertItem: AlertItem?
+    
+    // Filters
+    @Published var selectedNatures = Set<String>() { didSet{ refresh() }}
+    @Published var selectedNaturesString = [String]()
+    @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
+    @Published var notificationNaturesString = [String]()
+    @AppStorage("useLocation") var useLocation = false
+    @AppStorage("useDate") var useDate = false
+    @AppStorage("useNature") var useNature = false
+    @AppStorage("radius") var radius = 0.0
+    @AppStorage("dateFrom") var dateFrom = String()
+    @AppStorage("dateTo") var dateTo = String()
+    @AppStorage("selectedNatures") var selectedNaturesUD = String()
+    
+    // View States
     @Published var isRefreshing = false
     @Published var serverResponsive = true
     @Published var isLoading = false
-    @Published var mapModel = MM()
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
+    
+    // Network
+    @Published var networkManager = NetworkManager()
+    
+    // UserDefaults
     let defaults = UserDefaults.standard
-    private var storedPages : [Int] = []
-    private var currentPage = 1
     
     init() {
-        print("Initializing list view model")
+        print("I - Initializing list view model")
         model = Scanner()
         
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
                 case .notDetermined, .restricted, .denied:
-                    print("No access to location")
+                    print("X - Failed to get location")
                     self.locationEnabled = false
                 case .authorizedAlways, .authorizedWhenInUse:
-                    print("Access")
+                    print("G - Succeeded in getting location ")
                     self.locationEnabled = true
                 @unknown default:
                     break
             }
         } else {
-            print("Location services are not enabled")
+            print("X - Location services are disabled by user")
         }
         
+        let selectionArray = selectedNaturesUD.components(separatedBy: ", ")
+        self.selectedNatures = Set(selectionArray)
+        self.selectedNaturesString = Array(selectedNatures)
+        
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
-        print("Have \(self.bookmarkCount) bookmark(s)!")
-        self.getActivities()
-        self.getNatures()
+        print("G - Found \(self.bookmarkCount) bookmark(s)!")
     }
-    
+       
     func refresh() {
-        print("Refreshing Activities")
+        print("R --- Refreshing")
         self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
-        self.storedPages.removeAll() // clear out page log
-        self.currentPage = 1 // prep us to get page #1
-        
-        if natures.isEmpty {
-            self.getNatures() // get natures if first time using app
-        }
-        
-        self.getActivities() // get first batch of activities
-    }
-    
-    func getActivity(controlNum: String) {
-        NetworkManager.shared.getActivity(controlNum: controlNum) { result in
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let activity):
-                    print(activity)
-                case .failure(let error):
-                    print("Failed to retrieve activity \(controlNum) - \(String(error.localizedDescription)).")
-                }
-            }
-        }
-    }
-    
-    func getActivities() {
-        let radius = UserDefaults.standard.double(forKey: "radius")
-        var location: CLLocation? = nil
-        if UserDefaults.standard.bool(forKey: "useLocation") {
-            location = self.locationManager.location
-        }
-        
-        NetworkManager.shared.getActivities(page: currentPage, dateFrom: dateFrom, dateTo: dateTo, natures: selectedNatures, location: location, radius: radius) { [self] result in
-            
-            DispatchQueue.main.async {
-                switch result {
-                    
-                case .success(let newActivities):
-                    print("Page \(self.currentPage) retrieved!")
-                    self.serverResponsive = true // No problem connecting to server
-                    self.isLoading = false
-                    self.isRefreshing = false
-                    self.storedPages.append(self.currentPage)
+ 
+        Task.init {
+            do {
+                // Get first set of activities
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
+                if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
-                    self.addDatesToActivities()
-                    self.addDistancesToActivities()
-                    self.bookmarkCount = self.defaults.object(forKey: "bookmarkCount") as? Int ?? 0
+                    print("+ --- Got activities")
                     
-                case .failure(let error):
-                    print("Failed to retrieve Page \(self.currentPage)!")
-                    self.serverResponsive = false // Indicate problem connecting to the server
-                    
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(setName: "activities")
+                        self.addDistancesToActivities(setName: "activities")
+                        self.isRefreshing = false
                     }
+                } else {
+                    print("+ --- Got zero activities")
                     
-                    self.getActivities() // Try again until we get some more activities
+                    withAnimation {
+                        self.serverResponsive = false
+                        self.isRefreshing = false
+                    }
                 }
             }
         }
+        self.getNatures()
+        self.getBookmarks()
     }
     
+    // Get next 25 activities from Firestore
     func getMoreActivities() {
-        self.isLoading = true
-        self.currentPage+=1
-        print("Asking for page \(self.currentPage) of activities...")
-        self.getActivities()
-        return
-    }
-    
-    func getNatures() {
-        NetworkManager.shared.getNatures { [self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let natures):
-                    self.natures = natures
-                case .failure(let error):
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
+        withAnimation {
+            self.isLoading = true
+        }
+        
+        Task.init {
+            do {
+                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
+                
+                if (newActivities.count > 0) {
+                    self.activities.append(contentsOf: newActivities)
+                    print("+ --- Got more activities")
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(setName: "activities")
+                        self.addDistancesToActivities(setName: "activities")
+                        self.isLoading = false
+                    }
+                } else {
+                    print("+ --- Got more but zero activities")
+                    withAnimation {
+                        self.isLoading = false
                     }
                 }
             }
         }
     }
     
-    func addDatesToActivities() {
+    // Get natures from Firestore
+    func getNatures() {
+        Task.init {
+            do {
+                //Get natures if there aren't any
+                let newNatures = try await self.networkManager.getNatures()
+                if (newNatures.count > 0) {
+                    self.natures = newNatures
+                    print("+ --- Got natures")
+                } else {
+                    print("+ --- Got zero natures")
+                }
+            }
+        }
+    }
+    
+    func addDatesToActivities(setName: String) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:SS"
-        for i in self.activities.indices {
-            self.activities[i].date = formatter.date(from: self.activities[i].timestamp)
+        if (setName == "activities") {
+            var set = self.activities
+            for i in set.indices {
+                set[i].date = formatter.date(from: set[i].timestamp)
+            }
+            self.activities = set
+            print("G - Set dates on activities")
+            
+        } else {
+            var set = self.bookmarks
+            for i in set.indices {
+                set[i].date = formatter.date(from: set[i].timestamp)
+            }
+            self.bookmarks = set
+            print("G - Set dates on bookmarks")
         }
     }
     
-    func addDistancesToActivities() {
+    func addDistancesToActivities(setName: String) {
         if let location = self.locationManager.location {
-            for i in self.activities.indices {
-                self.activities[i].distance = ((location.distance(
-                    from: CLLocation(latitude: self.activities[i].latitude, longitude: self.activities[i].longitude))) * 0.000621371)
+            if (setName == "activities") {
+                var set = self.activities
+                for i in set.indices {
+                    set[i].distance = ((location.distance(
+                        from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
+                }
+                self.activities = set
+                print("G - Set distances on activities")
+            } else {
+                var set = self.bookmarks
+                for i in set.indices {
+                    set[i].distance = ((location.distance(
+                        from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
+                }
+                self.bookmarks = set
+                print("G - Set distances on bookmarks")
             }
         }
     }
@@ -195,9 +212,12 @@ final class MainViewModel: ObservableObject {
         var bookmarks = defaults.object(forKey: "Bookmarks") as? [String] ?? []
         bookmarks.append(String(bookmark.controlNumber))
         defaults.set(bookmarks, forKey: "Bookmarks")
+        
+        self.bookmarks.append(bookmark)
+        
         self.bookmarkCount = defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         self.bookmarkCount += 1
-        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
     }
     
@@ -207,13 +227,16 @@ final class MainViewModel: ObservableObject {
         var bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
         bookmarks?.removeAll { $0 == bookmark.controlNumber}
         defaults.set(bookmarks, forKey: "Bookmarks")
+        
+        self.bookmarks.removeAll { $0.controlNumber == bookmark.controlNumber}
+        
         self.bookmarkCount = defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         self.bookmarkCount-=1
         if self.bookmarkCount < 0 {
             self.bookmarkCount = 0
         }
         defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
-        print("Now have \(String(self.bookmarkCount)) bookmarks")
+        print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         if self.bookmarkCount == 0 && self.showBookmarks {
             self.showBookmarks = false
             self.refresh()
@@ -234,48 +257,20 @@ final class MainViewModel: ObservableObject {
     
     //getBookmarks
     func getBookmarks() {
-        self.showBookmarks = true
-        self.activities = []
-        var controlNums = ""
-        let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
-        
-        if (bookmarks?.count ?? 0 > 0) {
-            for bookmark in bookmarks ?? [""] {
-                // Create CSV String
-                controlNums = controlNums + bookmark + ","
-            }
-            
-            NetworkManager.shared.getActivitySet(controlNums: controlNums) { [self] result in
-                switch result {
-                    
-                case .success(var bookmarkList):
-                    print("Bookmarks retrieved")
-                    
-                    
-                    for i in bookmarkList.indices {
-                        bookmarkList[i].bookmarked = true
-                    }
-                    self.activities = bookmarkList
-                    self.addDistancesToActivities()
-                    self.addDatesToActivities()
-                    print("Done")
-                    
-                case .failure(let error):
-                    print("Failed to retrieve bookmarks")
-                    self.serverResponsive = false // Indicate problem connecting to the server
-                    
-                    switch error {
-                    case .invalidURL:
-                        self.alertItem = AlertContext.invalidURL
-                    case .unableToComplete:
-                        self.alertItem = AlertContext.unableToComplete
-                    case .invalidResponse:
-                        self.alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        self.alertItem = AlertContext.invalidData
-                    }
+        let bookmarks = (defaults.object(forKey: "Bookmarks") as? [String])
+        if (self.bookmarkCount > 0 && self.bookmarks.count != bookmarkCount) {
+            Task.init {
+                do {
+                    //Get bookmarks
+                    let bookmarks = try await self.networkManager.getActivitySet(controlNumbers: bookmarks!)
+                    self.bookmarks = bookmarks
+                    self.addDatesToActivities(setName: "bookmarks")
+                    self.addDistancesToActivities(setName: "bookmarks")
+                    print("+ --- Got bookmark entries from Firebase")
                 }
             }
+        } else {
+            print("+ --- All bookmarks already accounted for")
         }
     }
 }

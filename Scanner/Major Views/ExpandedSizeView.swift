@@ -32,7 +32,7 @@ struct ExpandedSizeView: View {
                 LocationDisclaimerView()
             }
         }
-        .sheet(isPresented: $showFilter) {
+        .fullScreenCover(isPresented: $showFilter) {
             ExpandedFilterSettings(viewModel: viewModel)
         }
     }
