@@ -26,39 +26,54 @@ struct ListView: View {
                 if (!viewModel.showBookmarks) {
                     NavigationView {
                         Section {
-                            List(viewModel.activities) { activity in
-                                ActivityRowView(activity: activity, viewModel: viewModel)
-                                
-                                if (activity == viewModel.activities.last) {
-                                    Section {
-                                        if (viewModel.isLoading) {
-                                            ProgressView()
-                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                .listRowSeparator(.hidden)
-                                        } else {
-                                            HStack {
-                                                Spacer()
-                                                
-                                                Text("Tap for More")
-                                                    .bold()
-                                                    .italic()
-                                                    .foregroundColor(.blue)
+                            if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing && viewModel.serverResponsive) {
+                                VStack {
+                                    Text("No Matches Found")
+                                        .font(.system(size: 25))
+                                    
+                                    Text("Adjust your filter settings")
+                                        .font(.system(size: 15))
+                                    
+                                    ZStack {
+                                        Image(systemName: "doc.text.magnifyingglass")
+                                            .foregroundColor(.blue)
+                                            .font(.system(size: 40))
+                                            .padding()
+                                    }
+                                }
+                            } else {
+                                List(viewModel.activities, id: \.self) { activity in
+                                    ActivityRowView(activity: activity, viewModel: viewModel)
+                                    
+                                    if (activity == viewModel.activities.last && !viewModel.useLocation) {
+                                        Section {
+                                            if (viewModel.isLoading) {
+                                                ProgressView()
                                                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                
-                                                Spacer()
-                                            }
-                                            .onTapGesture {
-                                                if (activity == viewModel.activities.last && !viewModel.isLoading) {
+                                                    .listRowSeparator(.hidden)
+                                            } else {
+                                                HStack {
+                                                    Spacer()
+                                                    
+                                                    Text("Get More")
+                                                        .bold()
+                                                        .italic()
+                                                        .foregroundColor(.blue)
+                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    
+                                                    Spacer()
+                                                }
+                                                .onTapGesture {
                                                     viewModel.getMoreActivities()
                                                 }
+                                                
                                             }
-                                            
                                         }
                                     }
                                 }
                             }
                         }
-                        .navigationTitle("Recent Activity")
+                        .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                         .navigationBarTitleDisplayMode(.automatic)
                         .refreshable {
                             withAnimation {
@@ -70,15 +85,10 @@ struct ListView: View {
                 } else {
                     
                     //Bookmarks
-                    if (viewModel.activities == []) {
+                    if (viewModel.bookmarks.count == 0) {
                         VStack {
-                            if (viewModel.bookmarkCount == 0) {
-                                Text("No Bookmarks Saved")
-                                    .font(.system(size: 25))
-                            } else {
-                                Text("Gathering Bookmarks")
-                                    .font(.system(size: 25))
-                            }
+                            Text("No Bookmarks Saved")
+                                .font(.system(size: 25))
                             
                             ZStack {
                                 Image(systemName: "bookmark")
@@ -90,7 +100,7 @@ struct ListView: View {
                     } else {
                         NavigationView {
                             Section {
-                                List(viewModel.activities) { activity in
+                                List(viewModel.bookmarks, id: \.self) { activity in
                                     ActivityRowView(activity: activity, viewModel: viewModel)
                                 }
                             }
@@ -105,20 +115,25 @@ struct ListView: View {
                     
                 case .background:
                     showRefreshReminderOnActive = true
+                    viewModel.getBookmarks()
                 case .active:
                     if showRefreshReminderOnActive {
                         withAnimation(.spring()) {showingRefreshReminder = true}
                     }
+                    viewModel.getBookmarks()
                 case .inactive:
-                    print("shrug")
+                    print("G - App Inactive (shrug)")
                 @unknown default:
-                    print("shrug")
+                    print("G - App Inactive (shrug)")
                 }
             }
             if showingRefreshReminder && !viewModel.showBookmarks {
                 VStack {
                     Button() {
-                        viewModel.refresh()
+                        withAnimation {
+                            playHaptic()
+                            viewModel.refresh()
+                        }
                         withAnimation(.spring()) {showingRefreshReminder.toggle()}
                     } label: {
                         ZStack{

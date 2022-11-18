@@ -26,13 +26,13 @@ class LiveActivityHelper {
     func start() {
         // Check if live activities are enabled on this device
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            print("Live Activities are not enabled for Scanner on this device!")
+            print("X - Live Activities are not enabled for Scanner on this device!")
             return
         }
 
         // Initialize the models
         let latestAttribute = LatestAttribute()
-        let initialState = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: 0, timestamp: "", nature: "Scanning for Activity", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
+        let initialState = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: "0", timestamp: "", nature: "Scanning for Activity", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
         
         // Tell iOS that there is a new activity started
         do {
@@ -42,13 +42,13 @@ class LiveActivityHelper {
                 pushType: nil)
             
             guard let latestActivity else {
-                print("Error: Could not initialize the live activity with ID: \(latestActivity?.id ?? "NO ID")")
+                print("X - Could not initialize the live activity with ID: \(latestActivity?.id ?? "NO ID")")
                 return
             }
             
-            print("Live Activity Started with ID: \(latestActivity.id). Awaiting police activity.")
+            print("G - Live Activity Started with ID: \(latestActivity.id). Awaiting police activity.")
         } catch (let error) {
-            print("Error: \(error.localizedDescription)")
+            print("X - \(error.localizedDescription)")
         }
     }
     
@@ -66,7 +66,8 @@ class LiveActivityHelper {
     
     func end() {
         Task {
-            let stoppingLatest = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: 0, timestamp: "", nature: "Scanning Ended", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
+            let stoppingLatest = LatestAttribute.LatestStatus(activity: Scanner.Activity(id: "0", timestamp: "", nature: "Scanning Ended", address: "", location: "", controlNumber: "", longitude: 0, latitude: 0))
+            print("G - Live activities ended")
             
             guard let latestActivity else {
                 return

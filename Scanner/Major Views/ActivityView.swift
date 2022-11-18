@@ -21,7 +21,7 @@ struct ActivityView: View {
             case .compact:
             ZStack {
                 if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
+                    MapView(chosenActivity: $chosenActivity, activities: (viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities), viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                 }
                 
@@ -34,7 +34,7 @@ struct ActivityView: View {
                             .edgesIgnoringSafeArea(.all)
                     }
                     VStack {
-                        if (viewModel.isRefreshing) {
+                        if (viewModel.isRefreshing || (!viewModel.showBookmarks && !viewModel.serverResponsive)) {
                             
                             Spacer()
                             
@@ -72,14 +72,14 @@ struct ActivityView: View {
         default:
             VStack {
                 if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, activities: $viewModel.activities, viewModel: viewModel)
+                    MapView(chosenActivity: $chosenActivity, activities: viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities, viewModel: viewModel)
                         .edgesIgnoringSafeArea(.all)
                     
                 } else {
                     if #available(iOS 16.0, *) {
                         NavigationSplitView {
                             VStack {
-                                if (viewModel.isRefreshing) {
+                                if (viewModel.isRefreshing || (!viewModel.showBookmarks && !viewModel.serverResponsive)) {
                                     Spacer()
                                     
                                     StatusView(viewModel: viewModel)
@@ -94,53 +94,78 @@ struct ActivityView: View {
                                         }
                                     
                                     Spacer()
-                                } else if (viewModel.showBookmarks && (viewModel.activities == [])) {
+                                } else if (viewModel.showBookmarks) {
                                     VStack {
-                                        Text(viewModel.bookmarkCount == 0 ? "No Bookmarks Saved" : "Gathering Bookmarks")
-                                            .foregroundColor(.primary)
+                                        if (viewModel.bookmarks.count == 0) {
+                                            Text("No Bookmarks Saved")
+                                                .foregroundColor(.primary)
+                                                .font(.system(size: 25))
+                                                .padding()
+                                            Image(systemName: "bookmark")
+                                                .foregroundColor(.orange)
+                                                .font(.system(size: 20))
+                                        } else if (viewModel.bookmarks.count != viewModel.bookmarkCount) {
+                                            Text("Gathering Bookmarks")
+                                                .foregroundColor(.primary)
+                                                .font(.system(size: 25))
+                                                .padding()
+                                            Image(systemName: "bookmark")
+                                                .foregroundColor(.orange)
+                                                .font(.system(size: 20))
+                                        }
+                                        
+                                        
+                                        else {
+                                            List(viewModel.bookmarks) { activity in
+                                                ActivityRowView(activity: activity, viewModel: viewModel)
+                                            }
+                                            
+                                        }
+                                    }
+                                    .onAppear {
+                                        if (viewModel.bookmarkCount != viewModel.bookmarks.count) {
+                                            viewModel.getBookmarks()
+                                        }
+                                    }
+                                    
+                                    
+                                } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
+                                    VStack {
+                                        Text("No Matches Found")
                                             .font(.system(size: 25))
-                                            .padding()
-                                        Image(systemName: "bookmark")
-                                            .foregroundColor(.orange)
-                                            .font(.system(size: 20))
+                                        
+                                        Text("Adjust your filter settings")
+                                            .font(.system(size: 15))
+                                        
+                                        ZStack {
+                                            Image(systemName: "doc.text.magnifyingglass")
+                                                .foregroundColor(.blue)
+                                                .font(.system(size: 40))
+                                                .padding()
+                                        }
                                     }
                                     
                                 } else {
-                                    if (showFilter) {
-                                        ExpandedFilterSettings(viewModel: viewModel)
-                                        
-                                    } else {
-                                            List(viewModel.activities) { activity in
-                                                ActivityRowView(activity: activity, viewModel: viewModel)
-                                                
-                                                if (activity == viewModel.activities.last && viewModel.isLoading) {
-                                                    
-                                                }
-                                            }.refreshable {
-                                            withAnimation {
-                                                viewModel.refresh()
-                                            }
-                                        }
-                                        
-                                        if (!viewModel.showBookmarks) {
-                                            Section {
-                                                if (viewModel.isLoading) {
-                                                    ProgressView()
-                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                        .listRowSeparator(.hidden)
-                                                } else {
-                                                    Text("Tap for More")
-                                                        .bold()
-                                                        .italic()
-                                                        .foregroundColor(.blue)
-                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                        .onTapGesture {
-                                                            if (!viewModel.isLoading) {
-                                                                viewModel.getMoreActivities()
-                                                            }
-                                                        }
-                                                        .padding(.trailing, -2)
-                                                }
+                                    List(viewModel.activities) { activity in
+                                        ActivityRowView(activity: activity, viewModel: viewModel)
+                                    }
+                                    
+                                    if (!viewModel.showBookmarks) {
+                                        Section {
+                                            if (viewModel.isLoading) {
+                                                ProgressView()
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .listRowSeparator(.hidden)
+                                            } else {
+                                                Text("Tap for More")
+                                                    .bold()
+                                                    .italic()
+                                                    .foregroundColor(.blue)
+                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                    .onTapGesture {
+                                                        viewModel.getMoreActivities()
+                                                    }
+                                                    .padding(.trailing, -2)
                                             }
                                         }
                                     }
@@ -148,22 +173,6 @@ struct ActivityView: View {
                             }
                             .navigationTitle(showFilter ? "Filters" : (viewModel.showBookmarks ? "Bookmarks" : "Recent Activity"))
                             .navigationBarBackButtonHidden()
-                            .toolbar {
-                                if (viewModel.serverResponsive) {
-                                    ToolbarItem(placement: .navigationBarTrailing) {
-                                        Button(action: {
-                                            withAnimation {
-                                                showFilter.toggle()
-                                            }
-                                        }, label: {
-                                            Image(systemName: "camera.filters")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(.green)
-                                                .shadow(radius: 2)
-                                        })
-                                    }
-                                }
-                            }
                         }
                     detail: {
                         Text("Select an event to view details")

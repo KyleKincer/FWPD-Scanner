@@ -16,7 +16,7 @@ struct ActivityRowView: View {
     var body: some View {
         NavigationLink(destination: {DetailView(viewModel: viewModel, activity: $activity)}) {
             VStack(spacing: 5) {
-                if (showDistance && activity.distance ?? 0 > 0.0 && !viewModel.showBookmarks) {
+                if (showDistance && activity.distance ?? 0 > 0.0) {
                     HStack {
                         Text(activity.nature == "" ? "Unknown" : activity.nature.capitalized)
                             .font(.body)
@@ -66,18 +66,15 @@ struct ActivityRowView: View {
                         
                         Spacer()
                     }
-                    
-                    if (!viewModel.showBookmarks) {
-                        HStack {
-                            Text("\(activity.date ?? Date(), style: .relative) ago")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                                .multilineTextAlignment(.trailing)
-                                .lineLimit(1)
-                            
-                            Spacer()
-                            
-                        }
+
+                    HStack {
+                        Text("\(activity.date ?? Date(), style: .relative) ago")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(1)
+                        
+                        Spacer()
                     }
                     
                     HStack {
@@ -98,16 +95,18 @@ struct ActivityRowView: View {
         .contextMenu {
             Button {
                 if activity.bookmarked {
-                    activity.bookmarked = false
-                    viewModel.removeBookmark(bookmark: activity)
-                    if (viewModel.showBookmarks) {
-                        withAnimation {
+                    withAnimation {
+                        activity.bookmarked = false
+                        viewModel.removeBookmark(bookmark: activity)
+                        if (viewModel.showBookmarks) {
                             viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
                         }
                     }
                 } else {
-                    activity.bookmarked = true
-                    viewModel.addBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = true
+                        viewModel.addBookmark(bookmark: activity)
+                    }
                 }
             } label: {
                 Text("Toggle Bookmark")
@@ -116,16 +115,20 @@ struct ActivityRowView: View {
         .swipeActions {
             Button(activity.bookmarked ? "Unmark" : "Bookmark") {
                 if activity.bookmarked {
-                    activity.bookmarked = false
-                    viewModel.removeBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = false
+                        viewModel.removeBookmark(bookmark: activity)
+                    }
                     if (viewModel.showBookmarks) {
                         withAnimation {
-                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                            viewModel.bookmarks.removeAll { $0.controlNumber == activity.controlNumber }
                         }
                     }
                 } else {
-                    activity.bookmarked = true
-                    viewModel.addBookmark(bookmark: activity)
+                    withAnimation {
+                        activity.bookmarked = true
+                        viewModel.addBookmark(bookmark: activity)
+                    }
                 }
             }.tint(activity.bookmarked ? .red : .orange)
         }
@@ -139,7 +142,7 @@ struct ActivityRowView: View {
 
 struct ActivityRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRowView(activity: Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842), viewModel: MainViewModel())
+        ActivityRowView(activity: Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842), viewModel: MainViewModel())
             .frame(width: 200, height: 100)
     }
 }

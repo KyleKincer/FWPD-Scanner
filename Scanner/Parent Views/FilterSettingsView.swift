@@ -10,18 +10,11 @@ import SwiftUI
 struct FilterSettings: View {
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
-    @State var dateFrom = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    @State var dateTo = Date()
     @State var showingTypesPopover = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
-    @State var showFavorites = false
-    
-    @AppStorage("useLocation") var useLocation = false
-    @AppStorage("useDate") var useDate = false
-    @AppStorage("radius") var radius = 0.0
-    @AppStorage("showDistance") var showDistance = true
-    
+    @State var dateFrom = Date()
+    @State var dateTo = Date()
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -38,50 +31,101 @@ struct FilterSettings: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
             
+            Text("Only one Scanner Filter Category may be applied.")
+                .multilineTextAlignment(.center)
+                .font(.subheadline)
+                .padding()
+            
             List {
                 Section("Location") {
                     Text("This app only works for Fort Wayne, IN")
                         .multilineTextAlignment(.center)
                     
-                    
-                    if viewModel.locationEnabled {
-                        Toggle("Show Distance From You", isOn: $showDistance)
-                        Toggle(isOn: $useLocation) {
-                            Text("Filter By Distance")
-                        }
-                        if useLocation {
+                    if (viewModel.locationEnabled) {
+                        Toggle("Filter By Distance", isOn: $viewModel.useLocation)
+                            .onChange(of: viewModel.useLocation) { newValue in
+                                withAnimation {
+                                    refreshOnExit = true
+                                    if (newValue) {
+                                        viewModel.useDate = false
+                                        viewModel.useNature = false
+                                    }
+                                }
+                            }
+                        
+                        if (viewModel.useLocation) {
                             VStack {
                                 HStack {
-                                    Text("Radius: \(String(format: "%g", (round(radius * 10)) / 10)) mi")
+                                    Text("Radius: \(String(format: "%g", (round(viewModel.radius * 10)) / 10)) mi")
                                     Spacer()
                                 }
-                                Slider(value: $radius, in: 0.1...5)
-                            }
-                        }
-                        
-                        if (useLocation) {
-                            Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {
+                                Slider(value: $viewModel.radius, in: 0.1...5)
+                                    .onChange(of: viewModel.radius) { _ in
+                                        refreshOnExit = true
+                                    }
                                 
+                                Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {}
                             }
                         }
                     }
                 }
                 
                 Section("Date") {
-                    Toggle(isOn: $useDate) {
-                        Text("Filter By Date Range")
-                    }
-                    if useDate {
+                    Toggle("Filter By Date", isOn: $viewModel.useDate)
+                        .onChange(of: viewModel.useDate) { newValue in
+                            refreshOnExit = true
+                            if (newValue) {
+                                withAnimation {
+                                    viewModel.useLocation = false
+                                    viewModel.useNature = false
+                                }
+                            }
+                        }
+                    
+                    if (viewModel.useDate) {
                         DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
+                            .onChange(of: dateFrom) { newValue in
+                                withAnimation {
+                                    if (!justAppeared1) {
+                                        refreshOnExit = true
+                                    } else {
+                                        justAppeared1 = false
+                                    }
+                                }
+                            }
+                        
+                        
                         DatePicker("To", selection: $dateTo, in: oldestDate...Date(), displayedComponents: .date)
+                            .onChange(of: dateTo) { newValue in
+                                if (!justAppeared2) {
+                                    refreshOnExit = true
+                                } else {
+                                    justAppeared2 = false
+                                }
+                            }
                     }
                 }
                 
-                Section("Filter By Activity Type") {
-                    Button {
-                        showingTypesPopover = true
-                    } label: {
-                        Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: (\(viewModel.selectedNatures.count))")
+                Section("Nature") {
+                    Toggle("Filter By Natures", isOn: $viewModel.useNature)
+                        .onChange(of: viewModel.useNature) { newValue in
+                            refreshOnExit = true
+                            withAnimation {
+                                if (newValue) {
+                                    viewModel.useDate = false
+                                    viewModel.useLocation = false
+                                }
+                            }
+                        }
+                    
+                    if (viewModel.useNature) {
+                        Button {
+                            withAnimation {
+                                showingTypesPopover = true
+                            }
+                        } label: {
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: \(viewModel.selectedNatures.first == "None" ? viewModel.selectedNatures.count - 1 : viewModel.selectedNatures.count)")
+                        }
                     }
                 }
             }
@@ -89,68 +133,32 @@ struct FilterSettings: View {
         }
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
-        }
-        .onChange(of: useLocation) { _ in
-            refreshOnExit = true
-        }
-        .onChange(of: radius) { _ in
-            if useLocation {
-                refreshOnExit = true
-            }
-            viewModel.refresh()
-        }
-        .onChange(of: showDistance) { newValue in
-            if !newValue {
-                viewModel.clearDistancesFromActivities()
-            }
-            viewModel.refresh()
-        }
-        .onChange(of: dateFrom) {newValue in
-            if (!justAppeared1) {
-                refreshOnExit = true
-            } else {
-                justAppeared1 = false
-            }
-        }
-        .onChange(of: dateTo) {newValue in
-            if (!justAppeared2) {
-                refreshOnExit = true
-            } else {
-                justAppeared2 = false
-            }
-        }
-        .onDisappear {
-            if dateFrom > dateTo {
-                viewModel.dateFrom = dateTo
-            } else {
-                viewModel.dateFrom = dateFrom
-            }
-            viewModel.dateTo = dateTo
-            if refreshOnExit {
-                refreshOnExit = false
-                viewModel.refresh()
-                print("Refreshed")
-            }
+                .onDisappear {
+                    refreshOnExit = false
+                }
         }
         .onAppear {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd 00:00:01"
+            dateFrom = formatter.date(from: viewModel.dateFrom) ?? Date()
+            formatter.dateFormat = "yyyy-MM-dd 23:59:59"
+            dateTo = formatter.date(from: viewModel.dateTo) ?? Date()
             refreshOnExit = false
             justAppeared1 = true
             justAppeared2 = true
-            if !(Calendar.current.dateComponents([.day, .month, .year], from: dateFrom) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateFrom))
-                || !(Calendar.current.dateComponents([.day, .month, .year], from: dateTo) == Calendar.current.dateComponents([.day, .month, .year], from: viewModel.dateTo)) {
-                dateFrom = viewModel.dateFrom
-                dateTo = viewModel.dateTo
-            }
         }
-    }
-    
-    func clearAllFilters() {
-        withAnimation {
-            useLocation = false
-            useDate = false
-            viewModel.selectedNatures.removeAll()
-            dateFrom = Date()
-            dateTo = Date()
+        .onDisappear {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd 00:00:01"
+            viewModel.dateFrom = formatter.string(from: dateFrom)
+            formatter.dateFormat = "yyyy-MM-dd 23:59:59"
+            viewModel.dateTo = formatter.string(from: dateTo)
+
+            if refreshOnExit {
+                refreshOnExit = false
+                viewModel.refresh()
+                print("R - Refreshed via Filters")
+            }
         }
     }
 }

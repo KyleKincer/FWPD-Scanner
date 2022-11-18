@@ -13,7 +13,8 @@ struct TVMainView: View {
     @State var showLocationDisclaimer = false
     @ObservedObject var viewModel : MainViewModel
     @State var mapView = MapViewModel()
-    @State var chosenActivity = Scanner.Activity(id: 0, timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
+    @State var chosenActivity = Scanner.Activity(id: "0", timestamp: "", nature: "", address: "Select an Activity to View Details", location: "", controlNumber: "", longitude: 0, latitude: 0)
+    @State var getMoreFocus : FocusState = FocusState()
     
     var body: some View {
         ZStack {
@@ -36,7 +37,7 @@ struct TVMainView: View {
                             if (viewModel.isRefreshing || !viewModel.serverResponsive) {
                                 TVStatusView(viewModel: viewModel)
                                     .frame(width: 450)
-                                    .onTapGesture {
+                                    .onLongPressGesture(minimumDuration: 0.01) {
                                         if (!viewModel.serverResponsive) {
                                             withAnimation (.linear(duration: 0.5)) {
                                                 viewModel.serverResponsive = true
@@ -47,6 +48,9 @@ struct TVMainView: View {
                                             }
                                         }
                                     }
+                                
+                                Spacer()
+
                             } else {
                                 Section {
                                     List(viewModel.activities) { activity in
@@ -58,17 +62,23 @@ struct TVMainView: View {
                                                     ProgressView()
                                                         .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                 } else {
-                                                    Text("Tap for More")
-                                                        .bold()
-                                                        .italic()
-                                                        .focusable()
-                                                        .foregroundColor(.blue)
-                                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                        .onTapGesture {
-                                                            if (activity == viewModel.activities.last && !viewModel.isLoading) {
-                                                                viewModel.getMoreActivities()
-                                                            }
+                                                    Button(action: {
+                                                        viewModel.getMoreActivities()
+                                                    }, label: {
+                                                        ZStack {
+                                                            Rectangle()
+                                                                .frame(width: 300, height: 100)
+                                                                .foregroundColor(.white)
+                                                                .cornerRadius(10)
+                                                            
+                                                            Text("Tap for More")
+                                                                .bold()
+                                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                                .foregroundColor(.blue)
                                                         }
+                                                    })
+                                                    .padding()
+                                                    .focusable()
                                                 }
                                             }
                                         }
@@ -83,11 +93,9 @@ struct TVMainView: View {
                         
                         Spacer()
                         
-                        if (chosenActivity.id == 0) {
+                        if (chosenActivity.id == "0") {
                             
                             VStack (alignment: .center){
-                                Spacer()
-                                
                                 Text("Select an Activity to see Details")
                                     .font(.title)
                                     .padding(.horizontal)
@@ -96,17 +104,15 @@ struct TVMainView: View {
                                     .font(.system(size: 100))
                                     .foregroundColor(Color("ModeOpposite"))
                                     .padding()
-                                
-                                Spacer()
                             }
+                            
+                            Spacer()
                             
                         } else {
                             
                             TVActivityDetailView(activity: chosenActivity)
-                                .padding()
-                            
                         }
-                    }.padding(.trailing)
+                    }
                 }
             }
         }

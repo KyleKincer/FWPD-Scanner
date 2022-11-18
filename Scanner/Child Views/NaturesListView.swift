@@ -9,20 +9,28 @@ import SwiftUI
 
 struct NaturesList: View {
     var viewModel: MainViewModel
-    @State var selection = Set<Int>()
+    @State var selection = Set<String>()
     @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) private var editMode
+    @State var tenSet = Set<String>()
+    @State var showNatureAlert = false
+    
     var body: some View {
         VStack {
             HStack {
                 Button {
+                    if (selection.count == 0) {
+                        viewModel.useNature = false
+                        selection.insert("None")
+                    }
                     dismiss()
                 } label: {
-                    Text("Close")
+                    Text("Apply")
                 }
                 
                 Spacer()
                 
-                Text("Select Activites")
+                Text("Select Natures")
                     .fontWeight(.semibold)
                     .italic()
                 
@@ -33,37 +41,47 @@ struct NaturesList: View {
                 } label: {
                     Text("Clear")
                 }
-                .disabled(selection.count == 0)
+                .disabled(selection.count == 0 || selection.first == "None")
             }
             .padding()
             
             List(selection: $selection, content: {
-                ForEach(viewModel.natures) { nature in
+                ForEach(viewModel.natures, id: \.name) { nature in
                     Text(nature.name.capitalized)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                 }
+                
+                .onChange(of: selection, perform: { latestSelection in
+                    if (latestSelection.count == 10) {
+                        tenSet = latestSelection
+                    }
+                    if (latestSelection.count >= 11) {
+                        showNatureAlert = true
+                        selection = tenSet
+                    }
+                    
+                })
             })
             .environment(\.editMode, .constant(EditMode.active))
             .navigationBarTitle(Text("Types"))
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        selection.removeAll()
-                    } label: {
-                        Text("Clear")
-                    }
-                }
-            }
             .onAppear {
-                selection = viewModel.selectedNatures
+                let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
+                selection = Set(selectionArray)
+                viewModel.selectedNatures = selection
+                
             }
             .onDisappear {
                 viewModel.selectedNatures = selection
+                viewModel.selectedNaturesString = Array(selection)
+                viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
             }
         }
         .interactiveDismissDisabled()
+        .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
+            Button("OK", role: .cancel) { }
+                }
     }
 }
 

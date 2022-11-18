@@ -10,7 +10,7 @@ import Foundation
 
 struct Scanner {
     struct Activity: Identifiable, Decodable, Equatable, Hashable, Encodable {
-        var id: Int
+        var id: String
         let timestamp: String
         let nature: String
         let address: String
@@ -37,7 +37,7 @@ struct Scanner {
     }
     
     struct Nature: Identifiable, Decodable, Equatable {
-        let id: Int
+        let id: String
         let name: String
     }
 }

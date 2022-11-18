@@ -21,6 +21,23 @@ struct TVMapView: View {
                 }
             }
             .ignoresSafeArea(.all)
+            
+            VStack {
+                Spacer()
+                
+                HStack (spacing: 0){
+                    Spacer()
+                    
+                    Text("Click ")
+                    Image(systemName: "playpause.circle")
+                    Text(" and select ")
+                    Image(systemName: "mappin.circle.fill")
+                    Text(" to exit the map!")
+                }
+                .padding()
+            }
+            
+            
         }
         .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
     }

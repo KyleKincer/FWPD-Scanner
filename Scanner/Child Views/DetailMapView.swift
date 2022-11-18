@@ -13,8 +13,6 @@ struct DetailMapView: View {
     @Binding var activity : Scanner.Activity
     @State var manager = CLLocationManager()
     @StateObject var managerDelegate = locationDelegate()
-    @Environment(\.horizontalSizeClass) var sizeClass
-    
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -44,47 +42,43 @@ struct DetailMapView: View {
                 }.frame(width: 200, height: 45)
                     .padding(.bottom)
             }
-            
-            if (sizeClass == .compact) {
+            HStack {
                 
-                HStack {
+                Spacer()
+                
+                Button(action: {
+                    playHaptic()
+                    activity.bookmarked.toggle()
                     
-                    Spacer()
-                    
-                    Button(action: {
-                        playHaptic()
-                        activity.bookmarked.toggle()
-                        
-                        if (activity.bookmarked) {
-                            viewModel.addBookmark(bookmark: activity)
-                            if (viewModel.showBookmarks) {
-                                withAnimation {
-                                    viewModel.activities.append(activity)
-                                }
-                            }
-                            
-                        } else {
-                            viewModel.removeBookmark(bookmark: activity)
-                            if (viewModel.showBookmarks) {
-                                withAnimation {
-                                    viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
-                                }
+                    if (activity.bookmarked) {
+                        viewModel.addBookmark(bookmark: activity)
+                        if (viewModel.showBookmarks) {
+                            withAnimation {
+                                viewModel.activities.append(activity)
                             }
                         }
                         
-                    }, label: {
-                        ZStack {
-                            Circle()
-                                .frame(width: 45, height: 45)
-                                .foregroundColor(.blue)
-                            
-                            Image(systemName: activity.bookmarked ? "bookmark.fill" : "bookmark")
-                                .foregroundColor(activity.bookmarked ? .yellow : .white)
+                    } else {
+                        viewModel.removeBookmark(bookmark: activity)
+                        if (viewModel.showBookmarks) {
+                            withAnimation {
+                                viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                            }
                         }
-                    })
-                    .padding(.bottom)
-                    .padding(.trailing)
-                }
+                    }
+                    
+                }, label: {
+                    ZStack {
+                        Circle()
+                            .frame(width: 45, height: 45)
+                            .foregroundColor(.blue)
+                        
+                        Image(systemName: activity.bookmarked ? "bookmark.fill" : "bookmark")
+                            .foregroundColor(activity.bookmarked ? .yellow : .white)
+                    }
+                })
+                .padding(.bottom)
+                .padding(.trailing)
             }
         }
     }
@@ -106,10 +100,10 @@ class locationDelegate: NSObject,ObservableObject,CLLocationManagerDelegate{
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 
         if manager.authorizationStatus == .authorizedWhenInUse{
-            print("Authorized")
+            print("G - Location Authorized")
             manager.startUpdatingLocation()
         } else {
-            print("not authorized")
+            print("X - Location Not Authorized")
             manager.requestWhenInUseAuthorization()
         }
     }
@@ -124,6 +118,6 @@ class locationDelegate: NSObject,ObservableObject,CLLocationManagerDelegate{
 
 struct DetailMapView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailMapView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: 1116, timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))
+        DetailMapView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))
     }
 }
