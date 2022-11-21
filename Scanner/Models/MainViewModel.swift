@@ -10,6 +10,7 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
+
 @MainActor
 final class MainViewModel: ObservableObject {
     // Main Model

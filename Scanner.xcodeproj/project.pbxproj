@@ -97,6 +97,7 @@
 		EBA6ECDA292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EBBBCE2F292AE5500015E4C1 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */; };
 		EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */; };
+		EBBBCE33292B0B5D0015E4C1 /* SubscriptionManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE32292B0B5D0015E4C1 /* SubscriptionManagerModel.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
@@ -212,6 +213,7 @@
 		EBBBCE2B2927F3D00015E4C1 /* WatchScanner Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchScanner Watch App.entitlements"; sourceTree = "<group>"; };
 		EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshReminderView.swift; sourceTree = "<group>"; };
+		EBBBCE32292B0B5D0015E4C1 /* SubscriptionManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManagerModel.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -274,11 +276,11 @@
 			isa = PBXGroup;
 			children = (
 				EBBBCE2A2927F3CB0015E4C1 /* scannerWidgetsExtension.entitlements */,
+				EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */,
 				E202F441278E84A7009C0B13 /* Scanner */,
 				EB158999292544080009F60D /* ScannerTV */,
 				EB15895C29242A550009F60D /* WatchScanner Watch App */,
 				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
-				EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 				4FF1AD4D21DDA7CE589A35A0 /* Pods */,
@@ -308,8 +310,8 @@
 				EB57406B28E61A20009FDA3D /* Major Views */,
 				EB57406D28E61A5E009FDA3D /* Parent Views */,
 				EBB42E4428F65D2100F32BD8 /* Child Views */,
-				E202F446278E84A8009C0B13 /* Assets.xcassets */,
 				E202F448278E84A8009C0B13 /* Preview Content */,
+				E202F446278E84A8009C0B13 /* Assets.xcassets */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -442,6 +444,7 @@
 				E202F4522790C46F009C0B13 /* MainViewModel.swift */,
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				EB98F86128E8BB3E009AC6B1 /* AttributeModel.swift */,
+				EBBBCE32292B0B5D0015E4C1 /* SubscriptionManagerModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 			);
 			path = Models;
@@ -759,6 +762,7 @@
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
+				EBBBCE33292B0B5D0015E4C1 /* SubscriptionManagerModel.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,

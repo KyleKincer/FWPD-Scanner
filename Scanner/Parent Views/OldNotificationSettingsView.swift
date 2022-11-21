@@ -21,7 +21,7 @@ struct OldNotificationSettingsView: View {
                 Button(action: {
                     withAnimation {
                         showNotificationView.toggle()
-                        updateSubscription(viewModel: viewModel, selection: selection)
+
                     }
                 }, label: {
                     HStack {

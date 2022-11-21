@@ -10,5 +10,10 @@
 	<string>13.0</string>
 	<key>UIApplicationSupportsMultipleScenes</key>
 	<string>NO</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

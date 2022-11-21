@@ -17,6 +17,7 @@ struct NewNotificationSettingsView: View {
     @State var selectAll = true
     @State var selection = Set<String>()
     @State var showScanningInfo = false
+    @State var notifications = SubscriptionManager()
     @Binding var showNotificationView : Bool
     
     var body: some View {
@@ -25,9 +26,7 @@ struct NewNotificationSettingsView: View {
                 Button(action: {
                     withAnimation {
                         showNotificationView.toggle()
-                        updateSubscription(viewModel: viewModel, selection: selection)
                         
-                        updateLiveActivitySubscription(viewModel: viewModel)
                     }
                     
                 }, label: {
@@ -113,7 +112,7 @@ struct NewNotificationSettingsView: View {
             .padding()
             
             List(selection: $selection, content: {
-                ForEach(viewModel.natures) { nature in
+                ForEach(viewModel.natures, id: \.name) { nature in
                     Text(nature.name.capitalized)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
@@ -125,20 +124,13 @@ struct NewNotificationSettingsView: View {
         .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island.", isPresented: $showScanningInfo) {
             Button("OK", role: .cancel) { }
         }
+        .onDisappear {
+            // Handle subscriptions
+            print("G - Subscribing to natures: \(selection)")
+            notifications.subscribeToNatures(natures: Array(selection))
+            
+        }
     }
-}
-
-@MainActor
-func updateSubscription(viewModel: MainViewModel, selection: Set<String>) {
-    viewModel.notificationNatures = selection
-    
-    // Do all the backend stuff
-}
-
-@available(iOS 16.1, *)
-func updateLiveActivitySubscription(viewModel: MainViewModel) {
-    
-    // Do more backend stuff
 }
 
 @available(iOS 16.1, *)
