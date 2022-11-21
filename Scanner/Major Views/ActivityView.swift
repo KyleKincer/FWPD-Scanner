@@ -68,6 +68,8 @@ struct ActivityView: View {
                         }
                         .navigationSplitViewStyle(.balanced)
                         .navigationBarTitleDisplayMode(.inline)
+                    } else {
+                        ListView(viewModel: viewModel)
                     }
                 }
             }

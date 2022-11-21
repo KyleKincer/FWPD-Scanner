@@ -37,10 +37,16 @@ struct MapView: View {
             if (chosenActivity != nil) {
                 Group {
                     VStack {
-                        Rectangle()
-                            .foregroundColor(colorScheme == .light ? .white : .black)
-                            .frame(width: 500, height: 90)
-                            .cornerRadius(20)
+                        HStack {
+                            Spacer()
+                            
+                            Rectangle()
+                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .frame(width: 500, height: 90)
+                                .cornerRadius(20)
+                            
+                            Spacer()
+                        }
                             
                         Spacer()
                     }

@@ -29,6 +29,7 @@ final class MainViewModel: ObservableObject {
     @Published var selectedNaturesString = [String]()
     @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
     @Published var notificationNaturesString = [String]()
+    @AppStorage("notificationNatures") var notificationNaturesUD = String()
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
@@ -72,6 +73,11 @@ final class MainViewModel: ObservableObject {
         let selectionArray = selectedNaturesUD.components(separatedBy: ", ")
         self.selectedNatures = Set(selectionArray)
         self.selectedNaturesString = Array(selectedNatures)
+        
+        let notificationArray = notificationNaturesUD.components(separatedBy: ", ")
+        self.notificationNatures = Set(notificationArray)
+        self.notificationNaturesString = Array(notificationNatures)
+        
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")

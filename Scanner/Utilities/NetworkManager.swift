@@ -262,7 +262,10 @@ class NetworkManager {
                 .getDocuments(source: .server)
             
             for nature in query.documents {
-                natures.append(self.makeNature(document: nature))
+                let nature = self.makeNature(document: nature)
+                if (nature.name != "") {
+                    natures.append(nature)
+                }
             }
         } catch {
             print("X - Error getting natures: \(error.localizedDescription)")

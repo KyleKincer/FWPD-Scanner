@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Firebase
-import FirebaseMessaging
 import UserNotifications
 
 @main
@@ -55,7 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
       if let messageID = userInfo[gcmMessageIDKey] {
-        print("Message ID: \(messageID)")
+        print("M - Message ID: \(messageID)")
       }
 
       print(userInfo)
@@ -68,7 +67,7 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
 
       let deviceToken:[String: String] = ["token": fcmToken ?? ""]
-        print("Device token: ", deviceToken) // This token can be used for testing notifications on FCM
+        print("M - Device token: ", deviceToken) // This token can be used for testing notifications on FCM
     }
 }
 
@@ -82,7 +81,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     let userInfo = notification.request.content.userInfo
 
     if let messageID = userInfo[gcmMessageIDKey] {
-        print("Message ID: \(messageID)")
+        print("M - Message ID: \(messageID)")
     }
 
     print(userInfo)
@@ -105,7 +104,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     let userInfo = response.notification.request.content.userInfo
 
     if let messageID = userInfo[gcmMessageIDKey] {
-      print("Message ID from userNotificationCenter didReceive: \(messageID)")
+      print("M - Message ID from userNotificationCenter didReceive: \(messageID)")
     }
 
     print(userInfo)
