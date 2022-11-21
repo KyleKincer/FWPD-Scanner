@@ -30,20 +30,18 @@ struct MapView: View {
             }
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
             .edgesIgnoringSafeArea(.all)
+            .onDisappear {
+                chosenActivity = nil
+            }
             
             if (chosenActivity != nil) {
                 Group {
                     VStack {
-                        HStack {
-                            Spacer()
+                        Rectangle()
+                            .foregroundColor(colorScheme == .light ? .white : .black)
+                            .frame(width: 500, height: 90)
+                            .cornerRadius(20)
                             
-                            Rectangle()
-                                .foregroundColor(colorScheme == .light ? .white : .black)
-                                .frame(width: 500, height: 90)
-                                .cornerRadius(20)
-                            
-                            Spacer()
-                        }
                         Spacer()
                     }
                 }
@@ -53,7 +51,7 @@ struct MapView: View {
                         
                         Spacer()
                         
-                        Text(chosenActivity!.nature == "" ? "Unknown" : chosenActivity!.nature)
+                        Text(chosenActivity!.nature)
                             .italic()
                             .bold()
                             .padding(.trailing, -8)
@@ -131,9 +129,9 @@ struct MapView: View {
                                     .tint(.white)
                                 }
                             }
-                            .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
-                            .padding(.bottom, 30)
                         }
+                        .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
+                        .padding(.bottom, 30)
                     }
                     
                     if (viewModel.showBookmarks) {

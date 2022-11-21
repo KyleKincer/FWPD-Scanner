@@ -13,14 +13,14 @@ struct OldNotificationSettingsView: View {
     @AppStorage("scanOn") var scanning = false
     @State var selectAll = true
     @State var selection = Set<String>()
-    @Binding var showNotificationSheet : Bool
+    @Binding var showNotificationView : Bool
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
                     withAnimation {
-                        showNotificationSheet.toggle()
+                        showNotificationView.toggle()
                         updateSubscription(viewModel: viewModel, selection: selection)
                     }
                 }, label: {
@@ -86,6 +86,6 @@ struct OldNotificationSettingsView: View {
 
 struct OldNotificatonSettingsViewPreviews: PreviewProvider {
     static var previews: some View {
-        OldNotificationSettingsView(viewModel: MainViewModel(), showNotificationSheet: .constant(true))
+        OldNotificationSettingsView(viewModel: MainViewModel(), showNotificationView: .constant(true))
     }
 }

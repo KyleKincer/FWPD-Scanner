@@ -43,13 +43,13 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    Text("One-Time Disclaimer")
+                    Text("One-Time Disclaimer:")
                         .fontWeight(.bold)
                     
                     Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: false)
-                        .padding(.horizontal, 30)
+                        .padding(.horizontal, 50)
                     
                     Text("If you are experiencing an emergency, dial 911.")
                         .fontWeight(.bold)
@@ -63,7 +63,9 @@ struct OnboardingView: View {
                 
                 Button(action: {
                     playHaptic()
-                    onboarding = false
+                    withAnimation {
+                        onboarding = false
+                    }
                 }, label: {
                     ZStack {
                         Capsule()

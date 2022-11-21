@@ -15,7 +15,7 @@ struct LocationDisclaimerView: View {
             Capsule()
                     .fill(Color.secondary)
                     .frame(width: 30, height: 3)
-                    .padding(10)
+                    .padding(20)
             
             Spacer()
             

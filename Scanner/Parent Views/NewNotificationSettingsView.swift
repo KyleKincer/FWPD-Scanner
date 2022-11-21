@@ -10,21 +10,21 @@ import SwiftUI
 @available(iOS 16.1, *)
 struct NewNotificationSettingsView: View {
     var viewModel: MainViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
     @AppStorage("enableLiveActivities") var live = true
     @AppStorage("scanOn") var scanning = false
     @State var helper = LiveActivityHelper()
     @State var selectAll = true
-    @State var selection = Set<String
-    >()
+    @State var selection = Set<String>()
     @State var showScanningInfo = false
-    @Binding var showNotificationSheet : Bool
+    @Binding var showNotificationView : Bool
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
                     withAnimation {
-                        showNotificationSheet.toggle()
+                        showNotificationView.toggle()
                         updateSubscription(viewModel: viewModel, selection: selection)
                         
                         updateLiveActivitySubscription(viewModel: viewModel)
@@ -41,7 +41,7 @@ struct NewNotificationSettingsView: View {
                 .padding([.leading, .top])
                 
                 Spacer()
-
+                
             }
             .padding(.horizontal)
             
@@ -52,37 +52,39 @@ struct NewNotificationSettingsView: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
             
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        scanning.toggle()
-                    }
-                    
-                    if (scanning) {
-                        helper.start()
-                    } else {
-                        helper.end()
-                    }
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
-                            .foregroundColor(scanning ? .red : .blue)
-                            .frame(width: 200, height: 50)
+            if (sizeClass == .compact) {
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            scanning.toggle()
+                        }
                         
-                        Text(scanning ? "Disable Scanning Mode" : "Enable Scanning Mode")
-                            .foregroundColor(.white)
-                    }
-                })
-                
-                Button(action: {
-                    showScanningInfo.toggle()
-                }, label: {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 30))
-                })
-                .padding(.leading, 40)
+                        if (scanning) {
+                            helper.start()
+                        } else {
+                            helper.end()
+                        }
+                    }, label: {
+                        ZStack {
+                            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+                                .foregroundColor(scanning ? .red : .blue)
+                                .frame(width: 200, height: 50)
+                            
+                            Text(scanning ? "Disable Scanning Mode" : "Enable Scanning Mode")
+                                .foregroundColor(.white)
+                        }
+                    })
+                    
+                    Button(action: {
+                        showScanningInfo.toggle()
+                    }, label: {
+                        Image(systemName: "info.circle")
+                            .font(.system(size: 30))
+                    })
+                    .padding(.leading, 40)
+                }
+                .padding(.bottom, 20)
             }
-            .padding(.bottom, 20)
             
             Spacer()
             
@@ -122,7 +124,7 @@ struct NewNotificationSettingsView: View {
         .interactiveDismissDisabled()
         .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island.", isPresented: $showScanningInfo) {
             Button("OK", role: .cancel) { }
-                }
+        }
     }
 }
 
@@ -142,6 +144,6 @@ func updateLiveActivitySubscription(viewModel: MainViewModel) {
 @available(iOS 16.1, *)
 struct NewNotificatonSettingsViewPreviews: PreviewProvider {
     static var previews: some View {
-        NewNotificationSettingsView(viewModel: MainViewModel(), showNotificationSheet: .constant(true))
+        NewNotificationSettingsView(viewModel: MainViewModel(), showNotificationView: .constant(true))
     }
 }

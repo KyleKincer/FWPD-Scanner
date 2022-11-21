@@ -38,7 +38,6 @@
 		EB15898129242B4F0009F60D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */; };
 		EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
-		EB15898529242D390009F60D /* NotificationsComingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15898429242D390009F60D /* NotificationsComingView.swift */; };
 		EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB158992292538D20009F60D /* WatchOnboardingView.swift */; };
 		EB15899B292544080009F60D /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15899A292544080009F60D /* ScannerTVApp.swift */; };
@@ -60,10 +59,7 @@
 		EB1589BF292544F60009F60D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589BE292544F60009F60D /* NetworkManager.swift */; };
 		EB1589C0292545190009F60D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
 		EB1589C1292545290009F60D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
-		EB1589C2292545F90009F60D /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EB1589C32925482C0009F60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
-		EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35728E51396009B593F /* StandardSizeView.swift */; };
-		EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
@@ -99,10 +95,11 @@
 		EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBA6ECD62920130C00805610 /* FirebaseMessaging */; };
 		EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EBA6ECDA292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
+		EBBBCE2F292AE5500015E4C1 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */; };
+		EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
-		EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,7 +157,6 @@
 		EB15897529242B110009F60D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB15897929242B370009F60D /* WatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
 		EB15897A29242B370009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		EB15898429242D390009F60D /* NotificationsComingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsComingView.swift; sourceTree = "<group>"; };
 		EB15898B292430D80009F60D /* GeoFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GeoFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB158992292538D20009F60D /* WatchOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchOnboardingView.swift; path = "watchScanner Watch App/WatchOnboardingView.swift"; sourceTree = SOURCE_ROOT; };
 		EB158998292544080009F60D /* ScannerTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScannerTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,8 +173,6 @@
 		EB1589AF292544790009F60D /* TVStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVStatusView.swift; sourceTree = "<group>"; };
 		EB1589B0292544790009F60D /* TVOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVOnboardingView.swift; sourceTree = "<group>"; };
 		EB1589BE292544F60009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		EB1CC35728E51396009B593F /* StandardSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSizeView.swift; sourceTree = "<group>"; };
-		EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSizeView.swift; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedDetailView.swift; sourceTree = "<group>"; };
 		EB346CB828FA407200693F59 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
@@ -214,10 +208,13 @@
 		EBA0647828FF4D1E00B42676 /* LockScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldNotificationSettingsView.swift; sourceTree = "<group>"; };
 		EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EBBBCE2A2927F3CB0015E4C1 /* scannerWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scannerWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		EBBBCE2B2927F3D00015E4C1 /* WatchScanner Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchScanner Watch App.entitlements"; sourceTree = "<group>"; };
+		EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
+		EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshReminderView.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
-		EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Scanner.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +273,7 @@
 		E202F436278E84A7009C0B13 = {
 			isa = PBXGroup;
 			children = (
+				EBBBCE2A2927F3CB0015E4C1 /* scannerWidgetsExtension.entitlements */,
 				E202F441278E84A7009C0B13 /* Scanner */,
 				EB158999292544080009F60D /* ScannerTV */,
 				EB15895C29242A550009F60D /* WatchScanner Watch App */,
@@ -302,7 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */,
-				EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */,
 				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
@@ -338,6 +335,7 @@
 		EB15895C29242A550009F60D /* WatchScanner Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				EBBBCE2B2927F3D00015E4C1 /* WatchScanner Watch App.entitlements */,
 				EB15897829242B370009F60D /* Models */,
 				EB15897129242AA20009F60D /* WatchScannerApp.swift */,
 				EB57DA1528E78D0C0031B68A /* WatchMainView.swift */,
@@ -412,12 +410,13 @@
 			isa = PBXGroup;
 			children = (
 				EB1CC35B28E5158F009B593F /* MainView.swift */,
-				EB1CC35728E51396009B593F /* StandardSizeView.swift */,
 				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
-				EB57406928E617A0009FDA3D /* ActivityView.swift */,
-				EB397D2B28F8AC2900E7178F /* StatusView.swift */,
-				EB1CC35928E514B5009B593F /* ExpandedSizeView.swift */,
 				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
+				EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */,
+				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
+				EB397D2B28F8AC2900E7178F /* StatusView.swift */,
+				EB57406928E617A0009FDA3D /* ActivityView.swift */,
+				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
 			);
 			path = "Major Views";
 			sourceTree = "<group>";
@@ -426,12 +425,12 @@
 			isa = PBXGroup;
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
-				EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */,
-				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
-				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
-				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
-				EB15898429242D390009F60D /* NotificationsComingView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
+				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
+				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
+				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
+				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
+				E264494F2796487200685DAB /* ActivityRowView.swift */,
 			);
 			path = "Parent Views";
 			sourceTree = "<group>";
@@ -479,14 +478,12 @@
 		EBB42E4428F65D2100F32BD8 /* Child Views */ = {
 			isa = PBXGroup;
 			children = (
-				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
-				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
-				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
+				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
-				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
-				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
+				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
+				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
 			);
 			path = "Child Views";
 			sourceTree = "<group>";
@@ -738,8 +735,8 @@
 			files = (
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
+				EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
-				EB15898529242D390009F60D /* NotificationsComingView.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
 				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
@@ -754,6 +751,7 @@
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
+				EBBBCE2F292AE5500015E4C1 /* BookmarkView.swift in Sources */,
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
@@ -768,9 +766,6 @@
 				EBA0647E28FF4D3200B42676 /* LockScreenView.swift in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
-				EB1CC35828E51396009B593F /* StandardSizeView.swift in Sources */,
-				EBFFB31C2912077800C5BF65 /* Scanner.xcdatamodeld in Sources */,
-				EB1CC35A28E514B5009B593F /* ExpandedSizeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,7 +804,6 @@
 				EB1589C0292545190009F60D /* MainViewModel.swift in Sources */,
 				EB1589B7292544790009F60D /* TVOnboardingView.swift in Sources */,
 				EB1589BA292544CA0009F60D /* MapViewModel.swift in Sources */,
-				EB1589C2292545F90009F60D /* LocationDisclaimerView.swift in Sources */,
 				EB1589B1292544790009F60D /* TVMapAnnotationView.swift in Sources */,
 				EB1589BC292544E40009F60D /* ScannerModel.swift in Sources */,
 				EB1589B6292544790009F60D /* TVStatusView.swift in Sources */,
@@ -984,7 +978,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -997,7 +991,7 @@
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1005,7 +999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
@@ -1032,7 +1026,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1045,7 +1039,7 @@
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1053,7 +1047,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner;
@@ -1076,8 +1070,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1088,7 +1083,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
 				PRODUCT_NAME = "FWPD Scanner";
 				SDKROOT = watchos;
@@ -1107,8 +1102,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1119,7 +1115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
 				PRODUCT_NAME = "FWPD Scanner";
 				SDKROOT = watchos;
@@ -1139,7 +1135,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1152,7 +1148,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1171,7 +1167,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1184,7 +1180,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1202,9 +1198,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = scannerWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;
@@ -1216,7 +1213,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.scannerWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1233,9 +1230,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = scannerWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;
@@ -1247,7 +1245,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.Scanner.scannerWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1340,19 +1338,6 @@
 			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		EBFFB31A2912077800C5BF65 /* Scanner.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */,
-			);
-			currentVersion = EBFFB31B2912077800C5BF65 /* Scanner.xcdatamodel */;
-			path = Scanner.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E202F437278E84A7009C0B13 /* Project object */;
 }
