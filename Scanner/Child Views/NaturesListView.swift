@@ -23,6 +23,7 @@ struct NaturesList: View {
                         viewModel.useNature = false
                         selection.insert("None")
                     }
+                    viewModel.refresh()
                     dismiss()
                 } label: {
                     Text("Apply")

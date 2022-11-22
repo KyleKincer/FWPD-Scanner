@@ -99,6 +99,8 @@
 		EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */; };
 		EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
+		EBD612A2292C1E8100FE9037 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */; };
+		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
 /* End PBXBuildFile section */
@@ -227,6 +229,7 @@
 			files = (
 				EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */,
 				EBA6ECD52920130C00805610 /* FirebaseFirestore in Frameworks */,
+				EBD612A2292C1E8100FE9037 /* FirebaseAnalytics in Frameworks */,
 				08875E1AB8E55DE2DC319B50 /* Pods_Scanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,12 +279,12 @@
 		E202F436278E84A7009C0B13 = {
 			isa = PBXGroup;
 			children = (
-				EBBBCE2A2927F3CB0015E4C1 /* scannerWidgetsExtension.entitlements */,
 				EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */,
 				E202F441278E84A7009C0B13 /* Scanner */,
 				EB158999292544080009F60D /* ScannerTV */,
 				EB15895C29242A550009F60D /* WatchScanner Watch App */,
 				EBA0646428FF4C2F00B42676 /* scannerWidgets */,
+				EBBBCE2A2927F3CB0015E4C1 /* scannerWidgetsExtension.entitlements */,
 				EB98F86828E8C3B7009AC6B1 /* Frameworks */,
 				E202F440278E84A7009C0B13 /* Products */,
 				4FF1AD4D21DDA7CE589A35A0 /* Pods */,
@@ -516,6 +519,7 @@
 			packageProductDependencies = (
 				EBA6ECD42920130C00805610 /* FirebaseFirestore */,
 				EBA6ECD62920130C00805610 /* FirebaseMessaging */,
+				EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */,
 			);
 			productName = Scanner;
 			productReference = E202F43F278E84A7009C0B13 /* Scanner.app */;
@@ -810,6 +814,7 @@
 				EB1589C0292545190009F60D /* MainViewModel.swift in Sources */,
 				EB1589B7292544790009F60D /* TVOnboardingView.swift in Sources */,
 				EB1589BA292544CA0009F60D /* MapViewModel.swift in Sources */,
+				EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */,
 				EB1589B1292544790009F60D /* TVMapAnnotationView.swift in Sources */,
 				EB1589BC292544E40009F60D /* ScannerModel.swift in Sources */,
 				EB1589B6292544790009F60D /* TVStatusView.swift in Sources */,
@@ -1346,6 +1351,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

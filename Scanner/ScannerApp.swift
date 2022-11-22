@@ -13,10 +13,12 @@ import UserNotifications
 struct ScannerApp: App {
     // Register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var viewModel = MainViewModel()
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(viewModel: viewModel)
+                .environmentObject(appDelegate)
                 .onAppear {
                     print("! --- APP STARTING")
                 }
@@ -24,7 +26,10 @@ struct ScannerApp: App {
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
+    @Published var openedFromNotification : Bool = false
+    @Published var notificationActivity : Scanner.Activity = Scanner.Activity(id: "0", timestamp: "", nature: "", address: "", location: "", controlNumber: "", longitude: 0.0, latitude: 0.0)
+    
     let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -50,14 +55,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
+    // Handle notification
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("M - Message ID: \(messageID)")
+        }
 
-      if let messageID = userInfo[gcmMessageIDKey] {
-        print("M - Message ID: \(messageID)")
-      }
-
-      print(userInfo)
+        print(userInfo)
+        
+        self.openedFromNotification = true
+        
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -106,8 +115,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     if let messageID = userInfo[gcmMessageIDKey] {
       print("M - Message ID from userNotificationCenter didReceive: \(messageID)")
     }
-
-    print(userInfo)
+      
+      self.openedFromNotification = true
+      print(userInfo.keys)
+      print(userInfo["aps"]!)
+      self.notificationActivity.controlNumber = "18F113407"
+      print(userInfo)
 
     completionHandler()
   }

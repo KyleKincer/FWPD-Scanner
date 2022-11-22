@@ -43,24 +43,22 @@ struct ListView: View {
                                 ActivityRowView(activity: activity, viewModel: viewModel)
                                 
                                 if (activity == viewModel.activities.last && !viewModel.useLocation) {
-                                    Section {
-                                        if (viewModel.isLoading) {
-                                            ProgressView()
+                                    if (viewModel.isLoading) {
+                                        ProgressView()
+                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                            .listRowSeparator(.hidden)
+                                    } else {
+                                        HStack (alignment: .center){
+                                            Text("Get More")
+                                                .bold()
+                                                .italic()
+                                                .foregroundColor(.blue)
                                                 .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                .listRowSeparator(.hidden)
-                                        } else {
-                                            HStack (alignment: .center){
-                                                Text("Get More")
-                                                    .bold()
-                                                    .italic()
-                                                    .foregroundColor(.blue)
-                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                            }
-                                            .onTapGesture {
-                                                viewModel.getMoreActivities()
-                                            }
-                                            
                                         }
+                                        .onTapGesture {
+                                            viewModel.getMoreActivities()
+                                        }
+                                        
                                     }
                                 }
                             }

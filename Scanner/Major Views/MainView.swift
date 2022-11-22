@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
-    
-    @StateObject var viewModel = MainViewModel()
+    @EnvironmentObject private var appDelegate: AppDelegate
+    @State var viewModel : MainViewModel
     @AppStorage("showDistance") var showDistance = true
     @AppStorage("onboarding") var onboarding = true
     @State private var showFilter = false
@@ -29,6 +29,7 @@ struct MainView: View {
                     StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
                     
                     ActivityView(showMap: $showMap, viewModel: viewModel)
+                        .environmentObject(appDelegate)
                     
                 } else {
                     VStack {
@@ -38,6 +39,7 @@ struct MainView: View {
                             .padding(0)
                         
                         ActivityView(showMap: $showMap, viewModel: viewModel)
+                            .environmentObject(appDelegate)
                             .padding(.top, -8)
                     }
                 }
@@ -77,10 +79,10 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         
-        MainView()
+        MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
             .previewDisplayName("iPhone 13 mini")
-        MainView()
+        MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

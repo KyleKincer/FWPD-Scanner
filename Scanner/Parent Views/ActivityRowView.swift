@@ -42,7 +42,7 @@ struct ActivityRowView: View {
                         
                         Spacer()
                         
-                        Text(activity.location.capitalized)
+                        Text(activity.location.capitalized == "Unorganized" ? "" : activity.location.capitalized)
                         
                     }
                     .font(.footnote)

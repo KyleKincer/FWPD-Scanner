@@ -25,9 +25,9 @@ final class MainViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     
     // Filters
-    @Published var selectedNatures = Set<String>() { didSet{ refresh() }}
+    @Published var selectedNatures = Set<String>()
     @Published var selectedNaturesString = [String]()
-    @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
+    @Published var notificationNatures = Set<String>()
     @Published var notificationNaturesString = [String]()
     @AppStorage("notificationNatures") var notificationNaturesUD = String()
     @AppStorage("useLocation") var useLocation = false
@@ -81,6 +81,7 @@ final class MainViewModel: ObservableObject {
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
+        self.refresh()
     }
        
     func refresh() {

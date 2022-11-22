@@ -139,9 +139,9 @@ struct NewNotificationSettingsView: View {
             }
         }
         .interactiveDismissDisabled()
-        .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island. Any filtering applied to notifications will apply here as well.", isPresented: $showScanningInfo) {
-            Button("OK", role: .cancel) { }
-        }
+//        .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island. Any filtering applied to notifications will apply here as well.", isPresented: $showScanningInfo) {
+//            Button("OK", role: .cancel) { }
+//        }
         .onChange(of: selectAll, perform: { _ in
             if (!selectAll) {
                 
