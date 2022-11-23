@@ -62,7 +62,7 @@ struct ListView: View {
                                     }
                                 }
                             }
-                            .navigationBarTitleDisplayMode(.automatic)
+                            .navigationBarTitleDisplayMode(.inline)
                             .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                             .refreshable {
                                 viewModel.refresh()

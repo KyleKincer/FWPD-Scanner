@@ -15,6 +15,8 @@ struct StandardNavBarView: View {
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
+    @AppStorage("newToNots") var newToNots = true
+    @State private var bellJingle = false
     @Environment(\.horizontalSizeClass) var sizeClass
     
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -78,11 +80,22 @@ struct StandardNavBarView: View {
                 
                 Button(action: {
                     playHaptic()
+                    newToNots = false
+                    bellJingle = false
                     withAnimation {
                         showNotificationSheet.toggle()
                     }
                 }, label: {
                     Image(systemName: "bell")
+                        .shadow(radius: 2)
+                        .rotationEffect(.degrees(bellJingle ? 5 : -5))
+                        //.rotation3DEffect(.degrees(5), axis: (x: 0, y: -5, z: 0))
+                        .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                        .onAppear() {
+                            if (newToNots) {
+                                bellJingle = true
+                            }
+                        }
                 })
                 .font(.system(size: 25))
                 .foregroundColor(.red)
