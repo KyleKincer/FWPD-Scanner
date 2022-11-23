@@ -15,10 +15,11 @@ struct NewNotificationSettingsView: View {
     @AppStorage("scanOn") var scanning = false
     @State var helper = LiveActivityHelper()
     @AppStorage("subToAll") var selectAll = false
-    @State var selection = Set<String>()
-    @State var showScanningInfo = false
-    @State var notifications = SubscriptionManager()
+    @State private var selection = Set<String>()
+    @State private var showScanningInfo = false
+    @State private var notifications = SubscriptionManager()
     @Binding var showNotificationView : Bool
+    @State private var searchText = ""
     
     var body: some View {
         VStack {
@@ -51,49 +52,11 @@ struct NewNotificationSettingsView: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
             
-//            if (sizeClass == .compact) {
-//                HStack {
-//
-//                    Text("Scanning Mode: Coming Soon")
-//                        .bold()
-//                    Button(action: {
-//                        withAnimation {
-//                            scanning.toggle()
-//                        }
-//
-//                        if (scanning) {
-//                            helper.start()
-//                        } else {
-//                            helper.end()
-//                        }
-//                    }, label: {
-//                        ZStack {
-//                            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
-//                                .foregroundColor(scanning ? .red : .blue)
-//                                .frame(width: 200, height: 50)
-//
-//                            Text(scanning ? "Disable Scanning Mode" : "Enable Scanning Mode")
-//                                .foregroundColor(.white)
-//                        }
-//                    })
-//
-//                    Button(action: {
-//                        showScanningInfo.toggle()
-//                    }, label: {
-//                        Image(systemName: "info.circle")
-//                            .font(.system(size: 30))
-//                    })
-//                    .padding(.leading, 40)
-//                }
-//                .padding(.vertical, 20)
-//            }
-
-
             Toggle("Notify Of All Activity", isOn: $selectAll)
                 .padding(.horizontal, 50)
                 .padding(.vertical)
                 .bold()
-
+            
             if (!selectAll) {
                 
                 Divider()
@@ -116,15 +79,20 @@ struct NewNotificationSettingsView: View {
                     .padding(.horizontal)
                 }
                 .padding(.horizontal, 50)
-                    
+                
+                TextField("Search", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
+                
                 List(selection: $selection, content: {
-                    ForEach(viewModel.natures, id: \.name) { nature in
+                    ForEach(searchResults, id: \.name) { nature in
                         Text(nature.name == "" ? "Unknown" : nature.name.capitalized)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
                     }
                 })
                 .environment(\.editMode, .constant(EditMode.active))
+                
             } else {
                 Text("Note: This will result in many notifications. To receive fewer notifications, disable the toggle and select specific activty natures!")
                     .padding()
@@ -139,9 +107,9 @@ struct NewNotificationSettingsView: View {
             }
         }
         .interactiveDismissDisabled()
-//        .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island. Any filtering applied to notifications will apply here as well.", isPresented: $showScanningInfo) {
-//            Button("OK", role: .cancel) { }
-//        }
+        //        .alert("Scanning Mode provides the most recent information in the form of a Live Activity widget on the Lock Screen and, where available, the Dynamic Island. Any filtering applied to notifications will apply here as well.", isPresented: $showScanningInfo) {
+        //            Button("OK", role: .cancel) { }
+        //        }
         .onChange(of: selectAll, perform: { _ in
             if (!selectAll) {
                 
@@ -188,6 +156,15 @@ struct NewNotificationSettingsView: View {
             } else {
                 notifications.subscribeToAll()
             }
+        }
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
         }
     }
 }

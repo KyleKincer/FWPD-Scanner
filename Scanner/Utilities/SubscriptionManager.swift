@@ -20,7 +20,15 @@ class SubscriptionManager {
         for nature in natures {
             
             // Remove whitespace
-            let topicName = nature.replacingOccurrences(of: " ", with: "")
+            let topicName = nature
+                .replacingOccurrences(of: " ", with: "")
+                .replacingOccurrences(of: "-", with: "")
+                .replacingOccurrences(of: "/", with: "")
+                .replacingOccurrences(of: "\\", with: "")
+                .replacingOccurrences(of: ")", with: "")
+                .replacingOccurrences(of: "(", with: "")
+                .replacingOccurrences(of: ",", with: "")
+            
             Messaging.messaging().subscribe(toTopic: topicName) { error in
                 print("Subscribed to \(topicName) topic")
             }
@@ -48,22 +56,5 @@ class SubscriptionManager {
         Messaging.messaging().unsubscribe(fromTopic: "ALL") { error in
             print("Unbsubscribed from All topic")
         }
-    }
-    
-    func subscribeLiveActivity(token: String, natures: [String]) {
-        db.collection("LATokens").document(token).setData([
-            "token": "\(token)",
-            "natures": "\(natures)"
-        ]) { err in
-            if let err = err {
-                print("X - Error writing document: \(err)")
-            } else {
-                print("G - Live Activity Updated")
-            }
-        }
-    }
-    
-    func unsubscribeLiveActivity(token: String) {
-        db.collection("LATokens").document(token).delete()
     }
 }

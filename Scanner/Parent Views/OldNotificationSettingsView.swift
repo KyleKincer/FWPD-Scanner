@@ -17,6 +17,7 @@ struct OldNotificationSettingsView: View {
     @State var showScanningInfo = false
     @State var notifications = SubscriptionManager()
     @Binding var showNotificationView : Bool
+    @State private var searchText = ""
     
     var body: some View {
         VStack {
@@ -73,8 +74,12 @@ struct OldNotificationSettingsView: View {
                 }
                 .padding(.horizontal, 50)
                     
+                TextField("Search", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
+                
                 List(selection: $selection, content: {
-                    ForEach(viewModel.natures, id: \.name) { nature in
+                    ForEach(searchResults, id: \.name) { nature in
                         Text(nature.name == "" ? "Unknown" : nature.name.capitalized)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
@@ -141,6 +146,15 @@ struct OldNotificationSettingsView: View {
             } else {
                 notifications.subscribeToAll()
             }
+        }
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
         }
     }
 }

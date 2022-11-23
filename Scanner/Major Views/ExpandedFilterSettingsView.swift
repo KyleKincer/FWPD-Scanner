@@ -20,6 +20,7 @@ struct ExpandedFilterSettings: View {
     @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
+    @State private var searchText = ""
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -154,8 +155,12 @@ struct ExpandedFilterSettings: View {
                         }
                         .padding()
                         
+                        TextField("Search", text: $searchText)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal)
+                        
                         List(selection: $selection, content: {
-                            ForEach(viewModel.natures, id: \.name) { nature in
+                            ForEach(searchResults, id: \.name) { nature in
                                 Text(nature.name.capitalized)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.75)
@@ -223,6 +228,15 @@ struct ExpandedFilterSettings: View {
                 Button("OK", role: .cancel) { }
                     }
         }.interactiveDismissDisabled()
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
+        }
     }
 }
 

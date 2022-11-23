@@ -14,6 +14,7 @@ struct NaturesList: View {
     @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
+    @State private var searchText = ""
     
     var body: some View {
         VStack {
@@ -30,7 +31,7 @@ struct NaturesList: View {
                 }
                 
                 Spacer()
-                
+                           
                 Text("Select Natures")
                     .fontWeight(.semibold)
                     .italic()
@@ -46,8 +47,12 @@ struct NaturesList: View {
             }
             .padding()
             
+            TextField("Search", text: $searchText)
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal)
+            
             List(selection: $selection, content: {
-                ForEach(viewModel.natures, id: \.name) { nature in
+                ForEach(searchResults, id: \.name) { nature in
                     Text(nature.name.capitalized)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
@@ -83,6 +88,15 @@ struct NaturesList: View {
         .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
             Button("OK", role: .cancel) { }
                 }
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
+        }
     }
 }
 
