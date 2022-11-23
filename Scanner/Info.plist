@@ -15,5 +15,10 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>launchicon</string>
+	</dict>
 </dict>
 </plist>
