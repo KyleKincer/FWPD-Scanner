@@ -141,7 +141,6 @@ struct ExpandedFilterSettings: View {
                     if (viewModel.useNature) {
                         HStack {                            
                             Text("Select Natures")
-                                .italic()
                                 .padding(.leading, -18)
                             
                             Spacer()
@@ -151,7 +150,7 @@ struct ExpandedFilterSettings: View {
                             } label: {
                                 Text("Clear")
                             }
-                            .disabled(selection.count == 0 || selection.first == "None")
+                            .disabled(selection.count == 0 || selection.first == "")
                         }
                         .padding()
                         
@@ -166,8 +165,8 @@ struct ExpandedFilterSettings: View {
                                     .minimumScaleFactor(0.75)
                             }
                         })
+                        .frame(height: 500)
                         .environment(\.editMode, .constant(EditMode.active))
-                        .frame(height: 800)
                         .onAppear {
                             let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                             selection = Set(selectionArray)
@@ -223,7 +222,6 @@ struct ExpandedFilterSettings: View {
                     print("R - Refreshed via Filters")
                 }
             }
-            .frame(width: 500)
             .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
                 Button("OK", role: .cancel) { }
                     }

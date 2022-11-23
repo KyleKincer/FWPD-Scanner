@@ -66,7 +66,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         print(userInfo)
         
         self.openedFromNotification = true
-        
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -77,6 +76,7 @@ extension AppDelegate: MessagingDelegate {
 
       let deviceToken:[String: String] = ["token": fcmToken ?? ""]
         print("M - Device token: ", deviceToken) // This token can be used for testing notifications on FCM
+
     }
 }
 

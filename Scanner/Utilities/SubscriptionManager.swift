@@ -12,7 +12,6 @@ import FirebaseFirestore
 class SubscriptionManager {
     
     let db = Firestore.firestore() //Firestore Initialization
-    
     // Notifications
     
     // Subscribe to topics

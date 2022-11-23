@@ -73,6 +73,7 @@ struct StandardNavBarView: View {
                     }
                     .onLongPressGesture {
                         onboarding = true
+                        newToNots = true
                     }
                     .minimumScaleFactor(0.5)
                 
