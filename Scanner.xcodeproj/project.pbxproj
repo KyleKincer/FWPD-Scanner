@@ -22,6 +22,7 @@
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 		EAA940BEBDCB0FF959949C17 /* Pods_scannerWidgetsExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673132D6587E7C28732BD43D /* Pods_scannerWidgetsExtension.framework */; };
+		EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB136E12292DC53E00CA905D /* NotificationView.swift */; };
 		EB15896929242A720009F60D /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
 		EB15896A29242A720009F60D /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
 		EB15896B29242A720009F60D /* WatchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA1528E78D0C0031B68A /* WatchMainView.swift */; };
@@ -154,6 +155,7 @@
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		E4126EF435D5649C86E63EB0 /* Pods_ScannerTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScannerTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB136E12292DC53E00CA905D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		EB15895B29242A550009F60D /* FWPD Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FWPD Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB15897129242AA20009F60D /* WatchScannerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchScannerApp.swift; sourceTree = "<group>"; };
 		EB15897329242AB60009F60D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
+				EB136E12292DC53E00CA905D /* NotificationView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
@@ -751,6 +754,7 @@
 				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
 				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
+				EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */,
 				EBA0647A28FF4D1E00B42676 /* BottomView.swift in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
