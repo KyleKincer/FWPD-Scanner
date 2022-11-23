@@ -117,11 +117,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
       
       self.openedFromNotification = true
-      print(userInfo.keys)
-      print(userInfo["aps"]!)
-      self.notificationActivity.controlNumber = "18F113407"
-      print(userInfo)
-
+      let values = userInfo.values
+      self.notificationActivity.controlNumber = userInfo["controlNumber"] as! String
+      
     completionHandler()
   }
 }

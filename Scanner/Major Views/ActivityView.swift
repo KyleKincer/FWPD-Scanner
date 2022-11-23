@@ -108,12 +108,13 @@ struct ActivityView: View {
                                 Text("Select an event to view details")
                                     .padding(20)
                                     .fontWeight(.semibold)
+                                    .font(.system(size: 30))
                                 
                                 Image(systemName: "square.stack.3d.down.forward.fill")
-                                    .scaleEffect(3)
                                     .padding(20)
+                                    .font(.system(size: 50))
                                 
-                            }.font(.system(size: 30))
+                            }
                         }
                         .navigationSplitViewStyle(.balanced)
                         .navigationBarTitleDisplayMode(.inline)
