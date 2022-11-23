@@ -41,34 +41,38 @@ struct ListView: View {
                         NavigationView {
                             List(viewModel.activities, id: \.self) { activity in
                                 ActivityRowView(activity: activity, viewModel: viewModel)
-                                
-                                if (activity == viewModel.activities.last && !viewModel.useLocation) {
-                                    Section {
-                                        if (viewModel.isLoading) {
-                                            ProgressView()
-                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                .listRowSeparator(.hidden)
-                                        } else {
-                                            HStack (alignment: .center){
-                                                Text("Get More")
-                                                    .bold()
-                                                    .italic()
-                                                    .foregroundColor(.blue)
-                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                            }
-                                            .onTapGesture {
-                                                viewModel.getMoreActivities()
-                                            }
-                                            
-                                        }
-                                    }
-                                }
                             }
-                            .navigationBarTitleDisplayMode(.inline)
+                            .listStyle(.sidebar)
+                            .id(UUID())
+                            .navigationBarTitleDisplayMode(.automatic)
                             .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                             .refreshable {
                                 viewModel.refresh()
+
                             }
+                            
+                            
+                            Section {
+                                if (viewModel.isLoading) {
+                                    ProgressView()
+                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        .listRowSeparator(.hidden)
+                                } else {
+                                    HStack (alignment: .center){
+                                        Text("Get More")
+                                            .bold()
+                                            .italic()
+                                            .foregroundColor(.blue)
+                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                    }
+                                    .onTapGesture {
+                                        viewModel.getMoreActivities()
+                                    }
+                                    
+                                }
+                            }
+                            
+                            
                         }
                     }
                 }

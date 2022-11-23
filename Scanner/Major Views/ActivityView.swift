@@ -21,7 +21,6 @@ struct ActivityView: View {
     
     var body: some View {
         ZStack {
-            colorScheme == .light ? Color.white : Color.black // Background
             if (appDelegate.openedFromNotification) {
                 ZStack {
                     NotificationView(viewModel: viewModel, activity: $appDelegate.notificationActivity)
@@ -49,57 +48,180 @@ struct ActivityView: View {
                 }
                 
             } else {
-                // StatusView if necessary
-                if (viewModel.isRefreshing || (!viewModel.showBookmarks && !viewModel.serverResponsive)) {
-                    StatusView(viewModel: viewModel)
-                        .onTapGesture {
-                            withAnimation (.linear(duration: 0.5)) {
-                                viewModel.serverResponsive = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    viewModel.serverResponsive = false
-                                    viewModel.refresh()
+                switch sizeClass {
+                case .compact:
+                    ZStack {
+                        if (showMap) {
+                            MapView(chosenActivity: $chosenActivity, activities: (viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities), viewModel: viewModel)
+                                .edgesIgnoringSafeArea(.all)
+                        }
+                        
+                        if (!showMap) {
+                            VStack {
+                                if (viewModel.isRefreshing) {
+                                    
+                                    Spacer()
+                                    
+                                    StatusView(viewModel: viewModel)
+                                        .onTapGesture {
+                                            if (!viewModel.serverResponsive) {
+                                                withAnimation {
+                                                    viewModel.serverResponsive = true
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                        viewModel.serverResponsive = false
+                                                        viewModel.refresh()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                } else {
+                                    if #available(iOS 16.0, *) {
+                                        NavigationStack {
+                                            ListView(viewModel: viewModel)
+                                        }
+                                        
+                                    } else {
+                                        ListView(viewModel: viewModel)
+                                    }
                                 }
                             }
-                        }
-                    
-                    // MapView if necessary
-                } else if (showMap) {
-                    MapView(chosenActivity: $chosenActivity, activities: (viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities), viewModel: viewModel)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    // Show ListView
-                } else {
-                    if (sizeClass == .compact) {
-                        if #available(iOS 16.0, *) {
-                            NavigationStack {
-                                ListView(viewModel: viewModel)
+                            .onAppear {
+                                chosenActivity = nil
                             }
+                        }
+                    }
+                default:
+                    VStack {
+                        if (showMap) {
+                            MapView(chosenActivity: $chosenActivity, activities: viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities, viewModel: viewModel)
+                                .edgesIgnoringSafeArea(.all)
                             
                         } else {
-                            ListView(viewModel: viewModel)
-                        }
-                    } else {
-                        if #available(iOS 16.0, *) {
-                            NavigationSplitView {
+                            if #available(iOS 16.0, *) {
+                                NavigationSplitView {
+                                    VStack {
+                                        if (viewModel.isRefreshing) {
+                                            Spacer()
+                                            
+                                            StatusView(viewModel: viewModel)
+                                                .onTapGesture {
+                                                    withAnimation (.linear(duration: 0.5)) {
+                                                        viewModel.serverResponsive = true
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                            viewModel.serverResponsive = false
+                                                            viewModel.refresh()
+                                                        }
+                                                    }
+                                                }
+                                            
+                                            Spacer()
+                                        } else if (viewModel.showBookmarks) {
+                                            VStack {
+                                                if (viewModel.bookmarkCount == 0) {
+                                                    Text("No Bookmarks Saved")
+                                                        .foregroundColor(.primary)
+                                                        .font(.system(size: 25))
+                                                        .padding()
+                                                    Image(systemName: "bookmark")
+                                                        .foregroundColor(.orange)
+                                                        .font(.system(size: 20))
+                                                } else if (viewModel.bookmarks.count != viewModel.bookmarkCount) {
+                                                    Text("Gathering Bookmarks")
+                                                        .foregroundColor(.primary)
+                                                        .font(.system(size: 25))
+                                                        .padding()
+                                                    Image(systemName: "bookmark")
+                                                        .foregroundColor(.orange)
+                                                        .font(.system(size: 20))
+                                                }
+                                                
+                                                
+                                                else {
+                                                    List(viewModel.bookmarks) { activity in
+                                                        ActivityRowView(activity: activity, viewModel: viewModel)
+                                                    }
+                                                    
+                                                }
+                                            }
+                                            .onAppear {
+                                                if (viewModel.bookmarkCount != viewModel.bookmarks.count) {
+                                                    viewModel.getBookmarks()
+                                                }
+                                            }
+                                            
+                                            
+                                        } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
+                                            VStack {
+                                                Text("No Matches Found")
+                                                    .font(.system(size: 25))
+                                                
+                                                Text("Adjust your filter settings")
+                                                    .font(.system(size: 15))
+                                                
+                                                ZStack {
+                                                    Image(systemName: "doc.text.magnifyingglass")
+                                                        .foregroundColor(.blue)
+                                                        .font(.system(size: 40))
+                                                        .padding()
+                                                }
+                                            }
+                                            
+                                        } else {
+                                            List(viewModel.activities) { activity in
+                                                ActivityRowView(activity: activity, viewModel: viewModel)
+                                            }
+                                            .refreshable {
+                                                viewModel.refresh()
+                                            }
+                                            
+                                            if (!viewModel.showBookmarks) {
+                                                Section {
+                                                    if (viewModel.isLoading) {
+                                                        ProgressView()
+                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                            .listRowSeparator(.hidden)
+                                                    } else {
+                                                        Text("Get More")
+                                                            .bold()
+                                                            .italic()
+                                                            .foregroundColor(.blue)
+                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                            .onTapGesture {
+                                                                viewModel.getMoreActivities()
+                                                            }
+                                                            .padding(.trailing, -2)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : (viewModel.useDate || viewModel.useNature || viewModel.useLocation ? "Filtered Activity" : "Activity"))
+                                    .navigationBarBackButtonHidden()
+                                }
+                            detail: {
+                                VStack {
+                                    Text("Select an event to view details")
+                                        .italic()
+                                        .bold()
+                                        .padding()
+                                    
+                                    Image(systemName: "mail.stack")
+                                        .font(.system(size: 50))
+                                    
+                                }
+                            }
+                                
+                            .navigationSplitViewStyle(.balanced)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .onAppear {
+                                chosenActivity = nil
+                            }
+                            } else {
                                 ListView(viewModel: viewModel)
                             }
-                        detail: {
-                            VStack {
-                                Text("Select an event to view details")
-                                    .padding(20)
-                                    .fontWeight(.semibold)
-                                    .font(.system(size: 30))
-                                
-                                Image(systemName: "square.stack.3d.down.forward.fill")
-                                    .padding(20)
-                                    .font(.system(size: 50))
-                                
-                            }
-                        }
-                        .navigationSplitViewStyle(.balanced)
-                        .navigationBarTitleDisplayMode(.inline)
-                        } else {
-                            ListView(viewModel: viewModel)
                         }
                     }
                 }

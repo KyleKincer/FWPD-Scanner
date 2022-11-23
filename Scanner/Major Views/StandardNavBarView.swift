@@ -76,6 +76,9 @@ struct StandardNavBarView: View {
                     }
                     .minimumScaleFactor(0.5)
                 
+                
+                
+                
                 Spacer()
                 
                 Button(action: {

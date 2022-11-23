@@ -65,18 +65,13 @@ struct DetailView: View {
                 DetailMapView(viewModel: viewModel, activity: $activity)
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
                     .edgesIgnoringSafeArea(.all)
-                    .onAppear {
-                        viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
-                    }
-                    .onDisappear {
-                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
-                    }
                     .environmentObject(appDelegate)
             }
             .padding(.top, 30)
             .navigationBarTitleDisplayMode(.inline)
             .transition(.slide)
             .onAppear {
+                print("yep")
                 isBookmarked = activity.bookmarked
             }
         }
