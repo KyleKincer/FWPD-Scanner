@@ -48,6 +48,10 @@ struct OldNotificationSettingsView: View {
                 .font(.largeTitle)
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
+            
+            if (selection.count == 0 && !selectAll) {
+                Text("Currently Disabled")
+            }
 
 
             Toggle("Notify Of All Activity", isOn: $selectAll)

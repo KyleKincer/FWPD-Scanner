@@ -12,6 +12,7 @@ struct ListView: View {
     @ObservedObject var viewModel: MainViewModel
     @State var showingRefreshReminder = false
     @State var showRefreshReminderOnActive = false
+    @Environment(\.horizontalSizeClass) var sizeClass
     
     var body: some View {
         ZStack {
@@ -41,6 +42,26 @@ struct ListView: View {
                         NavigationView {
                             List(viewModel.activities, id: \.self) { activity in
                                 ActivityRowView(activity: activity, viewModel: viewModel)
+                                
+                                if (activity == viewModel.activities.last) {
+                                    if (viewModel.isLoading) {
+                                        ProgressView()
+                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                            .listRowSeparator(.hidden)
+                                    } else {
+                                        HStack (alignment: .center){
+                                            Text("Get More")
+                                                .bold()
+                                                .italic()
+                                                .foregroundColor(.blue)
+                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        }
+                                        .onTapGesture {
+                                            viewModel.getMoreActivities()
+                                        }
+
+                                    }
+                                }
                             }
                             .listStyle(.sidebar)
                             .id(UUID())
@@ -50,29 +71,6 @@ struct ListView: View {
                                 viewModel.refresh()
 
                             }
-                            
-                            
-                            Section {
-                                if (viewModel.isLoading) {
-                                    ProgressView()
-                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                        .listRowSeparator(.hidden)
-                                } else {
-                                    HStack (alignment: .center){
-                                        Text("Get More")
-                                            .bold()
-                                            .italic()
-                                            .foregroundColor(.blue)
-                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                    }
-                                    .onTapGesture {
-                                        viewModel.getMoreActivities()
-                                    }
-                                    
-                                }
-                            }
-                            
-                            
                         }
                     }
                 }

@@ -15,8 +15,6 @@ struct ExpandedNavBarView: View {
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
-    @AppStorage("newToNots") var newToNots = true
-    @State private var bellJingle = false
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
@@ -135,28 +133,12 @@ struct ExpandedNavBarView: View {
             Button(action: {
                 withAnimation {
                     showNotificationView.toggle()
-                    newToNots = false
-                    bellJingle = false
                 }
             }, label: {
-                if (newToNots) {
-                    Image(systemName: "bell")
-                        .font(.system(size: 20))
-                        .foregroundColor(.red)
-                        .shadow(radius: 2)
-                        .rotationEffect(.degrees(bellJingle ? 5 : -5))
-                        .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
-                        .onAppear() {
-                            if (newToNots) {
-                                bellJingle = true
-                            }
-                        }
-                } else {
-                    Image(systemName: "bell")
-                        .font(.system(size: 20))
-                        .foregroundColor(.red)
-                        .shadow(radius: 2)
-                }
+                Image(systemName: "bell")
+                    .font(.system(size: 20))
+                    .foregroundColor(.red)
+                    .shadow(radius: 2)
             })
             .frame(width: 50, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)

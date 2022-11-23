@@ -143,7 +143,6 @@ struct ActivityView: View {
                                                     List(viewModel.bookmarks) { activity in
                                                         ActivityRowView(activity: activity, viewModel: viewModel)
                                                     }
-                                                    
                                                 }
                                             }
                                             .onAppear {
@@ -151,7 +150,6 @@ struct ActivityView: View {
                                                     viewModel.getBookmarks()
                                                 }
                                             }
-                                            
                                             
                                         } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
                                             VStack {
@@ -172,29 +170,29 @@ struct ActivityView: View {
                                         } else {
                                             List(viewModel.activities) { activity in
                                                 ActivityRowView(activity: activity, viewModel: viewModel)
-                                            }
-                                            .refreshable {
-                                                viewModel.refresh()
-                                            }
-                                            
-                                            if (!viewModel.showBookmarks) {
-                                                Section {
+                                                
+                                                if (activity == viewModel.activities.last) {
                                                     if (viewModel.isLoading) {
                                                         ProgressView()
                                                             .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                                             .listRowSeparator(.hidden)
                                                     } else {
-                                                        Text("Get More")
-                                                            .bold()
-                                                            .italic()
-                                                            .foregroundColor(.blue)
-                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                            .onTapGesture {
-                                                                viewModel.getMoreActivities()
-                                                            }
-                                                            .padding(.trailing, -2)
+                                                        HStack (alignment: .center){
+                                                            Text("Get More")
+                                                                .bold()
+                                                                .italic()
+                                                                .foregroundColor(.blue)
+                                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                        }
+                                                        .onTapGesture {
+                                                            viewModel.getMoreActivities()
+                                                        }
+
                                                     }
                                                 }
+                                            }
+                                            .refreshable {
+                                                viewModel.refresh()
                                             }
                                         }
                                     }
