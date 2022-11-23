@@ -139,17 +139,24 @@ struct ExpandedNavBarView: View {
                     bellJingle = false
                 }
             }, label: {
-                Image(systemName: "bell")
-                    .font(.system(size: 20))
-                    .foregroundColor(.red)
-                    .shadow(radius: 2)
-                    .rotationEffect(.degrees(bellJingle ? 5 : -5))
-                    .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
-                    .onAppear() {
-                        if (newToNots) {
-                            bellJingle = true
+                if (newToNots) {
+                    Image(systemName: "bell")
+                        .font(.system(size: 20))
+                        .foregroundColor(.red)
+                        .shadow(radius: 2)
+                        .rotationEffect(.degrees(bellJingle ? 5 : -5))
+                        .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                        .onAppear() {
+                            if (newToNots) {
+                                bellJingle = true
+                            }
                         }
-                    }
+                } else {
+                    Image(systemName: "bell")
+                        .font(.system(size: 20))
+                        .foregroundColor(.red)
+                        .shadow(radius: 2)
+                }
             })
             .frame(width: 50, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)

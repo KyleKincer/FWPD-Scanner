@@ -86,16 +86,21 @@ struct StandardNavBarView: View {
                         showNotificationSheet.toggle()
                     }
                 }, label: {
-                    Image(systemName: "bell")
-                        .shadow(radius: 2)
-                        .rotationEffect(.degrees(bellJingle ? 5 : -5))
+                    if (newToNots) {
+                        Image(systemName: "bell")
+                            .shadow(radius: 2)
+                            .rotationEffect(.degrees(bellJingle ? 5 : -5))
                         //.rotation3DEffect(.degrees(5), axis: (x: 0, y: -5, z: 0))
-                        .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
-                        .onAppear() {
-                            if (newToNots) {
-                                bellJingle = true
+                            .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                            .onAppear() {
+                                if (newToNots) {
+                                    bellJingle = true
+                                }
                             }
-                        }
+                    } else {
+                        Image(systemName: "bell")
+                            .shadow(radius: 2)
+                    }
                 })
                 .font(.system(size: 25))
                 .foregroundColor(.red)
