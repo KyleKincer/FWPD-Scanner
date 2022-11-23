@@ -153,6 +153,9 @@ struct ActivityView: View {
                                             
                                         } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
                                             VStack {
+                                                
+                                                Spacer()
+                                                
                                                 Text("No Matches Found")
                                                     .font(.system(size: 25))
                                                 
@@ -165,6 +168,9 @@ struct ActivityView: View {
                                                         .font(.system(size: 40))
                                                         .padding()
                                                 }
+                                                
+                                                Spacer()
+                                                
                                             }
                                             
                                         } else {

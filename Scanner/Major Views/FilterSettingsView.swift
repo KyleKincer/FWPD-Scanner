@@ -125,7 +125,7 @@ struct FilterSettings: View {
                                 showingTypesPopover = true
                             }
                         } label: {
-                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: \(viewModel.selectedNatures.first == "None" ? viewModel.selectedNatures.count - 1 : viewModel.selectedNatures.count)")
+                            Text(viewModel.selectedNatures.isEmpty ? "Filter By Natures" : "Types: \(viewModel.selectedNatures.count - 1)")
                         }
                     }
                 }
@@ -135,7 +135,7 @@ struct FilterSettings: View {
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
                 .onDisappear {
-                    refreshOnExit = false
+                    refreshOnExit = true
                 }
         }
         .onAppear {
@@ -147,6 +147,9 @@ struct FilterSettings: View {
             refreshOnExit = false
             justAppeared1 = true
             justAppeared2 = true
+            if (viewModel.selectedNatures.count == 1) {
+                viewModel.selectedNatures.insert("None")
+            }
         }
         .onDisappear {
             let formatter = DateFormatter()

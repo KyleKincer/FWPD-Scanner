@@ -26,6 +26,9 @@ struct ListView: View {
                     // If count = 0, likely filtered and no applicable results
                     if (viewModel.activities.count == 0) {
                         VStack {
+                            
+                            Spacer()
+                            
                             Text("No Matches Found")
                                 .font(.system(size: 25))
                             
@@ -36,6 +39,8 @@ struct ListView: View {
                                 .foregroundColor(.blue)
                                 .font(.system(size: 40))
                                 .padding()
+                            
+                            Spacer()
                         }
                     // Results
                     } else {

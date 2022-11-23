@@ -108,9 +108,12 @@ class NetworkManager {
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
                 print("F -- Filtering by Nature")
+                var selected = selectedNatures
+                
+                selected?.removeAll(where: {$0 == ""})
                 
                 let query = try await db.collection("activities")
-                    .whereField("nature", in: selectedNatures!)
+                    .whereField("nature", in: selected!)
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
                     .getDocuments(source: .server)
@@ -182,9 +185,12 @@ class NetworkManager {
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
                 print("F -- Filtering By Nature")
+                var selected = selectedNatures
+                
+                selected?.removeAll(where: {$0 == ""})
                 
                 let query = try await db.collection("activities")
-                    .whereField("nature", in: selectedNatures!)
+                    .whereField("nature", in: selected!)
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)

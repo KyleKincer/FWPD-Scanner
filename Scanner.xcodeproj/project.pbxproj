@@ -42,7 +42,6 @@
 		EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB158992292538D20009F60D /* WatchOnboardingView.swift */; };
 		EB15899B292544080009F60D /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15899A292544080009F60D /* ScannerTVApp.swift */; };
-		EB15899F292544080009F60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15899E292544080009F60D /* Assets.xcassets */; };
 		EB1589A2292544080009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1589A1292544080009F60D /* Preview Assets.xcassets */; };
 		EB1589A82925446E0009F60D /* TVActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589A62925446E0009F60D /* TVActivityDetailView.swift */; };
 		EB1589A92925446E0009F60D /* TVRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1589A72925446E0009F60D /* TVRowView.swift */; };
@@ -104,6 +103,7 @@
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* FilterSettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
+		EBFB9ED2292EA7F2002BD3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15899E292544080009F60D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -660,7 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1589A2292544080009F60D /* Preview Assets.xcassets in Resources */,
-				EB15899F292544080009F60D /* Assets.xcassets in Resources */,
+				EBFB9ED2292EA7F2002BD3AA /* Assets.xcassets in Resources */,
 				EB1589C32925482C0009F60D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -993,7 +993,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1042,7 +1042,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1089,7 +1089,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1097,6 +1097,7 @@
 				INFOPLIST_FILE = "WatchScanner-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1122,7 +1123,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1130,6 +1131,7 @@
 				INFOPLIST_FILE = "WatchScanner-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1154,11 +1156,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScannerTV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1186,11 +1189,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScannerTV/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "FWPD Scanner";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1220,7 +1224,7 @@
 				CODE_SIGN_ENTITLEMENTS = scannerWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;
@@ -1252,7 +1256,7 @@
 				CODE_SIGN_ENTITLEMENTS = scannerWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = scannerWidgets/Info.plist;

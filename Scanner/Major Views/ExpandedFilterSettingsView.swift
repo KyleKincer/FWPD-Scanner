@@ -36,6 +36,10 @@ struct ExpandedFilterSettings: View {
                 
                 HStack {
                     Button(action: {
+                        if (selection.count-1 == 0) {
+                            viewModel.useNature = false
+                            selection.insert("None")
+                        }
                         dismiss()
                     }, label: {
                         HStack {
@@ -187,6 +191,9 @@ struct ExpandedFilterSettings: View {
             }
             .environment(\.editMode, .constant(EditMode.active))
             .onAppear {
+                if (viewModel.selectedNatures.count == 1) {
+                    viewModel.selectedNatures.insert("None")
+                }
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd 00:00:01"
                 dateFrom = formatter.date(from: viewModel.dateFrom) ?? Date()

@@ -20,11 +20,13 @@ struct NaturesList: View {
         VStack {
             HStack {
                 Button {
-                    if (selection.count == 0) {
+                    if (selection.count-1  == 0) {
                         viewModel.useNature = false
                         selection.insert("None")
                     }
-                    viewModel.refresh()
+                    viewModel.selectedNatures = selection
+                    viewModel.selectedNaturesString = Array(selection)
+                    viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
                     dismiss()
                 } label: {
                     Text("Apply")
@@ -43,7 +45,7 @@ struct NaturesList: View {
                 } label: {
                     Text("Clear")
                 }
-                .disabled(selection.count == 0 || selection.first == "None")
+                .disabled(selection.count == 0 || selection.first == "")
             }
             .padding()
             
@@ -77,11 +79,6 @@ struct NaturesList: View {
                 selection = Set(selectionArray)
                 viewModel.selectedNatures = selection
                 
-            }
-            .onDisappear {
-                viewModel.selectedNatures = selection
-                viewModel.selectedNaturesString = Array(selection)
-                viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
             }
         }
         .interactiveDismissDisabled()
