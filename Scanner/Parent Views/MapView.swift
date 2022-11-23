@@ -115,6 +115,8 @@ struct MapView: View {
                             if (!viewModel.isLoading) {
                                 withAnimation {
                                     viewModel.getMoreActivities()
+                                    viewModel.addDatesToActivities(setName: "activities")
+                                    viewModel.addDistancesToActivities(setName: "activities")
                                 }
                             }
                             

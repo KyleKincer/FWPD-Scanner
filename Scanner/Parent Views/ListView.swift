@@ -63,13 +63,10 @@ struct ListView: View {
                                     }
                                 }
                             }
-                            .listStyle(.sidebar)
-                            .id(UUID())
                             .navigationBarTitleDisplayMode(.automatic)
                             .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                             .refreshable {
                                 viewModel.refresh()
-
                             }
                         }
                     }

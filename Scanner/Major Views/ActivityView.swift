@@ -168,7 +168,7 @@ struct ActivityView: View {
                                             }
                                             
                                         } else {
-                                            List(viewModel.activities) { activity in
+                                            List(viewModel.activities, id: \.self) { activity in
                                                 ActivityRowView(activity: activity, viewModel: viewModel)
                                                 
                                                 if (activity == viewModel.activities.last) {

@@ -98,8 +98,10 @@ final class MainViewModel: ObservableObject {
                     self.activities.append(contentsOf: newActivities)
                     print("+ --- Got activities")
                     
+                    
                     withAnimation {
                         self.serverResponsive = true
+                        
                         self.addDatesToActivities(setName: "activities")
                         self.addDistancesToActivities(setName: "activities")
                         self.isRefreshing = false
