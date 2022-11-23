@@ -49,10 +49,18 @@ struct MainView: View {
             }
             .sheet(isPresented: $showFilter) {
                 if #available(iOS 16.0, *) {
-                    FilterSettings(viewModel: viewModel)
-                        .presentationDetents([.fraction(0.8)])
+                    if (sizeClass == .compact) {
+                        FilterSettings(viewModel: viewModel)
+                            .presentationDetents([.fraction(0.8)])
+                    } else {
+                        ExpandedFilterSettings(viewModel: viewModel)
+                    }
                 } else {
-                    FilterSettings(viewModel: viewModel)
+                    if (sizeClass == .compact) {
+                        FilterSettings(viewModel: viewModel)
+                    } else {
+                        ExpandedFilterSettings(viewModel: viewModel)
+                    }
                 }
             }
             

@@ -24,28 +24,8 @@ struct ActivityView: View {
             colorScheme == .light ? Color.white : Color.black // Background
             if (appDelegate.openedFromNotification) {
                 ZStack {
-                    DetailView(viewModel: viewModel, activity: $appDelegate.notificationActivity)
-                        .environmentObject(appDelegate)
-                        .onAppear {
-                            Task.init {
-                                do {
-                                    appDelegate.notificationActivity = try await viewModel.networkManager.getActivity(controlNumber: appDelegate.notificationActivity.controlNumber)
-                                    
-                                    let formatter = DateFormatter()
-                                    formatter.dateFormat = "yyyy/MM/dd HH:mm:SS"
-                                appDelegate.notificationActivity.date = formatter.date(from: appDelegate.notificationActivity.timestamp)
-
-
-                                    if let location = viewModel.locationManager.location {
-                                        appDelegate.notificationActivity.distance = ((location.distance(from: CLLocation(latitude: appDelegate.notificationActivity.latitude, longitude: appDelegate.notificationActivity.longitude))) * 0.000621371)
-                                    }
-                                }
-                            }
-                            print("G - Opened from notification")
-                        }
-                        .onDisappear {
-                            viewModel.refresh()
-                        }
+                    NotificationView(viewModel: viewModel, activity: $appDelegate.notificationActivity)
+                        .padding(.top, 25)
                     
                     VStack {
                         HStack {
@@ -62,7 +42,7 @@ struct ActivityView: View {
                             
                             Spacer()
                         }
-                        .padding()
+                        .padding(.horizontal)
                         
                         Spacer()
                     }

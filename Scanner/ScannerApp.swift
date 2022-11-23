@@ -117,7 +117,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
       
       self.openedFromNotification = true
-      let values = userInfo.values
       self.notificationActivity.controlNumber = userInfo["controlNumber"] as! String
       
     completionHandler()

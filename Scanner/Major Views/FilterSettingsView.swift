@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FilterSettings: View {
+    
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var showingTypesPopover = false
