@@ -82,16 +82,9 @@ struct StandardNavBarView: View {
                         showNotificationSheet.toggle()
                     }
                 }, label: {
-                    if (scanning) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 25))
-                            .shadow(radius: 2)
-                    } else {
-                        Image(systemName: "triangle")
-                            .font(.system(size: 25))
-                            .shadow(radius: 2)
-                    }
+                    Image(systemName: "bell")
                 })
+                .font(.system(size: 25))
                 .foregroundColor(.red)
                 
                 Spacer()
