@@ -50,56 +50,57 @@ struct MapView: View {
                             
                         Spacer()
                     }
-                }
                 
-                VStack {
-                    HStack {
+                    VStack {
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Text(chosenActivity!.nature)
+                                .italic()
+                                .bold()
+                                .padding(.trailing, -8)
+                                .lineLimit(1)
+                                .font(.system(size: 20))
+                            
+                            Spacer()
+                            
+                        }.padding(.top)
                         
-                        Spacer()
-                        
-                        Text(chosenActivity!.nature)
-                            .italic()
-                            .bold()
-                            .padding(.trailing, -8)
-                            .lineLimit(1)
-                            .font(.system(size: 20))
-                        
-                        Spacer()
-                        
-                    }.padding(.top)
-                    
-                    HStack {
-                        
-                        Spacer()
-                        
-                        Text(chosenActivity!.address)
-                            .padding(.trailing, -8)
-                            .lineLimit(1)
-                            .font(.system(size: 15))
-                        
-                        if chosenActivity!.distance != nil {
-                            Text(", \(String(format: "%g", round(10 * chosenActivity!.distance!) / 10)) mi away")
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Text(chosenActivity!.address)
                                 .padding(.trailing, -8)
                                 .lineLimit(1)
                                 .font(.system(size: 15))
+                            
+                            if chosenActivity!.distance != nil {
+                                Text(", \(String(format: "%g", round(10 * chosenActivity!.distance!) / 10)) mi away")
+                                    .padding(.trailing, -8)
+                                    .lineLimit(1)
+                                    .font(.system(size: 15))
+                            }
+                            
+                            Spacer()
                         }
+                        .font(.system(size: 10))
+                        
+                        HStack {
+                            
+                            Spacer()
+                            Text("\(chosenActivity!.timestamp) (")
+                                .padding(.trailing, -8.5)
+                            Text(chosenActivity!.date ?? Date(), style: .relative)
+                                .padding(.trailing, -3)
+                            Text("ago)")
+                            Spacer()
+                        }.padding(.bottom)
                         
                         Spacer()
                     }
-                    .font(.system(size: 10))
-                    
-                    HStack {
-                        
-                        Spacer()
-                        Text("\(chosenActivity!.timestamp) (")
-                            .padding(.trailing, -8.5)
-                        Text(chosenActivity!.date ?? Date(), style: .relative)
-                            .padding(.trailing, -3)
-                        Text("ago)")
-                        Spacer()
-                    }.padding(.bottom)
-                    
-                    Spacer()
+                    .shadow(radius: 10)
                 }
             }
             VStack {
@@ -154,9 +155,9 @@ struct MapView: View {
                         }
                         .frame(width: 200, height: 33)
                         .padding(.bottom, 30)
-                            
-                        }
-                
+                        
+                    }
+                    
                     Spacer()
                 
                 }.transition(.move(edge: .top))

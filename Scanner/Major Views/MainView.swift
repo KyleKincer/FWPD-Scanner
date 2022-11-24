@@ -47,7 +47,7 @@ struct MainView: View {
             .onAppear {
                 showDistance = true
             }
-            .sheet(isPresented: $showFilter) {
+            .fullScreenCover(isPresented: $showFilter) {
                 if #available(iOS 16.0, *) {
                     if (sizeClass == .compact) {
                         FilterSettings(viewModel: viewModel)

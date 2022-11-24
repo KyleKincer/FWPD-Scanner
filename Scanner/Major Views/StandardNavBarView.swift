@@ -76,10 +76,7 @@ struct StandardNavBarView: View {
                         newToNots = true
                     }
                     .minimumScaleFactor(0.5)
-                
-                
-                
-                
+ 
                 Spacer()
                 
                 Button(action: {

@@ -13,7 +13,6 @@ struct NewNotificationSettingsView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @AppStorage("enableLiveActivities") var live = true
     @AppStorage("scanOn") var scanning = false
-    @State var helper = LiveActivityHelper()
     @AppStorage("subToAll") var selectAll = false
     @State private var selection = Set<String>()
     @State private var showScanningInfo = false
@@ -27,9 +26,7 @@ struct NewNotificationSettingsView: View {
                 Button(action: {
                     withAnimation {
                         showNotificationView.toggle()
-                        
                     }
-                    
                 }, label: {
                     HStack {
                         Image(systemName: "arrow.left")
