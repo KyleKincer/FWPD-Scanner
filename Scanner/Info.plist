@@ -10,5 +10,15 @@
 	<string>13.0</string>
 	<key>UIApplicationSupportsMultipleScenes</key>
 	<string>NO</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>launchicon</string>
+	</dict>
 </dict>
 </plist>

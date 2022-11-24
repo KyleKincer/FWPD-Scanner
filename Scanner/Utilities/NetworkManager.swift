@@ -18,12 +18,12 @@ class NetworkManager {
     func makeActivity(document: QueryDocumentSnapshot) -> Scanner.Activity {
         let id = document.documentID
         let data = document.data()
-        let location = data["location"] as? String ?? "UNKNOWN"
+        let location = data["location"] as? String ?? "Unknown"
         let address = data["address"] as? String ?? ""
         let timestamp = data["timestamp"] as? String ?? ""
         let controlNumber = data["control_number"] as? String ?? ""
         let longitude = data["longitude"] as? Double ?? 0.0
-        let nature = data["nature"] as? String ?? "UNKNOWN"
+        let nature = data["nature"] as? String ?? "Unknown"
         let latitude = data["latitude"] as? Double ?? 0.0
         let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude)
         
@@ -108,9 +108,12 @@ class NetworkManager {
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
                 print("F -- Filtering by Nature")
+                var selected = selectedNatures
+                
+                selected?.removeAll(where: {$0 == ""})
                 
                 let query = try await db.collection("activities")
-                    .whereField("nature", in: selectedNatures!)
+                    .whereField("nature", in: selected!)
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
                     .getDocuments(source: .server)
@@ -182,9 +185,12 @@ class NetworkManager {
             } else if (filterByNature && selectedNatures!.count > 1 && selectedNatures!.count < 11) {
                 // Natures
                 print("F -- Filtering By Nature")
+                var selected = selectedNatures
+                
+                selected?.removeAll(where: {$0 == ""})
                 
                 let query = try await db.collection("activities")
-                    .whereField("nature", in: selectedNatures!)
+                    .whereField("nature", in: selected!)
                     .order(by: "timestamp", descending: true)
                     .start(afterDocument: self.lastDocument!)
                     .limit(to: 25)
@@ -262,10 +268,9 @@ class NetworkManager {
                 .getDocuments(source: .server)
             
             for nature in query.documents {
-                let data = self.makeNature(document: nature)
-                
-                if (data.name != "") {
-                    natures.append(data)
+                let nature = self.makeNature(document: nature)
+                if (nature.name != "") {
+                    natures.append(nature)
                 }
             }
         } catch {

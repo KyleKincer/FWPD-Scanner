@@ -14,22 +14,26 @@ struct NaturesList: View {
     @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
+    @State private var searchText = ""
     
     var body: some View {
         VStack {
             HStack {
                 Button {
-                    if (selection.count == 0) {
+                    if (selection.count-1  == 0) {
                         viewModel.useNature = false
                         selection.insert("None")
                     }
+                    viewModel.selectedNatures = selection
+                    viewModel.selectedNaturesString = Array(selection)
+                    viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
                     dismiss()
                 } label: {
                     Text("Apply")
                 }
                 
                 Spacer()
-                
+                           
                 Text("Select Natures")
                     .fontWeight(.semibold)
                     .italic()
@@ -41,12 +45,16 @@ struct NaturesList: View {
                 } label: {
                     Text("Clear")
                 }
-                .disabled(selection.count == 0 || selection.first == "None")
+                .disabled(selection.count == 0 || selection.first == "")
             }
             .padding()
             
+            TextField("Search", text: $searchText)
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal)
+            
             List(selection: $selection, content: {
-                ForEach(viewModel.natures, id: \.name) { nature in
+                ForEach(searchResults, id: \.name) { nature in
                     Text(nature.name.capitalized)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
@@ -72,16 +80,20 @@ struct NaturesList: View {
                 viewModel.selectedNatures = selection
                 
             }
-            .onDisappear {
-                viewModel.selectedNatures = selection
-                viewModel.selectedNaturesString = Array(selection)
-                viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
-            }
         }
         .interactiveDismissDisabled()
         .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {
             Button("OK", role: .cancel) { }
                 }
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
+        }
     }
 }
 

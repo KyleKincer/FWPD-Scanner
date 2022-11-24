@@ -17,7 +17,6 @@ final class DetailViewModel: ObservableObject {
     init(activity: Scanner.Activity) {
         self.activity = activity
         self.activityCoordinates = CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)
-        self.region = MKCoordinateRegion(center: activityCoordinates,
-                                         span: Constants.defaultSpan)
+        self.region = MKCoordinateRegion(center: activityCoordinates, span: Constants.defaultSpan)
     }
 }

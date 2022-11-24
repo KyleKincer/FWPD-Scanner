@@ -15,7 +15,7 @@ struct Scanner {
         let nature: String
         let address: String
         let location: String
-        let controlNumber: String
+        var controlNumber: String
         let longitude: Double
         let latitude: Double
         var date: Date? = nil
