@@ -10,6 +10,7 @@ import SwiftUI
 import CoreLocation
 import MapKit
 
+
 @MainActor
 final class MainViewModel: ObservableObject {
     // Main Model
@@ -24,10 +25,11 @@ final class MainViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
     
     // Filters
-    @Published var selectedNatures = Set<String>() { didSet{ refresh() }}
+    @Published var selectedNatures = Set<String>()
     @Published var selectedNaturesString = [String]()
-    @Published var notificationNatures = Set<String>() { didSet{ refresh() }}
+    @Published var notificationNatures = Set<String>()
     @Published var notificationNaturesString = [String]()
+    @AppStorage("notificationNatures") var notificationNaturesUD = String()
     @AppStorage("useLocation") var useLocation = false
     @AppStorage("useDate") var useDate = false
     @AppStorage("useNature") var useNature = false
@@ -72,8 +74,14 @@ final class MainViewModel: ObservableObject {
         self.selectedNatures = Set(selectionArray)
         self.selectedNaturesString = Array(selectedNatures)
         
+        let notificationArray = notificationNaturesUD.components(separatedBy: ", ")
+        self.notificationNatures = Set(notificationArray)
+        self.notificationNaturesString = Array(notificationNatures)
+        
+        
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
+        self.refresh()
     }
        
     func refresh() {
@@ -90,8 +98,10 @@ final class MainViewModel: ObservableObject {
                     self.activities.append(contentsOf: newActivities)
                     print("+ --- Got activities")
                     
+                    
                     withAnimation {
                         self.serverResponsive = true
+                        
                         self.addDatesToActivities(setName: "activities")
                         self.addDistancesToActivities(setName: "activities")
                         self.isRefreshing = false

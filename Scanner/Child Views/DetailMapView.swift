@@ -10,6 +10,7 @@ import MapKit
 
 struct DetailMapView: View {
     @State var viewModel: MainViewModel
+    @EnvironmentObject private var appDelegate: AppDelegate
     @Binding var activity : Scanner.Activity
     @State var manager = CLLocationManager()
     @StateObject var managerDelegate = locationDelegate()
@@ -80,6 +81,9 @@ struct DetailMapView: View {
                 .padding(.bottom)
                 .padding(.trailing)
             }
+            .onChange(of: appDelegate.notificationActivity.latitude, perform: { _ in
+                managerDelegate.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: appDelegate.notificationActivity.latitude, longitude: appDelegate.notificationActivity.longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            })
         }
     }
 }

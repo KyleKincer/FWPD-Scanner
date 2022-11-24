@@ -12,6 +12,7 @@ import CoreData
 
 struct DetailView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
+    @EnvironmentObject private var appDelegate: AppDelegate
     @ObservedObject var viewModel : MainViewModel
     @Binding var activity : Scanner.Activity
     @AppStorage("showDistance") var showDistance = true
@@ -70,6 +71,7 @@ struct DetailView: View {
                     .onDisappear {
                         viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
                     }
+                    .environmentObject(appDelegate)
             }
             .padding(.top, 30)
             .navigationBarTitleDisplayMode(.inline)
@@ -80,6 +82,8 @@ struct DetailView: View {
         }
     }
 }
+
+
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {

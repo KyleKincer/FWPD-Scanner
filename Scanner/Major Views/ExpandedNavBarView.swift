@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ExpandedNavBarView: View {
-    @Binding var showScanMenu : Bool
     @Binding var showFilter : Bool
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
+    @Binding var showNotificationView : Bool
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
@@ -29,7 +29,7 @@ struct ExpandedNavBarView: View {
                     showLocationDisclaimer = true
                 }
                 .onLongPressGesture {
-                        onboarding = true
+                    onboarding = true
                 }
             
             Spacer()
@@ -48,7 +48,6 @@ struct ExpandedNavBarView: View {
                     
                 }
             }, label: {
-                
                 ZStack {
                     HStack {
                         if (showMap) {
@@ -57,7 +56,7 @@ struct ExpandedNavBarView: View {
                                 .foregroundColor(.blue)
                                 .transition(.opacity)
                             
-                            Text("List View")
+                            Text("List")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                             
@@ -67,14 +66,14 @@ struct ExpandedNavBarView: View {
                                 .foregroundColor(.blue)
                                 .transition(.opacity)
                             
-                            Text("Map View")
+                            Text("Map")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                         }
                     }
                 }
             })
-            .frame(width: 150, height: 35)
+            .frame(width: 100, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.blue))
             .padding(.horizontal)
@@ -94,7 +93,6 @@ struct ExpandedNavBarView: View {
                         
                     }
                 }, label: {
-                    
                     ZStack {
                         HStack {
                             Image(systemName: "camera.filters")
@@ -102,14 +100,14 @@ struct ExpandedNavBarView: View {
                                 .foregroundColor(.green)
                                 .transition(.opacity)
                             
-                            Text("Apply Filters")
+                            Text("Filters")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                                 
                         }
                     }
                 })
-                .frame(width: 150, height: 35)
+                .frame(width: 115, height: 35)
                 .background(RoundedRectangle(cornerRadius: 20)
                     .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.green))
                 .padding(.horizontal)
@@ -121,24 +119,30 @@ struct ExpandedNavBarView: View {
                     viewModel.showBookmarks.toggle()
                 }
             }, label: {
-                ZStack {
-                    
-                    HStack {
-                        
-                        Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(.orange)
-                            .shadow(radius: 2)
-                        
-                        Text(viewModel.showBookmarks ? "Show All" : "Bookmarks")
-                            .foregroundColor(.primary)
-                            .transition(.opacity)
-                    }
-                }
+                Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
+                    .font(.system(size: 20))
+                    .foregroundColor(.orange)
+                    .shadow(radius: 2)
             })
-            .frame(width: 150, height: 35)
+            .frame(width: 50, height: 35)
             .background(RoundedRectangle(cornerRadius: 20)
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.orange))
+            .shadow(radius: 2)
+            .padding(.horizontal)
+            
+            Button(action: {
+                withAnimation {
+                    showNotificationView.toggle()
+                }
+            }, label: {
+                Image(systemName: "bell")
+                    .font(.system(size: 20))
+                    .foregroundColor(.red)
+                    .shadow(radius: 2)
+            })
+            .frame(width: 50, height: 35)
+            .background(RoundedRectangle(cornerRadius: 20)
+                .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.red))
             .shadow(radius: 2)
             .padding(.horizontal)
         }
@@ -151,7 +155,7 @@ struct ExpandedNavBarView: View {
 
 struct ExpandedNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedNavBarView(showScanMenu: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
+        ExpandedNavBarView(showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), showNotificationView: .constant(false), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

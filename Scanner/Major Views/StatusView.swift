@@ -45,7 +45,6 @@ struct StatusView: View {
                 }
             }
             .frame(width: 200, height: 200)
-            .mask(Circle().frame(width: 345, height: 345).scaleEffect(self.isAnimating ? 0.3 : 0.5))
         } else {
             if (viewModel.serverResponsive) {
                 VStack {
@@ -104,12 +103,10 @@ struct StatusView: View {
                             Image("launchicon")
                                 .colorInvert()
                                 .scaleEffect(0.1)
-                                .mask(Circle().frame(width: 70, height: 70))
                             
                         } else {
                             Image("launchicon")
                                 .scaleEffect(0.1)
-                                .mask(Circle().frame(width: 130, height: 130))
                             
                         }
                         

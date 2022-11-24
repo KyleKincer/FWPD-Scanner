@@ -9,20 +9,25 @@ import SwiftUI
 
 struct OldNotificationSettingsView: View {
     var viewModel: MainViewModel
+    @Environment(\.horizontalSizeClass) var sizeClass
     @AppStorage("enableLiveActivities") var live = true
     @AppStorage("scanOn") var scanning = false
-    @State var selectAll = true
+    @AppStorage("subToAll") var selectAll = false
     @State var selection = Set<String>()
-    @Binding var showNotificationSheet : Bool
+    @State var showScanningInfo = false
+    @State var notifications = SubscriptionManager()
+    @Binding var showNotificationView : Bool
+    @State private var searchText = ""
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
                     withAnimation {
-                        showNotificationSheet.toggle()
-                        updateSubscription(viewModel: viewModel, selection: selection)
+                        showNotificationView.toggle()
+                        
                     }
+                    
                 }, label: {
                     HStack {
                         Image(systemName: "arrow.left")
@@ -33,7 +38,7 @@ struct OldNotificationSettingsView: View {
                 .padding([.leading, .top])
                 
                 Spacer()
-
+                
             }
             .padding(.horizontal)
             
@@ -44,48 +49,123 @@ struct OldNotificationSettingsView: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
             
-            Spacer()
-            
-            
-            Text("Filter Notifications By Nature")
-                .bold()
-                .font(.system(size: 20))
-            
-            HStack {
-                
-                Text("Natures")
-                    .fontWeight(.semibold)
-                    .italic()
-                    .padding(.horizontal)
-
-                Button {
-                    withAnimation {
-                        selection.removeAll()
-                    }
-                } label: {
-                    Text("Clear All")
-                }
-                .disabled(selection.count == 0)
-                .padding(.horizontal)
+            if (selection.count == 0 && !selectAll) {
+                Text("Currently Disabled")
             }
-            .padding()
-            
-            List(selection: $selection, content: {
-                ForEach(viewModel.natures) { nature in
-                    Text(nature.name.capitalized)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.75)
+
+
+            Toggle("Notify Of All Activity", isOn: $selectAll)
+                .padding()
+
+            if (!selectAll) {
+                
+                HStack {
+                    Text("Select Natures:")
+                        .bold()
+                        .font(.system(size: 15))
+                    
+                    Spacer()
+                    
+                    Button {
+                        withAnimation {
+                            selection.removeAll()
+                        }
+                    } label: {
+                        Text("Clear All")
+                    }
+                    .disabled(selection.count == 0)
+                    .padding(.horizontal)
                 }
-            })
-            .environment(\.editMode, .constant(EditMode.active))
+                .padding(.horizontal, 50)
+                    
+                TextField("Search", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
+                
+                List(selection: $selection, content: {
+                    ForEach(searchResults, id: \.name) { nature in
+                        Text(nature.name == "" ? "Unknown" : nature.name.capitalized)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                    }
+                })
+                .environment(\.editMode, .constant(EditMode.active))
+            } else {
+                Text("Note: This will result in many notifications. To receive fewer notifications, disable the toggle and select specific activty natures!")
+                    .padding()
+                
+                Text("To receive no notifications, turn off the toggle and make sure no Natures are selected.")
+                    .padding()
+                
+                
+                Spacer()
+            }
         }
         .interactiveDismissDisabled()
+
+        .onChange(of: selectAll, perform: { _ in
+            if (!selectAll) {
+                
+                let selectionArray = viewModel.notificationNaturesUD.components(separatedBy: ", ")
+                selection = Set(selectionArray)
+                viewModel.notificationNatures = selection
+            }
+        })
+        .onAppear {
+            if (viewModel.natures.count == 0) {
+                viewModel.getNatures()
+            }
+            
+            
+            if (!selectAll) {
+                let selectionArray = viewModel.notificationNaturesUD.components(separatedBy: ", ")
+                selection = Set(selectionArray)
+                viewModel.notificationNatures = selection
+            }
+        }
+        .onDisappear {
+            // Handle subscriptions
+            if (!selectAll) {
+                notifications.unsubscribeFromAll()
+                
+                if (viewModel.notificationNatures != selection) {
+                    
+                    // Subscribe to new natures
+                    notifications.subscribeToNatures(natures: Array(selection))
+                    
+                    // Unsubscribe from removed natures
+                    let arraySelection = Array(selection)
+                    var removedNatures = [String]()
+                    for nature in Array(viewModel.notificationNatures) {
+                        if !arraySelection.contains(where: {$0 == nature}) {
+                            removedNatures.append(nature)
+                        }
+                    }
+                    notifications.removeNatures(natures: removedNatures)
+                    
+                    viewModel.notificationNatures = selection
+                    viewModel.notificationNaturesString = Array(selection)
+                    viewModel.notificationNaturesUD = Array(selection).joined(separator: ", ")
+                }
+            } else {
+                notifications.subscribeToAll()
+            }
+        }
+    }
+    
+    @MainActor
+    var searchResults: [Scanner.Nature] {
+        if searchText.isEmpty {
+            return viewModel.natures
+        } else {
+            return viewModel.natures.filter { $0.name.contains(searchText.uppercased()) }
+        }
     }
 }
 
 
 struct OldNotificatonSettingsViewPreviews: PreviewProvider {
     static var previews: some View {
-        OldNotificationSettingsView(viewModel: MainViewModel(), showNotificationSheet: .constant(true))
+        OldNotificationSettingsView(viewModel: MainViewModel(), showNotificationView: .constant(true))
     }
 }

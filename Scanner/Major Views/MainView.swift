@@ -9,10 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
-    
-    @StateObject var viewModel = MainViewModel()
+    @EnvironmentObject private var appDelegate: AppDelegate
+    @State var viewModel : MainViewModel
     @AppStorage("showDistance") var showDistance = true
     @AppStorage("onboarding") var onboarding = true
+    @State private var showFilter = false
+    @State private var showMap = false
+    @State private var showNotificationView = false
+    @State private var showLocationDisclaimer = false
     
     var body: some View {
         if (onboarding) {
@@ -22,13 +26,59 @@ struct MainView: View {
         } else {
             VStack {
                 if (sizeClass == .compact) {
-                    StandardSizeView(viewModel: viewModel) // for iOS devices and compact iPads
+                    StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
+                    
+                    ActivityView(showMap: $showMap, viewModel: viewModel)
+                        .environmentObject(appDelegate)
+                    
                 } else {
-                    ExpandedSizeView(viewModel: viewModel) // for all other iPads
+                    VStack {
+                        ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, viewModel: viewModel)
+                        
+                        Divider()
+                            .padding(0)
+                        
+                        ActivityView(showMap: $showMap, viewModel: viewModel)
+                            .environmentObject(appDelegate)
+                            .padding(.top, -8)
+                    }
                 }
             }
             .onAppear {
                 showDistance = true
+            }
+            .fullScreenCover(isPresented: $showFilter) {
+                if #available(iOS 16.0, *) {
+                    if (sizeClass == .compact) {
+                        FilterSettings(viewModel: viewModel)
+                            .presentationDetents([.fraction(0.8)])
+                    } else {
+                        ExpandedFilterSettings(viewModel: viewModel)
+                    }
+                } else {
+                    if (sizeClass == .compact) {
+                        FilterSettings(viewModel: viewModel)
+                    } else {
+                        ExpandedFilterSettings(viewModel: viewModel)
+                    }
+                }
+            }
+            
+            .fullScreenCover(isPresented: $showNotificationView) {
+                if #available(iOS 16.1, *) {
+                    NewNotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
+                } else {
+                    OldNotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
+                }
+            }
+            
+            .sheet(isPresented: $showLocationDisclaimer) {
+                if #available(iOS 16.1, *) {
+                    LocationDisclaimerView()
+                        .presentationDetents([.fraction(0.5)])
+                } else {
+                    LocationDisclaimerView()
+                }
             }
         }
     }
@@ -37,10 +87,10 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         
-        MainView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini 15.0"))
+        MainView(viewModel: MainViewModel())
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
             .previewDisplayName("iPhone 13 mini")
-        MainView()
+        MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }
