@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterSettings: View {
-    
+    @Binding var showFilter: Bool
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var showingTypesPopover = false
@@ -20,10 +20,26 @@ struct FilterSettings: View {
     
     var body: some View {
         VStack {
-            Capsule()
-                .fill(Color.secondary)
-                .frame(width: 30, height: 3)
-                .padding([.top, .leading, .trailing], 10)
+            HStack {
+                Button(action: {
+                    withAnimation {
+                        showFilter.toggle()
+                    }
+                }, label: {
+                    HStack {
+                        Image(systemName: "arrow.left")
+                            .font(.system(size: 30))
+                        
+                        Text("Save Filters")
+                    }
+                })
+                .padding([.leading, .top])
+                .foregroundColor(.green)
+                
+                Spacer()
+                
+            }
+            .padding(.horizontal)
             
             Text("Activity Filters")
                 .fontWeight(.black)
@@ -169,6 +185,6 @@ struct FilterSettings: View {
 
 struct FilterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        FilterSettings(viewModel: MainViewModel())
+        FilterSettings(showFilter: .constant(true), viewModel: MainViewModel())
     }
 }

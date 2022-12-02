@@ -33,6 +33,9 @@ struct NewNotificationSettingsView: View {
                             .foregroundColor(.red)
                             .bold()
                             .font(.system(size: 30))
+                        
+                        Text("Save")
+                            .foregroundColor(.red)
                     }
                 })
                 .padding([.leading, .top])

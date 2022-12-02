@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExpandedFilterSettings: View {
+    @Binding var showFilter: Bool
     @ObservedObject var viewModel: MainViewModel
     @State private var refreshOnExit = false
     @State var showingTypesPopover = false
@@ -25,6 +26,7 @@ struct ExpandedFilterSettings: View {
     
     var body: some View {
         VStack {
+            
             ZStack {
                 Text("Activity Filters")
                     .fontWeight(.black)
@@ -45,12 +47,12 @@ struct ExpandedFilterSettings: View {
                         HStack {
                             Image(systemName: "arrow.left")
                                 .font(.system(size: 30))
-                                .foregroundColor(.blue)
                             Text("Save Filters")
                                 .padding([.trailing, .vertical])
                         }
                     })
                     .padding(.leading)
+                    .foregroundColor(.green)
                     
                     Spacer()
                     
@@ -251,7 +253,7 @@ struct ExpandedFilterSettings: View {
 
 struct ExpandedFilterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedFilterSettings(viewModel: MainViewModel())
+        ExpandedFilterSettings(showFilter: .constant(true), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }
