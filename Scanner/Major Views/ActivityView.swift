@@ -214,7 +214,7 @@ struct ActivityView: View {
                                     
                                     Image(systemName: "mail.stack")
                                         .font(.system(size: 50))
-                                    
+                                                                        
                                 }
                             }
                                 

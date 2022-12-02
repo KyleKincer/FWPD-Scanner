@@ -20,7 +20,7 @@ struct DetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            VStack (alignment: .center){
                 Group { // header
                     Text(activity.nature == "" ? "Unknown" : activity.nature)
                         .font(.largeTitle)

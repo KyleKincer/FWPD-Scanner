@@ -41,6 +41,14 @@ struct MainView: View {
                         ActivityView(showMap: $showMap, viewModel: viewModel)
                             .environmentObject(appDelegate)
                             .padding(.top, -8)
+                        
+                        Divider()
+                            .padding(0)
+                        
+                        SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+                            .ignoresSafeArea()
+                            .frame(maxHeight: 40)
+                        
                     }
                 }
             }
