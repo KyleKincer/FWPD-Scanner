@@ -74,6 +74,9 @@ struct ListView: View {
                                 viewModel.refresh()
                             }
                         }
+                        SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+                            .ignoresSafeArea()
+                            .frame(maxHeight: 40)
                     }
                 }
             }
