@@ -12,6 +12,7 @@ struct FilterSettings: View {
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var showingTypesPopover = false
+    @State var showUserNameSheet = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
     @State var dateFrom = Date()
@@ -145,9 +146,24 @@ struct FilterSettings: View {
                         }
                     }
                 }
+                
+                Section("Account") {
+                    Button {
+                        if viewModel.commentUser=="" {
+                            showUserNameSheet = true
+                        } else {
+                            viewModel.commentUser = ""
+                        }
+                    } label: {
+                        Text(viewModel.commentUser=="" ? "Log in" : "Log out")
+                    }
+                }
             }
             .padding(.top, -15)
         }
+        .fullScreenCover(isPresented: $showUserNameSheet, content: {
+            LoginView(viewModel: viewModel)
+        })
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
                 .onDisappear {
