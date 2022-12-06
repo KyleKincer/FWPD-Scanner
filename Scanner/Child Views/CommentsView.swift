@@ -131,7 +131,7 @@ struct CommentsView: View {
                             // UserName Rules
                             rulesMet = true
                             alert = ""
-                            
+
                             if (userNameInput == "") {
                                 rulesMet = false
                                 alert.append("Username cannot be blank!\n")
@@ -156,6 +156,9 @@ struct CommentsView: View {
                     Button(action: {
                         viewModel.commentUser = userNameInput
                         showUserNameSheet = false
+                        if (comment.count > 0) {
+                            showSubmit = true
+                        }
                     }, label: {
                         ZStack {
                             Capsule()
