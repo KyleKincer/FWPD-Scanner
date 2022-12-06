@@ -25,6 +25,7 @@
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
 		E2C16903293BE34B00642670 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16902293BE34B00642670 /* CommentsView.swift */; };
 		E2C16907293C343800642670 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16906293C343800642670 /* CommentsViewModel.swift */; };
+		E2E36C67293FB1F300A4A32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E36C66293FB1F300A4A32C /* LoginView.swift */; };
 		EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB136E12292DC53E00CA905D /* NotificationView.swift */; };
 		EB15896929242A720009F60D /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
 		EB15896A29242A720009F60D /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
@@ -130,6 +131,7 @@
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		E2C16902293BE34B00642670 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		E2C16906293C343800642670 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		E2E36C66293FB1F300A4A32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E4126EF435D5649C86E63EB0 /* Pods_ScannerTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScannerTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB136E12292DC53E00CA905D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
 				E2C16902293BE34B00642670 /* CommentsView.swift */,
+				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
 			);
 			path = "Child Views";
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
 				E24522BE279134F200EFBB3E /* DetailView.swift in Sources */,
+				E2E36C67293FB1F300A4A32C /* LoginView.swift in Sources */,
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
 				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
 				EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */,
