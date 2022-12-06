@@ -7,15 +7,18 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseCore
+import FirebaseAuth
 
 struct CommentsView: View {
     @State var viewModel: MainViewModel
     @StateObject var commentModel = CommentsViewModel()
     @Binding var activity: Scanner.Activity
     @State var comment: String = ""
-    @State var showUserNameSheet = false
+    @State var showLoginSheet = false
     @State var showSubmit = false
-    @FocusState private var commentIsFocused: Bool
+    @FocusState var commentIsFocused: Bool
+    @State var authHandle : AuthStateDidChangeListenerHandle?
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -33,7 +36,7 @@ struct CommentsView: View {
                     Spacer()
                     
                     Button {
-                        showUserNameSheet = true
+                        showLoginSheet = true
                     } label: {
                         ZStack {
                             Capsule()
@@ -85,8 +88,20 @@ struct CommentsView: View {
                     }.disabled(comment.isEmpty)
                 }
             }
-            .onAppear(perform: { commentModel.startListening(activityId: activity.id) })
-            .onDisappear(perform: { commentModel.stopListening() })
+            .onAppear(perform: {
+                commentModel.startListening(activityId: activity.id)
+                
+                authHandle = Auth.auth().addStateDidChangeListener { auth, user in
+                    
+                }
+                
+            })
+            .onDisappear(perform: {
+                commentModel.stopListening()
+                
+                Auth.auth().removeStateDidChangeListener(authHandle!)
+                
+            })
             
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds < $1.timestamp.seconds })) { comment in
@@ -102,7 +117,7 @@ struct CommentsView: View {
                 }
             }
             .padding(.horizontal)
-            .fullScreenCover(isPresented: $showUserNameSheet, content: {
+            .sheet(isPresented: $showLoginSheet, content: {
                 LoginView(viewModel: viewModel)
             })
         }

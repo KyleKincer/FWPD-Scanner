@@ -28,9 +28,6 @@ struct ExpandedNavBarView: View {
                 .onTapGesture {
                     showLocationDisclaimer = true
                 }
-                .onLongPressGesture {
-                    onboarding = true
-                }
             
             Spacer()
             

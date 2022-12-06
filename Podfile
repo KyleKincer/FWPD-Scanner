@@ -7,6 +7,7 @@ target 'Scanner' do
 
   # Pods for Scanner
  pod 'GeoFire/Utils'
+ pod 'GoogleSignIn'
 
 end
 
@@ -15,13 +16,5 @@ target 'ScannerTV' do
   use_frameworks!
 
   # Pods for ScannerTV
-
-end
-
-target 'scannerWidgetsExtension' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for scannerWidgetsExtension
 
 end

@@ -13,6 +13,9 @@ struct OnboardingView: View {
     @ObservedObject var viewModel : MainViewModel
     @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = true
+    @State private var showInfo = false
+    @State var showLogin = false
+    @State var showRegister = false
     
     var body: some View {
         ZStack {
@@ -50,6 +53,7 @@ struct OnboardingView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: false)
                         .padding(.horizontal, 50)
+                }
                     
                     Text("If you are experiencing an emergency, dial 911.")
                         .fontWeight(.bold)
@@ -59,6 +63,42 @@ struct OnboardingView: View {
                         .padding(.top)
                                     
                     Spacer()
+                
+                HStack {
+                    Button(action: {
+                        playHaptic()
+                        withAnimation {
+                            showRegister = true
+                        }
+                    }, label: {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 150, height: 50)
+                                .foregroundColor(.blue)
+                            
+                            Text("Sign Up")
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                    })
+
+                    
+                    Button(action: {
+                        playHaptic()
+                        withAnimation {
+                            showLogin = true
+                        }
+                    }, label: {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 150, height: 50)
+                                .foregroundColor(.blue)
+                            
+                            Text("Sign In")
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                    })
                 }
                 
                 Button(action: {
@@ -69,27 +109,40 @@ struct OnboardingView: View {
                 }, label: {
                     ZStack {
                         Capsule()
-                            .frame(width: 250, height: 75)
-                            .foregroundColor(.blue)
+                            .frame(width: 240, height: 50)
+                            .foregroundColor(.gray)
                         
-                        Text("Let's Get Scanning!")
+                        Text("Proceed Without Account")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
-                }).padding(.bottom, 50)
-                    .onAppear {
-                        onboarding = true
-                        viewModel.locationManager.requestAlwaysAuthorization()
-                    }
-                    .onDisappear {
-                        viewModel.selectedNaturesUD.removeAll()
-                        viewModel.refresh()
-                    }
+                })
+
                 
                 Spacer()
+                
             }
-        }.padding()
-            .transition(.opacity)
+        }
+        .padding()
+        .transition(.opacity)
+        .onAppear {
+            onboarding = true
+            viewModel.locationManager.requestAlwaysAuthorization()
+        }
+        .onDisappear {
+            viewModel.selectedNaturesUD.removeAll()
+            viewModel.refresh()
+        }
+        .sheet(isPresented: $showLogin, content: {
+            VStack {
+                LoginView(viewModel: viewModel)
+            }
+            
+        })
+        .sheet(isPresented: $showRegister, content: {
+            RegisterView(viewModel: viewModel)
+        })
+        
     }
 }
 

@@ -71,10 +71,6 @@ struct StandardNavBarView: View {
                         playHaptic()
                         showLocationDisclaimer = true
                     }
-                    .onLongPressGesture {
-                        onboarding = true
-                        newToNots = true
-                    }
                     .minimumScaleFactor(0.5)
  
                 Spacer()

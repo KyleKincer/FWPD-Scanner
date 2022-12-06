@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
-
+import FirebaseCore
+import FirebaseAuth
 
 @MainActor
 final class MainViewModel: ObservableObject {
@@ -46,9 +47,10 @@ final class MainViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     
-    // Network
+    // Network and auth
     @Published var networkManager = NetworkManager()
-    
+    @AppStorage("loggedIn") var loggedIn = false
+    @Published var user : User?
     // UserDefaults
     let defaults = UserDefaults.standard
     
