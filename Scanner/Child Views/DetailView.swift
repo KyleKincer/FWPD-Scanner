@@ -31,12 +31,12 @@ struct DetailView: View {
                     
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
-                        VStack(alignment: .leading, spacing: 5) {
-                            HStack(spacing: 5) {
-                                Text(activity.timestamp)
-                                    .foregroundColor(.secondary)
-                            }
-                                    .foregroundColor(.secondary)
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack(spacing: 5) {
+                                    Text(activity.timestamp)
+                                        .foregroundColor(.secondary)
+                                }
+                                .foregroundColor(.secondary)
                             }
                             if (!viewModel.showBookmarks) {
                                 Text("\(activity.date ?? Date(), style: .relative) ago")
@@ -66,31 +66,33 @@ struct DetailView: View {
                         }
                         .padding(.trailing)
                         .padding(.vertical, 5)
+                    }
+                    .font(.footnote)
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(8)
                     .shadow(radius: 4)
                     .padding(.horizontal, 5)
                     .padding(.bottom, 5)
+                    
+                    
+                    DetailMapView(viewModel: viewModel, activity: $activity)
+                        .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                        .frame(height: geometry.size.height * 0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .onAppear {
+                            viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
+                        }
+                        .onDisappear {
+                            viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
+                        }
+                        .environmentObject(appDelegate)
+                    CommentsView(activity: activity)
                 }
-                
-                
-                DetailMapView(viewModel: viewModel, activity: $activity)
-                    .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
-                    .frame(height: geometry.size.height * 0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .onAppear {
-                        viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
-                    }
-                    .onDisappear {
-                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
-                    }
-                    .environmentObject(appDelegate)
-                CommentsView(activity: activity)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .transition(.slide)
-            .onAppear {
-                isBookmarked = activity.bookmarked
+                .navigationBarTitleDisplayMode(.inline)
+                .transition(.slide)
+                .onAppear {
+                    isBookmarked = activity.bookmarked
+                }
             }
         }
     }
