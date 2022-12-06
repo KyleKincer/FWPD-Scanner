@@ -20,17 +20,22 @@ struct DetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack (alignment: .center){
-                Group {
-                    Text(activity.nature)
+            ScrollView {
+                Group { // header
+                    Text(activity.nature == "" ? "Unknown" : activity.nature)
                         .font(.largeTitle)
                         .italic()
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal)
+                    
                     HStack {
+                        VStack(alignment: .leading, spacing: 5) {
                         VStack(alignment: .leading, spacing: 5) {
                             HStack(spacing: 5) {
                                 Text(activity.timestamp)
                                     .foregroundColor(.secondary)
-                                Image(systemName: "clock")
+                            }
                                     .foregroundColor(.secondary)
                             }
                             if (!viewModel.showBookmarks) {
@@ -61,8 +66,6 @@ struct DetailView: View {
                         }
                         .padding(.trailing)
                         .padding(.vertical, 5)
-                    }
-                    .font(.footnote)
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(8)
                     .shadow(radius: 4)
@@ -73,14 +76,16 @@ struct DetailView: View {
                 
                 DetailMapView(viewModel: viewModel, activity: $activity)
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                    .frame(height: geometry.size.height * 0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onAppear {
                         viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
                     }
                     .onDisappear {
-                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
                     }
                     .environmentObject(appDelegate)
+                CommentsView(activity: activity)
             }
             .navigationBarTitleDisplayMode(.inline)
             .transition(.slide)
