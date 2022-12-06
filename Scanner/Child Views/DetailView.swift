@@ -30,14 +30,12 @@ struct DetailView: View {
                         .padding(.horizontal)
                     
                     HStack {
-                        VStack(alignment: .center, spacing: 5) {
                             VStack(alignment: .leading, spacing: 5) {
                                 HStack(spacing: 5) {
                                     Text(activity.timestamp)
-                                        .foregroundColor(.secondary)
                                 }
                                 .foregroundColor(.secondary)
-                            }
+                            
                             if (!viewModel.showBookmarks) {
                                 Text("\(activity.date ?? Date(), style: .relative) ago")
                                     .foregroundColor(.secondary)
