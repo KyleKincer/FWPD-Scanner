@@ -29,7 +29,8 @@ struct ScannerApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     @Published var openedFromNotification : Bool = false
-    @Published var notificationActivity : Scanner.Activity = Scanner.Activity(id: "0", timestamp: "", nature: "", address: "", location: "", controlNumber: "", longitude: 0.0, latitude: 0.0)
+    @Published var notificationActivity : Scanner.Activity = Scanner.Activity()
+
     
     let gcmMessageIDKey = "gcm.message_id"
 

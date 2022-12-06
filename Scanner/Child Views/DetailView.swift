@@ -20,7 +20,7 @@ struct DetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack (alignment: .center){
+            ScrollView {
                 Group { // header
                     Text(activity.nature == "" ? "Unknown" : activity.nature)
                         .font(.largeTitle)
@@ -28,19 +28,22 @@ struct DetailView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 2)
                     
-                    Label(title: {
-                        Text(activity.controlNumber)}, icon: {
-                            Image(systemName: "info.circle")
-                        })
-                    .padding(.horizontal)
-                    .padding(.bottom, 3)
-                    
-                    Label(title: {
-                        Text("\(activity.timestamp)").padding(.trailing, -8.5)}, icon: {
-                            Image(systemName: "clock")
-                        })
+                    HStack {
+                        Label(title: {
+                            Text(activity.controlNumber)}, icon: {
+                                Image(systemName: "info.circle")
+                            })
+                        .padding(.horizontal)
+                        .padding(.bottom, 3)
+                        
+                        Label(title: {
+                            Text("\(activity.timestamp)").padding(.trailing, -8.5)}, icon: {
+                                Image(systemName: "clock")
+                            })
+                        
+                    }
                     
                     if (!viewModel.showBookmarks) {
                         Text("\(activity.date ?? Date(), style: .relative) ago")
@@ -64,16 +67,17 @@ struct DetailView: View {
                 
                 DetailMapView(viewModel: viewModel, activity: $activity)
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                    .frame(height: geometry.size.height * 0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onAppear {
                         viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
                     }
                     .onDisappear {
-                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
                     }
                     .environmentObject(appDelegate)
+                CommentsView(activity: activity)
             }
-            .padding(.top, 30)
             .navigationBarTitleDisplayMode(.inline)
             .transition(.slide)
             .onAppear {

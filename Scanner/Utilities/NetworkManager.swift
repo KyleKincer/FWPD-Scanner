@@ -26,6 +26,7 @@ class NetworkManager {
         let nature = data["nature"] as? String ?? "Unknown"
         let latitude = data["latitude"] as? Double ?? 0.0
         let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude)
+        let document = document.reference
         
         return activity
     }
