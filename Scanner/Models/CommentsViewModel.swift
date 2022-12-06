@@ -30,8 +30,8 @@ class CommentsViewModel: ObservableObject {
         }
     }
     
-    func submitComment(activityId: String, comment: String) {
-        let newComment = Comment(user: "Kyle", text: comment)
+    func submitComment(activityId: String, comment: String, userName: String) {
+        let newComment = Comment(user: userName, text: comment)
         let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
         commentsRef.addDocument(data: newComment.toData())
     }

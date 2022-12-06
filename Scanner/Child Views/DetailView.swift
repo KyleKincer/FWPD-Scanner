@@ -23,14 +23,14 @@ struct DetailView: View {
             ScrollView {
                 Group { // header
                     Text(activity.nature == "" ? "Unknown" : activity.nature)
-                        .font(.largeTitle)
+                        .font(.system(size: 30))
                         .italic()
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
                     
                     HStack {
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .center, spacing: 5) {
                             VStack(alignment: .leading, spacing: 5) {
                                 HStack(spacing: 5) {
                                     Text(activity.timestamp)
@@ -86,7 +86,10 @@ struct DetailView: View {
                             viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
                         }
                         .environmentObject(appDelegate)
-                    CommentsView(activity: activity)
+                        .cornerRadius(5.0)
+                        .padding(.horizontal)
+                    
+                    CommentsView(viewModel: viewModel, activity: $activity)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .transition(.slide)
@@ -97,8 +100,6 @@ struct DetailView: View {
         }
     }
 }
-
-
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {

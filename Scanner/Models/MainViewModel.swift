@@ -37,6 +37,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("dateFrom") var dateFrom = String()
     @AppStorage("dateTo") var dateTo = String()
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
+    @AppStorage("commentUser") var commentUser = String()
     
     // View States
     @Published var isRefreshing = false
