@@ -21,46 +21,55 @@ struct DetailView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack (alignment: .center){
-                Group { // header
-                    Text(activity.nature == "" ? "Unknown" : activity.nature)
+                Group {
+                    Text(activity.nature)
                         .font(.largeTitle)
                         .italic()
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal)
-                        .padding(.bottom, 5)
-                    
-                    Label(title: {
-                        Text(activity.controlNumber)}, icon: {
-                            Image(systemName: "info.circle")
-                        })
-                    .padding(.horizontal)
-                    .padding(.bottom, 3)
-                    
-                    Label(title: {
-                        Text("\(activity.timestamp)").padding(.trailing, -8.5)}, icon: {
-                            Image(systemName: "clock")
-                        })
-                    
-                    if (!viewModel.showBookmarks) {
-                        Text("\(activity.date ?? Date(), style: .relative) ago")
-                            .padding(.horizontal)
-                            .padding(.bottom, 3)
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            HStack(spacing: 5) {
+                                Text(activity.timestamp)
+                                    .foregroundColor(.secondary)
+                                Image(systemName: "clock")
+                                    .foregroundColor(.secondary)
+                            }
+                            if (!viewModel.showBookmarks) {
+                                Text("\(activity.date ?? Date(), style: .relative) ago")
+                                    .foregroundColor(.secondary)
+                            }
+                            Text(activity.controlNumber)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(.leading)
+                        .padding(.vertical, 5)
+                        
+                        Spacer()
+                        
+                        HStack {
+                            VStack(alignment: .trailing, spacing: 5) {
+                                HStack(spacing: 5) {
+                                    Text(activity.address)
+                                        .foregroundColor(.secondary)
+                                    Image(systemName: "mappin.and.ellipse")
+                                        .foregroundColor(.secondary)
+                                }
+                                if (showDistance && !viewModel.showBookmarks) {
+                                    Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .padding(.trailing)
+                        .padding(.vertical, 5)
                     }
-                    
-                    Label(title: {
-                        Text(activity.address)}, icon: {
-                            Image(systemName: "mappin.and.ellipse")
-                            
-                        })
-                    .padding(.horizontal)
-                    
-                    if (showDistance && !viewModel.showBookmarks) {
-                        Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
-                            .padding(.horizontal)
-                            .padding(.bottom, 3)
-                    }
+                    .font(.footnote)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(8)
+                    .shadow(radius: 4)
+                    .padding(.horizontal, 5)
+                    .padding(.bottom, 5)
                 }
+                
                 
                 DetailMapView(viewModel: viewModel, activity: $activity)
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
@@ -73,7 +82,6 @@ struct DetailView: View {
                     }
                     .environmentObject(appDelegate)
             }
-            .padding(.top, 30)
             .navigationBarTitleDisplayMode(.inline)
             .transition(.slide)
             .onAppear {
