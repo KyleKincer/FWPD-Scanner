@@ -121,6 +121,8 @@ struct RegisterView: View {
                         }
                     }, label: {
                         Image("appleLogo")
+                            .background(Color.white)
+                            .cornerRadius(200)
                     })
                     .scaleEffect(0.1)
                     .frame(width: 50, height: 50)
