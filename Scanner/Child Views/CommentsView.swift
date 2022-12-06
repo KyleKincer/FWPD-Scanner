@@ -15,6 +15,7 @@ struct CommentsView: View {
     @State var comment: String = ""
     @State var showUserNameSheet = false
     @State var showSubmit = false
+    @FocusState private var commentIsFocused: Bool
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -28,12 +29,32 @@ struct CommentsView: View {
                     
                     Text(viewModel.commentUser)
                         .foregroundColor(.gray)
+                } else {
+                    Spacer()
+                    
+                    Button {
+                        showUserNameSheet = true
+                    } label: {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 100, height: 35)
+                                .foregroundColor(.red)
+                            HStack {
+                                Image(systemName: "person.fill.questionmark")
+                                    .foregroundColor(.white)
+                                Text("Login")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        }
+                    }
                 }
             }
             .padding(.horizontal)
             
             HStack {
                 TextField("Type comment here...", text: $comment)
+                    .focused($commentIsFocused)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.trailing)
                     .onChange(of: comment.count) { newValue in
@@ -53,6 +74,7 @@ struct CommentsView: View {
                     Button() {
                         playHaptic()
                         commentModel.submitComment(activityId: activity.id, comment: comment, userName: viewModel.commentUser)
+                        commentIsFocused = false
                         comment = ""
                     } label: {
                         ZStack{
@@ -61,19 +83,6 @@ struct CommentsView: View {
                                 .tint(.white)
                         }.frame(width: 100, height: 35)
                     }.disabled(comment.isEmpty)
-                }
-                
-                if (viewModel.commentUser == "") {
-                    Button() {
-                        playHaptic()
-                        showUserNameSheet = true
-                    } label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 15)
-                            Text("Set Name").fontWeight(.semibold)
-                                .tint(.white)
-                        }.frame(width: 150, height: 35)
-                    }
                 }
             }
             .onAppear(perform: { commentModel.startListening(activityId: activity.id) })
@@ -99,8 +108,8 @@ struct CommentsView: View {
         }
     }
 }
-                         
-    
+
+
 struct CommentsView_Previews: PreviewProvider {
     static var previews: some View {
         CommentsView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))

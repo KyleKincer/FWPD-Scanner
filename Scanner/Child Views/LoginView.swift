@@ -49,7 +49,7 @@ struct LoginView: View {
                     // UserName Rules
                     rulesMet = true
                     alert = ""
-
+                    
                     if (userNameInput == "") {
                         rulesMet = false
                         alert.append("Username cannot be blank!\n")
@@ -70,23 +70,41 @@ struct LoginView: View {
                         alert.append("Username must be 30 characters or fewer!\n")
                     }
                 }
-            
-            Button(action: {
-                viewModel.commentUser = userNameInput
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                ZStack {
-                    Capsule()
-                        .frame(width: 100, height: 50)
-                        .foregroundColor(rulesMet ? .blue : .gray)
-                    
-                    Text("Save")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-            })
-            .disabled(!rulesMet)
-            .padding(.vertical)
+            HStack {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    ZStack {
+                        Capsule()
+                            .frame(width: 100, height: 50)
+                            .foregroundColor(.red)
+                        
+                        Text("Cancel")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                })
+                .padding()
+                
+                Spacer()
+                
+                Button(action: {
+                    viewModel.commentUser = userNameInput
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    ZStack {
+                        Capsule()
+                            .frame(width: 100, height: 50)
+                            .foregroundColor(rulesMet ? .blue : .gray)
+                        
+                        Text("Save")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                })
+                .disabled(!rulesMet)
+                .padding()
+            }
         }
     }
 }
