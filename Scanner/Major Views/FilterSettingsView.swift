@@ -12,7 +12,7 @@ struct FilterSettings: View {
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var showingTypesPopover = false
-    @State var showUserNameSheet = false
+    @State var showLoginSheet = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
     @State var dateFrom = Date()
@@ -149,19 +149,19 @@ struct FilterSettings: View {
                 
                 Section("Account") {
                     Button {
-                        if viewModel.username=="" {
-                            showUserNameSheet = true
+                        if !viewModel.loggedIn {
+                            showLoginSheet = true
                         } else {
-                            viewModel.username = ""
+                            viewModel.logOut()
                         }
                     } label: {
-                        Text(viewModel.username=="" ? "Log in" : "Log out")
+                        Text(viewModel.loggedIn ? "Log out" : "Log in")
                     }
                 }
             }
             .padding(.top, -15)
         }
-        .fullScreenCover(isPresented: $showUserNameSheet, content: {
+        .fullScreenCover(isPresented: $showLoginSheet, content: {
             LoginView(viewModel: viewModel)
         })
         .popover(isPresented: $showingTypesPopover) {

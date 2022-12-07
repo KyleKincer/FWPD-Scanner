@@ -87,6 +87,12 @@ final class MainViewModel: ObservableObject {
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
     }
+    
+    func logOut() {
+        username = ""
+        userId = ""
+        loggedIn = false
+    }
        
     func refresh() {
         print("R --- Refreshing")
