@@ -20,10 +20,11 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Group {
-                Capsule()
-                    .frame(width: 100, height: 5)
-                    .foregroundColor(.gray)
-                    .padding()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "x.circle")
+                }
                 
                 Spacer()
                 

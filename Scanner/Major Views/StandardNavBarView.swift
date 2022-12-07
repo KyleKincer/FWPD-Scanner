@@ -53,7 +53,7 @@ struct StandardNavBarView: View {
                         showFilter.toggle()
                     }
                 }, label: {
-                    Image(systemName: "camera.filters")
+                    Image(systemName: "gear")
                         .font(.system(size: 25))
                         .shadow(radius: 2)
                 })

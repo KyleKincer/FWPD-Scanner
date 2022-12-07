@@ -58,14 +58,14 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showFilter) {
                 if #available(iOS 16.0, *) {
                     if (sizeClass == .compact) {
-                        FilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                        SettingsView(showFilter: $showFilter, viewModel: viewModel)
                             .presentationDetents([.fraction(0.8)])
                     } else {
                         ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
                     }
                 } else {
                     if (sizeClass == .compact) {
-                        FilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                        SettingsView(showFilter: $showFilter, viewModel: viewModel)
                     } else {
                         ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
                     }

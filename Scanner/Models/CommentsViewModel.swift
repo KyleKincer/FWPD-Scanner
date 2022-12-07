@@ -30,11 +30,44 @@ class CommentsViewModel: ObservableObject {
         }
     }
     
-    func submitComment(activityId: String, comment: String, userName: String) {
-        let newComment = Comment(user: userName, text: comment)
-        let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
-        commentsRef.addDocument(data: newComment.toData())
+    func submitComment(activityId: String, comment: String, userId: String) -> Int {
+        let newComment = Comment(userId: userId, text: comment)
+        var newCommentCount = 1
+        let activityRef = Firestore.firestore().collection("activities").document(activityId)
+
+        // start a transaction
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            // get the document
+            let document = try! transaction.getDocument(activityRef)
+            
+            // check if the document exists
+            if let oldCommentCount = document.data()?["commentCount"] as? Int {
+                // increment the comment count
+                print("oldCommentCount: \(oldCommentCount)")
+                newCommentCount = oldCommentCount + 1
+            } else {
+                
+            }
+            
+            // update the document with the new comment count
+            print("newCommentCount: \(newCommentCount)")
+            transaction.updateData(["commentCount": newCommentCount], forDocument: document.reference)
+            
+            // return the new comment count
+            return newCommentCount
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error)")
+            } else {
+                // the transaction was successful, add the new comment
+                let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
+                commentsRef.addDocument(data: newComment.toData())
+            }
+        }
+        print("newCommentCount: \(newCommentCount)")
+        return newCommentCount
     }
+
     
     func updateComments(querySnapshot: QuerySnapshot?) {
      // update the comments property with the data from the snapshot

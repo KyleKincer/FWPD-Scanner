@@ -57,6 +57,7 @@ struct CommentsView: View {
             
             HStack {
                 TextField("Type comment here...", text: $comment)
+                    .keyboardType(.default)
                     .focused($commentIsFocused)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.trailing)
@@ -76,7 +77,7 @@ struct CommentsView: View {
                 if (showSubmit && viewModel.username != "") {
                     Button() {
                         playHaptic()
-                        commentModel.submitComment(activityId: activity.id, comment: comment, userName: viewModel.username)
+                        activity.commentCount = commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId)
                         commentIsFocused = false
                         comment = ""
                     } label: {
@@ -127,6 +128,6 @@ struct CommentsView: View {
 
 struct CommentsView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842)))
+        CommentsView(viewModel: MainViewModel(), activity: .constant(Scanner.Activity(id: "1116", timestamp: "06/07/1998 - 01:01:01", nature: "Wild Kyle Appears", address: "5522 Old Dover Blvd", location: "Canterbury Green", controlNumber: "10AD43", longitude: -85.10719687273503, latitude: 41.13135945131842, commentCount: 3)))
     }
 }

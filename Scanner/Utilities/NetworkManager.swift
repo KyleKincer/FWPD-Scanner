@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreLocation
-import FirebaseFirestore
+import Firebase
 import GeoFire
 
 class NetworkManager {
@@ -25,7 +25,8 @@ class NetworkManager {
         let longitude = data["longitude"] as? Double ?? 0.0
         let nature = data["nature"] as? String ?? "Unknown"
         let latitude = data["latitude"] as? Double ?? 0.0
-        let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude)
+        let commentCount = data["commentCount"] as? Int ?? 0
+        let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude, commentCount: commentCount)
         
         return activity
     }

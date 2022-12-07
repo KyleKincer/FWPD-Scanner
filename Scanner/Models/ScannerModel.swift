@@ -22,6 +22,7 @@ struct Scanner {
         var date: Date? = nil
         var distance: Double? = nil
         var bookmarked: Bool = false
+        var commentCount: Int?
         
         enum CodingKeys: String, CodingKey {
             // the API gives us control_number
@@ -36,6 +37,7 @@ struct Scanner {
             case date
             case distance
             case bookmarked
+            case commentCount
         }
         
         init(from decoder: Decoder) throws {
@@ -51,6 +53,7 @@ struct Scanner {
                 self.date = try container.decode(Date.self, forKey: .date)
                 self.distance = try container.decode(Double.self, forKey: .distance)
                 self.bookmarked = try container.decode(Bool.self, forKey: .bookmarked)
+                self.commentCount = try container.decode(Int.self, forKey: .commentCount)
             }
         
         init() {
@@ -65,9 +68,10 @@ struct Scanner {
                 self.date = nil
                 self.distance = nil
                 self.bookmarked = false
+                self.commentCount = 0
             }
         
-        init(id: String, timestamp: String, nature: String, address: String, location: String, controlNumber: String, longitude: Double, latitude: Double) {
+        init(id: String, timestamp: String, nature: String, address: String, location: String, controlNumber: String, longitude: Double, latitude: Double, commentCount: Int) {
                 self.id = id
                 self.timestamp = timestamp
                 self.nature = nature
@@ -79,6 +83,7 @@ struct Scanner {
                 self.date = nil
                 self.distance = nil
                 self.bookmarked = false
+                self.commentCount = commentCount
             }
     }
     
@@ -151,15 +156,15 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     init(document: QueryDocumentSnapshot) {
         print("Document: \(document)")
         self.id = document.documentID
-        self.userId = document.data()["user"] as! String
+        self.userId = document.data()["userId"] as! String
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
         print("Self: \(self)")
     }
     
-    init(user: String, text: String) {
+    init(userId: String, text: String) {
         self.id = ""
-        self.userId = user
+        self.userId = userId
         self.text = text
         self.timestamp = Timestamp(Firebase.Timestamp())
     }

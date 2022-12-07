@@ -92,12 +92,12 @@ struct ExpandedNavBarView: View {
                 }, label: {
                     ZStack {
                         HStack {
-                            Image(systemName: "camera.filters")
+                            Image(systemName: "gear")
                                 .font(.system(size: 25))
                                 .foregroundColor(.green)
                                 .transition(.opacity)
                             
-                            Text("Filters")
+                            Text("Settings")
                                 .foregroundColor(.primary)
                                 .transition(.opacity)
                                 

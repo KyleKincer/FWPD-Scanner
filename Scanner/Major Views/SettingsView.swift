@@ -1,5 +1,5 @@
 //
-//  FilterPopover.swift
+//  SettingsView.swift
 //  Scanner
 //
 //  Created by Kyle Kincer on 4/7/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FilterSettings: View {
+struct SettingsView: View {
     @Binding var showFilter: Bool
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
@@ -31,7 +31,7 @@ struct FilterSettings: View {
                         Image(systemName: "arrow.left")
                             .font(.system(size: 30))
                         
-                        Text("Save Filters")
+                        Text("Back")
                     }
                 })
                 .padding([.leading, .top])
@@ -42,7 +42,7 @@ struct FilterSettings: View {
             }
             .padding(.horizontal)
             
-            Text("Activity Filters")
+            Text("Settings")
                 .fontWeight(.black)
                 .italic()
                 .font(.largeTitle)
@@ -148,6 +148,9 @@ struct FilterSettings: View {
                 }
                 
                 Section("Account") {
+                    if viewModel.loggedIn {
+                        Text("Howdy, \(viewModel.username)!")
+                    }
                     Button {
                         if !viewModel.loggedIn {
                             showLoginSheet = true
@@ -201,6 +204,6 @@ struct FilterSettings: View {
 
 struct FilterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        FilterSettings(showFilter: .constant(true), viewModel: MainViewModel())
+        SettingsView(showFilter: .constant(true), viewModel: MainViewModel())
     }
 }
