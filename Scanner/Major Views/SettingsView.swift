@@ -164,7 +164,7 @@ struct SettingsView: View {
             }
             .padding(.top, -15)
         }
-        .fullScreenCover(isPresented: $showLoginSheet, content: {
+        .sheet(isPresented: $showLoginSheet, content: {
             LoginView(viewModel: viewModel)
         })
         .popover(isPresented: $showingTypesPopover) {

@@ -77,7 +77,7 @@ struct CommentsView: View {
                 if (showSubmit && viewModel.username != "") {
                     Button() {
                         playHaptic()
-                        activity.commentCount = commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId)
+                        activity.commentCount = commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
                         commentIsFocused = false
                         comment = ""
                     } label: {
@@ -107,7 +107,7 @@ struct CommentsView: View {
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds < $1.timestamp.seconds })) { comment in
                     HStack {
-                        Text(comment.userId + ": ")
+                        Text(comment.userName + ": ")
                             .foregroundColor(.gray)
                         
                         Text(comment.text)

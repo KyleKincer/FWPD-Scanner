@@ -133,14 +133,16 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
             hasher.combine(self.timestamp)
         }
     
-    var id: String
+    let id: String
     let userId: String
+    var userName: String
     let text: String
     let timestamp: Timestamp
 
     private enum CodingKeys: String, CodingKey {
         case id
-        case user
+        case userId
+        case userName
         case text
         case timestamp
     }
@@ -148,7 +150,8 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.userId = try container.decode(String.self, forKey: .user)
+        self.userId = try container.decode(String.self, forKey: .userId)
+        self.userName = try container.decode(String.self, forKey: .userName)
         self.text = try container.decode(String.self, forKey: .text)
         self.timestamp = try container.decode(Timestamp.self, forKey: .timestamp)
     }
@@ -157,14 +160,15 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         print("Document: \(document)")
         self.id = document.documentID
         self.userId = document.data()["userId"] as! String
+        self.userName = ""
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
-        print("Self: \(self)")
     }
     
-    init(userId: String, text: String) {
+    init(userId: String, userName: String, text: String) {
         self.id = ""
         self.userId = userId
+        self.userName = userName
         self.text = text
         self.timestamp = Timestamp(Firebase.Timestamp())
     }
