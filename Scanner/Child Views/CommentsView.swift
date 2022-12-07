@@ -27,10 +27,10 @@ struct CommentsView: View {
                 Text("Comments")
                     .bold()
                 
-                if viewModel.commentUser != "" {
+                if viewModel.username != "" {
                     Spacer()
                     
-                    Text(viewModel.commentUser)
+                    Text(viewModel.username)
                         .foregroundColor(.gray)
                 } else {
                     Spacer()
@@ -73,10 +73,10 @@ struct CommentsView: View {
                     }
                     .keyboardType(.emailAddress)
                 
-                if (showSubmit && viewModel.commentUser != "") {
+                if (showSubmit && viewModel.username != "") {
                     Button() {
                         playHaptic()
-                        commentModel.submitComment(activityId: activity.id, comment: comment, userName: viewModel.commentUser)
+                        commentModel.submitComment(activityId: activity.id, comment: comment, userName: viewModel.username)
                         commentIsFocused = false
                         comment = ""
                     } label: {
@@ -106,7 +106,7 @@ struct CommentsView: View {
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds < $1.timestamp.seconds })) { comment in
                     HStack {
-                        Text(comment.user + ": ")
+                        Text(comment.userId + ": ")
                             .foregroundColor(.gray)
                         
                         Text(comment.text)

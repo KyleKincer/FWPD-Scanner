@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import FirebaseCore
+import Firebase
 import FirebaseAuth
 
 struct RegisterView: View {
     @Environment(\.dismiss) var dismiss
     @State private var email = ""
+    @State private var username = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var errorMessage = ""
@@ -32,6 +33,8 @@ struct RegisterView: View {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
                     .keyboardType(.emailAddress)
+                TextField("Username", text: $username)
+                    .padding(.horizontal)
                 SecureField("Password", text: $password)
                     .padding(.horizontal)
                     .border(password != confirmPassword ? Color.red : Color.clear)
@@ -62,6 +65,16 @@ struct RegisterView: View {
                             // user was successfully created
                             if let authResult = authResult {
                                 print("Successfully created user: \(authResult.user)")
+                                let userId = authResult.user.uid
+                                let db = Firestore.firestore()
+                                let userRef = db.collection("users").document(userId)
+                                userRef.setData(["username": username]) { err in
+                                    if let err = err {
+                                        print("Error writing document: \(err)")
+                                    } else {
+                                        print("Document successfully written!")
+                                    }
+                                }
                                 dismiss()
                             }
                         }

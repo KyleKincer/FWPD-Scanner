@@ -116,20 +116,20 @@ struct Timestamp: Decodable, Equatable, Hashable {
 struct Comment: Identifiable, Decodable, Equatable, Hashable {
     static func == (lhs: Comment, rhs: Comment) -> Bool {
             return lhs.id == rhs.id &&
-                   lhs.user == rhs.user &&
+                   lhs.userId == rhs.userId &&
                    lhs.text == rhs.text &&
                    lhs.timestamp == rhs.timestamp
         }
     
     func hash(into hasher: inout Hasher) {
             hasher.combine(self.id)
-            hasher.combine(self.user)
+            hasher.combine(self.userId)
             hasher.combine(self.text)
             hasher.combine(self.timestamp)
         }
     
     var id: String
-    let user: String
+    let userId: String
     let text: String
     let timestamp: Timestamp
 
@@ -143,7 +143,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.user = try container.decode(String.self, forKey: .user)
+        self.userId = try container.decode(String.self, forKey: .user)
         self.text = try container.decode(String.self, forKey: .text)
         self.timestamp = try container.decode(Timestamp.self, forKey: .timestamp)
     }
@@ -151,7 +151,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     init(document: QueryDocumentSnapshot) {
         print("Document: \(document)")
         self.id = document.documentID
-        self.user = document.data()["user"] as! String
+        self.userId = document.data()["user"] as! String
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
         print("Self: \(self)")
@@ -159,14 +159,14 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     
     init(user: String, text: String) {
         self.id = ""
-        self.user = user
+        self.userId = user
         self.text = text
         self.timestamp = Timestamp(Firebase.Timestamp())
     }
     
     func toData() -> [String: Any] {
         return ["text": text,
-                "user": user,
+                "userId": userId,
                 "timestamp": timestamp.firebaseTimestamp]
     }
 }

@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
-import FirebaseCore
+import Firebase
 import FirebaseAuth
 
 struct LoginView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var email = ""
     @State private var password = ""
+    @State private var errorMessage = ""
     @State private var showRegister = false
     @ObservedObject var viewModel : MainViewModel
     
@@ -47,6 +49,13 @@ struct LoginView: View {
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             
+            if errorMessage != "" {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .lineLimit(nil)
+                    .padding(.horizontal)
+            }
+            
             Button(action: {
                 playHaptic()
                 withAnimation {
@@ -55,11 +64,31 @@ struct LoginView: View {
                         if let error = error {
                             // there was an error logging in
                             print("Error logging in: \(error)")
+                            self.errorMessage = error.localizedDescription
                         } else {
+                            self.errorMessage = ""
                             // user was successfully logged in
                             if let authResult = authResult {
-                                print("Successfully logged in user: \(authResult.user)")
+                                let userId = authResult.user.uid
+                                viewModel.userId = userId
+                                
+                                // Get the user's username from Firestore
+                                Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
+                                    if let error = error {
+                                        // there was an error getting the username
+                                        print("Error getting username: \(error)")
+                                    } else {
+                                        // the username was successfully retrieved
+                                        if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
+                                            print("Successfully retrieved username: \(username)")
+                                            viewModel.username = username
+                                        }
+                                    }
+                                }
+                                print("Successfully logged in user: \(userId)")
                             }
+                            viewModel.loggedIn = true
+                            dismiss()
                         }
                     }
                 }
@@ -80,6 +109,7 @@ struct LoginView: View {
                 .font(.subheadline)
                 .italic()
                 .padding(.vertical, -5)
+                .padding(.top, -4)
             
             Button(action: {
                 playHaptic()
@@ -157,10 +187,8 @@ struct LoginView: View {
                     .frame(width: 50, height: 50)
                     .padding()
                 }
-
+                
             }.padding()
-            
-            Spacer()
         }
         .sheet(isPresented: $showRegister, content: {
             RegisterView(viewModel: viewModel)

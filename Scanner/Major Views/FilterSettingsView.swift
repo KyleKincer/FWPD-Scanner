@@ -149,13 +149,13 @@ struct FilterSettings: View {
                 
                 Section("Account") {
                     Button {
-                        if viewModel.commentUser=="" {
+                        if viewModel.username=="" {
                             showUserNameSheet = true
                         } else {
-                            viewModel.commentUser = ""
+                            viewModel.username = ""
                         }
                     } label: {
-                        Text(viewModel.commentUser=="" ? "Log in" : "Log out")
+                        Text(viewModel.username=="" ? "Log in" : "Log out")
                     }
                 }
             }
