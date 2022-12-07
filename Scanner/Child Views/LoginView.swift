@@ -42,10 +42,13 @@ struct LoginView: View {
             Text("Use your Email and Password:")
                 .bold()
             
-            TextField("Email Address", text: $email)
-                .padding(.horizontal)
-            SecureField("Password", text: $password)
-                .padding(.horizontal)
+            Group {
+                TextField("Email Address", text: $email)
+                    .padding(.horizontal)
+                SecureField("Password", text: $password)
+                    .padding(.horizontal)
+            }
+            .textFieldStyle(RoundedBorderTextFieldStyle())
             
             Button(action: {
                 playHaptic()
@@ -64,8 +67,6 @@ struct LoginView: View {
                 }
             })
             .padding()
-            
-            Spacer()
             
             Divider()
                 .padding()
@@ -122,7 +123,7 @@ struct LoginView: View {
                             .background(Color.white)
                             .cornerRadius(200)
                     })
-                    .scaleEffect(0.1)
+                    .scaleEffect(0.4)
                     .frame(width: 50, height: 50)
                     .padding()
                 }

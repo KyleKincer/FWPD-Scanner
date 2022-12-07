@@ -40,10 +40,13 @@ struct RegisterView: View {
                 Text("Use an Email and Password:")
                     .bold()
                 
-                TextField("Email Address", text: $email)
-                    .padding(.horizontal)
-                SecureField("Password", text: $password)
-                    .padding(.horizontal)
+                Group {
+                    TextField("Email Address", text: $email)
+                        .padding(.horizontal)
+                    SecureField("Password", text: $password)
+                        .padding(.horizontal)
+                }
+                .textFieldStyle(RoundedBorderTextFieldStyle())
             }
                 
                 Button(action: {
@@ -66,13 +69,11 @@ struct RegisterView: View {
                     }
                 })
                 .padding()
-            
-            Spacer()
                     
             Divider()
                 .padding()
             
-            Text("or use any of the following services:")
+            Text("or login with :")
                 .bold()
                 .padding()
             
@@ -124,12 +125,14 @@ struct RegisterView: View {
                             .background(Color.white)
                             .cornerRadius(200)
                     })
-                    .scaleEffect(0.1)
+                    .scaleEffect(0.4)
                     .frame(width: 50, height: 50)
                     .padding()
                 }
 
-            }.padding()
+            }
+            .scaleEffect()
+            .padding()
             
             Spacer()
         }
