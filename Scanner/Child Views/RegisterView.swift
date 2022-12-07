@@ -10,8 +10,11 @@ import FirebaseCore
 import FirebaseAuth
 
 struct RegisterView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var email = ""
     @State private var password = ""
+    @State private var confirmPassword = ""
+    @State private var errorMessage = ""
     @ObservedObject var viewModel : MainViewModel
     
     
@@ -23,59 +26,67 @@ struct RegisterView: View {
                 .foregroundColor(.gray)
                 .padding()
             
+            SignUpHeader()
+            
             Group {
-                Text("Sign Up")
-                    .fontWeight(.black)
-                    .italic()
-                    .font(.largeTitle)
-                    .shadow(radius: 2)
-                    .foregroundColor(Color("ModeOpposite"))
-                
-                Spacer()
-                
-                Text("Quickly create an account to enable community commenting and additional features in the future!")
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Text("Use an Email and Password:")
-                    .bold()
-                
-                Group {
-                    TextField("Email Address", text: $email)
-                        .padding(.horizontal)
-                    SecureField("Password", text: $password)
-                        .padding(.horizontal)
-                }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("Email Address", text: $email)
+                    .padding(.horizontal)
+                    .keyboardType(.emailAddress)
+                SecureField("Password", text: $password)
+                    .padding(.horizontal)
+                    .border(password != confirmPassword ? Color.red : Color.clear)
+                SecureField("Confirm password", text: $confirmPassword)
+                    .padding(.horizontal)
+                    .border(password != confirmPassword ? Color.red : Color.clear)
             }
-                
-                Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        print("A -- Registering new user")
-                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                            // ... add code
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            if errorMessage != "" {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .lineLimit(nil)
+                    .padding(.horizontal)
+            }
+            
+            Button(action: {
+                playHaptic()
+                withAnimation {
+                    print("A -- Registering new user")
+                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                        if let error = error {
+                            // there was an error creating the user
+                            print("Error creating user: \(error)")
+                            self.errorMessage = error.localizedDescription
+                        } else {
+                            self.errorMessage = ""
+                            // user was successfully created
+                            if let authResult = authResult {
+                                print("Successfully created user: \(authResult.user)")
+                                dismiss()
+                            }
                         }
                     }
-                }, label: {
-                    ZStack {
-                        Capsule()
-                            .frame(width: 100, height: 40)
-                            .foregroundColor(.blue)
-                        
-                        Text("Submit")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                    }
-                })
-                .padding()
+                }
+            }, label: {
+                ZStack {
+                    Capsule()
+                        .frame(width: 100, height: 40)
+                        .foregroundColor(.blue)
                     
+                    Text("Submit")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                }
+            })
+            .disabled(password != confirmPassword)
+            .padding()
+            
             Divider()
                 .padding()
             
             Text("or login with :")
                 .bold()
-                .padding()
+                .padding(.top)
             
             HStack {
                 Group {
@@ -129,13 +140,33 @@ struct RegisterView: View {
                     .frame(width: 50, height: 50)
                     .padding()
                 }
-
+                
             }
             .scaleEffect()
             .padding()
             
             Spacer()
         }
+    }
+}
+
+struct SignUpHeader: View {
+    var body: some View {
+        Text("Sign Up")
+            .fontWeight(.black)
+            .italic()
+            .font(.largeTitle)
+            .shadow(radius: 2)
+            .foregroundColor(Color("ModeOpposite"))
+        
+        Spacer()
+        
+        Text("Quickly create an account to enable community commenting and additional features in the future!")
+            .multilineTextAlignment(.center)
+            .padding()
+        
+        Text("Use an Email and Password:")
+            .bold()
     }
 }
 

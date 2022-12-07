@@ -41,6 +41,7 @@ struct LoginView: View {
             Group {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
+                    .keyboardType(.emailAddress)
                 SecureField("Password", text: $password)
                     .padding(.horizontal)
             }
@@ -50,6 +51,17 @@ struct LoginView: View {
                 playHaptic()
                 withAnimation {
                     print("A -- Logging in...")
+                    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                        if let error = error {
+                            // there was an error logging in
+                            print("Error logging in: \(error)")
+                        } else {
+                            // user was successfully logged in
+                            if let authResult = authResult {
+                                print("Successfully logged in user: \(authResult.user)")
+                            }
+                        }
+                    }
                 }
             }, label: {
                 ZStack {
