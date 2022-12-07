@@ -12,11 +12,11 @@ import FirebaseAuth
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var showRegister = false
     @ObservedObject var viewModel : MainViewModel
     
     var body: some View {
         VStack {
-            
             Group {
                 Capsule()
                     .frame(width: 100, height: 5)
@@ -33,10 +33,6 @@ struct LoginView: View {
                     .foregroundColor(Color("ModeOpposite"))
                 
                 Spacer()
-                
-                Text("Sign in to enable community commenting and additional features in the future!")
-                    .multilineTextAlignment(.center)
-                    .padding()
             }
             
             Text("Use your Email and Password:")
@@ -53,7 +49,7 @@ struct LoginView: View {
             Button(action: {
                 playHaptic()
                 withAnimation {
-                    print("A -- Registering new user")
+                    print("A -- Logging in...")
                 }
             }, label: {
                 ZStack {
@@ -66,7 +62,29 @@ struct LoginView: View {
                         .fontWeight(.bold)
                 }
             })
-            .padding()
+            .padding(.top)
+            
+            Text("or")
+                .font(.subheadline)
+                .italic()
+                .padding(.vertical, -5)
+            
+            Button(action: {
+                playHaptic()
+                withAnimation {
+                    showRegister = true
+                }
+            }, label: {
+                ZStack {
+                    Capsule()
+                        .frame(width: 100, height: 40)
+                        .foregroundColor(.blue)
+                    
+                    Text("Sign Up")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                }
+            })
             
             Divider()
                 .padding()
@@ -132,6 +150,9 @@ struct LoginView: View {
             
             Spacer()
         }
+        .sheet(isPresented: $showRegister, content: {
+            RegisterView(viewModel: viewModel)
+        })
     }
 }
 
