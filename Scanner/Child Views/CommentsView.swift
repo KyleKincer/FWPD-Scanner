@@ -63,11 +63,11 @@ struct CommentsView: View {
                     .padding(.trailing)
                     .onChange(of: comment.count) { newValue in
                         if (newValue > 0) {
-                            withAnimation {
+                            withAnimation(.easeInOut) {
                                 showSubmit = true
                             }
                         } else {
-                            withAnimation {
+                            withAnimation(.easeInOut) {
                                 showSubmit = false
                             }
                         }
@@ -86,7 +86,7 @@ struct CommentsView: View {
                             Text("Submit").fontWeight(.semibold)
                                 .tint(.white)
                         }.frame(width: 100, height: 35)
-                    }.disabled(comment.isEmpty)
+                    }
                 }
             }
             .onAppear(perform: {
@@ -105,7 +105,7 @@ struct CommentsView: View {
             })
             
             VStack (alignment: .leading) {
-                ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds < $1.timestamp.seconds })) { comment in
+                ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
                     CommentView(comment: comment)
                 }
             }

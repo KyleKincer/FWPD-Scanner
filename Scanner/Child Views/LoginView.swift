@@ -48,6 +48,7 @@ struct LoginView: View {
                     .padding(.horizontal)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(width: 350)
             
             if errorMessage != "" {
                 Text(errorMessage)

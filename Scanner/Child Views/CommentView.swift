@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CommentView: View {
     let comment: Comment
+    let formatter = RelativeDateTimeFormatter()
+    
     var body: some View {
         if !comment.hidden {
             HStack {
@@ -18,12 +20,12 @@ struct CommentView: View {
                     HStack {
                         Text(comment.userName)
                             .font(.headline)
-                            .foregroundColor(.gray)
                         Text("·")
-                        Text(comment.timestamp.firebaseTimestamp.dateValue().formatted())
+                        Text(formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()))
                             .font(.caption)
-                            .foregroundColor(.gray)
                     }
+                    .foregroundColor(.gray)
+                    
                     Text(comment.text)
                 }
             }

@@ -17,6 +17,7 @@ struct ExpandedFilterSettings: View {
     @State var selection = Set<String>()
     @State var dateFrom = Date()
     @State var dateTo = Date()
+    @State var showLoginSheet = false
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
@@ -69,6 +70,21 @@ struct ExpandedFilterSettings: View {
             
             
             VStack {
+                Section("Account") {
+                    if viewModel.loggedIn {
+                        Text("Howdy, \(viewModel.username)!")
+                    }
+                    Button {
+                        if !viewModel.loggedIn {
+                            showLoginSheet = true
+                        } else {
+                            viewModel.logOut()
+                        }
+                    } label: {
+                        Text(viewModel.loggedIn ? "Log out" : "Log in")
+                    }
+                }
+                
                 if (viewModel.locationEnabled) {
                     Toggle("Filter By Distance", isOn: $viewModel.useLocation)
                         .onChange(of: viewModel.useLocation) { newValue in
@@ -196,6 +212,9 @@ struct ExpandedFilterSettings: View {
             .padding(.horizontal, 70)
             .padding(.vertical, 10)
         }
+        .sheet(isPresented: $showLoginSheet, content: {
+            LoginView(viewModel: viewModel)
+        })
         .environment(\.editMode, .constant(EditMode.active))
         .onAppear {
             if (viewModel.selectedNatures.count == 1) {
