@@ -120,29 +120,6 @@ struct CommentsView: View {
     }
 }
 
-struct CommentView: View {
-    let comment: Comment
-    var body: some View {
-        HStack {
-            Image(systemName: "person.circle")
-                .foregroundColor(.gray)
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(comment.userName)
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text(comment.timestamp.firebaseTimestamp.dateValue().formatted())
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                Text(comment.text)
-            }
-        }
-        .padding(.vertical, 4)
-    }
-}
-
 
 
 struct CommentsView_Previews: PreviewProvider {

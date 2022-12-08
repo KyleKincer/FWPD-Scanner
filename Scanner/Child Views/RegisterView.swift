@@ -17,6 +17,7 @@ struct RegisterView: View {
     @State private var confirmPassword = ""
     @State private var errorMessage = ""
     @ObservedObject var viewModel : MainViewModel
+    @ObservedObject var registerViewModel = RegisterViewModel()
     
     
     var body: some View {
@@ -33,8 +34,17 @@ struct RegisterView: View {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
                     .keyboardType(.emailAddress)
-                TextField("Username", text: $username)
-                    .padding(.horizontal)
+                ZStack {
+                    TextField("Username", text: $username)
+                        .limitInputLength(value: $username, length: 20)
+                        .padding(.horizontal)
+                    
+                    Text("\(username.count)/20")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 30)
+                }
                 SecureField("Password", text: $password)
                     .padding(.horizontal)
                     .border(password != confirmPassword ? Color.red : Color.clear)
@@ -43,6 +53,7 @@ struct RegisterView: View {
                     .border(password != confirmPassword ? Color.red : Color.clear)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(width: 350)
             
             if errorMessage != "" {
                 Text(errorMessage)
@@ -51,135 +62,127 @@ struct RegisterView: View {
                     .padding(.horizontal)
             }
             
-            Button(action: {
-                playHaptic()
-                withAnimation {
-                    print("A -- Registering new user")
-                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        if let error = error {
-                            // there was an error creating the user
-                            print("Error creating user: \(error)")
-                            self.errorMessage = error.localizedDescription
-                        } else {
-                            self.errorMessage = ""
-                            // user was successfully created
-                            if let authResult = authResult {
-                                print("Successfully created user: \(authResult.user)")
-                                let userId = authResult.user.uid
-                                let db = Firestore.firestore()
-                                let userRef = db.collection("users").document(userId)
-                                userRef.setData(["username": username]) { err in
-                                    if let err = err {
-                                        print("Error writing document: \(err)")
-                                    } else {
-                                        print("Document successfully written!")
+            Group {
+                Button(action: {
+                                playHaptic()
+                                withAnimation {
+                                    print("A -- Registering new user")
+                                    if registerViewModel.createUser() {
+                                        dismiss()
                                     }
                                 }
-                                dismiss()
-                            }
-                        }
-                    }
-                }
-            }, label: {
-                ZStack {
-                    Capsule()
-                        .frame(width: 100, height: 40)
-                        .foregroundColor(.blue)
-                    
-                    Text("Submit")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-            })
-            .disabled(password != confirmPassword)
-            .padding()
-            
-            Divider()
-                .padding()
-            
-            Text("or login with :")
-                .bold()
-                .padding(.top)
-            
-            HStack {
-                Group {
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            print("Google")
-                        }
-                    }, label: {
-                        Image("googleLogo")
-                    })
-                    .scaleEffect(0.2)
-                    .frame(width: 50, height: 50)
-                    .padding()
-                    
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            print("Facebook")
-                        }
-                    }, label: {
-                        Image("facebookLogo")
-                    })
-                    .scaleEffect(0.35)
-                    .frame(width: 50, height: 50)
-                    .padding()
-                    
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            print("Twitter")
-                        }
-                    }, label: {
-                        Image("twitterLogo")
-                    })
-                    .scaleEffect(0.08)
-                    .frame(width: 50, height: 50)
-                    .padding()
-                    
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            print("Apple")
-                        }
-                    }, label: {
-                        Image("appleLogo")
-                            .background(Color.white)
-                            .cornerRadius(200)
-                    })
-                    .scaleEffect(0.4)
-                    .frame(width: 50, height: 50)
-                    .padding()
-                }
-                
+                            }, label: {
+                                ZStack {
+                                    Capsule()
+                                        .frame(width: 100, height: 40)
+                                        .foregroundColor(.blue)
+                                    
+                                    Text("Submit")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.bold)
+                                }
+                            })
+                            .disabled(password != confirmPassword)
+                            .padding()
+                            
+                            Divider()
+                                .padding()
+                            
+                            SocialButtons()
+                            
+                            Spacer()
             }
-            .scaleEffect()
-            .padding()
             
-            Spacer()
-        }
+                    }
     }
 }
 
 struct SignUpHeader: View {
     var body: some View {
-        Text("Sign Up")
-            .fontWeight(.black)
-            .italic()
-            .font(.largeTitle)
-            .shadow(radius: 2)
-            .foregroundColor(Color("ModeOpposite"))
-        
-        Spacer()
-        
-        Text("Quickly create an account to enable community commenting and additional features in the future!")
-            .multilineTextAlignment(.center)
-            .padding()
-        
-        Text("Use an Email and Password:")
+        Group {
+            Text("Sign Up")
+                .fontWeight(.black)
+                .italic()
+                .font(.largeTitle)
+                .shadow(radius: 2)
+                .foregroundColor(Color("ModeOpposite"))
+
+            Spacer()
+
+            Text("Quickly create an account to enable community commenting and additional features in the future!")
+                .multilineTextAlignment(.center)
+                .padding()
+
+            Text("Use an Email and Password:")
+                .bold()
+        }
+
+    }
+}
+
+struct SocialButtons: View {
+    var body: some View {
+        Text("or login with :")
             .bold()
+            .padding(.top)
+        
+        HStack {
+            Group {
+                Button(action: {
+                    playHaptic()
+                    withAnimation {
+                        print("Google")
+                    }
+                }, label: {
+                    Image("googleLogo")
+                })
+                .scaleEffect(0.2)
+                .frame(width: 50, height: 50)
+                .padding()
+                
+                Button(action: {
+                    playHaptic()
+                    withAnimation {
+                        print("Facebook")
+                    }
+                }, label: {
+                    Image("facebookLogo")
+                })
+                .scaleEffect(0.35)
+                .frame(width: 50, height: 50)
+                .padding()
+                
+                Button(action: {
+                    playHaptic()
+                    withAnimation {
+                        print("Twitter")
+                    }
+                }, label: {
+                    Image("twitterLogo")
+                })
+                .scaleEffect(0.08)
+                .frame(width: 50, height: 50)
+                .padding()
+                
+                Button(action: {
+                    playHaptic()
+                    withAnimation {
+                        print("Apple")
+                    }
+                }, label: {
+                    Image("appleLogo")
+                        .background(Color.white)
+                        .cornerRadius(200)
+                })
+                .scaleEffect(0.4)
+                .frame(width: 50, height: 50)
+                .padding()
+            }
+            
+        }
+        .scaleEffect()
+        .padding()
+
     }
 }
 

@@ -138,6 +138,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     var userName: String
     let text: String
     let timestamp: Timestamp
+    let hidden: Bool
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -145,6 +146,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         case userName
         case text
         case timestamp
+        case hidden
     }
 
     init(from decoder: Decoder) throws {
@@ -154,6 +156,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         self.userName = try container.decode(String.self, forKey: .userName)
         self.text = try container.decode(String.self, forKey: .text)
         self.timestamp = try container.decode(Timestamp.self, forKey: .timestamp)
+        self.hidden = try container.decode(Bool.self, forKey: .hidden)
     }
 
     init(document: QueryDocumentSnapshot) {
@@ -163,14 +166,16 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         self.userName = ""
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
+        self.hidden = document.data()["hidden"] as! Bool
     }
     
-    init(id: String = UUID().uuidString, userId: String, userName: String, text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp())) {
+    init(id: String = UUID().uuidString, userId: String, userName: String, text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp()), hidden: Bool = false) {
         self.id = id
         self.userId = userId
         self.userName = userName
         self.text = text
         self.timestamp = timestamp
+        self.hidden = hidden
     }
     
     func toData() -> [String: Any] {

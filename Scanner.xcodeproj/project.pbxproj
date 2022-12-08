@@ -17,6 +17,8 @@
 		E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
 		E24522BE279134F200EFBB3E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* DetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
+		E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */; };
+		E24CED4829423A2000EB960C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED4729423A2000EB960C /* RegisterViewModel.swift */; };
 		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		E25EDCDA29398ABA00F017E8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = E25EDCD929398ABA00F017E8 /* GoogleMobileAds */; };
 		E25EDCDC29398D5800F017E8 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EDCDB29398D5800F017E8 /* BannerAd.swift */; };
@@ -24,6 +26,7 @@
 		E26449502796487200685DAB /* ActivityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264494F2796487200685DAB /* ActivityRowView.swift */; };
 		E264495727986B0700685DAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495627986B0700685DAB /* Constants.swift */; };
 		E26449602798D38E00685DAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264495F2798D38E00685DAB /* MapView.swift */; };
+		E291766A2941A03000D14526 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29176692941A03000D14526 /* CommentView.swift */; };
 		E2C16903293BE34B00642670 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16902293BE34B00642670 /* CommentsView.swift */; };
 		E2C16907293C343800642670 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16906293C343800642670 /* CommentsViewModel.swift */; };
 		E2E36C67293FB1F300A4A32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E36C66293FB1F300A4A32C /* LoginView.swift */; };
@@ -123,6 +126,8 @@
 		E202F4522790C46F009C0B13 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E24522BD279134F200EFBB3E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E24522D12791F69400EFBB3E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLimitModifier.swift; sourceTree = "<group>"; };
+		E24CED4729423A2000EB960C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		E25EDCDB29398D5800F017E8 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -130,6 +135,7 @@
 		E264495627986B0700685DAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E264495D2798D1B200685DAB /* Scanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scanner.entitlements; sourceTree = "<group>"; };
 		E264495F2798D38E00685DAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		E29176692941A03000D14526 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		E2C16902293BE34B00642670 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		E2C16906293C343800642670 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		E2E36C66293FB1F300A4A32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 				E24522D12791F69400EFBB3E /* LocationManager.swift */,
 				E264495627986B0700685DAB /* Constants.swift */,
 				E25EDCDB29398D5800F017E8 /* BannerAd.swift */,
+				E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 				EB346CB828FA407200693F59 /* DetailViewModel.swift */,
 				E2587F232798D3EC008D80CA /* MapViewModel.swift */,
 				E2C16906293C343800642670 /* CommentsViewModel.swift */,
+				E24CED4729423A2000EB960C /* RegisterViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -441,6 +449,7 @@
 				E2C16902293BE34B00642670 /* CommentsView.swift */,
 				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
 				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
+				E29176692941A03000D14526 /* CommentView.swift */,
 			);
 			path = "Child Views";
 			sourceTree = "<group>";
@@ -664,6 +673,7 @@
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
 				EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
+				E291766A2941A03000D14526 /* CommentView.swift in Sources */,
 				E25EDCDC29398D5800F017E8 /* BannerAd.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
@@ -687,11 +697,13 @@
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
 				EBA6ECD2291FD97500805610 /* OldNotificationSettingsView.swift in Sources */,
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
+				E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
 				EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */,
+				E24CED4829423A2000EB960C /* RegisterViewModel.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
 				EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
