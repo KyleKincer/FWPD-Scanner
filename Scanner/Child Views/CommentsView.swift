@@ -11,7 +11,7 @@ import FirebaseCore
 import FirebaseAuth
 
 struct CommentsView: View {
-    @State var viewModel: MainViewModel
+    @ObservedObject var viewModel: MainViewModel
     @StateObject var commentModel = CommentsViewModel()
     @Binding var activity: Scanner.Activity
     @State var comment: String = ""
@@ -27,7 +27,7 @@ struct CommentsView: View {
                 Text("Comments")
                     .bold()
                 
-                if viewModel.username != "" {
+                if viewModel.loggedIn {
                     Spacer()
                     
                     Text(viewModel.username)
@@ -72,12 +72,12 @@ struct CommentsView: View {
                             }
                         }
                     }
-                    .keyboardType(.emailAddress)
                 
-                if (showSubmit && viewModel.username != "") {
+                if (showSubmit && viewModel.loggedIn) {
                     Button() {
                         playHaptic()
-                        activity.commentCount = commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
+                        commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
+                        activity.commentCount!+=1
                         commentIsFocused = false
                         comment = ""
                     } label: {
@@ -106,24 +106,43 @@ struct CommentsView: View {
             
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds < $1.timestamp.seconds })) { comment in
-                    HStack {
-                        Text(comment.userName + ": ")
-                            .foregroundColor(.gray)
-                        
-                        Text(comment.text)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.vertical, 4)
-                    
+                    CommentView(comment: comment)
                 }
             }
             .padding(.horizontal)
+            .onChange(of: commentModel.comments, perform: { _ in
+                commentModel.comments = commentModel.comments
+            })
             .sheet(isPresented: $showLoginSheet, content: {
                 LoginView(viewModel: viewModel)
             })
         }
     }
 }
+
+struct CommentView: View {
+    let comment: Comment
+    var body: some View {
+        HStack {
+            Image(systemName: "person.circle")
+                .foregroundColor(.gray)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(comment.userName)
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                    Text(comment.timestamp.firebaseTimestamp.dateValue().formatted())
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                Text(comment.text)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
 
 
 struct CommentsView_Previews: PreviewProvider {

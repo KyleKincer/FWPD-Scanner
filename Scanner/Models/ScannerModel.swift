@@ -165,12 +165,12 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
     }
     
-    init(userId: String, userName: String, text: String) {
-        self.id = ""
+    init(id: String = UUID().uuidString, userId: String, userName: String, text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp())) {
+        self.id = id
         self.userId = userId
         self.userName = userName
         self.text = text
-        self.timestamp = Timestamp(Firebase.Timestamp())
+        self.timestamp = timestamp
     }
     
     func toData() -> [String: Any] {

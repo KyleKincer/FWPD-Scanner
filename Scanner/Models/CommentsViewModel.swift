@@ -30,46 +30,18 @@ class CommentsViewModel: ObservableObject {
         }
     }
     
-    func submitComment(activityId: String, comment: String, userId: String, userName: String) -> Int {
+    func submitComment(activityId: String, comment: String, userId: String, userName: String) {
         let newComment = Comment(userId: userId, userName: userName, text: comment)
-        var newCommentCount = 1
-        let activityRef = Firestore.firestore().collection("activities").document(activityId)
         
-        // start a transaction
-        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
-            // get the document
-            let document = try! transaction.getDocument(activityRef)
-            
-            // check if the document exists
-            if let oldCommentCount = document.data()?["commentCount"] as? Int {
-                // increment the comment count
-                print("oldCommentCount: \(oldCommentCount)")
-                newCommentCount = oldCommentCount + 1
-            } else {
-                
-            }
-            
-            // update the document with the new comment count
-            print("newCommentCount: \(newCommentCount)")
-            transaction.updateData(["commentCount": newCommentCount], forDocument: document.reference)
-            
-            // return the new comment count
-            return newCommentCount
-        }) { (object, error) in
-            if let error = error {
-                print("Transaction failed: \(error)")
-            } else {
-                // the transaction was successful, add the new comment
-                let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
-                commentsRef.addDocument(data: newComment.toData())
-            }
-        }
-        print("newCommentCount: \(newCommentCount)")
-        return newCommentCount
+        Firestore.firestore().collection("activities").document(activityId).updateData(["commentCount": FieldValue.increment(Double(1))])
+        
+        let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
+        commentsRef.addDocument(data: newComment.toData())
     }
     
     
     func updateComments(querySnapshot: QuerySnapshot?) {
+        self.comments.removeAll()
         let usersRef = Firestore.firestore().collection("users")
         
         // loop through the comments and get the userName for each one
@@ -84,21 +56,17 @@ class CommentsViewModel: ObservableObject {
                     return
                 }
                 // update the comment's userName with the userName from the user document
-                let userName = userDocument!.get("userName") as? String
+                let userName = userDocument!.get("username") as? String
                 let text = commentDocument.data()["text"] as! String
-                let comment = Comment(userId: userId, userName: userName ?? "Unknown User", text: text)
+                let timestamp = commentDocument.data()["timestamp"] as! Firebase.Timestamp
+                let id = commentDocument.documentID
+                let comment = Comment(id: id, userId: userId, userName: userName ?? "Unknown User", text: text, timestamp: Timestamp(timestamp))
                 
                 // add the updated comment to the comments array
                 self.comments.append(comment)
             }
         }
     }
-    
-    
-    
-    
-    
-    
     
     
     func stopListening() {
