@@ -89,9 +89,14 @@ final class MainViewModel: ObservableObject {
     }
     
     func logOut() {
-        username = ""
-        userId = ""
-        loggedIn = false
+        do {
+            try Auth.auth().signOut()
+            username = ""
+            userId = ""
+            loggedIn = false
+        } catch {
+            print(error.localizedDescription)
+        }
     }
        
     func refresh() {

@@ -119,7 +119,7 @@ struct ActivityRowView: View {
                 Text("Toggle Bookmark")
             }
             NavigationLink {
-                DetailView(viewModel: viewModel, activity: $activity, focusOnComment: true)
+                DetailView(viewModel: viewModel, activity: $activity)
             } label: {
                 Text("Comment")
             }

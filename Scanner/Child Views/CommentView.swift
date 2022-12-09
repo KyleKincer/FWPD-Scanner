@@ -12,7 +12,6 @@ struct CommentView: View {
     let formatter = RelativeDateTimeFormatter()
     
     var body: some View {
-        if !comment.hidden {
             HStack {
                 Image(systemName: "person.circle")
                     .foregroundColor(.gray)
@@ -26,12 +25,15 @@ struct CommentView: View {
                     }
                     .foregroundColor(.gray)
                     
-                    Text(comment.text)
+                    if !comment.hidden {
+                        Text(comment.text)
+                    } else {
+                        Text("Comment hidden")
+                            .italic()
+                    }
                 }
             }
             .padding(.vertical, 4)
-            
-        }
     }
 }
 
