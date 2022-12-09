@@ -41,6 +41,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @AppStorage("username") var username = String()
     @AppStorage("userId") var userId = String()
+    @Published var onboarding = false
     
     // View States
     @Published var isRefreshing = false
@@ -62,6 +63,9 @@ final class MainViewModel: ObservableObject {
     init() {
         print("I - Initializing list view model")
         model = Scanner()
+        if (self.userId == "") {
+            self.onboarding = true
+        }
         
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
@@ -92,12 +96,52 @@ final class MainViewModel: ObservableObject {
         self.refresh()
     }
     
+    func login(email: String, password: String) {
+        Task.init {
+            do {
+                print("A -- Logging in...")
+                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        // there was an error logging in
+                        print("Error logging in: \(error)")
+                    } else {
+                        // user was successfully logged in
+                        if let authResult = authResult {
+                            let userId = authResult.user.uid
+                            self.userId = userId
+                            
+                            // Get the user's username from Firestore
+                            Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
+                                if let error = error {
+                                    self.authError = error.localizedDescription
+                                    // there was an error getting the username
+                                    print("Error getting username: \(error)")
+                                } else {
+                                    // the username was successfully retrieved
+                                    if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
+                                        print("Successfully retrieved username: \(username)")
+                                        self.username = username
+                                        self.loggedIn = true
+                                        self.showAuth = false
+                                        self.onboarding = false
+                                    }
+                                }
+                            }
+                            print("Successfully logged in user: \(userId)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func logOut() {
         do {
             try Auth.auth().signOut()
-            username = ""
-            userId = ""
-            loggedIn = false
+            self.username = ""
+            self.userId = ""
+            self.loggedIn = false
+            self.onboarding = true
         } catch {
             print(error.localizedDescription)
         }
@@ -165,6 +209,7 @@ final class MainViewModel: ObservableObject {
                             self.loggedIn = true
                             self.showAuth = false
                             self.username = username
+                            self.onboarding = false
                         }
                     }
                 }

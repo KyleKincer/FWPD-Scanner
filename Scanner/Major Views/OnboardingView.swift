@@ -11,7 +11,6 @@ struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel : MainViewModel
-    @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = true
     @State private var showInfo = false
     @State var signingUp = false
@@ -55,6 +54,7 @@ struct OnboardingView: View {
                         Button(action: {
                             playHaptic()
                             withAnimation {
+                                signingUp = true
                                 viewModel.showAuth = true
                             }
                         }, label: {
@@ -92,7 +92,7 @@ struct OnboardingView: View {
                 Button(action: {
                     playHaptic()
                     withAnimation {
-                        onboarding = false
+                        viewModel.onboarding = false
                     }
                 }, label: {
                     ZStack {
@@ -114,7 +114,6 @@ struct OnboardingView: View {
         .padding()
         .transition(.opacity)
         .onAppear {
-            onboarding = true
             viewModel.locationManager.requestAlwaysAuthorization()
         }
         .onDisappear {
@@ -124,8 +123,18 @@ struct OnboardingView: View {
         .fullScreenCover(isPresented: $viewModel.showAuth, content: {
             if (signingUp) {
                 RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                    .onDisappear {
+                        if (viewModel.userId != "") {
+                            viewModel.onboarding = false
+                        }
+                    }
             } else {
                 LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                    .onDisappear {
+                        if (viewModel.userId != "") {
+                            viewModel.onboarding = false
+                        }
+                    }
             }
         })
     }

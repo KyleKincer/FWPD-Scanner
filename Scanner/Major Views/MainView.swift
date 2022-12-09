@@ -12,14 +12,13 @@ struct MainView: View {
     @EnvironmentObject private var appDelegate: AppDelegate
     @State var viewModel : MainViewModel
     @AppStorage("showDistance") var showDistance = true
-    @AppStorage("onboarding") var onboarding = true
     @State private var showFilter = false
     @State private var showMap = false
     @State private var showNotificationView = false
     @State private var showLocationDisclaimer = false
     
     var body: some View {
-        if (onboarding) {
+        if (viewModel.onboarding) {
             OnboardingView(viewModel: viewModel)
                 .transition(.opacity)
             
