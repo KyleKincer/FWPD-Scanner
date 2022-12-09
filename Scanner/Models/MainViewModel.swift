@@ -12,6 +12,7 @@ import MapKit
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import GoogleSignIn
 
 @MainActor
 final class MainViewModel: ObservableObject {
@@ -43,6 +44,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("userId") var userId = String()
     @Published var onboarding = false
     
+    
     // View States
     @Published var isRefreshing = false
     @Published var serverResponsive = true
@@ -56,6 +58,7 @@ final class MainViewModel: ObservableObject {
     @Published var user : User?
     @Published var authError = ""
     @Published var showAuth = false
+    @Published var loginType = ""
     
     // UserDefaults
     let defaults = UserDefaults.standard
@@ -124,6 +127,7 @@ final class MainViewModel: ObservableObject {
                                         self.loggedIn = true
                                         self.showAuth = false
                                         self.onboarding = false
+                                        self.loginType = "email"
                                     }
                                 }
                             }
@@ -133,6 +137,70 @@ final class MainViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func loginWithGoogle() {
+        // 1
+          if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+            GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
+                authenticateUser(for: user, with: error)
+            }
+          } else {
+            // 2
+            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+            
+            // 3
+            let configuration = GIDConfiguration(clientID: clientID)
+            
+            // 4
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            guard let rootViewController = windowScene.windows.first?.rootViewController else { return }
+            
+            // 5
+            GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
+              authenticateUser(for: user, with: error)
+            }
+              self.loginType = "google"
+          }
+    }
+    
+    private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
+      // 1
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+      
+      // 2
+      guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+      
+      let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+      
+      // 3
+      Auth.auth().signIn(with: credential) { [unowned self] (result, error) in
+        if let error = error {
+          print(error.localizedDescription)
+        } else {
+            self.username = result!.user.displayName ?? "None"
+            self.loggedIn = true
+            self.showAuth = false
+            self.onboarding = false
+        }
+      }
+    }
+    
+    func googleSignOut() {
+      // 1
+      GIDSignIn.sharedInstance.signOut()
+      
+      do {
+        // 2
+        try Auth.auth().signOut()
+        
+          self.loggedIn = false
+      } catch {
+        print(error.localizedDescription)
+      }
     }
     
     func logOut() {

@@ -443,9 +443,9 @@
 				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
-				E2C16902293BE34B00642670 /* CommentsView.swift */,
 				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
 				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
+				E2C16902293BE34B00642670 /* CommentsView.swift */,
 				E29176692941A03000D14526 /* CommentView.swift */,
 			);
 			path = "Child Views";

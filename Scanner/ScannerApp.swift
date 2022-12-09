@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import GoogleMobileAds
 import UserNotifications
+import GoogleSignIn
 
 @main
 struct ScannerApp: App {
