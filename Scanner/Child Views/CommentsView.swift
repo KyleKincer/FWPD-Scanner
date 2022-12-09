@@ -77,7 +77,12 @@ struct CommentsView: View {
                     Button() {
                         playHaptic()
                         commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
-                        activity.commentCount!+=1
+                        activity.commentCount! = activity.commentCount! + 1
+                        
+                        let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber})
+                        
+                        viewModel.activities[index!].commentCount!+=1
+                        
                         commentIsFocused = false
                         comment = ""
                     } label: {
