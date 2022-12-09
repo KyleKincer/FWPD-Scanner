@@ -44,11 +44,11 @@ struct LoginView: View {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
                     .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
                 SecureField("Password", text: $password)
                     .padding(.horizontal)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
-            .frame(width: 350)
             
             if errorMessage != "" {
                 Text(errorMessage)

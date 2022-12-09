@@ -54,6 +54,7 @@ struct ActivityRowView: View {
                         if activity.commentCount!>0 {
                             HStack {
                                 Image(systemName: "message")
+                                    .foregroundColor(.blue)
                                 Text(String(activity.commentCount ?? 0))
                             }
                         }
@@ -117,8 +118,8 @@ struct ActivityRowView: View {
             } label: {
                 Text("Toggle Bookmark")
             }
-            Button {
-                
+            NavigationLink {
+                DetailView(viewModel: viewModel, activity: $activity, focusOnComment: true)
             } label: {
                 Text("Comment")
             }
