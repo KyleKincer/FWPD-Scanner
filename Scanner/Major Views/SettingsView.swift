@@ -12,11 +12,11 @@ struct SettingsView: View {
     @ObservedObject var viewModel: MainViewModel   
     @State var refreshOnExit = false
     @State var showingTypesPopover = false
-    @State var showLoginSheet = false
     @State var justAppeared1 = false
     @State var justAppeared2 = false
     @State var dateFrom = Date()
     @State var dateTo = Date()
+    @State var signingUp : Bool = false
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -153,7 +153,7 @@ struct SettingsView: View {
                     }
                     Button {
                         if !viewModel.loggedIn {
-                            showLoginSheet = true
+                            viewModel.showAuth = true
                         } else {
                             viewModel.logOut()
                         }
@@ -164,8 +164,13 @@ struct SettingsView: View {
             }
             .padding(.top, -15)
         }
-        .sheet(isPresented: $showLoginSheet, content: {
-            LoginView(viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.showAuth, content: {
+            if (signingUp) {
+                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+            } else {
+                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage:
+                    $viewModel.showAuth)
+            }
         })
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)

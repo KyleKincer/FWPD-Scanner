@@ -17,12 +17,13 @@ struct ExpandedFilterSettings: View {
     @State var selection = Set<String>()
     @State var dateFrom = Date()
     @State var dateTo = Date()
-    @State var showLoginSheet = false
     @Environment(\.dismiss) var dismiss
     @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
     @State private var searchText = ""
+    @State var showPage : Bool = false
+    @State var signingUp : Bool = false
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -76,7 +77,7 @@ struct ExpandedFilterSettings: View {
                     }
                     Button {
                         if !viewModel.loggedIn {
-                            showLoginSheet = true
+                            showPage = true
                         } else {
                             viewModel.logOut()
                         }
@@ -212,8 +213,12 @@ struct ExpandedFilterSettings: View {
             .padding(.horizontal, 70)
             .padding(.vertical, 10)
         }
-        .sheet(isPresented: $showLoginSheet, content: {
-            LoginView(viewModel: viewModel)
+        .fullScreenCover(isPresented: $showPage, content: {
+            if (signingUp) {
+                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $showPage)
+            } else {
+                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $showPage)
+            }
         })
         .environment(\.editMode, .constant(EditMode.active))
         .onAppear {

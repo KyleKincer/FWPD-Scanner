@@ -14,8 +14,7 @@ struct OnboardingView: View {
     @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = true
     @State private var showInfo = false
-    @State var showLogin = false
-    @State var showRegister = false
+    @State var signingUp = false
     
     var body: some View {
         ZStack {
@@ -46,59 +45,48 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    Text("One-Time Disclaimer:")
-                        .fontWeight(.bold)
+                    DisclaimerView()
                     
-                    Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: false)
-                        .padding(.horizontal, 50)
-                }
-                    
-                    Text("If you are experiencing an emergency, dial 911.")
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: false)
-                        .padding(.horizontal, 30)
-                        .padding(.top)
-                                    
                     Spacer()
+                }
                 
                 HStack {
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            showRegister = true
-                        }
-                    }, label: {
-                        ZStack {
-                            Capsule()
-                                .frame(width: 150, height: 50)
-                                .foregroundColor(.blue)
-                            
-                            Text("Sign Up")
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                        }
-                    })
-
-                    
-                    Button(action: {
-                        playHaptic()
-                        withAnimation {
-                            showLogin = true
-                        }
-                    }, label: {
-                        ZStack {
-                            Capsule()
-                                .frame(width: 150, height: 50)
-                                .foregroundColor(.blue)
-                            
-                            Text("Sign In")
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                        }
-                    })
+                    Group {
+                        Button(action: {
+                            playHaptic()
+                            withAnimation {
+                                viewModel.showAuth = true
+                            }
+                        }, label: {
+                            ZStack {
+                                Capsule()
+                                    .frame(width: 150, height: 50)
+                                    .foregroundColor(.blue)
+                                
+                                Text("Sign Up")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        })
+                        
+                        
+                        Button(action: {
+                            playHaptic()
+                            withAnimation {
+                                viewModel.showAuth = true
+                            }
+                        }, label: {
+                            ZStack {
+                                Capsule()
+                                    .frame(width: 150, height: 50)
+                                    .foregroundColor(.blue)
+                                
+                                Text("Sign In")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        })
+                    }
                 }
                 
                 Button(action: {
@@ -133,16 +121,32 @@ struct OnboardingView: View {
             viewModel.selectedNaturesUD.removeAll()
             viewModel.refresh()
         }
-        .sheet(isPresented: $showLogin, content: {
-            VStack {
-                LoginView(viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.showAuth, content: {
+            if (signingUp) {
+                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+            } else {
+                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
             }
-            
         })
-        .sheet(isPresented: $showRegister, content: {
-            RegisterView(viewModel: viewModel)
-        })
+    }
+}
+    
+struct DisclaimerView: View {
+    var body: some View {
+        Text("One-Time Disclaimer:")
+            .fontWeight(.bold)
         
+        Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: false)
+            .padding(.horizontal, 50)
+        
+        Text("If you are experiencing an emergency, dial 911.")
+            .fontWeight(.bold)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: false)
+            .padding(.horizontal, 30)
+            .padding(.top)
     }
 }
 

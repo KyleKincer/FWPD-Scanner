@@ -10,25 +10,54 @@ import Firebase
 import FirebaseAuth
 
 struct RegisterView: View {
-    @Environment(\.dismiss) var dismiss
-    @State private var email = ""
-    @State private var username = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var errorMessage = ""
+    @State private var username = ""
+    @State private var email = ""
     @ObservedObject var viewModel : MainViewModel
-    @ObservedObject var registerViewModel = RegisterViewModel()
-    
+    @Binding var signingUp : Bool
+    @Binding var showPage : Bool
     
     var body: some View {
         VStack {
+            Group {
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            signingUp = false
+                            showPage = false
+                        }
+                    }, label: {
+                        HStack {
+                            Image(systemName: "arrow.left")
+                                .foregroundColor(.yellow)
+                                .font(.system(size: 30))
+                            
+                            Text("Back")
+                                .foregroundColor(.yellow)
+                        }
+                    })
+                    .padding([.leading, .top])
+                    
+                    Spacer()
+                    
+                }
+                .padding(.horizontal)
+            }
             
-            Capsule()
-                .frame(width: 100, height: 5)
-                .foregroundColor(.gray)
-                .padding()
-            
+            Group {
+                Button(action: {
+                    signingUp = false
+                }, label: {
+                    Text("Sign In Instead")
+                        .foregroundColor(.blue)
+                })
+            }
+                
             SignUpHeader()
+
+            Spacer()
             
             Group {
                 TextField("Email Address", text: $email)
@@ -46,11 +75,12 @@ struct RegisterView: View {
                         .padding(.trailing, 30)
                 }
                 SecureField("Password", text: $password)
-                    .padding(.horizontal)
                     .border(password != confirmPassword ? Color.red : Color.clear)
+                    .padding(.horizontal)
+                
                 SecureField("Confirm password", text: $confirmPassword)
-                    .padding(.horizontal)
                     .border(password != confirmPassword ? Color.red : Color.clear)
+                    .padding(.horizontal)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .frame(width: 350)
@@ -64,36 +94,35 @@ struct RegisterView: View {
             
             Group {
                 Button(action: {
-                                playHaptic()
-                                withAnimation {
-                                    print("A -- Registering new user")
-                                    if registerViewModel.createUser() {
-                                        dismiss()
-                                    }
-                                }
-                            }, label: {
-                                ZStack {
-                                    Capsule()
-                                        .frame(width: 100, height: 40)
-                                        .foregroundColor(.blue)
-                                    
-                                    Text("Submit")
-                                        .foregroundColor(.white)
-                                        .fontWeight(.bold)
-                                }
-                            })
-                            .disabled(password != confirmPassword)
-                            .padding()
-                            
-                            Divider()
-                                .padding()
-                            
-                            SocialButtons()
-                            
-                            Spacer()
-            }
-            
+                    playHaptic()
+                    var userID = ""
+                    withAnimation {
+                        print("A -- Registering new user")
+                        
+                        viewModel.createUser(email: email, password: password, username: username)
                     }
+                }, label: {
+                    ZStack {
+                        Capsule()
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(.blue)
+                        
+                        Text("Submit")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                })
+                .disabled(password != confirmPassword)
+                .padding()
+                
+                Divider()
+                    .padding()
+                
+                SocialButtons()
+                
+                Spacer()
+            }
+        }
     }
 }
 
@@ -116,7 +145,6 @@ struct SignUpHeader: View {
             Text("Use an Email and Password:")
                 .bold()
         }
-
     }
 }
 
@@ -178,7 +206,6 @@ struct SocialButtons: View {
                 .frame(width: 50, height: 50)
                 .padding()
             }
-            
         }
         .scaleEffect()
         .padding()
@@ -188,6 +215,6 @@ struct SocialButtons: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(viewModel: MainViewModel())
+        RegisterView(viewModel: MainViewModel(), signingUp: .constant(true), showPage: .constant(true))
     }
 }

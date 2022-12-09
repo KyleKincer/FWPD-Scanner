@@ -15,10 +15,10 @@ struct CommentsView: View {
     @StateObject var commentModel = CommentsViewModel()
     @Binding var activity: Scanner.Activity
     @State var comment: String = ""
-    @State var showLoginSheet = false
     @State var showSubmit = false
     @FocusState var commentIsFocused: Bool
     @State var authHandle : AuthStateDidChangeListenerHandle?
+    @State var signingUp : Bool = false
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -36,7 +36,7 @@ struct CommentsView: View {
                     Spacer()
                     
                     Button {
-                        showLoginSheet = true
+                        viewModel.showAuth = true
                     } label: {
                         ZStack {
                             Capsule()
@@ -113,8 +113,12 @@ struct CommentsView: View {
             .onChange(of: commentModel.comments, perform: { _ in
                 commentModel.comments = commentModel.comments
             })
-            .sheet(isPresented: $showLoginSheet, content: {
-                LoginView(viewModel: viewModel)
+            .fullScreenCover(isPresented: $viewModel.showAuth, content: {
+                if (signingUp) {
+                    RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                } else {
+                    LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                }
             })
         }
     }

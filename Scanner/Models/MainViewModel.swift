@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
 
 @MainActor
 final class MainViewModel: ObservableObject {
@@ -52,6 +53,9 @@ final class MainViewModel: ObservableObject {
     @Published var networkManager = NetworkManager()
     @AppStorage("loggedIn") var loggedIn = false
     @Published var user : User?
+    @Published var authError = ""
+    @Published var showAuth = false
+    
     // UserDefaults
     let defaults = UserDefaults.standard
     
@@ -133,6 +137,39 @@ final class MainViewModel: ObservableObject {
         }
         self.getNatures()
         self.getBookmarks()
+    }
+    
+    func createUser(email: String, password: String, username: String) {
+        Task.init {
+            do {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        // there was an error creating the user
+                        print("Error creating user: \(error)")
+                        self.authError = error.localizedDescription
+                    } else {
+                        self.authError = ""
+                        // user was successfully created
+                        if let authResult = authResult {
+                            print("Successfully created user: \(authResult.user)")
+                            self.userId = authResult.user.uid
+                            let db = Firestore.firestore()
+                            let userRef = db.collection("users").document(self.userId)
+                            userRef.setData(["username": username]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                            self.loggedIn = true
+                            self.showAuth = false
+                            self.username = username
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // Get next 25 activities from Firestore
