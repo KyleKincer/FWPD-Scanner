@@ -113,6 +113,12 @@ struct Timestamp: Decodable, Equatable, Hashable {
         self.nanoseconds = Int(timestamp.nanoseconds)
     }
     
+    init() {
+        let timestamp = Firebase.Timestamp()
+        self.seconds = Int(timestamp.seconds)
+        self.nanoseconds = Int(timestamp.nanoseconds)
+    }
+    
     var firebaseTimestamp: Firebase.Timestamp {
         return Firebase.Timestamp(seconds: Int64(self.seconds), nanoseconds: Int32(self.nanoseconds))
     }
