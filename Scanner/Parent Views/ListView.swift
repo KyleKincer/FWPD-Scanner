@@ -44,7 +44,35 @@ struct ListView: View {
                         }
                     // Results
                     } else {
+                        
+                        HStack {
+
+                            Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Activity" : "Recent Comments"))
+                                .font(.title)
+
+                            Spacer()
+                            
+                            
+                            if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
+                                
+                                Button(action: {
+                                    withAnimation {
+                                        viewModel.showMostRecent.toggle()
+                                    }
+                                    
+                                    
+                                    
+                                }, label: {
+                                    Image(systemName: viewModel.showMostRecent ? "bubble.right" : "clock")
+                                        .font(.system(size: 20))
+                                })
+                            }
+                            
+                        }
+                        .padding(.horizontal)
+                        
                         NavigationView {
+                            
                             List(viewModel.activities, id: \.self) { activity in
                                 ActivityRowView(activity: activity, viewModel: viewModel)
                                 
@@ -68,8 +96,8 @@ struct ListView: View {
                                     }
                                 }
                             }
-                            .navigationBarTitleDisplayMode(.automatic)
-                            .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
+//                            .navigationBarTitleDisplayMode(.automatic)
+//                            .navigationTitle((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                             .refreshable {
                                 viewModel.refresh()
                             }

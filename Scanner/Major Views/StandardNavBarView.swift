@@ -53,7 +53,7 @@ struct StandardNavBarView: View {
                         showFilter.toggle()
                     }
                 }, label: {
-                    Image(systemName: "gear")
+                    Image(systemName: "switch.2")
                         .font(.system(size: 25))
                         .shadow(radius: 2)
                 })

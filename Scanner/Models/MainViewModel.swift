@@ -51,6 +51,7 @@ final class MainViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
+    @Published var showMostRecent = true
     
     // Network and auth
     @Published var networkManager = NetworkManager()
