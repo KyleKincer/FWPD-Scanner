@@ -160,6 +160,7 @@ final class MainViewModel: ObservableObject {
             // 5
             GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
               authenticateUser(for: user, with: error)
+                
             }
               self.loginType = "google"
           }
@@ -182,10 +183,13 @@ final class MainViewModel: ObservableObject {
         if let error = error {
           print(error.localizedDescription)
         } else {
+            self.userId = result!.user.uid
             self.username = result!.user.displayName ?? "None"
             self.loggedIn = true
             self.showAuth = false
             self.onboarding = false
+            
+            self.writeUserDocument(userId: self.userId, username: self.username)
         }
       }
     }
@@ -266,22 +270,27 @@ final class MainViewModel: ObservableObject {
                         if let authResult = authResult {
                             print("Successfully created user: \(authResult.user)")
                             self.userId = authResult.user.uid
-                            let db = Firestore.firestore()
-                            let userRef = db.collection("users").document(self.userId)
-                            userRef.setData(["username": username]) { err in
-                                if let err = err {
-                                    print("Error writing document: \(err)")
-                                } else {
-                                    print("Document successfully written!")
-                                }
-                            }
                             self.loggedIn = true
                             self.showAuth = false
                             self.username = username
                             self.onboarding = false
+                            
+                            self.writeUserDocument(userId: self.userId, username: self.username)
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func writeUserDocument(userId: String, username: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(self.userId)
+        userRef.setData(["username": username]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
     }
