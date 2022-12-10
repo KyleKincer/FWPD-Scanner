@@ -72,6 +72,21 @@ class CommentsViewModel: ObservableObject {
     }
     
     
+    func deleteComment(comment: Comment, activityId: String) {
+        let activityRef = Firestore.firestore().collection("activities").document(activityId)
+        let commentsRef = activityRef.collection("comments")
+        commentsRef.document(comment.id).delete()
+        activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+    }
+    
+    
+    func hideComment(comment: Comment, activityId: String) {
+        let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments").document(comment.id)
+        // update the comment's hidden property in Firestore
+        commentsRef.updateData(["hidden": !comment.hidden])
+}
+    
+    
     func stopListening() {
         // stop listening for changes to the comments collection
         listener?.remove()

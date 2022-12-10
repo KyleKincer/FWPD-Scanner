@@ -112,6 +112,25 @@ struct CommentsView: View {
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
                     CommentView(comment: comment)
+                        .contextMenu {
+                            if viewModel.admin {
+                                Button {
+                                    commentModel.deleteComment(comment: comment, activityId: activity.id)
+                                    activity.commentCount!-=1
+                                } label: {
+                                    Text("Delete")
+                                }
+                                
+                                Button {
+                                    withAnimation {
+                                        commentModel.hideComment(comment: comment, activityId: activity.id)
+                                    }
+                                } label: {
+                                    Text(comment.hidden ? "Unhide" : "Hide")
+                                }
+                                
+                            }
+                        }
                 }
             }
             .padding(.horizontal)
