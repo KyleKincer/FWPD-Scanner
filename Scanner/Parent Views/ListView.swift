@@ -126,9 +126,9 @@ struct ListView: View {
                 }
                 viewModel.getBookmarks()
             case .inactive:
-                print("G - App Inactive (shrug)")
+                print("G - App Inactive ¯\\_(ツ)_/¯")
             @unknown default:
-                print("G - App Inactive (shrug)")
+                print("G - App Inactive ¯\\_(ツ)_/¯")
             }
         }
     }

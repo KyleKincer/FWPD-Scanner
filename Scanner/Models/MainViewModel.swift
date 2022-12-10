@@ -42,6 +42,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @AppStorage("username") var username = String()
     @AppStorage("userId") var userId = String()
+    @AppStorage("admin") var admin = false
     @Published var onboarding = false
     
     
@@ -73,14 +74,14 @@ final class MainViewModel: ObservableObject {
         
         if CLLocationManager.locationServicesEnabled() {
             switch locationManager.authorizationStatus {
-                case .notDetermined, .restricted, .denied:
-                    print("X - Failed to get location")
-                    self.locationEnabled = false
-                case .authorizedAlways, .authorizedWhenInUse:
-                    print("G - Succeeded in getting location ")
-                    self.locationEnabled = true
-                @unknown default:
-                    break
+            case .notDetermined, .restricted, .denied:
+                print("X - Failed to get location")
+                self.locationEnabled = false
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("G - Succeeded in getting location ")
+                self.locationEnabled = true
+            @unknown default:
+                break
             }
         } else {
             print("X - Location services are disabled by user")
@@ -111,28 +112,8 @@ final class MainViewModel: ObservableObject {
                     } else {
                         // user was successfully logged in
                         if let authResult = authResult {
-                            let userId = authResult.user.uid
-                            self.userId = userId
-                            
-                            // Get the user's username from Firestore
-                            Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
-                                if let error = error {
-                                    self.authError = error.localizedDescription
-                                    // there was an error getting the username
-                                    print("Error getting username: \(error)")
-                                } else {
-                                    // the username was successfully retrieved
-                                    if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
-                                        print("Successfully retrieved username: \(username)")
-                                        self.username = username
-                                        self.loggedIn = true
-                                        self.showAuth = false
-                                        self.onboarding = false
-                                        self.loginType = "email"
-                                    }
-                                }
-                            }
-                            print("Successfully logged in user: \(userId)")
+                            self.loginType = "email"
+                            self.initUser(auth: authResult)
                         }
                     }
                 }
@@ -142,11 +123,11 @@ final class MainViewModel: ObservableObject {
     
     func loginWithGoogle() {
         // 1
-          if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+        if GIDSignIn.sharedInstance.hasPreviousSignIn() {
             GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
                 authenticateUser(for: user, with: error)
             }
-          } else {
+        } else {
             // 2
             guard let clientID = FirebaseApp.app()?.options.clientID else { return }
             
@@ -159,53 +140,71 @@ final class MainViewModel: ObservableObject {
             
             // 5
             GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
-              authenticateUser(for: user, with: error)
+                authenticateUser(for: user, with: error)
                 
             }
-              self.loginType = "google"
-          }
+            self.loginType = "google"
+        }
     }
     
     private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
-      // 1
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
-      
-      // 2
-      guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
-      
-      let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-      
-      // 3
-      Auth.auth().signIn(with: credential) { [unowned self] (result, error) in
+        // 1
         if let error = error {
-          print(error.localizedDescription)
-        } else {
-            self.userId = result!.user.uid
-            self.username = result!.user.displayName ?? "None"
-            self.loggedIn = true
-            self.showAuth = false
-            self.onboarding = false
-            
-            self.writeUserDocument(userId: self.userId, username: self.username)
+            print(error.localizedDescription)
+            return
         }
-      }
+        
+        // 2
+        guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+        
+        // 3
+        Auth.auth().signIn(with: credential) { [unowned self] (result, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                initUser(auth: result)
+            }
+        }
+    }
+    
+    func initUser(auth: AuthDataResult?) {
+        self.userId = auth!.user.uid
+        self.username = auth!.user.displayName ?? "None"
+        self.loggedIn = true
+        self.showAuth = false
+        self.onboarding = false
+        
+        // Only call writeUserDocument if a document doesn't already exist
+        // in the users collection with the uid.
+        let userDocRef = Firestore.firestore().collection("users").document(self.userId)
+        userDocRef.getDocument { (snapshot, error) in
+            if error == nil && snapshot?.exists == false {
+                self.writeUserDocument(userId: self.userId, username: self.username)
+            } else if snapshot?.exists == true {
+                self.readUserDocument(snapshot: snapshot!)
+            }
+        }
+    }
+    
+    func readUserDocument(snapshot: DocumentSnapshot) {
+        self.username = (snapshot.data()!["username"] as? String)!
+        self.admin = snapshot.data()?["admin"] as? Bool ?? false
     }
     
     func googleSignOut() {
-      // 1
-      GIDSignIn.sharedInstance.signOut()
-      
-      do {
-        // 2
-        try Auth.auth().signOut()
+        // 1
+        GIDSignIn.sharedInstance.signOut()
         
-          self.loggedIn = false
-      } catch {
-        print(error.localizedDescription)
-      }
+        do {
+            // 2
+            try Auth.auth().signOut()
+            
+            self.loggedIn = false
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func logOut() {
@@ -219,13 +218,13 @@ final class MainViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
-       
+    
     func refresh() {
         print("R --- Refreshing")
         self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
- 
+        
         Task.init {
             do {
                 // Get first set of activities
