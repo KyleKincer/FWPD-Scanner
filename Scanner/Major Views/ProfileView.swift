@@ -15,7 +15,7 @@ struct ProfileView: View {
     
     
     var body: some View {
-        if (viewModel.loggedIn) {
+        if (!viewModel.loggedIn) {
             // Authenticate
             if (signingUp) {
                 RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)

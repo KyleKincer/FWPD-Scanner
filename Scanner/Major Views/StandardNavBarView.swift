@@ -115,7 +115,7 @@ struct StandardNavBarView: View {
                     }
                     
                 }, label: {
-                    Image(systemName: "person.crop.circle")
+                    Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
                         .font(.system(size: 25))
                         .foregroundColor(.orange)
                         .shadow(radius: 2)
