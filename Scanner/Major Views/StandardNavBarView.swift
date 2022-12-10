@@ -12,11 +12,14 @@ struct StandardNavBarView: View {
     @Binding var showFilter : Bool
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
+    @Binding var showProfileView : Bool
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
     @AppStorage("newToNots") var newToNots = true
     @State private var bellJingle = false
+    
+    
     @Environment(\.horizontalSizeClass) var sizeClass
     
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -107,13 +110,12 @@ struct StandardNavBarView: View {
                 Button(action: {
                     playHaptic()
                     withAnimation {
-                        viewModel.showBookmarks.toggle()
-                    }
-                    if (viewModel.showBookmarks) {
+                        showProfileView.toggle()
                         viewModel.getBookmarks()
                     }
+                    
                 }, label: {
-                    Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
+                    Image(systemName: "person.crop.circle")
                         .font(.system(size: 25))
                         .foregroundColor(.orange)
                         .shadow(radius: 2)
@@ -129,7 +131,7 @@ struct StandardNavBarView: View {
 
 struct StandardNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardNavBarView(showNotificationSheet: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), viewModel: MainViewModel())
+        StandardNavBarView(showNotificationSheet: .constant(false), showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), showProfileView: .constant(false), viewModel: MainViewModel())
     }
 }
 

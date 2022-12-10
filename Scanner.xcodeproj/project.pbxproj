@@ -29,6 +29,8 @@
 		E2C16903293BE34B00642670 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16902293BE34B00642670 /* CommentsView.swift */; };
 		E2C16907293C343800642670 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C16906293C343800642670 /* CommentsViewModel.swift */; };
 		E2E36C67293FB1F300A4A32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E36C66293FB1F300A4A32C /* LoginView.swift */; };
+		EB0C3B0929442E590098C234 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C3B0829442E590098C234 /* ProfileView.swift */; };
+		EB0C3B0B29443B4B0098C234 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C3B0A29443B4B0098C234 /* HistoryView.swift */; };
 		EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB136E12292DC53E00CA905D /* NotificationView.swift */; };
 		EB15896929242A720009F60D /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7E828E79ADD005A76E7 /* WatchListView.swift */; };
 		EB15896A29242A720009F60D /* WatchRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */; };
@@ -139,6 +141,8 @@
 		E2E36C66293FB1F300A4A32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E4126EF435D5649C86E63EB0 /* Pods_ScannerTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScannerTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64FAFC148E2653F24F4B56A /* Pods_Scanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0C3B0829442E590098C234 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		EB0C3B0A29443B4B0098C234 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		EB136E12292DC53E00CA905D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		EB15895B29242A550009F60D /* FWPD Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FWPD Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB15897129242AA20009F60D /* WatchScannerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchScannerApp.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				EB1CC35B28E5158F009B593F /* MainView.swift */,
+				EB0C3B0829442E590098C234 /* ProfileView.swift */,
 				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
 				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
 				EBE043FE28F5F23B003C4A37 /* SettingsView.swift */,
@@ -398,6 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
+				E2C16902293BE34B00642670 /* CommentsView.swift */,
+				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
 				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
 				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
@@ -445,7 +452,6 @@
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
 				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
 				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
-				E2C16902293BE34B00642670 /* CommentsView.swift */,
 				E29176692941A03000D14526 /* CommentView.swift */,
 			);
 			path = "Child Views";
@@ -667,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
+				EB0C3B0929442E590098C234 /* ProfileView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
 				EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
@@ -682,6 +689,7 @@
 				EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
+				EB0C3B0B29443B4B0098C234 /* HistoryView.swift in Sources */,
 				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,

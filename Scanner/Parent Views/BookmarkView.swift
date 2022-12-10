@@ -31,7 +31,6 @@ struct BookmarkView: View {
                             ActivityRowView(activity: activity, viewModel: viewModel)
                         }
                     }
-                    .navigationTitle("Bookmarks")
                     .navigationBarTitleDisplayMode(.inline)
                 }
             }

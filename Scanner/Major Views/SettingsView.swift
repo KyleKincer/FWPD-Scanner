@@ -16,7 +16,6 @@ struct SettingsView: View {
     @State var justAppeared2 = false
     @State var dateFrom = Date()
     @State var dateTo = Date()
-    @State var signingUp : Bool = false
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
@@ -146,32 +145,9 @@ struct SettingsView: View {
                         }
                     }
                 }
-                
-                Section("Account") {
-                    if viewModel.loggedIn {
-                        Text("Howdy, \(viewModel.username)!")
-                    }
-                    Button {
-                        if !viewModel.loggedIn {
-                            viewModel.showAuth = true
-                        } else {
-                            viewModel.logOut()
-                        }
-                    } label: {
-                        Text(viewModel.loggedIn ? "Log out" : "Log in")
-                    }
-                }
             }
             .padding(.top, -15)
         }
-        .fullScreenCover(isPresented: $viewModel.showAuth, content: {
-            if (signingUp) {
-                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
-            } else {
-                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage:
-                    $viewModel.showAuth)
-            }
-        })
         .popover(isPresented: $showingTypesPopover) {
             NaturesList(viewModel: viewModel)
                 .onDisappear {

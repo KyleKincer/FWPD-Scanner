@@ -16,16 +16,17 @@ struct MainView: View {
     @State private var showMap = false
     @State private var showNotificationView = false
     @State private var showLocationDisclaimer = false
+    @State private var showProfileView = false
     
     var body: some View {
         if (viewModel.onboarding) {
-            OnboardingView(viewModel: viewModel)
+            OnboardingView(viewModel: $viewModel)
                 .transition(.opacity)
             
         } else {
             VStack {
                 if (sizeClass == .compact) {
-                    StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, viewModel: viewModel)
+                    StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showProfileView: $showProfileView, viewModel: viewModel)
                     
                     ActivityView(showMap: $showMap, viewModel: viewModel)
                         .environmentObject(appDelegate)
@@ -54,6 +55,7 @@ struct MainView: View {
             .onAppear {
                 showDistance = true
             }
+            
             .fullScreenCover(isPresented: $showFilter) {
                 if #available(iOS 16.0, *) {
                     if (sizeClass == .compact) {
@@ -77,6 +79,10 @@ struct MainView: View {
                 } else {
                     OldNotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
                 }
+            }
+            
+            .fullScreenCover(isPresented: $showProfileView) {
+                ProfileView(viewModel: $viewModel, showProfileView: $showProfileView)
             }
             
             .sheet(isPresented: $showLocationDisclaimer) {

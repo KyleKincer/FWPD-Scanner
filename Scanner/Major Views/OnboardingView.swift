@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var viewModel : MainViewModel
+    @Binding var viewModel : MainViewModel
     @State var isAnimating = true
     @State private var showInfo = false
     @State var signingUp = false
@@ -49,63 +49,19 @@ struct OnboardingView: View {
                     Spacer()
                 }
                 
-                HStack {
-                    Group {
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                signingUp = true
-                                viewModel.showAuth = true
-                            }
-                        }, label: {
-                            ZStack {
-                                Capsule()
-                                    .frame(width: 150, height: 50)
-                                    .foregroundColor(.blue)
-                                
-                                Text("Sign Up")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.bold)
-                            }
-                        })
-                        
-                        
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                viewModel.showAuth = true
-                            }
-                        }, label: {
-                            ZStack {
-                                Capsule()
-                                    .frame(width: 150, height: 50)
-                                    .foregroundColor(.blue)
-                                
-                                Text("Sign In")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.bold)
-                            }
-                        })
-                    }
-                }
-                
                 Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        viewModel.onboarding = false
-                    }
+                    viewModel.onboarding = false
                 }, label: {
                     ZStack {
                         Capsule()
-                            .frame(width: 240, height: 50)
-                            .foregroundColor(.gray)
+                            .frame(width: 200, height: 60)
+                            .foregroundColor(.blue)
                         
-                        Text("Proceed Without Account")
+                        Text("Let's Get Scanning")
                             .foregroundColor(.white)
-                            .fontWeight(.bold)
+                            .bold()
                     }
                 })
-
                 
                 Spacer()
                 
@@ -120,23 +76,6 @@ struct OnboardingView: View {
             viewModel.selectedNaturesUD.removeAll()
             viewModel.refresh()
         }
-        .fullScreenCover(isPresented: $viewModel.showAuth, content: {
-            if (signingUp) {
-                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
-                    .onDisappear {
-                        if (viewModel.userId != "") {
-                            viewModel.onboarding = false
-                        }
-                    }
-            } else {
-                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
-                    .onDisappear {
-                        if (viewModel.userId != "") {
-                            viewModel.onboarding = false
-                        }
-                    }
-            }
-        })
     }
 }
     
@@ -161,6 +100,6 @@ struct DisclaimerView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(viewModel: MainViewModel())
+        OnboardingView(viewModel: .constant(MainViewModel()))
     }
 }
