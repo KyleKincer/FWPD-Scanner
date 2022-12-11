@@ -40,7 +40,6 @@ struct ListView: View {
                 // Show BookmarkView
                 if (viewModel.showBookmarks) {
                     BookmarkView(viewModel: viewModel)
-                    
                 } else if (viewModel.showMostRecent) {
                     RecentCommentsView(viewModel: viewModel)
                 } else  { // Show normal activity view
@@ -93,11 +92,11 @@ struct ListView: View {
                                 viewModel.refresh()
                             }
                         }
-                        SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
-                            .ignoresSafeArea()
-                            .frame(maxHeight: 40)
                     }
                 }
+                SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+                    .ignoresSafeArea()
+                    .frame(maxHeight: 40)
             }
             
             // Refresh Reminder Capsule

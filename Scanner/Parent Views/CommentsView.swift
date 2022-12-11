@@ -79,9 +79,9 @@ struct CommentsView: View {
                         commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
                         activity.commentCount! = activity.commentCount! + 1
                         
-                        let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber})
-                        
-                        viewModel.activities[index!].commentCount!+=1
+                        if let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber}) {
+                            viewModel.activities[index].commentCount!+=1
+                        }
                         
                         commentIsFocused = false
                         comment = ""
