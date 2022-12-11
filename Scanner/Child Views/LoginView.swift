@@ -166,6 +166,9 @@ struct LoginView: View {
                             playHaptic()
                             withAnimation {
                                 viewModel.loginWithGoogle()
+                                withAnimation {
+                                    dismiss()
+                                }
                             }
                         }, label: {
                             Image("googleLogo")

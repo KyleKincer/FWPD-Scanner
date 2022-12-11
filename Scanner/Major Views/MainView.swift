@@ -25,6 +25,10 @@ struct MainView: View {
             
         } else {
             VStack {
+                if viewModel.showAuthError {
+                    alert(viewModel.authError, isPresented: $viewModel.showAuthError, actions: {})
+                }
+
                 if (sizeClass == .compact) {
                     StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showProfileView: $showProfileView, viewModel: viewModel)
                     

@@ -53,6 +53,7 @@ final class MainViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     @Published var showMostRecent = true
+    @Published var showAuthError = false
     
     // Network and auth
     @Published var networkManager = NetworkManager()
@@ -151,6 +152,8 @@ final class MainViewModel: ObservableObject {
         // 1
         if let error = error {
             print(error.localizedDescription)
+            self.showAuthError = true
+            self.authError = error.localizedDescription
             return
         }
         
