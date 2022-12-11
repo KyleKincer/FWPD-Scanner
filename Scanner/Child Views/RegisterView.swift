@@ -95,10 +95,8 @@ struct RegisterView: View {
             Group {
                 Button(action: {
                     playHaptic()
-                    var userID = ""
                     withAnimation {
                         print("A -- Registering new user")
-                        
                         viewModel.createUser(email: email, password: password, username: username)
                     }
                 }, label: {
@@ -117,8 +115,6 @@ struct RegisterView: View {
                 
                 Divider()
                     .padding()
-                
-                SocialButtons()
                 
                 Spacer()
             }
@@ -145,71 +141,6 @@ struct SignUpHeader: View {
             Text("Use an Email and Password:")
                 .bold()
         }
-    }
-}
-
-struct SocialButtons: View {
-    var body: some View {
-        Text("or login with :")
-            .bold()
-            .padding(.top)
-        
-        HStack {
-            Group {
-                Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        print("Google")
-                    }
-                }, label: {
-                    Image("googleLogo")
-                })
-                .scaleEffect(0.2)
-                .frame(width: 50, height: 50)
-                .padding()
-                
-                Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        print("Facebook")
-                    }
-                }, label: {
-                    Image("facebookLogo")
-                })
-                .scaleEffect(0.35)
-                .frame(width: 50, height: 50)
-                .padding()
-                
-                Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        print("Twitter")
-                    }
-                }, label: {
-                    Image("twitterLogo")
-                })
-                .scaleEffect(0.08)
-                .frame(width: 50, height: 50)
-                .padding()
-                
-                Button(action: {
-                    playHaptic()
-                    withAnimation {
-                        print("Apple")
-                    }
-                }, label: {
-                    Image("appleLogo")
-                        .background(Color.white)
-                        .cornerRadius(200)
-                })
-                .scaleEffect(0.4)
-                .frame(width: 50, height: 50)
-                .padding()
-            }
-        }
-        .scaleEffect()
-        .padding()
-
     }
 }
 

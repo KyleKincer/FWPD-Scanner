@@ -12,6 +12,8 @@ struct ProfileView: View {
     @State private var signingUp = false
     @State private var page = 1
     @Binding var showProfileView : Bool
+    @State private var editingUsername = false
+    @State private var newUsername = ""
     
     
     var body: some View {
@@ -22,7 +24,7 @@ struct ProfileView: View {
             } else {
                 LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
             }
-                
+            
         } else {
             // Profile View
             VStack {
@@ -49,22 +51,54 @@ struct ProfileView: View {
                         Text("Sign Out")
                             .foregroundColor(.red)
                     })
- 
+                    
                 }
                 .padding(.horizontal)
                 
                 Button (action: {
-                        // Change icon color and send change to firebase?
+                    // Change icon color and send change to firebase?
                     
-                    }, label: {
-                        Image(systemName: "person.crop.circle")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 80))
-                    })
-                
-                Text(viewModel.username)
-                    .font(.title2)
-                    .italic()
+                }, label: {
+                    Image(systemName: "person.crop.circle")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 80))
+                })
+                if editingUsername {
+                    HStack {
+                        TextField(viewModel.username, text: $newUsername)
+                            .frame(width: 200)
+                            .limitInputLength(value: $newUsername, length: 20)
+                            .padding(.horizontal)
+                        
+                        Button {
+                            viewModel.updateUsername(to: newUsername)
+                            editingUsername = false
+                        } label: {
+                            ZStack {
+                                Capsule()
+                                    .frame(width: 100, height: 40)
+                                    .foregroundColor(.blue)
+                                
+                                Text("Submit")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        }.disabled(newUsername.count==0)
+                    }
+                } else {
+                    HStack {
+                        Text(viewModel.username)
+                            .font(.title2)
+                        Button {
+                            editingUsername = true
+                        } label: {
+                            Text("Edit")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                }
                 
                 Divider()
                     .padding(.horizontal, 50)

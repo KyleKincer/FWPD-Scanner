@@ -298,6 +298,22 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    func updateUsername(to username: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(self.userId)
+        let oldUserName = self.username
+        self.username = username // preemptively set the local username property,
+        
+        userRef.updateData(["username": username]) { err in
+            if let err = err {
+                self.username = oldUserName
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
     // Get next 25 activities from Firestore
     func getMoreActivities() {
         withAnimation {

@@ -157,7 +157,7 @@ struct LoginView: View {
                 Divider()
                     .padding()
                 
-                Text("or use any of the following services:")
+                Text("or log in with")
                     .bold()
                     .padding()
                 
