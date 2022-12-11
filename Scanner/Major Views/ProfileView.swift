@@ -59,9 +59,21 @@ struct ProfileView: View {
                     // Change icon color and send change to firebase?
                     
                 }, label: {
-                    Image(systemName: "person.crop.circle")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 80))
+                    if (viewModel.profileImageURL != "") {
+                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
+                            image
+                                .clipShape(Circle())
+                        } placeholder: {
+                            Image(systemName: "person.crop.circle")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 80))
+                        }
+
+                    } else {
+                        Image(systemName: "person.crop.circle")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 80))
+                    }
                 })
                 if editingUsername {
                     HStack {

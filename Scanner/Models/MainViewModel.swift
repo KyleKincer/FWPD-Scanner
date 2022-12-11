@@ -44,6 +44,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("username") var username = String()
     @AppStorage("userId") var userId = String()
     @AppStorage("admin") var admin = false
+    @AppStorage("profileImageURL") var profileImageURL = ""
     @Published var onboarding = false
     
     
@@ -168,6 +169,7 @@ final class MainViewModel: ObservableObject {
             if let error = error {
                 print(error.localizedDescription)
             } else {
+                self.profileImageURL = result!.user.photoURL?.absoluteString ?? ""
                 initUser(auth: result)
             }
         }
