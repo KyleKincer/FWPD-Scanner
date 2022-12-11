@@ -187,7 +187,7 @@ final class MainViewModel: ObservableObject {
         let userDocRef = Firestore.firestore().collection("users").document(self.userId)
         userDocRef.getDocument { (snapshot, error) in
             if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(userId: self.userId, username: self.username)
+                self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
             } else if snapshot?.exists == true {
                 self.readUserDocument(snapshot: snapshot!)
             }
@@ -280,7 +280,7 @@ final class MainViewModel: ObservableObject {
                             self.username = username
                             self.onboarding = false
                             
-                            self.writeUserDocument(userId: self.userId, username: self.username)
+                            self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
                         }
                     }
                 }
@@ -288,10 +288,10 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func writeUserDocument(userId: String, username: String) {
+    func writeUserDocument(userId: String, username: String, imageURL: String) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(self.userId)
-        userRef.setData(["username": username]) { err in
+        userRef.setData(["username": username, "imageURL": imageURL]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
