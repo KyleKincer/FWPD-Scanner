@@ -251,6 +251,25 @@ class NetworkManager {
         return activities.sorted(by: { $0.timestamp > $1.timestamp })
     }
     
+    func getRecentlyCommentedActivities() async throws -> [Scanner.Activity] {
+        var activities = [Scanner.Activity]()
+        
+        do {
+            let db = Firestore.firestore()
+            let activitiesRef = db.collection("activities")
+            let query = activitiesRef.order(by: "lastCommentAt", descending: true).limit(to: 100)
+            
+            let results = try await query.getDocuments(source: .server)
+            for document in results.documents {
+                let activity = self.makeActivity(document: document)
+                activities.append(activity)
+            }
+            
+        }
+        return activities
+    }
+
+    
     func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
         let id = document.documentID
         let data = document.data()

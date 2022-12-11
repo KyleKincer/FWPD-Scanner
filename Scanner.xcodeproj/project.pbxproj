@@ -18,6 +18,7 @@
 		E24522BE279134F200EFBB3E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* DetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */; };
+		E24CED4C29463AB200EB960C /* RecentCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED4B29463AB200EB960C /* RecentCommentsView.swift */; };
 		E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2587F232798D3EC008D80CA /* MapViewModel.swift */; };
 		E25EDCDA29398ABA00F017E8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = E25EDCD929398ABA00F017E8 /* GoogleMobileAds */; };
 		E25EDCDC29398D5800F017E8 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EDCDB29398D5800F017E8 /* BannerAd.swift */; };
@@ -128,6 +129,7 @@
 		E24522BD279134F200EFBB3E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E24522D12791F69400EFBB3E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLimitModifier.swift; sourceTree = "<group>"; };
+		E24CED4B29463AB200EB960C /* RecentCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCommentsView.swift; sourceTree = "<group>"; };
 		E2587F232798D3EC008D80CA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		E25EDCDB29398D5800F017E8 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		E264494D2794B56700685DAB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
 				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
+				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
 			);
 			path = "Parent Views";
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */,
 				E202F445278E84A7009C0B13 /* ListView.swift in Sources */,
 				EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */,
+				E24CED4C29463AB200EB960C /* RecentCommentsView.swift in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
 				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
 				EB0C3B0B29443B4B0098C234 /* HistoryView.swift in Sources */,

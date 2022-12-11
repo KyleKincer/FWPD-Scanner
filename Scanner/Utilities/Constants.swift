@@ -16,5 +16,11 @@ enum Constants {
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
     static let defaultSpanLarge = MKCoordinateSpan(latitudeDelta: 0.035, longitudeDelta: 0.035)
     static let appID = "ca-app-pub-3358879278981317/4566147613"
-//    static let appID = "ca-app-pub-3940256099942544/2934735716" // TESTING APP ID
+    //    static let appID = "ca-app-pub-3940256099942544/2934735716" // TESTING APP ID
+}
+
+enum SetName: String {
+    case activities
+    case bookmarks
+    case recentlyCommentedActivities
 }

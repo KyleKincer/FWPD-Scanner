@@ -20,6 +20,7 @@ final class MainViewModel: ObservableObject {
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
+    @Published var recentlyCommentedActivities = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
     
     // Location and Map
@@ -52,7 +53,7 @@ final class MainViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
-    @Published var showMostRecent = true
+    @Published var showMostRecent = false
     @Published var showAuthError = false
     
     // Network and auth
@@ -240,8 +241,8 @@ final class MainViewModel: ObservableObject {
                     withAnimation {
                         self.serverResponsive = true
                         
-                        self.addDatesToActivities(setName: "activities")
-                        self.addDistancesToActivities(setName: "activities")
+                        self.addDatesToActivities(.activities)
+                        self.addDistancesToActivities(.activities)
                         self.isRefreshing = false
                     }
                 } else {
@@ -312,8 +313,8 @@ final class MainViewModel: ObservableObject {
                     print("+ --- Got more activities")
                     withAnimation {
                         self.serverResponsive = true
-                        self.addDatesToActivities(setName: "activities")
-                        self.addDistancesToActivities(setName: "activities")
+                        self.addDatesToActivities(.activities)
+                        self.addDistancesToActivities(.activities)
                         self.isLoading = false
                     }
                 } else {
@@ -342,30 +343,38 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func addDatesToActivities(setName: String) {
+    func addDatesToActivities(_ setName: SetName) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:SS"
-        if (setName == "activities") {
+        switch setName {
+        case .activities:
             var set = self.activities
             for i in set.indices {
                 set[i].date = formatter.date(from: set[i].timestamp)
             }
             self.activities = set
             print("G - Set dates on activities")
-            
-        } else {
+        case .bookmarks:
             var set = self.bookmarks
             for i in set.indices {
                 set[i].date = formatter.date(from: set[i].timestamp)
             }
             self.bookmarks = set
             print("G - Set dates on bookmarks")
+        case .recentlyCommentedActivities:
+            var set = self.recentlyCommentedActivities
+            for i in set.indices {
+                set[i].date = formatter.date(from: set[i].timestamp)
+            }
+            self.recentlyCommentedActivities = set
+            print("G - Set dates on recentlyCommentedActivities")
         }
     }
     
-    func addDistancesToActivities(setName: String) {
+    func addDistancesToActivities(_ setName: SetName) {
         if let location = self.locationManager.location {
-            if (setName == "activities") {
+            switch setName{
+            case .activities:
                 var set = self.activities
                 for i in set.indices {
                     set[i].distance = ((location.distance(
@@ -373,7 +382,7 @@ final class MainViewModel: ObservableObject {
                 }
                 self.activities = set
                 print("G - Set distances on activities")
-            } else {
+            case .bookmarks:
                 var set = self.bookmarks
                 for i in set.indices {
                     set[i].distance = ((location.distance(
@@ -381,6 +390,14 @@ final class MainViewModel: ObservableObject {
                 }
                 self.bookmarks = set
                 print("G - Set distances on bookmarks")
+            case .recentlyCommentedActivities:
+                var set = self.recentlyCommentedActivities
+                for i in set.indices {
+                    set[i].distance = ((location.distance(
+                        from: CLLocation(latitude: set[i].latitude, longitude: set[i].longitude))) * 0.000621371)
+                }
+                self.recentlyCommentedActivities = set
+                print("G - Set distances on recentlyCommentedActivities")
             }
         }
     }
@@ -451,13 +468,26 @@ final class MainViewModel: ObservableObject {
                     //Get bookmarks
                     let bookmarks = try await self.networkManager.getActivitySet(controlNumbers: bookmarks!)
                     self.bookmarks = bookmarks
-                    self.addDatesToActivities(setName: "bookmarks")
-                    self.addDistancesToActivities(setName: "bookmarks")
+                    self.addDatesToActivities(.bookmarks)
+                    self.addDistancesToActivities(.bookmarks)
                     print("+ --- Got bookmark entries from Firebase")
                 }
             }
         } else {
             print("+ --- All bookmarks already accounted for")
+        }
+    }
+    
+    func getRecentlyCommentedActivities() {
+        Task.init {
+            do {
+                //Get bookmarks
+                let recentlyCommentedActivities = try await self.networkManager.getRecentlyCommentedActivities()
+                self.recentlyCommentedActivities = recentlyCommentedActivities
+                self.addDatesToActivities(.recentlyCommentedActivities)
+                self.addDistancesToActivities(.recentlyCommentedActivities)
+                print("+ --- Got recentlyCommentedActivities from Firebase")
+            }
         }
     }
 }

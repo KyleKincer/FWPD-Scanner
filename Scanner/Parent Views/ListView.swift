@@ -17,12 +17,33 @@ struct ListView: View {
     var body: some View {
         ZStack {
             VStack {
+                HStack {
+                    
+                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Comments" : "Recent Activity"))
+                        .font(.title)
+                    
+                    Spacer()
+                    
+                    if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
+                        
+                        Button(action: {
+                            withAnimation {
+                                viewModel.showMostRecent.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: viewModel.showMostRecent ? "bubble.right" : "clock")
+                                .font(.system(size: 20))
+                        })
+                    }
+                }
+                .padding(.horizontal)
                 // Show BookmarkView
                 if (viewModel.showBookmarks) {
                     BookmarkView(viewModel: viewModel)
                     
-                // Show activities
-                } else {
+                } else if (viewModel.showMostRecent) {
+                    RecentCommentsView(viewModel: viewModel)
+                } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
                     if (viewModel.activities.count == 0) {
                         VStack {
@@ -42,35 +63,8 @@ struct ListView: View {
                             
                             Spacer()
                         }
-                    // Results
+                        // Results
                     } else {
-                        
-                        HStack {
-
-                            Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Activity" : "Recent Comments"))
-                                .font(.title)
-
-                            Spacer()
-                            
-                            
-                            if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
-                                
-                                Button(action: {
-                                    withAnimation {
-                                        viewModel.showMostRecent.toggle()
-                                    }
-                                    
-                                    
-                                    
-                                }, label: {
-                                    Image(systemName: viewModel.showMostRecent ? "bubble.right" : "clock")
-                                        .font(.system(size: 20))
-                                })
-                            }
-                            
-                        }
-                        .padding(.horizontal)
-                        
                         NavigationView {
                             
                             List(viewModel.activities, id: \.self) { activity in
@@ -92,7 +86,6 @@ struct ListView: View {
                                         .onTapGesture {
                                             viewModel.getMoreActivities()
                                         }
-
                                     }
                                 }
                             }
