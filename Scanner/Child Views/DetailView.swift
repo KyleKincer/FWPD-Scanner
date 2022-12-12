@@ -93,6 +93,15 @@ struct DetailView: View {
                 .transition(.slide)
                 .onAppear {
                     isBookmarked = activity.bookmarked
+                    
+                    let index = viewModel.history.firstIndex(of: activity)
+                    
+                    if (index != nil) {
+                        viewModel.history.remove(at: index ?? 0)
+                    }
+                    viewModel.history.prepend(activity)
+                    
+                    
                 }
             }
         }

@@ -20,6 +20,7 @@ final class MainViewModel: ObservableObject {
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
+    @Published var history = [Scanner.Activity]()
     @Published var recentlyCommentedActivities = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
     

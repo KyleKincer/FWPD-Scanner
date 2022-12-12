@@ -12,8 +12,23 @@ struct HistoryView: View {
     
     var body: some View {
         VStack {
-            Text("History View")
-            Text("Coming Soon")
+            if (viewModel.history.count > 0) {
+                NavigationView {
+                    
+                    List(viewModel.history, id: \.self) { activity in
+                        ActivityRowView(activity: activity, viewModel: viewModel)
+                    }
+                    .navigationTitle("History")
+                }
+            } else {
+                Text("No History In This Session")
+                    .bold()
+                    .italic()
+                
+                Image(systemName: "clock.badge.questionmark.fill")
+                    .font(.system(size: 40))
+                    .padding()
+            }
         }
     }
 }

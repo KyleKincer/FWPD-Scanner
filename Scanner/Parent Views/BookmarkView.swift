@@ -32,6 +32,7 @@ struct BookmarkView: View {
                         }
                     }
                     .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("Bookmarks")
                 }
             }
         }
