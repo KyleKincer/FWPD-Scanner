@@ -10,9 +10,9 @@ import Firebase
 import FirebaseAuth
 
 struct RegisterView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var errorMessage = ""
     @State private var username = ""
     @State private var email = ""
     @ObservedObject var viewModel : MainViewModel
@@ -65,6 +65,8 @@ struct RegisterView: View {
                     .keyboardType(.emailAddress)
                 ZStack {
                     TextField("Username", text: $username)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
                         .limitInputLength(value: $username, length: 20)
                         .padding(.horizontal)
                     
@@ -85,8 +87,8 @@ struct RegisterView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .frame(width: 350)
             
-            if errorMessage != "" {
-                Text(errorMessage)
+            if viewModel.authError != "" {
+                Text(viewModel.authError)
                     .foregroundColor(.red)
                     .lineLimit(nil)
                     .padding(.horizontal)
@@ -97,7 +99,11 @@ struct RegisterView: View {
                     playHaptic()
                     withAnimation {
                         print("A -- Registering new user")
-                        viewModel.createUser(email: email, password: password, username: username)
+                        viewModel.createUser(email: email, password: password, username: username) { created in
+                            if (created) {
+                                dismiss()
+                            }
+                        }
                     }
                 }, label: {
                     ZStack {
@@ -118,6 +124,9 @@ struct RegisterView: View {
                 
                 Spacer()
             }
+        }
+        .onDisappear() {
+            viewModel.authError = "" // clear auth error on exit so we don't show it again if user trys to register again
         }
     }
 }

@@ -262,41 +262,43 @@ final class MainViewModel: ObservableObject {
         self.getBookmarks()
     }
     
-    func createUser(email: String, password: String, username: String) {
-        usernameIsAvailable(username: username, completion: { available in
+    func createUser(email: String, password: String, username: String, _ completion: @escaping (Bool) -> Void) {
+        usernameIsAvailable(username: username, { available in
             if (!available) {
                 self.authError = "Username is already in use."
+                completion(false)
                 return
-            }
-        })
-        Task.init {
-            do {
-                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                    if let error = error {
-                        // there was an error creating the user
-                        print("Error creating user: \(error)")
-                        self.authError = error.localizedDescription
-                    } else {
-                        self.authError = ""
-                        // user was successfully created
-                        if let authResult = authResult {
-                            print("Successfully created user: \(authResult.user)")
-                            self.userId = authResult.user.uid
-                            self.loggedIn = true
-                            self.showAuth = false
-                            self.username = username
-                            self.onboarding = false
-                            
-                            self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+            } else {
+                Task.init {
+                    do {
+                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                            if let error = error {
+                                // there was an error creating the user
+                                print("Error creating user: \(error)")
+                                self.authError = error.localizedDescription
+                            } else {
+                                self.authError = ""
+                                // user was successfully created
+                                if let authResult = authResult {
+                                    print("Successfully created user: \(authResult.user)")
+                                    self.userId = authResult.user.uid
+                                    self.loggedIn = true
+                                    self.showAuth = false
+                                    self.username = username
+                                    self.onboarding = false
+                                    
+                                    self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+                                    completion(true)
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
+        })
     }
     
-    func usernameIsAvailable(username: String, completion: @escaping (Bool) -> Void) {
-        var available: Bool?
+    func usernameIsAvailable(username: String, _ completion: @escaping (Bool) -> Void) {
         // Get a reference to the users collection
         let db = Firestore.firestore()
         let usersRef = db.collection("users")
