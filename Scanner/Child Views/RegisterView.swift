@@ -57,8 +57,6 @@ struct RegisterView: View {
                 
             SignUpHeader()
 
-            Spacer()
-            
             Group {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
@@ -119,9 +117,6 @@ struct RegisterView: View {
                 .disabled(password != confirmPassword)
                 .padding()
                 
-                Divider()
-                    .padding()
-                
                 Spacer()
             }
         }
@@ -134,6 +129,9 @@ struct RegisterView: View {
 struct SignUpHeader: View {
     var body: some View {
         Group {
+            
+            Spacer()
+            
             Text("Sign Up")
                 .fontWeight(.black)
                 .italic()
@@ -141,6 +139,11 @@ struct SignUpHeader: View {
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
 
+            Image(systemName: "person.fill.badge.plus")
+                .font(.system(size: 50))
+                .foregroundColor(.orange)
+                .shadow(radius: 5)
+            
             Spacer()
 
             Text("Quickly create an account to enable community commenting and additional features in the future!")

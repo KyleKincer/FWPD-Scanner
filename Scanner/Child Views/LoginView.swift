@@ -20,7 +20,6 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            
             Group {
                 HStack {
                     Button(action: {
@@ -32,11 +31,11 @@ struct LoginView: View {
                     }, label: {
                         HStack {
                             Image(systemName: "arrow.left")
-                                .foregroundColor(.yellow)
+                                .foregroundColor(.orange)
                                 .font(.system(size: 30))
                             
                             Text("Back")
-                                .foregroundColor(.yellow)
+                                .foregroundColor(.orange)
                         }
                     })
                     .padding([.leading, .top])
@@ -48,6 +47,8 @@ struct LoginView: View {
                 
             }
             
+            Spacer()
+            
             Group {
                 Text("Sign In")
                     .fontWeight(.black)
@@ -56,7 +57,13 @@ struct LoginView: View {
                     .shadow(radius: 2)
                     .foregroundColor(Color("ModeOpposite"))
                 
+                Image(systemName: "person.3.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(.orange)
+                    .shadow(radius: 5)
+                
                 Spacer()
+            
             }
             
             Text("Use your Email and Password:")
@@ -129,37 +136,30 @@ struct LoginView: View {
             })
             .padding(.top)
             
-            Text("or")
-                .font(.subheadline)
-                .italic()
-                .padding(.vertical, -5)
-                .padding(.top, -4)
-            
-            Button(action: {
-                playHaptic()
-                withAnimation {
-                    signingUp = true
-                }
-            }, label: {
-                ZStack {
-                    Capsule()
-                        .frame(width: 100, height: 40)
-                        .foregroundColor(.blue)
-                    
-                    Text("Sign Up")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-            })
-            
             Group {
                 
                 Divider()
                     .padding()
                 
-                Text("or log in with")
+                Text("No Account?")
                     .bold()
-                    .padding()
+                
+                Button(action: {
+                    playHaptic()
+                    withAnimation {
+                        signingUp = true
+                    }
+                }, label: {
+                    ZStack {
+                        Capsule()
+                            .frame(width: 200, height: 40)
+                            .foregroundColor(.blue)
+                        
+                        Text("Sign Up with Email")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                })
                 
                 HStack {
                     Group {
@@ -174,46 +174,52 @@ struct LoginView: View {
                         .scaleEffect(0.2)
                         .frame(width: 50, height: 50)
                         .padding()
+                        .shadow(radius: 6)
                         
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                print("Facebook")
-                            }
-                        }, label: {
-                            Image("facebookLogo")
-                        })
-                        .scaleEffect(0.35)
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                print("Twitter")
-                            }
-                        }, label: {
-                            Image("twitterLogo")
-                        })
-                        .scaleEffect(0.08)
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                print("Apple")
-                            }
-                        }, label: {
-                            Image("appleLogo")
-                                .background(Color.white)
-                                .cornerRadius(200)
-                        })
-                        .scaleEffect(0.4)
-                        .frame(width: 50, height: 50)
-                        .padding()
+//                        Button(action: {
+//                            playHaptic()
+//                            withAnimation {
+//                                print("Facebook")
+//                            }
+//                        }, label: {
+//                            Image("facebookLogo")
+//                        })
+//                        .scaleEffect(0.35)
+//                        .frame(width: 50, height: 50)
+//                        .padding()
+//
+//                        Button(action: {
+//                            playHaptic()
+//                            withAnimation {
+//                                print("Twitter")
+//                            }
+//                        }, label: {
+//                            Image("twitterLogo")
+//                        })
+//                        .scaleEffect(0.08)
+//                        .frame(width: 50, height: 50)
+//                        .padding()
+//
+//                        Button(action: {
+//                            playHaptic()
+//                            withAnimation {
+//                                print("Apple")
+//                            }
+//                        }, label: {
+//                            Image("appleLogo")
+//                                .background(Color.white)
+//                                .cornerRadius(200)
+//                        })
+//                        .scaleEffect(0.4)
+//                        .frame(width: 50, height: 50)
+//                        .padding()
                     }
-                }.padding()
+                    
+                    
+                }
+                
+                Text("or sign up quickly with Google")
+                    .bold()
             }
         }
     }

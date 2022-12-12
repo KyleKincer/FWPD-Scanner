@@ -146,6 +146,7 @@ struct StandardNavBarView: View {
             .padding([.leading, .trailing])
             
             Spacer()
+            
         }.frame(height: 50)
     }
             
