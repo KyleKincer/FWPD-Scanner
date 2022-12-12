@@ -33,12 +33,19 @@ class CommentsViewModel: ObservableObject {
     func submitComment(activityId: String, comment: String, userId: String, userName: String) {
         let newComment = Comment(userId: userId, userName: userName, text: comment)
         
+        // update commentCount on the comment document
         Firestore.firestore().collection("activities").document(activityId).updateData(["commentCount": FieldValue.increment(Double(1))])
+        // update commentCount and lastCommentAt on the users document
+        Firestore.firestore().collection("users").document(userId).updateData(["commentCount": FieldValue.increment(Double(1)), "lastCommentAt" : Timestamp().firebaseTimestamp])
         
         let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
         commentsRef.addDocument(data: newComment.toData())
         
         commentsRef.parent?.updateData(["lastCommentAt" : Timestamp().firebaseTimestamp])
+    }
+    
+    func incrementUserCommentCount (userId: String) {
+        Firestore.firestore().collection("users").document(userId).updateData(["commentCount": FieldValue.increment(Double(1))])
     }
     
     

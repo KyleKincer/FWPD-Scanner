@@ -117,6 +117,105 @@ final class MainViewModel: ObservableObject {
         self.getNatures()
         self.getBookmarks()
     }
+    
+    func createUser(email: String, password: String, username: String, _ completion: @escaping (Bool) -> Void) {
+        usernameIsAvailable(username: username, { available in
+            if (!available) {
+                self.authError = "Username is already in use."
+                completion(false)
+                return
+            } else {
+                Task.init {
+                    do {
+                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                            if let error = error {
+                                // there was an error creating the user
+                                print("Error creating user: \(error)")
+                                self.authError = error.localizedDescription
+                            } else {
+                                self.authError = ""
+                                // user was successfully created
+                                if let authResult = authResult {
+                                    print("Successfully created user: \(authResult.user)")
+                                    self.userId = authResult.user.uid
+                                    self.loggedIn = true
+                                    self.showAuth = false
+                                    self.username = username
+                                    self.onboarding = false
+                                    
+                                    self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+                                    completion(true)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    func usernameIsAvailable(username: String, _ completion: @escaping (Bool) -> Void) {
+        // Get a reference to the users collection
+        let db = Firestore.firestore()
+        let usersRef = db.collection("users")
+        
+        // Create a query to get the user document with the specified username
+        let query = usersRef.whereField("username", isEqualTo: username)
+        
+        // Get the query snapshot
+        query.getDocuments() { snapshot, error in
+            if let error = error {
+                // there was an error querying the collection
+                print("Error querying users collection: \(error)")
+                completion(false)
+            } else {
+                // check if a user document with the specified username was found
+                if snapshot!.documents.count > 0 {
+                    // a user document with the specified username already exists
+                    print("A user with the username '\(username)' already exists.")
+                    completion(false)
+                } else {
+                    // the username is available
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    func writeUserDocument(userId: String, username: String, imageURL: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(self.userId)
+        userRef.setData(["username": username, "imageURL": imageURL]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    func updateUsername(to username: String, _ completion: @escaping (String) -> Void) {
+        usernameIsAvailable(username: username) { available in
+            if (!available) {
+                completion("Username is already in use.")
+            } else {
+                let db = Firestore.firestore()
+                let userRef = db.collection("users").document(self.userId)
+                let oldUserName = self.username
+                self.username = username // preemptively set the local username property,
+                
+                userRef.updateData(["username": username]) { err in
+                    if let err = err {
+                        self.username = oldUserName
+                        print("Error writing document: \(err)")
+                        completion(err.localizedDescription)
+                    } else {
+                        print("Document successfully written!")
+                        completion("")
+                    }
+                }
+            }
+    }
 
     // Get next 25 activities from Firestore
     func getMoreActivities() {
