@@ -78,10 +78,10 @@ struct DetailView: View {
                         .frame(height: geometry.size.height * 0.4)
                         .edgesIgnoringSafeArea(.all)
                         .onAppear {
-                            viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
+                            viewModel.location.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
                         }
                         .onDisappear {
-                            viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
+                            viewModel.location.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
                         }
                         .environmentObject(appDelegate)
                         .cornerRadius(5.0)
@@ -99,9 +99,7 @@ struct DetailView: View {
                     if (index != nil) {
                         viewModel.history.remove(at: index ?? 0)
                     }
-                    viewModel.history.prepend(activity)
-                    
-                    
+                    viewModel.history.append(activity)
                 }
             }
         }

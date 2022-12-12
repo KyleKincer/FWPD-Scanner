@@ -94,7 +94,7 @@ struct LoginView: View {
                             // user was successfully logged in
                             if let authResult = authResult {
                                 let userId = authResult.user.uid
-                                viewModel.userId = userId
+                                viewModel.auth.userId = userId
                                 
                                 // Get the user's username from Firestore
                                 Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
@@ -105,13 +105,13 @@ struct LoginView: View {
                                         // the username was successfully retrieved
                                         if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
                                             print("Successfully retrieved username: \(username)")
-                                            viewModel.username = username
+                                            viewModel.auth.username = username
                                         }
                                     }
                                 }
                                 print("Successfully logged in user: \(userId)")
                             }
-                            viewModel.loggedIn = true
+                            viewModel.auth.loggedIn = true
                             dismiss()
                         }
                     }
@@ -166,7 +166,7 @@ struct LoginView: View {
                         Button(action: {
                             playHaptic()
                             withAnimation {
-                                viewModel.loginWithGoogle()
+                                viewModel.auth.loginWithGoogle()
                                 withAnimation {
                                     dismiss()
                                 }

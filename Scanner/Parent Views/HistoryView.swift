@@ -15,7 +15,7 @@ struct HistoryView: View {
             if (viewModel.history.count > 0) {
                 NavigationView {
                     
-                    List(viewModel.history, id: \.self) { activity in
+                    List(viewModel.history.reversed(), id: \.self) { activity in
                         ActivityRowView(activity: activity, viewModel: viewModel)
                     }
                     .navigationTitle("History")

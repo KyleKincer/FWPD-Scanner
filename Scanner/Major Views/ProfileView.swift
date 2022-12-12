@@ -18,12 +18,12 @@ struct ProfileView: View {
     
     
     var body: some View {
-        if (!viewModel.loggedIn) {
+        if (viewModel.auth.loggedIn) {
             // Authenticate
             if (signingUp) {
-                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
             } else {
-                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
+                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
             }
             
         } else {
@@ -46,8 +46,8 @@ struct ProfileView: View {
                     Spacer()
                     
                     Button(action: {
-                        viewModel.logOut()
-                        viewModel.loggedIn = false
+                        viewModel.auth.logOut()
+                        viewModel.auth.loggedIn = false
                     }, label: {
                         Text("Sign Out")
                             .foregroundColor(.red)
@@ -60,8 +60,8 @@ struct ProfileView: View {
                     // Change icon color and send change to firebase?
                     
                 }, label: {
-                    if (viewModel.profileImageURL != "") {
-                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
+                    if (viewModel.auth.profileImageURL != "") {
+                        AsyncImage(url: URL(string: viewModel.auth.profileImageURL)) { image in
                             image
                                 .clipShape(Circle())
                         } placeholder: {
@@ -78,7 +78,7 @@ struct ProfileView: View {
                 })
                 if editingUsername {
                     HStack {
-                        TextField(viewModel.username, text: $newUsername)
+                        TextField(viewModel.auth.username, text: $newUsername)
                             .frame(width: 200)
                             .limitInputLength(value: $newUsername, length: 20)
                             .textInputAutocapitalization(.never)
@@ -105,16 +105,20 @@ struct ProfileView: View {
                     }
                 } else {
                     HStack {
-                        Text(viewModel.username)
+                        Text(viewModel.auth.username)
                             .font(.title2)
                         Button {
                             editingUsername = true
-                            newUsername = viewModel.username
+                            newUsername = viewModel.auth.username
                             usernameIsFocused = true
                         } label: {
-                            Text("Edit")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
+//                            Text("Edit")
+//                                .font(.footnote)
+//                                .foregroundColor(.secondary)
+                            
+                            Image(systemName: "pencil")
+                                .foregroundColor(.blue)
+                                .padding(.horizontal)
                         }
                     }
                     
@@ -146,8 +150,8 @@ struct ProfileView: View {
     
     @MainActor
     func onSubmit() {
-        if (newUsername != viewModel.username && newUsername.count > 0) {
-            viewModel.updateUsername(to: newUsername)
+        if (newUsername != viewModel.auth.username && newUsername.count > 0) {
+            viewModel.auth.updateUsername(to: newUsername)
         }
         editingUsername = false
     }

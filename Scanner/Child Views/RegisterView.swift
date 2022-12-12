@@ -87,8 +87,8 @@ struct RegisterView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .frame(width: 350)
             
-            if viewModel.authError != "" {
-                Text(viewModel.authError)
+            if viewModel.auth.authError != "" {
+                Text(viewModel.auth.authError)
                     .foregroundColor(.red)
                     .lineLimit(nil)
                     .padding(.horizontal)
@@ -99,7 +99,7 @@ struct RegisterView: View {
                     playHaptic()
                     withAnimation {
                         print("A -- Registering new user")
-                        viewModel.createUser(email: email, password: password, username: username) { created in
+                        viewModel.auth.createUser(email: email, password: password, username: username) { created in
                             if (created) {
                                 dismiss()
                             }
@@ -126,7 +126,7 @@ struct RegisterView: View {
             }
         }
         .onDisappear() {
-            viewModel.authError = "" // clear auth error on exit so we don't show it again if user trys to register again
+            viewModel.auth.authError = "" // clear auth error on exit so we don't show it again if user trys to register again
         }
     }
 }

@@ -25,29 +25,16 @@ final class MainViewModel: ObservableObject {
     @Published var natures = [Scanner.Nature]()
     
     // Location and Map
-    @Published var locationManager: CLLocationManager = CLLocationManager()
-    @Published var locationEnabled: Bool = false
-    @Published var region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+    @Published var location = LocationModel()
     
     // Filters
-    @Published var selectedNatures = Set<String>()
-    @Published var selectedNaturesString = [String]()
-    @Published var notificationNatures = Set<String>()
-    @Published var notificationNaturesString = [String]()
-    @AppStorage("notificationNatures") var notificationNaturesUD = String()
-    @AppStorage("useLocation") var useLocation = false
-    @AppStorage("useDate") var useDate = false
-    @AppStorage("useNature") var useNature = false
-    @AppStorage("radius") var radius = 0.0
-    @AppStorage("dateFrom") var dateFrom = String()
-    @AppStorage("dateTo") var dateTo = String()
-    @AppStorage("selectedNatures") var selectedNaturesUD = String()
-    @AppStorage("username") var username = String()
-    @AppStorage("userId") var userId = String()
-    @AppStorage("admin") var admin = false
-    @AppStorage("profileImageURL") var profileImageURL = ""
-    @Published var onboarding = false
+    @Published var filters = FilterModel()
     
+    // Network
+    @Published var networkManager = NetworkManager()
+    
+    // Auth
+    @Published var auth = AuthModel()
     
     // View States
     @Published var isRefreshing = false
@@ -56,34 +43,24 @@ final class MainViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     @Published var showMostRecent = false
-    @Published var showAuthError = false
     
-    // Network and auth
-    @Published var networkManager = NetworkManager()
-    @AppStorage("loggedIn") var loggedIn = false
-    @Published var user : User?
-    @Published var authError = ""
-    @Published var showAuth = false
-    @Published var loginType = ""
-    
+    @Published var onboarding = false
+
     // UserDefaults
     let defaults = UserDefaults.standard
     
     init() {
         print("I - Initializing list view model")
         model = Scanner()
-        if (self.userId == "") {
-            self.onboarding = true
-        }
         
         if CLLocationManager.locationServicesEnabled() {
-            switch locationManager.authorizationStatus {
+            switch self.location.locationManager.authorizationStatus {
             case .notDetermined, .restricted, .denied:
                 print("X - Failed to get location")
-                self.locationEnabled = false
+                self.location.locationEnabled = false
             case .authorizedAlways, .authorizedWhenInUse:
                 print("G - Succeeded in getting location ")
-                self.locationEnabled = true
+                self.location.locationEnabled = true
             @unknown default:
                 break
             }
@@ -91,142 +68,20 @@ final class MainViewModel: ObservableObject {
             print("X - Location services are disabled by user")
         }
         
-        let selectionArray = selectedNaturesUD.components(separatedBy: ", ")
-        self.selectedNatures = Set(selectionArray)
-        self.selectedNaturesString = Array(selectedNatures)
+        let selectionArray = self.filters.selectedNaturesUD.components(separatedBy: ", ")
+        self.filters.selectedNatures = Set(selectionArray)
+        self.filters.selectedNaturesString = Array(self.filters.selectedNatures)
         
-        let notificationArray = notificationNaturesUD.components(separatedBy: ", ")
-        self.notificationNatures = Set(notificationArray)
-        self.notificationNaturesString = Array(notificationNatures)
-        
+        let notificationArray = self.filters.notificationNaturesUD.components(separatedBy: ", ")
+        self.filters.notificationNatures = Set(notificationArray)
+        self.filters.notificationNaturesString = Array(self.filters.notificationNatures)
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
     }
     
-    func login(email: String, password: String) {
-        Task.init {
-            do {
-                print("A -- Logging in...")
-                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                    if let error = error {
-                        // there was an error logging in
-                        print("Error logging in: \(error)")
-                    } else {
-                        // user was successfully logged in
-                        if let authResult = authResult {
-                            self.loginType = "email"
-                            self.initUser(auth: authResult)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func loginWithGoogle() {
-        // 1
-        if GIDSignIn.sharedInstance.hasPreviousSignIn() {
-            GIDSignIn.sharedInstance.restorePreviousSignIn { [unowned self] user, error in
-                authenticateUser(for: user, with: error)
-            }
-        } else {
-            // 2
-            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-            
-            // 3
-            let configuration = GIDConfiguration(clientID: clientID)
-            
-            // 4
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-            guard let rootViewController = windowScene.windows.first?.rootViewController else { return }
-            
-            // 5
-            GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
-                authenticateUser(for: user, with: error)
-                
-            }
-            self.loginType = "google"
-        }
-    }
-    
-    private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
-        // 1
-        if let error = error {
-            print(error.localizedDescription)
-            self.showAuthError = true
-            self.authError = error.localizedDescription
-            return
-        }
-        
-        // 2
-        guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
-        
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-        
-        // 3
-        Auth.auth().signIn(with: credential) { [unowned self] (result, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                self.profileImageURL = result!.user.photoURL?.absoluteString ?? ""
-                initUser(auth: result)
-            }
-        }
-    }
-    
-    func initUser(auth: AuthDataResult?) {
-        self.userId = auth!.user.uid
-        self.username = auth!.user.displayName ?? "None"
-        self.loggedIn = true
-        self.showAuth = false
-        self.onboarding = false
-        
-        // Only call writeUserDocument if a document doesn't already exist
-        // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(self.userId)
-        userDocRef.getDocument { (snapshot, error) in
-            if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
-            } else if snapshot?.exists == true {
-                self.readUserDocument(snapshot: snapshot!)
-            }
-        }
-    }
-    
-    func readUserDocument(snapshot: DocumentSnapshot) {
-        self.username = (snapshot.data()!["username"] as? String)!
-        self.admin = snapshot.data()?["admin"] as? Bool ?? false
-    }
-    
-    func googleSignOut() {
-        // 1
-        GIDSignIn.sharedInstance.signOut()
-        
-        do {
-            // 2
-            try Auth.auth().signOut()
-            
-            self.loggedIn = false
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func logOut() {
-        do {
-            try Auth.auth().signOut()
-            self.username = ""
-            self.profileImageURL = ""
-            self.userId = ""
-            self.loggedIn = false
-            self.onboarding = true
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
+    // Refresh all data
     func refresh() {
         print("R --- Refreshing")
         self.showBookmarks = false
@@ -236,7 +91,7 @@ final class MainViewModel: ObservableObject {
         Task.init {
             do {
                 // Get first set of activities
-                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.filters.useDate, filterByLocation: self.filters.useLocation, filterByNature: self.filters.useNature, dateFrom: self.filters.dateFrom, dateTo: self.filters.dateTo, selectedNatures: self.filters.selectedNaturesString, location: self.location.locationManager.location, radius: self.filters.radius)
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
                     print("+ --- Got activities")
@@ -262,99 +117,7 @@ final class MainViewModel: ObservableObject {
         self.getNatures()
         self.getBookmarks()
     }
-    
-    func createUser(email: String, password: String, username: String, _ completion: @escaping (Bool) -> Void) {
-        usernameIsAvailable(username: username, { available in
-            if (!available) {
-                self.authError = "Username is already in use."
-                completion(false)
-                return
-            } else {
-                Task.init {
-                    do {
-                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                            if let error = error {
-                                // there was an error creating the user
-                                print("Error creating user: \(error)")
-                                self.authError = error.localizedDescription
-                            } else {
-                                self.authError = ""
-                                // user was successfully created
-                                if let authResult = authResult {
-                                    print("Successfully created user: \(authResult.user)")
-                                    self.userId = authResult.user.uid
-                                    self.loggedIn = true
-                                    self.showAuth = false
-                                    self.username = username
-                                    self.onboarding = false
-                                    
-                                    self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
-                                    completion(true)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        })
-    }
-    
-    func usernameIsAvailable(username: String, _ completion: @escaping (Bool) -> Void) {
-        // Get a reference to the users collection
-        let db = Firestore.firestore()
-        let usersRef = db.collection("users")
-        
-        // Create a query to get the user document with the specified username
-        let query = usersRef.whereField("username", isEqualTo: username)
-        
-        // Get the query snapshot
-        query.getDocuments() { snapshot, error in
-            if let error = error {
-                // there was an error querying the collection
-                print("Error querying users collection: \(error)")
-                completion(false)
-            } else {
-                // check if a user document with the specified username was found
-                if snapshot!.documents.count > 0 {
-                    // a user document with the specified username already exists
-                    print("A user with the username '\(username)' already exists.")
-                    completion(false)
-                } else {
-                    // the username is available
-                    completion(true)
-                }
-            }
-        }
-    }
-    
-    func writeUserDocument(userId: String, username: String, imageURL: String) {
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.userId)
-        userRef.setData(["username": username, "imageURL": imageURL]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
-    
-    func updateUsername(to username: String) {
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.userId)
-        let oldUserName = self.username
-        self.username = username // preemptively set the local username property,
-        
-        userRef.updateData(["username": username]) { err in
-            if let err = err {
-                self.username = oldUserName
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
-    
+
     // Get next 25 activities from Firestore
     func getMoreActivities() {
         withAnimation {
@@ -363,7 +126,7 @@ final class MainViewModel: ObservableObject {
         
         Task.init {
             do {
-                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
+                let newActivities = try await self.networkManager.getMoreActivities(filterByDate: self.filters.useDate, filterByLocation: self.filters.useLocation, filterByNature: self.filters.useNature, dateFrom: self.filters.dateFrom, dateTo: self.filters.dateTo, selectedNatures: self.filters.selectedNaturesString, location: self.location.locationManager.location, radius: self.filters.radius)
                 
                 if (newActivities.count > 0) {
                     self.activities.append(contentsOf: newActivities)
@@ -429,7 +192,7 @@ final class MainViewModel: ObservableObject {
     }
     
     func addDistancesToActivities(_ setName: SetName) {
-        if let location = self.locationManager.location {
+        if let location = self.location.locationManager.location {
             switch setName{
             case .activities:
                 var set = self.activities
