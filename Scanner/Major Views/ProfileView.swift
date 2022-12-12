@@ -69,60 +69,62 @@ struct ProfileView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 80))
                         }
-
+                        
                     } else {
                         Image(systemName: "person.crop.circle")
                             .foregroundColor(.gray)
                             .font(.system(size: 80))
                     }
                 })
-                if editingUsername {
-                    HStack {
-                        TextField(viewModel.auth.username, text: $newUsername)
-                            .frame(width: 200)
-                            .limitInputLength(value: $newUsername, length: 20)
-                            .textInputAutocapitalization(.never)
-                            .submitLabel(.done)
-                            .onSubmit {
-                                onSubmit()
-                            }
-                            .padding(.horizontal)
-                            .focused($usernameIsFocused)
-                        
-                        Button {
-                            onSubmit()
-                        } label: {
-                            ZStack {
-                                Capsule()
-                                    .frame(width: 100, height: 40)
-                                    .foregroundColor(.blue)
-                                
-                                Text("Submit")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.bold)
-                            }
-                        }.disabled(newUsername.count==0)
-                    }
-                } else {
-                    HStack {
-                        Text(viewModel.auth.username)
-                            .font(.title2)
-                        Button {
-                            editingUsername = true
-                            newUsername = viewModel.auth.username
-                            usernameIsFocused = true
-                        } label: {
-//                            Text("Edit")
-//                                .font(.footnote)
-//                                .foregroundColor(.secondary)
-                            
-                            Image(systemName: "pencil")
-                                .foregroundColor(.blue)
+                VStack {
+                    if editingUsername {
+                        HStack {
+                            TextField(viewModel.auth.username, text: $newUsername)
+                                .frame(width: 200)
+                                .limitInputLength(value: $newUsername, length: 20)
+                                .textInputAutocapitalization(.never)
+                                .submitLabel(.done)
+                                .onSubmit {
+                                    withAnimation {
+                                        onSubmit()
+                                    }
+                                }
                                 .padding(.horizontal)
+                                .focused($usernameIsFocused)
+                            
+                            Button {
+                                withAnimation {
+                                    onSubmit()
+                                }
+                            } label: {
+                                ZStack {
+                                    Capsule()
+                                        .frame(width: 100, height: 40)
+                                        .foregroundColor(.blue)
+                                    
+                                    Text("Submit")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.bold)
+                                }
+                            }.disabled(newUsername.count==0)
+                        }
+                    } else {
+                        HStack {
+                            Text(viewModel.auth.username)
+                                .font(.title2)
+                            Button {
+                                editingUsername = true
+                                newUsername = viewModel.auth.username
+                                usernameIsFocused = true
+                            } label: {
+                                Text("Edit")
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
-                    
                 }
+                .padding(.horizontal)
                 
                 Divider()
                     .padding(.horizontal, 50)

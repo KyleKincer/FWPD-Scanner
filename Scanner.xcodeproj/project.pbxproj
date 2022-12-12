@@ -412,9 +412,9 @@
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
 				E2C16902293BE34B00642670 /* CommentsView.swift */,
-				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
 				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
+				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
 				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
 				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
 				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
