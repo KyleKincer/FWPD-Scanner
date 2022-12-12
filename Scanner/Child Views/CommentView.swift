@@ -51,6 +51,8 @@ struct CommentView: View {
                 }
             }
             .padding(.vertical, 4)
+        
+        Divider()
     }
 }
 
