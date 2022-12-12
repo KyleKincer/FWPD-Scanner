@@ -263,6 +263,12 @@ final class MainViewModel: ObservableObject {
     }
     
     func createUser(email: String, password: String, username: String) {
+        usernameIsAvailable(username: username, completion: { available in
+            if (!available) {
+                self.authError = "Username is already in use."
+                return
+            }
+        })
         Task.init {
             do {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -284,6 +290,35 @@ final class MainViewModel: ObservableObject {
                             self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    func usernameIsAvailable(username: String, completion: @escaping (Bool) -> Void) {
+        var available: Bool?
+        // Get a reference to the users collection
+        let db = Firestore.firestore()
+        let usersRef = db.collection("users")
+        
+        // Create a query to get the user document with the specified username
+        let query = usersRef.whereField("username", isEqualTo: username)
+        
+        // Get the query snapshot
+        query.getDocuments() { snapshot, error in
+            if let error = error {
+                // there was an error querying the collection
+                print("Error querying users collection: \(error)")
+                completion(false)
+            } else {
+                // check if a user document with the specified username was found
+                if snapshot!.documents.count > 0 {
+                    // a user document with the specified username already exists
+                    print("A user with the username '\(username)' already exists.")
+                    completion(false)
+                } else {
+                    // the username is available
+                    completion(true)
                 }
             }
         }

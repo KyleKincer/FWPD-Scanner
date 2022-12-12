@@ -81,14 +81,16 @@ struct ProfileView: View {
                         TextField(viewModel.username, text: $newUsername)
                             .frame(width: 200)
                             .limitInputLength(value: $newUsername, length: 20)
+                            .textInputAutocapitalization(.never)
+                            .submitLabel(.done)
+                            .onSubmit {
+                                onSubmit()
+                            }
                             .padding(.horizontal)
                             .focused($usernameIsFocused)
                         
                         Button {
-                            if (newUsername != viewModel.username) {
-                                viewModel.updateUsername(to: newUsername)
-                            }
-                            editingUsername = false
+                            onSubmit()
                         } label: {
                             ZStack {
                                 Capsule()
@@ -140,6 +142,14 @@ struct ProfileView: View {
                 }
             }
         }
+    }
+    
+    @MainActor
+    func onSubmit() {
+        if (newUsername != viewModel.username && newUsername.count > 0) {
+            viewModel.updateUsername(to: newUsername)
+        }
+        editingUsername = false
     }
 }
 
