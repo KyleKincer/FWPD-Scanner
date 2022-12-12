@@ -217,6 +217,7 @@ final class MainViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.username = ""
+            self.profileImageURL = ""
             self.userId = ""
             self.loggedIn = false
             self.onboarding = true

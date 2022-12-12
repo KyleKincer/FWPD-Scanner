@@ -115,10 +115,25 @@ struct StandardNavBarView: View {
                     }
                     
                 }, label: {
-                    Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                        .font(.system(size: 25))
-                        .foregroundColor(.orange)
-                        .shadow(radius: 2)
+                    if (viewModel.profileImageURL != ""){
+                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
+                            image
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.gray)
+                        }
+                        
+                    } else {
+                        Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                            .font(.system(size: 25))
+                            .foregroundColor(.orange)
+                            .shadow(radius: 2)
+                    }
                 })
             }
             .padding([.leading, .trailing])
