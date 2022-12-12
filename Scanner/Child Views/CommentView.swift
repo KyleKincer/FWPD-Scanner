@@ -13,51 +13,63 @@ struct CommentView: View {
     
     var body: some View {
         HStack {
-            if (comment.imageURL != ""){
-                AsyncImage(url: URL(string: comment.imageURL)) { image in
-                    image
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                        .clipShape(Circle())
-                } placeholder: {
+            if (comment.userName == "AdminKyle" || comment.userName == "AdminNick") {
+                Image(systemName: "crown.fill")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+                    .foregroundColor(.yellow)
+                    .padding(.horizontal)
+
+            } else {
+                if (comment.imageURL != ""){
+                    AsyncImage(url: URL(string: comment.imageURL)) { image in
+                        image
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.gray)
+                    }
+                    
+                } else {
                     Image(systemName: "person.circle")
                         .resizable()
                         .frame(width: 35, height: 35)
                         .foregroundColor(.gray)
                 }
-                
-            } else {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .foregroundColor(.gray)
             }
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(comment.userName)
-                            .font(.headline)
-                        Text("·")
-                        
-                        if (formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()) == "0") {
-                            Text("Just now")
-                                .font(.caption)
-                        }
+
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(comment.userName)
+                        .font(.headline)
+                    Text("·")
+                    
+                    if (formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()) == formatter.localizedString(for: Date.now, relativeTo: Date())) {
+                        Text("Just now")
+                            .font(.caption)
+                    } else {
                         
                         Text(formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()))
                             .font(.caption)
                     }
-                    .foregroundColor(.gray)
-                    
-                    if !comment.hidden {
-                        Text(comment.text)
-                    } else {
-                        Text("Comment hidden")
-                            .italic()
-                    }
+                }
+                .foregroundColor(.gray)
+                
+                if !comment.hidden {
+                    Text(comment.text)
+                } else {
+                    Text("Comment hidden")
+                        .italic()
                 }
             }
-            .padding(.vertical, 4)
-        
+        }
+        .padding(.vertical, 4)
+    
         Divider()
     }
 }

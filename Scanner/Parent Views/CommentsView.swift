@@ -26,6 +26,7 @@ struct CommentsView: View {
                 
                 Text("Comments")
                     .bold()
+                    .font(.system(size: 20))
                 
                 if viewModel.loggedIn {
                     Spacer()
@@ -41,7 +42,7 @@ struct CommentsView: View {
                         ZStack {
                             Capsule()
                                 .frame(width: 100, height: 35)
-                                .foregroundColor(.red)
+                                .foregroundColor(.orange)
                             HStack {
                                 Image(systemName: "person.fill.questionmark")
                                     .foregroundColor(.white)

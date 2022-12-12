@@ -32,7 +32,7 @@ struct ListView: View {
                             }
                         }, label: {
                             Image(systemName: viewModel.showMostRecent ? "bubble.right" : "clock")
-                                .font(.system(size: 20))
+                                .font(.system(size: 25))
                         })
                     }
                 }

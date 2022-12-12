@@ -275,8 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */,
-				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
+				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
