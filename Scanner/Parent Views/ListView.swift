@@ -44,7 +44,7 @@ struct ListView: View {
                     RecentCommentsView(viewModel: viewModel)
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
-                    if (viewModel.activities.count == 0) {
+                    if (viewModel.activities.count == 0 && !viewModel.isRefreshing) {
                         VStack {
                             
                             Spacer()

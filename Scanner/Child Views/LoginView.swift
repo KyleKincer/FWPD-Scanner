@@ -27,6 +27,7 @@ struct LoginView: View {
                         withAnimation {
                             signingUp = false
                             showPage = false
+                            dismiss()
                         }
                     }, label: {
                         HStack {

@@ -75,6 +75,9 @@ struct StandardNavBarView: View {
                         showLocationDisclaimer = true
                     }
                     .minimumScaleFactor(0.5)
+                    .onLongPressGesture(perform: {
+                        viewModel.onboarding = true
+                    })
  
                 Spacer()
                 
@@ -121,11 +124,15 @@ struct StandardNavBarView: View {
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .clipShape(Circle())
+                                .shadow(radius: 2)
+                                
                         } placeholder: {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.gray)
+                                .border(.orange)
+                                .shadow(radius: 2)
                         }
                         
                     } else {

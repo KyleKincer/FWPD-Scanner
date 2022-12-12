@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    @Binding var viewModel : MainViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State var isAnimating = true
     @State private var showInfo = false
     @State var signingUp = false
@@ -36,11 +36,6 @@ struct OnboardingView: View {
                         .shadow(radius: 2)
                         .foregroundColor(Color("ModeOpposite"))
                         .scaleEffect(2)
-                    
-                    StatusView(viewModel: viewModel)
-                        .scaleEffect(0.5)
-                        .frame(width: 400, height: 100)
-                        .padding()
                     
                     Spacer()
                     
@@ -100,6 +95,6 @@ struct DisclaimerView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(viewModel: .constant(MainViewModel()))
+        OnboardingView(viewModel: MainViewModel())
     }
 }

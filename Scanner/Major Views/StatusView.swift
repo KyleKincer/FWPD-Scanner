@@ -46,45 +46,7 @@ struct StatusView: View {
             }
             .frame(width: 200, height: 200)
         } else {
-            if (viewModel.serverResponsive) {
-                VStack {
-                    ZStack {
-                        if (colorScheme == .light) {
-                            Image("launchicon")
-                                .scaleEffect(self.isAnimating ? 0.3 : 0.5)
-                                .colorInvert()
-                                .onAppear {
-                                    withAnimation (.linear(duration: 1).repeatForever()) {
-                                        self.isAnimating = true
-                                    }
-                                }
-                                .onDisappear {
-                                    self.isAnimating = false
-                                }
-                        } else {
-                            Image("launchicon")
-                                .scaleEffect(self.isAnimating ? 0.3 : 0.5)
-                                .onAppear {
-                                    withAnimation (.linear(duration: 1).repeatForever()) {
-                                        self.isAnimating = true
-                                    }
-                                }
-                                .onDisappear {
-                                    self.isAnimating = false
-                                }
-                        }
-                    }
-                    .frame(width: 200, height: 200)
-                    
-                    if (!onboarding) {
-                        Text("Scanning")
-                            .font(.system(size: 40))
-                            .italic()
-                            .bold()
-                    }
-                    
-                }
-            } else {
+            if (!viewModel.serverResponsive) {
                 VStack {
                     Text("Scanner Services Unavailable")
                         .font(.system(size: 20))

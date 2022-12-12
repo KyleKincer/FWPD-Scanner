@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @EnvironmentObject private var appDelegate: AppDelegate
-    @State var viewModel : MainViewModel
+    @StateObject var viewModel : MainViewModel
     @AppStorage("showDistance") var showDistance = true
     @State private var showFilter = false
     @State private var showMap = false
@@ -20,7 +20,7 @@ struct MainView: View {
     
     var body: some View {
         if (viewModel.onboarding) {
-            OnboardingView(viewModel: $viewModel)
+            OnboardingView(viewModel: viewModel)
                 .transition(.opacity)
             
         } else {
@@ -86,7 +86,7 @@ struct MainView: View {
             }
             
             .fullScreenCover(isPresented: $showProfileView) {
-                ProfileView(viewModel: $viewModel, showProfileView: $showProfileView)
+                ProfileView(viewModel: viewModel, showProfileView: $showProfileView)
             }
             
             .sheet(isPresented: $showLocationDisclaimer) {

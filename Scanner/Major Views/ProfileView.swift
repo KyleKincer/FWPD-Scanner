@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Binding var viewModel : MainViewModel
+    @ObservedObject var viewModel : MainViewModel
     @State private var signingUp = false
-    @State private var page = 1
     @Binding var showProfileView : Bool
     @State private var editingUsername = false
     @State private var newUsername = ""
     @FocusState var usernameIsFocused: Bool
-    
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -32,7 +30,10 @@ struct ProfileView: View {
                 HStack {
                     
                     Button (action: {
-                        showProfileView.toggle()
+                        withAnimation {
+                            showProfileView.toggle()
+                        }
+                        
                         
                     }, label: {
                         Image(systemName: "arrow.left")
@@ -46,8 +47,11 @@ struct ProfileView: View {
                     Spacer()
                     
                     Button(action: {
-                        viewModel.logOut()
-                        viewModel.loggedIn = false
+                        withAnimation {
+                            viewModel.logOut()
+                            viewModel.loggedIn = false
+                            viewModel.showAuth = true
+                        }
                     }, label: {
                         Text("Sign Out")
                             .foregroundColor(.red)
@@ -94,10 +98,10 @@ struct ProfileView: View {
                         } label: {
                             ZStack {
                                 Capsule()
-                                    .frame(width: 100, height: 40)
+                                    .frame(width: 75, height: 40)
                                     .foregroundColor(.blue)
                                 
-                                Text("Submit")
+                                Text("Save")
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                             }
@@ -108,9 +112,11 @@ struct ProfileView: View {
                         Text(viewModel.username)
                             .font(.title2)
                         Button {
-                            editingUsername = true
-                            newUsername = viewModel.username
-                            usernameIsFocused = true
+                            withAnimation {
+                                editingUsername = true
+                                newUsername = viewModel.username
+                                usernameIsFocused = true
+                            }
                         } label: {
                             Text("Edit")
                                 .font(.footnote)
@@ -141,6 +147,9 @@ struct ProfileView: View {
                         }
                 }
             }
+            .onDisappear {
+                viewModel.refresh()
+            }
         }
     }
     
@@ -155,6 +164,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: .constant(MainViewModel()), showProfileView: .constant(true))
+        ProfileView(viewModel: MainViewModel(), showProfileView: .constant(true))
     }
 }

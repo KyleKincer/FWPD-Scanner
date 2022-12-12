@@ -58,7 +58,7 @@ struct ActivityView: View {
                         
                         if (!showMap) {
                             VStack {
-                                if (viewModel.isRefreshing) {
+                                if (!viewModel.serverResponsive) {
                                     
                                     Spacer()
                                     
@@ -103,7 +103,7 @@ struct ActivityView: View {
                             if #available(iOS 16.0, *) {
                                 NavigationSplitView {
                                     VStack {
-                                        if (viewModel.isRefreshing) {
+                                        if (!viewModel.serverResponsive) {
                                             Spacer()
                                             
                                             StatusView(viewModel: viewModel)

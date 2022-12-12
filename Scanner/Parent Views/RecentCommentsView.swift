@@ -33,6 +33,9 @@ struct RecentCommentsView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                 }
+                .refreshable {
+                    viewModel.getRecentlyCommentedActivities()
+                }
             }
         }
         .onAppear {

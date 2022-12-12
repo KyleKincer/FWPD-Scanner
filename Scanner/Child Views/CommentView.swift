@@ -37,6 +37,12 @@ struct CommentView: View {
                         Text(comment.userName)
                             .font(.headline)
                         Text("·")
+                        
+                        if (formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()) == "0") {
+                            Text("Just now")
+                                .font(.caption)
+                        }
+                        
                         Text(formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()))
                             .font(.caption)
                     }
@@ -56,8 +62,8 @@ struct CommentView: View {
     }
 }
 
-//struct CommentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommentView()
-//    }
-//}
+struct CommentView_Previews: PreviewProvider {
+    static var previews: some View {
+        CommentView(comment: Comment(userId: "Admin", userName: "AdminKyle", text: "Howdy"))
+    }
+}
