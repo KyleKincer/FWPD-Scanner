@@ -14,6 +14,7 @@ struct ProfileView: View {
     @Binding var showProfileView : Bool
     @State private var editingUsername = false
     @State private var newUsername = ""
+    @FocusState var usernameIsFocused: Bool
     
     
     var body: some View {
@@ -81,9 +82,12 @@ struct ProfileView: View {
                             .frame(width: 200)
                             .limitInputLength(value: $newUsername, length: 20)
                             .padding(.horizontal)
+                            .focused($usernameIsFocused)
                         
                         Button {
-                            viewModel.updateUsername(to: newUsername)
+                            if (newUsername != viewModel.username) {
+                                viewModel.updateUsername(to: newUsername)
+                            }
                             editingUsername = false
                         } label: {
                             ZStack {
@@ -103,6 +107,8 @@ struct ProfileView: View {
                             .font(.title2)
                         Button {
                             editingUsername = true
+                            newUsername = viewModel.username
+                            usernameIsFocused = true
                         } label: {
                             Text("Edit")
                                 .font(.footnote)
