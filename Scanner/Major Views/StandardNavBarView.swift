@@ -115,8 +115,8 @@ struct StandardNavBarView: View {
                     }
                     
                 }, label: {
-                    if (viewModel.auth.profileImageURL != ""){
-                        AsyncImage(url: URL(string: viewModel.auth.profileImageURL)) { image in
+                    if (viewModel.profileImageURL != ""){
+                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
                             image
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -129,7 +129,7 @@ struct StandardNavBarView: View {
                         }
                         
                     } else {
-                        Image(systemName: viewModel.auth.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                        Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
                             .shadow(radius: 2)

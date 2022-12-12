@@ -14,17 +14,16 @@ struct ProfileView: View {
     @Binding var showProfileView : Bool
     @State private var editingUsername = false
     @State private var newUsername = ""
-    @State private var error = ""
     @FocusState var usernameIsFocused: Bool
     
     
     var body: some View {
-        if (!viewModel.auth.loggedIn) {
+        if (!viewModel.loggedIn) {
             // Authenticate
             if (signingUp) {
-                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
+                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
             } else {
-                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
+                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
             }
             
         } else {
@@ -47,8 +46,8 @@ struct ProfileView: View {
                     Spacer()
                     
                     Button(action: {
-                        viewModel.auth.logOut()
-                        viewModel.auth.loggedIn = false
+                        viewModel.logOut()
+                        viewModel.loggedIn = false
                     }, label: {
                         Text("Sign Out")
                             .foregroundColor(.red)
@@ -61,8 +60,8 @@ struct ProfileView: View {
                     // Change icon color and send change to firebase?
                     
                 }, label: {
-                    if (viewModel.auth.profileImageURL != "") {
-                        AsyncImage(url: URL(string: viewModel.auth.profileImageURL)) { image in
+                    if (viewModel.profileImageURL != "") {
+                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
                             image
                                 .clipShape(Circle())
                         } placeholder: {
@@ -70,19 +69,13 @@ struct ProfileView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 80))
                         }
-                        
+
                     } else {
                         Image(systemName: "person.crop.circle")
                             .foregroundColor(.gray)
                             .font(.system(size: 80))
                     }
                 })
-                
-                if (error != "") {
-                    Text(error)
-                        .foregroundColor(.red)
-                        .padding(.horizontal)
-                }
                 if editingUsername {
                     HStack {
                         TextField(viewModel.username, text: $newUsername)
@@ -124,8 +117,8 @@ struct ProfileView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
+                    
                 }
-                .padding(.horizontal)
                 
                 Divider()
                     .padding(.horizontal, 50)
@@ -154,14 +147,9 @@ struct ProfileView: View {
     @MainActor
     func onSubmit() {
         if (newUsername != viewModel.username && newUsername.count > 0) {
-        if (newUsername != viewModel.username && newUsername.count > 0) {
-            viewModel.updateUsername(to: newUsername) { error in
-                if (error = "") {
-                    editingUsername = false
-                } else {
-                    self.error = error
-                }
-            }
+            viewModel.updateUsername(to: newUsername)
+        }
+        editingUsername = false
     }
 }
 

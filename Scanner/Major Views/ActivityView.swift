@@ -202,7 +202,7 @@ struct ActivityView: View {
                                             }
                                         }
                                     }
-                                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : (viewModel.filters.useDate || viewModel.filters.useNature || viewModel.filters.useLocation ? "Filtered Activity" : "Activity"))
+                                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : (viewModel.useDate || viewModel.useNature || viewModel.useLocation ? "Filtered Activity" : "Activity"))
                                     .navigationBarBackButtonHidden()
                                 }
                             detail: {

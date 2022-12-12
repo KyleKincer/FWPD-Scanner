@@ -27,16 +27,16 @@ struct CommentsView: View {
                 Text("Comments")
                     .bold()
                 
-                if viewModel.auth.loggedIn {
+                if viewModel.loggedIn {
                     Spacer()
                     
-                    Text(viewModel.auth.username)
+                    Text(viewModel.username)
                         .foregroundColor(.gray)
                 } else {
                     Spacer()
                     
                     Button {
-                        viewModel.auth.showAuth = true
+                        viewModel.showAuth = true
                     } label: {
                         ZStack {
                             Capsule()
@@ -73,10 +73,10 @@ struct CommentsView: View {
                         }
                     }
                 
-                if (showSubmit && viewModel.auth.loggedIn) {
+                if (showSubmit && viewModel.loggedIn) {
                     Button() {
                         playHaptic()
-                        commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.auth.userId, userName: viewModel.auth.username)
+                        commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
                         activity.commentCount! = activity.commentCount! + 1
                         
                         if let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber}) {
@@ -113,7 +113,7 @@ struct CommentsView: View {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
                     CommentView(comment: comment)
                         .contextMenu {
-                            if viewModel.auth.admin {
+                            if viewModel.admin {
                                 Button {
                                     commentModel.deleteComment(comment: comment, activityId: activity.id)
                                     activity.commentCount!-=1
@@ -137,11 +137,11 @@ struct CommentsView: View {
             .onChange(of: commentModel.comments, perform: { _ in
                 commentModel.comments = commentModel.comments
             })
-            .fullScreenCover(isPresented: $viewModel.auth.showAuth, content: {
+            .fullScreenCover(isPresented: $viewModel.showAuth, content: {
                 if (signingUp) {
-                    RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
+                    RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
                 } else {
-                    LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.auth.showAuth)
+                    LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $viewModel.showAuth)
                 }
             })
         }

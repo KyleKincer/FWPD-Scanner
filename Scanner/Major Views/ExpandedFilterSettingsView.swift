@@ -41,7 +41,7 @@ struct ExpandedFilterSettings: View {
                 HStack {
                     Button(action: {
                         if (selection.count-1 == 0) {
-                            viewModel.filters.useNature = false
+                            viewModel.useNature = false
                             selection.insert("None")
                         }
                         dismiss()
@@ -72,39 +72,39 @@ struct ExpandedFilterSettings: View {
             
             VStack {
                 Section("Account") {
-                    if viewModel.auth.loggedIn {
-                        Text("Howdy, \(viewModel.auth.username)!")
+                    if viewModel.loggedIn {
+                        Text("Howdy, \(viewModel.username)!")
                     }
                     Button {
-                        if !viewModel.auth.loggedIn {
+                        if !viewModel.loggedIn {
                             showPage = true
                         } else {
-                            viewModel.auth.logOut()
+                            viewModel.logOut()
                         }
                     } label: {
-                        Text(viewModel.auth.loggedIn ? "Log out" : "Log in")
+                        Text(viewModel.loggedIn ? "Log out" : "Log in")
                     }
                 }
                 
-                if (viewModel.location.locationEnabled) {
-                    Toggle("Filter By Distance", isOn: $viewModel.filters.useLocation)
-                        .onChange(of: viewModel.filters.useLocation) { newValue in
+                if (viewModel.locationEnabled) {
+                    Toggle("Filter By Distance", isOn: $viewModel.useLocation)
+                        .onChange(of: viewModel.useLocation) { newValue in
                             refreshOnExit = true
                             
                             if (newValue) {
-                                viewModel.filters.useDate = false
-                                viewModel.filters.useNature = false
+                                viewModel.useDate = false
+                                viewModel.useNature = false
                             }
                         }
                     
-                    if (viewModel.filters.useLocation) {
+                    if (viewModel.useLocation) {
                         VStack {
                             HStack {
-                                Text("Radius: \(String(format: "%g", (round(viewModel.filters.radius * 10)) / 10)) mi")
+                                Text("Radius: \(String(format: "%g", (round(viewModel.radius * 10)) / 10)) mi")
                                 Spacer()
                             }
-                            Slider(value: $viewModel.filters.radius, in: 0.1...5)
-                                .onChange(of: viewModel.filters.radius) { _ in
+                            Slider(value: $viewModel.radius, in: 0.1...5)
+                                .onChange(of: viewModel.radius) { _ in
                                     refreshOnExit = true
                                 }
                             
@@ -115,19 +115,19 @@ struct ExpandedFilterSettings: View {
                     Divider()
                 }
                 
-                Toggle("Filter By Date", isOn: $viewModel.filters.useDate)
-                    .onChange(of: viewModel.filters.useDate) { newValue in
+                Toggle("Filter By Date", isOn: $viewModel.useDate)
+                    .onChange(of: viewModel.useDate) { newValue in
                         refreshOnExit = true
                         
                         if (newValue) {
                             withAnimation {
-                                viewModel.filters.useLocation = false
-                                viewModel.filters.useNature = false
+                                viewModel.useLocation = false
+                                viewModel.useNature = false
                             }
                         }
                     }
                 
-                if (viewModel.filters.useDate) {
+                if (viewModel.useDate) {
                     DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
                         .onChange(of: dateFrom) {newValue in
                             if (!justAppeared1) {
@@ -151,19 +151,19 @@ struct ExpandedFilterSettings: View {
                 Divider()
                 
                 
-                Toggle("Filter By Natures", isOn: $viewModel.filters.useNature)
-                    .onChange(of: viewModel.filters.useNature) { newValue in
+                Toggle("Filter By Natures", isOn: $viewModel.useNature)
+                    .onChange(of: viewModel.useNature) { newValue in
                         refreshOnExit = true
                         
                         withAnimation {
                             if (newValue) {
-                                viewModel.filters.useDate = false
-                                viewModel.filters.useLocation = false
+                                viewModel.useDate = false
+                                viewModel.useLocation = false
                             }
                         }
                     }
                 
-                if (viewModel.filters.useNature) {
+                if (viewModel.useNature) {
                     HStack {
                         Text("Select Natures")
                             .padding(.leading, -18)
@@ -192,9 +192,9 @@ struct ExpandedFilterSettings: View {
                     })
                     .environment(\.editMode, .constant(EditMode.active))
                     .onAppear {
-                        let selectionArray = viewModel.filters.selectedNaturesUD.components(separatedBy: ", ")
+                        let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                         selection = Set(selectionArray)
-                        viewModel.filters.selectedNatures = selection
+                        viewModel.selectedNatures = selection
                     }
                     .onChange(of: selection, perform: { latestSelection in
                         if (latestSelection.count == 10) {
@@ -222,37 +222,37 @@ struct ExpandedFilterSettings: View {
         })
         .environment(\.editMode, .constant(EditMode.active))
         .onAppear {
-            if (viewModel.filters.selectedNatures.count == 1) {
-                viewModel.filters.selectedNatures.insert("None")
+            if (viewModel.selectedNatures.count == 1) {
+                viewModel.selectedNatures.insert("None")
             }
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd 00:00:01"
-            dateFrom = formatter.date(from: viewModel.filters.dateFrom) ?? Date()
+            dateFrom = formatter.date(from: viewModel.dateFrom) ?? Date()
             formatter.dateFormat = "yyyy-MM-dd 23:59:59"
-            dateTo = formatter.date(from: viewModel.filters.dateTo) ?? Date()
+            dateTo = formatter.date(from: viewModel.dateTo) ?? Date()
             justAppeared1 = true
             justAppeared2 = true
-            let selectionArray = viewModel.filters.selectedNaturesUD.components(separatedBy: ", ")
+            let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
             selection = Set(selectionArray)
-            viewModel.filters.selectedNatures = selection
+            viewModel.selectedNatures = selection
             refreshOnExit = false
             
         }
         .onDisappear {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd 00:00:01"
-            viewModel.filters.dateFrom = formatter.string(from: dateFrom)
+            viewModel.dateFrom = formatter.string(from: dateFrom)
             formatter.dateFormat = "yyyy-MM-dd 23:59:59"
-            viewModel.filters.dateTo = formatter.string(from: dateTo)
+            viewModel.dateTo = formatter.string(from: dateTo)
             
             if (selection.count == 0) {
-                viewModel.filters.useNature = false
+                viewModel.useNature = false
                 selection.insert("None")
             }
             
-            viewModel.filters.selectedNatures = selection
-            viewModel.filters.selectedNaturesString = Array(selection)
-            viewModel.filters.selectedNaturesUD = Array(selection).joined(separator: ", ")
+            viewModel.selectedNatures = selection
+            viewModel.selectedNaturesString = Array(selection)
+            viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
             
             if refreshOnExit {
                 refreshOnExit = false

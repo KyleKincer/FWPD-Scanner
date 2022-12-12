@@ -106,9 +106,9 @@ struct OldNotificationSettingsView: View {
         .onChange(of: selectAll, perform: { _ in
             if (!selectAll) {
                 
-                let selectionArray = viewModel.filters.notificationNaturesUD.components(separatedBy: ", ")
+                let selectionArray = viewModel.notificationNaturesUD.components(separatedBy: ", ")
                 selection = Set(selectionArray)
-                viewModel.filters.notificationNatures = selection
+                viewModel.notificationNatures = selection
             }
         })
         .onAppear {
@@ -118,9 +118,9 @@ struct OldNotificationSettingsView: View {
             
             
             if (!selectAll) {
-                let selectionArray = viewModel.filters.notificationNaturesUD.components(separatedBy: ", ")
+                let selectionArray = viewModel.notificationNaturesUD.components(separatedBy: ", ")
                 selection = Set(selectionArray)
-                viewModel.filters.notificationNatures = selection
+                viewModel.notificationNatures = selection
             }
         }
         .onDisappear {
@@ -128,7 +128,7 @@ struct OldNotificationSettingsView: View {
             if (!selectAll) {
                 notifications.unsubscribeFromAll()
                 
-                if (viewModel.filters.notificationNatures != selection) {
+                if (viewModel.notificationNatures != selection) {
                     
                     // Subscribe to new natures
                     notifications.subscribeToNatures(natures: Array(selection))
@@ -136,16 +136,16 @@ struct OldNotificationSettingsView: View {
                     // Unsubscribe from removed natures
                     let arraySelection = Array(selection)
                     var removedNatures = [String]()
-                    for nature in Array(viewModel.filters.notificationNatures) {
+                    for nature in Array(viewModel.notificationNatures) {
                         if !arraySelection.contains(where: {$0 == nature}) {
                             removedNatures.append(nature)
                         }
                     }
                     notifications.removeNatures(natures: removedNatures)
                     
-                    viewModel.filters.notificationNatures = selection
-                    viewModel.filters.notificationNaturesString = Array(selection)
-                    viewModel.filters.notificationNaturesUD = Array(selection).joined(separator: ", ")
+                    viewModel.notificationNatures = selection
+                    viewModel.notificationNaturesString = Array(selection)
+                    viewModel.notificationNaturesUD = Array(selection).joined(separator: ", ")
                 }
             } else {
                 notifications.subscribeToAll()

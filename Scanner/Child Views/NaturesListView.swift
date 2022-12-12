@@ -21,12 +21,12 @@ struct NaturesList: View {
             HStack {
                 Button {
                     if (selection.count-1  == 0) {
-                        viewModel.filters.useNature = false
+                        viewModel.useNature = false
                         selection.insert("None")
                     }
-                    viewModel.filters.selectedNatures = selection
-                    viewModel.filters.selectedNaturesString = Array(selection)
-                    viewModel.filters.selectedNaturesUD = Array(selection).joined(separator: ", ")
+                    viewModel.selectedNatures = selection
+                    viewModel.selectedNaturesString = Array(selection)
+                    viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
                     dismiss()
                 } label: {
                     Text("Apply")
@@ -75,9 +75,9 @@ struct NaturesList: View {
             .navigationBarTitle(Text("Types"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                let selectionArray = viewModel.filters.selectedNaturesUD.components(separatedBy: ", ")
+                let selectionArray = viewModel.selectedNaturesUD.components(separatedBy: ", ")
                 selection = Set(selectionArray)
-                viewModel.filters.selectedNatures = selection
+                viewModel.selectedNatures = selection
                 
             }
         }
@@ -99,6 +99,6 @@ struct NaturesList: View {
 
 struct NaturesList_Previews: PreviewProvider {
     static var previews: some View {
-        NaturesList(viewModel: MainViewModel(), selection: MainViewModel().filters.selectedNatures)
+        NaturesList(viewModel: MainViewModel(), selection: MainViewModel().selectedNatures)
     }
 }

@@ -25,8 +25,8 @@ struct MainView: View {
             
         } else {
             VStack {
-                if viewModel.auth.showAuthError {
-                    alert(viewModel.auth.authError, isPresented: $viewModel.auth.showAuthError, actions: {})
+                if viewModel.showAuthError {
+                    alert(viewModel.authError, isPresented: $viewModel.showAuthError, actions: {})
                 }
 
                 if (sizeClass == .compact) {

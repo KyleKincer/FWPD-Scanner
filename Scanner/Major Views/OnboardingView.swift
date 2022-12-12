@@ -70,10 +70,10 @@ struct OnboardingView: View {
         .padding()
         .transition(.opacity)
         .onAppear {
-            viewModel.location.locationManager.requestAlwaysAuthorization()
+            viewModel.locationManager.requestAlwaysAuthorization()
         }
         .onDisappear {
-            viewModel.filters.selectedNaturesUD.removeAll()
+            viewModel.selectedNaturesUD.removeAll()
             viewModel.refresh()
         }
     }

@@ -66,10 +66,10 @@ struct NotificationView: View {
                     .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
                     .edgesIgnoringSafeArea(.all)
                     .onAppear {
-                        viewModel.location.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
+                        viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
                     }
                     .onDisappear {
-                        viewModel.location.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
+                        viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075))
                     }
                     .environmentObject(appDelegate)
             }
@@ -87,7 +87,7 @@ struct NotificationView: View {
                     appDelegate.notificationActivity.date = formatter.date(from: appDelegate.notificationActivity.timestamp)
 
 
-                        if let location = viewModel.location.locationManager.location {
+                        if let location = viewModel.locationManager.location {
                             appDelegate.notificationActivity.distance = ((location.distance(from: CLLocation(latitude: appDelegate.notificationActivity.latitude, longitude: appDelegate.notificationActivity.longitude))) * 0.000621371)
                         }
                     }

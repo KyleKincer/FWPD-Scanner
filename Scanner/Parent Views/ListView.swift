@@ -19,12 +19,12 @@ struct ListView: View {
             VStack {
                 HStack {
                     
-                    Text((viewModel.filters.useDate || viewModel.filters.useNature || viewModel.filters.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Comments" : "Recent Activity"))
+                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Comments" : "Recent Activity"))
                         .font(.title)
                     
                     Spacer()
                     
-                    if (!viewModel.filters.useDate && !viewModel.filters.useNature && !viewModel.filters.useLocation) {
+                    if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
                         
                         Button(action: {
                             withAnimation {
