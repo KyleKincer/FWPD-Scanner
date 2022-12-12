@@ -59,11 +59,12 @@ class CommentsViewModel: ObservableObject {
                 }
                 // update the comment's userName with the userName from the user document
                 let userName = userDocument!.get("username") as? String
+                let imageURL = userDocument!.get("imageURL") as? String
                 let text = commentDocument.data()["text"] as! String
                 let timestamp = commentDocument.data()["timestamp"] as! Firebase.Timestamp
                 let hidden = commentDocument.data()["hidden"] as? Bool
                 let id = commentDocument.documentID
-                let comment = Comment(id: id, userId: userId, userName: userName ?? "Unknown User", text: text, timestamp: Timestamp(timestamp), hidden: hidden ?? false)
+                let comment = Comment(id: id, userId: userId, userName: userName ?? "Unknown User", imageURL: imageURL ?? "", text: text, timestamp: Timestamp(timestamp), hidden: hidden ?? false)
                 
                 // add the updated comment to the comments array
                 self.comments.append(comment)

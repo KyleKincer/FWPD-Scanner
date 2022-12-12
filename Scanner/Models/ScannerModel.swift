@@ -142,6 +142,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     let id: String
     let userId: String
     var userName: String
+    let imageURL: String
     let text: String
     let timestamp: Timestamp
     let hidden: Bool
@@ -150,6 +151,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         case id
         case userId
         case userName
+        case imageURL
         case text
         case timestamp
         case hidden
@@ -160,6 +162,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         self.id = try container.decode(String.self, forKey: .id)
         self.userId = try container.decode(String.self, forKey: .userId)
         self.userName = try container.decode(String.self, forKey: .userName)
+        self.imageURL = try container.decode(String.self, forKey: .imageURL)
         self.text = try container.decode(String.self, forKey: .text)
         self.timestamp = try container.decode(Timestamp.self, forKey: .timestamp)
         self.hidden = try container.decode(Bool.self, forKey: .hidden)
@@ -170,15 +173,17 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
         self.id = document.documentID
         self.userId = document.data()["userId"] as! String
         self.userName = ""
+        self.imageURL = ""
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
-        self.hidden = document.data()["hidden"] as! Bool
+        self.hidden = document.data()["hidden"] as? Bool ?? false
     }
     
-    init(id: String = UUID().uuidString, userId: String, userName: String, text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp()), hidden: Bool = false) {
+    init(id: String = UUID().uuidString, userId: String, userName: String, imageURL: String = "", text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp()), hidden: Bool = false) {
         self.id = id
         self.userId = userId
         self.userName = userName
+        self.imageURL = imageURL
         self.text = text
         self.timestamp = timestamp
         self.hidden = hidden

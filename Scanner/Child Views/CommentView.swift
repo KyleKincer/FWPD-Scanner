@@ -12,9 +12,26 @@ struct CommentView: View {
     let formatter = RelativeDateTimeFormatter()
     
     var body: some View {
-            HStack {
+        HStack {
+            if (comment.imageURL != ""){
+                AsyncImage(url: URL(string: comment.imageURL)) { image in
+                    image
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(.gray)
+                }
+                
+            } else {
                 Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 35, height: 35)
                     .foregroundColor(.gray)
+            }
                 VStack(alignment: .leading) {
                     HStack {
                         Text(comment.userName)
