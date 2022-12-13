@@ -96,7 +96,7 @@ struct ExpandedNavBarView: View {
                 }, label: {
                     ZStack {
                         HStack {
-                            Image(systemName: "gear")
+                            Image(systemName: "switch.2")
                                 .font(.system(size: 25))
                                 .foregroundColor(.green)
                                 .transition(.opacity)

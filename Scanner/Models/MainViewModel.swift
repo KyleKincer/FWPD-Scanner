@@ -186,25 +186,28 @@ final class MainViewModel: ObservableObject {
                 self.currentUser = (User(id: result!.user.uid,
                                          username: result!.user.displayName!,
                                          profileImageURL: (result?.user.photoURL)!))
+                
                 initUser(user: result?.user)
             }
         }
     }
     
     func initUser(user: FirebaseAuth.User?) {
-        withAnimation {
-            self.loggedIn = true
-            self.showAuth = false
-        }
-        
-        // Only call writeUserDocument if a document doesn't already exist
-        // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
-        userDocRef.getDocument { (snapshot, error) in
-            if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(user: self.currentUser!)
-            } else if snapshot?.exists == true {
-                self.currentUser = User(document: snapshot!)
+        if (self.currentUser != nil) {
+            withAnimation {
+                self.loggedIn = true
+                self.showAuth = false
+            }
+            
+            // Only call writeUserDocument if a document doesn't already exist
+            // in the users collection with the uid.
+            let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
+            userDocRef.getDocument { (snapshot, error) in
+                if error == nil && snapshot?.exists == false {
+                    self.writeUserDocument(user: self.currentUser!)
+                } else if snapshot?.exists == true {
+                    self.currentUser = User(document: snapshot!)
+                }
             }
         }
     }
