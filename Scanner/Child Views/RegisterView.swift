@@ -121,7 +121,7 @@ struct SignUpHeader: View {
             
             Spacer()
 
-            Text("Quickly create an account to enable community commenting and additional features in the future!")
+            Text("Quickly create an account to enable community commenting and view bookmarks, along with additional features in the future!")
                 .multilineTextAlignment(.center)
                 .padding()
 
