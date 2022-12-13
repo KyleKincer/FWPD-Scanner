@@ -112,7 +112,7 @@ struct CommentsView: View {
             
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
-                    CommentView(comment: comment)
+                    CommentView(comment: comment, admin: viewModel.admin)
                         .contextMenu {
                             if viewModel.admin {
                                 Button {

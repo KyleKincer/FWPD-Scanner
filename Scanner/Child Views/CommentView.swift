@@ -9,19 +9,12 @@ import SwiftUI
 
 struct CommentView: View {
     let comment: Comment
+    let admin: Bool
     let formatter = RelativeDateTimeFormatter()
     
     var body: some View {
         HStack {
-            if (comment.userName == "AdminKyle" || comment.userName == "AdminNick") {
-                Image(systemName: "crown.fill")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .foregroundColor(.yellow)
-                    .padding(.horizontal)
-
-            } else {
-                if (comment.imageURL != ""){
+            if (comment.imageURL != ""){
                     AsyncImage(url: URL(string: comment.imageURL)) { image in
                         image
                             .resizable()
@@ -40,13 +33,17 @@ struct CommentView: View {
                         .frame(width: 35, height: 35)
                         .foregroundColor(.gray)
                 }
-            }
 
             
             VStack(alignment: .leading) {
                 HStack {
                     Text(comment.userName)
                         .font(.headline)
+                    if (admin) {
+                        Image(systemName: "crown")
+                            .font(.footnote)
+                            .foregroundColor(.red)
+                    }
                     Text("·")
                     
                     if (formatter.localizedString(for: comment.timestamp.firebaseTimestamp.dateValue(), relativeTo: Date()) == formatter.localizedString(for: Date.now, relativeTo: Date())) {
@@ -76,6 +73,6 @@ struct CommentView: View {
 
 struct CommentView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentView(comment: Comment(userId: "Admin", userName: "AdminKyle", text: "Howdy"))
+        CommentView(comment: Comment(userId: "Admin", userName: "AdminKyle", text: "Howdy"), admin: true)
     }
 }
