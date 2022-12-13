@@ -185,7 +185,7 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
 
 
 struct User: Identifiable, Decodable {
-    let id: UUID
+    let id: String
     var username: String
     let admin: Bool
     var profileImageURL: URL?
@@ -193,7 +193,7 @@ struct User: Identifiable, Decodable {
     let lastCommentAt: Timestamp?
     
     init(username: String) {
-        self.id = UUID()
+        self.id = ""
         self.username = username
         self.admin = false
         self.profileImageURL = nil
@@ -201,7 +201,7 @@ struct User: Identifiable, Decodable {
         self.lastCommentAt = nil
     }
     
-    init(id: UUID, username: String, profileImageURL: URL) {
+    init(id: String, username: String, profileImageURL: URL) {
         self.id = id
         self.username = username
         self.admin = false
@@ -211,10 +211,10 @@ struct User: Identifiable, Decodable {
     }
     
     init(document: DocumentSnapshot) {
-        self.id = UUID(uuidString: document.documentID)!
+        self.id = document.documentID
         self.username = (document.data()!["username"] as? String)!
         self.admin = document.data()?["admin"] as? Bool ?? false
-        self.profileImageURL = URL(string: document.data()?["profileImageURL"] as! String)
+        self.profileImageURL = URL(string: document.data()?["imageURL"] as! String)
         self.commentCount = document.data()?["commentCount"] as? Int
         self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
     }
@@ -230,7 +230,7 @@ struct User: Identifiable, Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(UUID.self, forKey: .id)
+        self.id = try container.decode(String.self, forKey: .id)
         self.username = try container.decode(String.self, forKey: .username)
         self.admin = try container.decode(Bool.self, forKey: .admin)
         self.profileImageURL = try container.decodeIfPresent(URL.self, forKey: .profileImageURL)

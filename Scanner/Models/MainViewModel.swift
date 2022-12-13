@@ -167,7 +167,7 @@ final class MainViewModel: ObservableObject {
                 print(error.localizedDescription)
             } else {
                 self.currentUser?.profileImageURL = result!.user.photoURL ?? URL(string: "")
-                self.currentUser = (User(id: UUID(uuidString: result!.user.uid)!,
+                self.currentUser = (User(id: result!.user.uid,
                                          username: result!.user.displayName!,
                                          profileImageURL: (result?.user.photoURL)!))
                 initUser(auth: result)
@@ -181,7 +181,7 @@ final class MainViewModel: ObservableObject {
         
         // Only call writeUserDocument if a document doesn't already exist
         // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(self.currentUser!.id.uuidString)
+        let userDocRef = Firestore.firestore().collection("users").document(self.currentUser!.id)
         userDocRef.getDocument { (snapshot, error) in
             if error == nil && snapshot?.exists == false {
                 self.writeUserDocument(user: self.currentUser!)
@@ -317,7 +317,7 @@ final class MainViewModel: ObservableObject {
     
     func writeUserDocument(user: User) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(user.id.uuidString)
+        let userRef = db.collection("users").document(user.id)
         userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? URL(string: "")]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -329,7 +329,7 @@ final class MainViewModel: ObservableObject {
     
     func updateUsername(to username: String) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.currentUser?.id)
+        let userRef = db.collection("users").document(self.currentUser!.id)
         let oldUserName = (self.currentUser?.username)!
         self.currentUser?.username = username // preemptively set the local username property,
         
