@@ -167,6 +167,9 @@ final class MainViewModel: ObservableObject {
                 print(error.localizedDescription)
             } else {
                 self.currentUser?.profileImageURL = result!.user.photoURL ?? URL(string: "")
+                self.currentUser = (User(id: UUID(uuidString: result!.user.uid)!,
+                                         username: result!.user.displayName!,
+                                         profileImageURL: (result?.user.photoURL)!))
                 initUser(auth: result)
             }
         }
@@ -178,10 +181,10 @@ final class MainViewModel: ObservableObject {
         
         // Only call writeUserDocument if a document doesn't already exist
         // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(auth!.user.uid)
+        let userDocRef = Firestore.firestore().collection("users").document(self.currentUser!.id.uuidString)
         userDocRef.getDocument { (snapshot, error) in
             if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+                self.writeUserDocument(user: self.currentUser!)
             } else if snapshot?.exists == true {
                 self.currentUser = User(document: snapshot!)
             }
@@ -314,8 +317,8 @@ final class MainViewModel: ObservableObject {
     
     func writeUserDocument(user: User) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(user.id)
-        userRef.setData(["username": user.username, "imageURL": user.profileImageURL]) { err in
+        let userRef = db.collection("users").document(user.id.uuidString)
+        userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? URL(string: "")]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

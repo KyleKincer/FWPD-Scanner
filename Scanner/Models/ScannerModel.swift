@@ -201,6 +201,15 @@ struct User: Identifiable, Decodable {
         self.lastCommentAt = nil
     }
     
+    init(id: UUID, username: String, profileImageURL: URL) {
+        self.id = id
+        self.username = username
+        self.admin = false
+        self.profileImageURL = profileImageURL
+        self.commentCount = 0
+        self.lastCommentAt = nil
+    }
+    
     init(document: DocumentSnapshot) {
         self.id = UUID(uuidString: document.documentID)!
         self.username = (document.data()!["username"] as? String)!
