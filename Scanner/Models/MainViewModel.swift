@@ -44,14 +44,13 @@ final class MainViewModel: ObservableObject {
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @Published var onboarding = false
     
-    
     // View States
     @Published var isRefreshing = false
     @Published var serverResponsive = true
     @Published var isLoading = false
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
-    @Published var showMostRecent = false
+    @Published var showMostRecentComments = false
     @Published var showAuthError = false
     
     // Network and auth

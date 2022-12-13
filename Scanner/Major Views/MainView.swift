@@ -78,11 +78,7 @@ struct MainView: View {
             }
             
             .fullScreenCover(isPresented: $showNotificationView) {
-                if #available(iOS 16.1, *) {
-                    NewNotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
-                } else {
-                    OldNotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
-                }
+                NotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
             }
             
             .fullScreenCover(isPresented: $showProfileView) {

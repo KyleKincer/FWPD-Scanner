@@ -57,11 +57,11 @@ struct CommentsView: View {
             .padding(.horizontal)
             
             HStack {
-                TextField("Type comment here...", text: $comment)
+                TextField("Type your comment here...", text: $comment)
                     .keyboardType(.default)
                     .focused($commentIsFocused)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.trailing)
+                    .padding(.horizontal)
                     .onChange(of: comment.count) { newValue in
                         if (newValue > 0) {
                             withAnimation(.easeInOut) {

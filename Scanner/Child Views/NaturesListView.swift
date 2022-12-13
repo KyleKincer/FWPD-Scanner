@@ -29,25 +29,24 @@ struct NaturesList: View {
                     viewModel.selectedNaturesUD = Array(selection).joined(separator: ", ")
                     dismiss()
                 } label: {
-                    Text("Apply")
+                    BackButtonView(text: "Apply", color: Color.blue)
                 }
-                
-                Spacer()
                            
                 Text("Select Natures")
                     .fontWeight(.semibold)
                     .italic()
+                    .padding(.top)
                 
-                Spacer()
+                Spacer(minLength: 100)
                 
                 Button {
                     selection.removeAll()
                 } label: {
                     Text("Clear")
+                        .padding([.trailing, .top])
                 }
                 .disabled(selection.count == 0 || selection.first == "")
             }
-            .padding()
             
             TextField("Search", text: $searchText)
                 .textFieldStyle(.roundedBorder)

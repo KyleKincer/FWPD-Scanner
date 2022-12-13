@@ -93,7 +93,6 @@ struct StandardNavBarView: View {
                         Image(systemName: "bell")
                             .shadow(radius: 2)
                             .rotationEffect(.degrees(bellJingle ? 5 : -5))
-                    
                             .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
                             .onAppear() {
                                 if (newToNots) {
@@ -131,7 +130,6 @@ struct StandardNavBarView: View {
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.gray)
-                                .border(.orange)
                                 .shadow(radius: 2)
                         }
                         

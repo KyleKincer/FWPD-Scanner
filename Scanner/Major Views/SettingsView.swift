@@ -20,26 +20,14 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        showFilter.toggle()
-                    }
-                }, label: {
-                    HStack {
-                        Image(systemName: "arrow.left")
-                            .font(.system(size: 30))
-                        
-                        Text("Back")
-                    }
-                })
-                .padding([.leading, .top])
-                .foregroundColor(.green)
-                
-                Spacer()
-                
-            }
-            .padding(.horizontal)
+            Button(action: {
+                withAnimation {
+                    showFilter.toggle()
+                }
+            }, label: {
+                BackButtonView(text: "Apply", color: .green)
+            })
+
             
             Text("Settings")
                 .fontWeight(.black)
@@ -175,6 +163,7 @@ struct SettingsView: View {
             viewModel.dateTo = formatter.string(from: dateTo)
 
             if refreshOnExit {
+                viewModel.showMostRecentComments = false
                 refreshOnExit = false
                 viewModel.refresh()
                 print("R - Refreshed via Filters")

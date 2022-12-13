@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 16.1, *)
-struct NewNotificationSettingsView: View {
+struct NotificationSettingsView: View {
     var viewModel: MainViewModel
     @Environment(\.horizontalSizeClass) var sizeClass
     @AppStorage("enableLiveActivities") var live = true
@@ -22,28 +21,13 @@ struct NewNotificationSettingsView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        showNotificationView.toggle()
-                    }
-                }, label: {
-                    HStack {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.red)
-                            .bold()
-                            .font(.system(size: 30))
-                        
-                        Text("Save")
-                            .foregroundColor(.red)
-                    }
-                })
-                .padding([.leading, .top])
-                
-                Spacer()
-                
-            }
-            .padding(.horizontal)
+            Button(action: {
+                withAnimation {
+                    showNotificationView.toggle()
+                }
+            }, label: {
+                BackButtonView(text: "Save", color: Color.red)
+            })
             
             Text("Notifications")
                 .fontWeight(.black)
@@ -51,6 +35,7 @@ struct NewNotificationSettingsView: View {
                 .font(.largeTitle)
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
+                .padding(.top)
             
             if (selection.count == 0 && !selectAll) {
                 Text("Currently Disabled")
@@ -59,11 +44,11 @@ struct NewNotificationSettingsView: View {
             Toggle("Notify Of All Activity", isOn: $selectAll)
                 .padding(.horizontal, 50)
                 .padding(.vertical)
-                .bold()
             
             if (!selectAll) {
                 
                 Divider()
+                    .padding(.horizontal, 20)
                 
                 HStack {
                     Text("Select Natures:")
@@ -100,11 +85,9 @@ struct NewNotificationSettingsView: View {
             } else {
                 Text("Note: This will result in many notifications. To receive fewer notifications, disable the toggle and select specific activty natures!")
                     .padding()
-                    .bold()
                 
                 Text("To receive no notifications, turn off the toggle and make sure no Natures are selected.")
                     .padding()
-                    .bold()
                 
                 
                 Spacer()
@@ -173,9 +156,8 @@ struct NewNotificationSettingsView: View {
     }
 }
 
-@available(iOS 16.1, *)
-struct NewNotificatonSettingsViewPreviews: PreviewProvider {
+struct NotificatonSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        NewNotificationSettingsView(viewModel: MainViewModel(), showNotificationView: .constant(true))
+        NotificationSettingsView(viewModel: MainViewModel(), showNotificationView: .constant(true))
     }
 }

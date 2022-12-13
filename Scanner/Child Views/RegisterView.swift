@@ -21,39 +21,14 @@ struct RegisterView: View {
     
     var body: some View {
         VStack {
-            Group {
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            signingUp = false
-                            showPage = false
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: "arrow.left")
-                                .foregroundColor(.yellow)
-                                .font(.system(size: 30))
-                            
-                            Text("Back")
-                                .foregroundColor(.yellow)
-                        }
-                    })
-                    .padding([.leading, .top])
-                    
-                    Spacer()
-                    
-                }
-                .padding(.horizontal)
-            }
-            
-            Group {
-                Button(action: {
+            Button(action: {
+                withAnimation {
                     signingUp = false
-                }, label: {
-                    Text("Sign In Instead")
-                        .foregroundColor(.blue)
-                })
-            }
+                    showPage = false
+                }
+            }, label: {
+                BackButtonView(text: "Log In Instead", color: Color.orange)
+            })
                 
             SignUpHeader()
 

@@ -33,15 +33,8 @@ struct ProfileView: View {
                         withAnimation {
                             showProfileView.toggle()
                         }
-                        
-                        
                     }, label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.orange)
-                        
-                        Text("Back")
-                            .foregroundColor(.orange)
-                        
+                        BackButtonView(text: "Cancel", color: .orange)
                     })
                     
                     Spacer()
@@ -105,12 +98,14 @@ struct ProfileView: View {
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                             }
-                        }.disabled(newUsername.count==0)
+                        }
+                        .disabled(newUsername.count==0)
                     }
                 } else {
                     HStack {
                         Text(viewModel.currentUser!.username)
                             .font(.title2)
+                        
                         Button {
                             withAnimation {
                                 editingUsername = true
@@ -123,7 +118,6 @@ struct ProfileView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    
                 }
                 
                 Divider()
@@ -131,7 +125,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                
+
                 TabView {
                     BookmarkView(viewModel: viewModel)
                         .tabItem {

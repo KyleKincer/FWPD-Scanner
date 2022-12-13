@@ -11,7 +11,7 @@ struct OnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel : MainViewModel
-    @State var isAnimating = true
+    @State var isAnimating = false
     @State private var showInfo = false
     @State var signingUp = false
     
@@ -37,9 +37,36 @@ struct OnboardingView: View {
                         .foregroundColor(Color("ModeOpposite"))
                         .scaleEffect(2)
                     
-                    Spacer()
+                    if (colorScheme == .light) {
+                        Image("launchicon")
+                            .scaleEffect(self.isAnimating ? 0.2 : 0.3)
+                            .colorInvert()
+                            .frame(width: 100, height: 100)
+                            .onAppear {
+                                withAnimation (.linear(duration: 1).repeatForever()) {
+                                    self.isAnimating = true
+                                }
+                            }
+                            .onDisappear {
+                                self.isAnimating = false
+                            }
+                    } else {
+                        Image("launchicon")
+                            .scaleEffect(self.isAnimating ? 0.2 : 0.3)
+                            .frame(width: 100, height: 100)
+                            .onAppear {
+                                withAnimation (.linear(duration: 1).repeatForever()) {
+                                    self.isAnimating = false
+                                    self.isAnimating = true
+                                }
+                            }
+                            .onDisappear {
+                                self.isAnimating = false
+                            }
+                    }
                     
                     DisclaimerView()
+                        .padding(.top)
                     
                     Spacer()
                 }

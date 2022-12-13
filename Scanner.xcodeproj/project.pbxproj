@@ -74,7 +74,7 @@
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
-		EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */; };
+		EB3A359328F5FEDE009625D0 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */; };
 		EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */; };
 		EB484D19293FD4E20068B85F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB484D18293FD4E20068B85F /* FirebaseAuth */; };
 		EB4EA5BD293FDE8000A39512 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA5BC293FDE8000A39512 /* RegisterView.swift */; };
@@ -85,7 +85,6 @@
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
-		EBA6ECD2291FD97500805610 /* OldNotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */; };
 		EBA6ECD52920130C00805610 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EBA6ECD42920130C00805610 /* FirebaseFirestore */; };
 		EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBA6ECD62920130C00805610 /* FirebaseMessaging */; };
 		EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
@@ -93,6 +92,7 @@
 		EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */; };
 		EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
+		EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */; };
 		EBD612A2292C1E8100FE9037 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */; };
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* SettingsView.swift */; };
@@ -173,7 +173,7 @@
 		EB346CB828FA407200693F59 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		EB397D2B28F8AC2900E7178F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStatusView.swift; sourceTree = "<group>"; };
-		EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotificationSettingsView.swift; sourceTree = "<group>"; };
+		EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedNavBarView.swift; sourceTree = "<group>"; };
 		EB4EA5BC293FDE8000A39512 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		EB57406728E6166E009FDA3D /* StandardNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardNavBarView.swift; sourceTree = "<group>"; };
@@ -192,13 +192,13 @@
 		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldNotificationSettingsView.swift; sourceTree = "<group>"; };
 		EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBBBCE2B2927F3D00015E4C1 /* WatchScanner Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchScanner Watch App.entitlements"; sourceTree = "<group>"; };
 		EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshReminderView.swift; sourceTree = "<group>"; };
 		EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
+		EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackButton.swift; sourceTree = "<group>"; };
 		EBD6128E292BAF2200FE9037 /* WatchScanner-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchScanner-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EBE043FE28F5F23B003C4A37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -409,8 +409,7 @@
 				E264495F2798D38E00685DAB /* MapView.swift */,
 				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
 				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
-				EB3A359228F5FEDE009625D0 /* NewNotificationSettingsView.swift */,
-				EBA6ECD1291FD97500805610 /* OldNotificationSettingsView.swift */,
+				EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */,
 				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
@@ -456,6 +455,7 @@
 				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
 				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
 				E29176692941A03000D14526 /* CommentView.swift */,
+				EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */,
 			);
 			path = "Child Views";
 			sourceTree = "<group>";
@@ -704,7 +704,6 @@
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
-				EBA6ECD2291FD97500805610 /* OldNotificationSettingsView.swift in Sources */,
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
 				E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
@@ -713,7 +712,8 @@
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */,
 				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
-				EB3A359328F5FEDE009625D0 /* NewNotificationSettingsView.swift in Sources */,
+				EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */,
+				EB3A359328F5FEDE009625D0 /* NotificationSettingsView.swift in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
 			);

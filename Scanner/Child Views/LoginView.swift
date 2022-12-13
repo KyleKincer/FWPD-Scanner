@@ -14,39 +14,23 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
+    @State private var googleAuth = false
     @ObservedObject var viewModel : MainViewModel
     @Binding var signingUp : Bool
     @Binding var showPage : Bool
     
     var body: some View {
         VStack {
-            Group {
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            signingUp = false
-                            showPage = false
-                            dismiss()
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: "arrow.left")
-                                .foregroundColor(.orange)
-                                .font(.system(size: 30))
-                            
-                            Text("Back")
-                                .foregroundColor(.orange)
-                        }
-                    })
-                    .padding([.leading, .top])
-                    
-                    Spacer()
-                    
+            Button(action: {
+                withAnimation {
+                    signingUp = false
+                    showPage = false
+                    dismiss()
                 }
-                .padding(.horizontal)
-                
-            }
-            
+            }, label: {
+                BackButtonView(text: "Cancel", color: Color.orange)
+            })
+                    
             Spacer()
             
             Group {
@@ -162,18 +146,29 @@ struct LoginView: View {
                 
                 HStack {
                     Group {
-                        Button(action: {
-                            playHaptic()
-                            withAnimation {
-                                viewModel.loginWithGoogle()
-                            }
-                        }, label: {
-                            Image("googleLogo")
-                        })
-                        .scaleEffect(0.2)
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        .shadow(radius: 6)
+                        
+                        if (googleAuth) {
+                            ProgressView()
+                                .scaleEffect(2.5)
+                                .frame(width: 50, height: 50)
+                                .padding()
+                                .shadow(radius: 6)
+                            
+                        } else {
+                            Button(action: {
+                                playHaptic()
+                                googleAuth.toggle()
+                                withAnimation {
+                                    viewModel.loginWithGoogle()
+                                }
+                            }, label: {
+                                Image("googleLogo")
+                            })
+                            .scaleEffect(0.2)
+                            .frame(width: 50, height: 50)
+                            .padding()
+                            .shadow(radius: 6)
+                        }
                         
 //                        Button(action: {
 //                            playHaptic()
@@ -217,8 +212,10 @@ struct LoginView: View {
                     
                 }
                 
-                Text("or sign up quickly with Google")
+                Text("or sign up or in quickly with Google")
                     .bold()
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
         }
     }

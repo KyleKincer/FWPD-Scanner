@@ -10,7 +10,7 @@ import SwiftUI
 struct RefreshReminderView: View {
     @ObservedObject var viewModel : MainViewModel
     @Binding var showingRefreshReminder : Bool
-    @State var startingOffsetY: CGFloat = 100.0
+    @State var startingOffsetY: CGFloat = 45.0
     @State var currentDragOffsetY: CGFloat = 0
     
     var body: some View {

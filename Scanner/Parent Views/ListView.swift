@@ -19,7 +19,7 @@ struct ListView: View {
             VStack {
                 HStack {
                     
-                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecent ? "Recent Comments" : "Recent Activity"))
+                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
                         .font(.title)
                     
                     Spacer()
@@ -28,19 +28,20 @@ struct ListView: View {
                         
                         Button(action: {
                             withAnimation {
-                                viewModel.showMostRecent.toggle()
+                                viewModel.showMostRecentComments.toggle()
                             }
                         }, label: {
-                            Image(systemName: viewModel.showMostRecent ? "bubble.right" : "clock")
+                            Image(systemName: viewModel.showMostRecentComments ? "bubble.right" : "clock")
                                 .font(.system(size: 25))
                         })
                     }
                 }
                 .padding(.horizontal)
+                
                 // Show BookmarkView
                 if (viewModel.showBookmarks) {
                     BookmarkView(viewModel: viewModel)
-                } else if (viewModel.showMostRecent) {
+                } else if (viewModel.showMostRecentComments) {
                     RecentCommentsView(viewModel: viewModel)
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
