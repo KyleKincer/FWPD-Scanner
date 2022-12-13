@@ -197,3 +197,14 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
 }
 
 
+struct User: Identifiable {
+    let id: Int
+    let username: String
+    let admin: Bool
+    let profileImageURL: String
+    let commentCount: Int
+    let lastCommentAt: Timestamp
+}
+
+
+
