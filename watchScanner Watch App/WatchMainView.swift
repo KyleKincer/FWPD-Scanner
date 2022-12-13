@@ -10,11 +10,10 @@ import SwiftUI
 struct WatchMainView: View {
     @StateObject var viewModel = WatchViewModel()
     @State var showMap = false
-    @AppStorage("onboarding") var onboarding = true
 
     var body: some View {
         VStack {
-            if (onboarding) {
+            if (viewModel.onboarding) {
                 WatchOnboardingView(viewModel: viewModel)
                     .transition(.slide)
             } else {

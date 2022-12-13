@@ -11,7 +11,6 @@ struct WatchOnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel : WatchViewModel
-    @AppStorage("onboarding") var onboarding = true
     @State var isAnimating = true
     
     var body: some View {
@@ -51,14 +50,15 @@ struct WatchOnboardingView: View {
                         .onTapGesture {
                             withAnimation {
                                 viewModel.playHaptic()
-                                onboarding = false
+                                viewModel.onboarding = false
+                                viewModel.onboardingUD = false
                             }
                         }
                 }
             }
             .transition(.opacity)
             .onAppear {
-                onboarding = true
+                viewModel.onboarding = true
             }
         }.transition(.slide)
     }

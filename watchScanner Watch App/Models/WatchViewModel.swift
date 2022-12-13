@@ -33,6 +33,8 @@ final class WatchViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     @Published var hapticsEnabled = true
+    @AppStorage("onboarding") var onboardingUD = true
+    @Published var onboarding = false
     
     // Network
     @Published var networkManager = NetworkManager()
@@ -43,6 +45,8 @@ final class WatchViewModel: ObservableObject {
     init() {
         print("I - Initializing list view model")
         model = Scanner()
+        self.onboarding = self.onboardingUD
+        self.onboardingUD = false
         self.refreshWatch()
         
     }

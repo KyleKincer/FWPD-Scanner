@@ -43,6 +43,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("dateTo") var dateTo = String()
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @AppStorage("adsRemoved") var adsRemoved = false
+    @AppStorage("onboarding") var onboardingUD = true
     @Published var onboarding = false
     
     // View States
@@ -72,6 +73,7 @@ final class MainViewModel: ObservableObject {
     init() {
         print("I - Initializing list view model")
         model = Scanner()
+        self.onboarding = self.onboardingUD
         if (!self.loggedIn) {
             if let user = Auth.auth().currentUser {
               // User is signed in.
