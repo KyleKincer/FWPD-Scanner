@@ -93,6 +93,10 @@
 		EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */; };
 		EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC53FAF28FC96B80063F87A /* DetailMapView.swift */; };
 		EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */; };
+		EBC7DB2C2948BB110059BEC5 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2B2948BB110059BEC5 /* PurchaseView.swift */; };
+		EBC7DB2E2948BD660059BEC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */; };
+		EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */; };
+		EBC7DB342948D0BA0059BEC5 /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = EBC7DB332948D0BA0059BEC5 /* Snow.sks */; };
 		EBD612A2292C1E8100FE9037 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */; };
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* SettingsView.swift */; };
@@ -199,6 +203,10 @@
 		EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		EBC53FAF28FC96B80063F87A /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackButton.swift; sourceTree = "<group>"; };
+		EBC7DB2B2948BB110059BEC5 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
+		EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		EBC7DB332948D0BA0059BEC5 /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		EBD6128E292BAF2200FE9037 /* WatchScanner-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchScanner-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EBE043FE28F5F23B003C4A37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -210,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBA6ECD72920130C00805610 /* FirebaseMessaging in Frameworks */,
+				EBC7DB2E2948BD660059BEC5 /* StoreKit.framework in Frameworks */,
 				EB484D19293FD4E20068B85F /* FirebaseAuth in Frameworks */,
 				EBA6ECD52920130C00805610 /* FirebaseFirestore in Frameworks */,
 				E25EDCDA29398ABA00F017E8 /* GoogleMobileAds in Frameworks */,
@@ -278,6 +287,7 @@
 				E264495D2798D1B200685DAB /* Scanner.entitlements */,
 				EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */,
 				E202F442278E84A7009C0B13 /* ScannerApp.swift */,
+				EBC7DB332948D0BA0059BEC5 /* Snow.sks */,
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
 				EB57406B28E61A20009FDA3D /* Major Views */,
@@ -301,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				E264494D2794B56700685DAB /* NetworkManager.swift */,
+				EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */,
 				EBBBCE32292B0B5D0015E4C1 /* SubscriptionManager.swift */,
 				E24522D12791F69400EFBB3E /* LocationManager.swift */,
 				E264495627986B0700685DAB /* Constants.swift */,
@@ -432,6 +443,7 @@
 		EB98F86828E8C3B7009AC6B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */,
 				EB15898B292430D80009F60D /* GeoFire.framework */,
 				EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */,
 				EB98F86B28E8C3B7009AC6B1 /* SwiftUI.framework */,
@@ -455,6 +467,7 @@
 				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
 				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
 				E29176692941A03000D14526 /* CommentView.swift */,
+				EBC7DB2B2948BB110059BEC5 /* PurchaseView.swift */,
 				EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */,
 			);
 			path = "Child Views";
@@ -581,6 +594,7 @@
 				E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */,
 				EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */,
 				E202F447278E84A8009C0B13 /* Assets.xcassets in Resources */,
+				EBC7DB342948D0BA0059BEC5 /* Snow.sks in Resources */,
 				EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +710,8 @@
 				EB0C3B0B29443B4B0098C234 /* HistoryView.swift in Sources */,
 				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
+				EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */,
+				EBC7DB2C2948BB110059BEC5 /* PurchaseView.swift in Sources */,
 				E2587F242798D3EC008D80CA /* MapViewModel.swift in Sources */,
 				E2C16907293C343800642670 /* CommentsViewModel.swift in Sources */,
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,

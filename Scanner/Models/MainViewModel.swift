@@ -42,6 +42,7 @@ final class MainViewModel: ObservableObject {
     @AppStorage("dateFrom") var dateFrom = String()
     @AppStorage("dateTo") var dateTo = String()
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
+    @AppStorage("adsRemoved") var adsRemoved = false
     @Published var onboarding = false
     
     // View States
@@ -52,6 +53,7 @@ final class MainViewModel: ObservableObject {
     @Published var bookmarkCount = 0
     @Published var showMostRecentComments = false
     @Published var showAuthError = false
+    @AppStorage("newToNots") var newToNots = true
     
     // Network and auth
     @Published var networkManager = NetworkManager()
@@ -60,6 +62,9 @@ final class MainViewModel: ObservableObject {
     @Published var authError = ""
     @Published var showAuth = false
     @Published var loginType = ""
+    
+    // Store
+    @Published var store = StoreManager()
     
     // UserDefaults
     let defaults = UserDefaults.standard
@@ -119,8 +124,10 @@ final class MainViewModel: ObservableObject {
                     } else {
                         // user was successfully logged in
                         if let authResult = authResult {
-                            self.loginType = "email"
-                            self.initUser(user: authResult.user)
+                            withAnimation {
+                                self.loginType = "email"
+                                self.initUser(user: authResult.user)
+                            }
                         }
                     }
                 }
@@ -183,8 +190,10 @@ final class MainViewModel: ObservableObject {
     }
     
     func initUser(user: FirebaseAuth.User?) {
-        self.loggedIn = true
-        self.showAuth = false
+        withAnimation {
+            self.loggedIn = true
+            self.showAuth = false
+        }
         
         // Only call writeUserDocument if a document doesn't already exist
         // in the users collection with the uid.
@@ -206,7 +215,10 @@ final class MainViewModel: ObservableObject {
             // 2
             try Auth.auth().signOut()
             
-            self.loggedIn = false
+            withAnimation {
+                self.loggedIn = false
+                self.currentUser = nil
+            }
         } catch {
             print(error.localizedDescription)
         }
@@ -215,8 +227,10 @@ final class MainViewModel: ObservableObject {
     func logOut() {
         do {
             try Auth.auth().signOut()
-            self.loggedIn = false
-            self.currentUser = nil
+            withAnimation {
+                self.loggedIn = false
+                self.currentUser = nil
+            }
             
         } catch {
             print(error.localizedDescription)

@@ -16,8 +16,7 @@ struct StandardNavBarView: View {
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
-    @AppStorage("newToNots") var newToNots = true
-    @State private var bellJingle = false
+    @State private var allJingle = false
     
     
     @Environment(\.horizontalSizeClass) var sizeClass
@@ -36,15 +35,46 @@ struct StandardNavBarView: View {
                     }
                 }, label: {
                     if (showMap) {
-                        Image(systemName: "list.bullet.below.rectangle")
-                            .font(.system(size: 25))
-                            .foregroundColor(.blue)
-                            .shadow(radius: 2)
+                        if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
+                            Image(systemName: "list.bullet.below.rectangle")
+                                .shadow(radius: 2)
+                                .font(.system(size: 25))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(allJingle ? 5 : -5))
+                                .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                                .onAppear {
+                                    allJingle = true
+                                }
+                                .onDisappear {
+                                    allJingle = false
+                                }
+                            
+                        } else {
+                            Image(systemName: "list.bullet.below.rectangle")
+                                .font(.system(size: 25))
+                                .shadow(radius: 2)
+                                .foregroundColor(.blue)
+                        }
                     } else {
-                        Image(systemName: "map")
-                            .font(.system(size: 25))
-                            .foregroundColor(.blue)
-                            .shadow(radius: 2)
+                        if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
+                            Image(systemName: "map")
+                                .shadow(radius: 2)
+                                .font(.system(size: 25))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(allJingle ? 5 : -5))
+                                .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                                .onAppear {
+                                    allJingle = true
+                                }
+                                .onDisappear {
+                                    allJingle = false
+                                }
+                        } else {
+                            Image(systemName: "map")
+                                .font(.system(size: 25))
+                                .foregroundColor(.blue)
+                                .shadow(radius: 2)
+                        }
                     }
                 })
                 
@@ -56,9 +86,25 @@ struct StandardNavBarView: View {
                         showFilter.toggle()
                     }
                 }, label: {
-                    Image(systemName: "switch.2")
-                        .font(.system(size: 25))
-                        .shadow(radius: 2)
+                    if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
+                        Image(systemName: "switch.2")
+                            .shadow(radius: 2)
+                            .font(.system(size: 25))
+                            .foregroundColor(.green)
+                            .rotationEffect(.degrees(allJingle ? 5 : -5))
+                            .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                            .onAppear {
+                                allJingle = true
+                            }
+                            .onDisappear {
+                                allJingle = false
+                            }
+                    } else {
+                        Image(systemName: "switch.2")
+                            .font(.system(size: 25))
+                            .foregroundColor(.green)
+                            .shadow(radius: 2)
+                    }
                 })
                 .foregroundColor(.green)
                 
@@ -83,22 +129,20 @@ struct StandardNavBarView: View {
                 
                 Button(action: {
                     playHaptic()
-                    newToNots = false
-                    bellJingle = false
+                    viewModel.newToNots = false
                     withAnimation {
                         showNotificationSheet.toggle()
                     }
                 }, label: {
-                    if (newToNots) {
+                    if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
                         Image(systemName: "bell")
                             .shadow(radius: 2)
-                            .rotationEffect(.degrees(bellJingle ? 5 : -5))
+                            .rotationEffect(.degrees(allJingle ? 5 : -5))
                             .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
-                            .onAppear() {
-                                if (newToNots) {
-                                    bellJingle = true
-                                }
+                            .onAppear {
+                                allJingle = true
                             }
+                                            
                     } else {
                         Image(systemName: "bell")
                             .shadow(radius: 2)
@@ -117,27 +161,54 @@ struct StandardNavBarView: View {
                     }
                     
                 }, label: {
-                    if let url = viewModel.currentUser?.profileImageURL {
-                        AsyncImage(url: url) { image in
-                            image
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .clipShape(Circle())
-                                .shadow(radius: 2)
+                    if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
+                        if let url = viewModel.currentUser?.profileImageURL {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 2)
                                 
-                        } placeholder: {
-                            Image(systemName: "person.crop.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.gray)
+                            } placeholder: {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.gray)
+                                    .shadow(radius: 2)
+                            }
+                            
+                        } else {
+                            Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                                .font(.system(size: 25))
+                                .foregroundColor(.orange)
+                                .shadow(radius: 2)
+                                .rotationEffect(.degrees(allJingle ? 5 : -5))
+                                .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                        }
+                    } else {
+                        if let url = viewModel.currentUser?.profileImageURL {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 2)
+                                
+                            } placeholder: {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.gray)
+                                    .shadow(radius: 2)
+                            }
+                            
+                        } else {
+                            Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                                .font(.system(size: 25))
+                                .foregroundColor(.orange)
                                 .shadow(radius: 2)
                         }
-                        
-                    } else {
-                        Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                            .font(.system(size: 25))
-                            .foregroundColor(.orange)
-                            .shadow(radius: 2)
                     }
                 })
             }

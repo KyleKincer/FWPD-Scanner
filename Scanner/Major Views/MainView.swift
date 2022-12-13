@@ -18,79 +18,95 @@ struct MainView: View {
     @State private var showLocationDisclaimer = false
     @State private var showProfileView = false
     
+    var scene: SKScene {
+        let scene = SnowScene()
+        scene.scaleMode = .resizeFill
+        scene.backgroundColor = .clear
+        return scene
+    }
+    
     var body: some View {
-        if (viewModel.onboarding) {
-            OnboardingView(viewModel: viewModel)
-                .transition(.opacity)
+        ZStack {
+            if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
+                SpriteView(scene: scene, options: [.allowsTransparency])
+                    .ignoresSafeArea()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            }
             
-        } else {
-            VStack {
-                if viewModel.showAuthError {
-                    alert(viewModel.authError, isPresented: $viewModel.showAuthError, actions: {})
-                }
-
-                if (sizeClass == .compact) {
-                    StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showProfileView: $showProfileView, viewModel: viewModel)
+            
+            if (viewModel.onboarding) {
+                OnboardingView(viewModel: viewModel)
+                    .transition(.opacity)
+                
+            } else {
+                VStack {
+                    if viewModel.showAuthError {
+                        alert(viewModel.authError, isPresented: $viewModel.showAuthError, actions: {})
+                    }
                     
-                    ActivityView(showMap: $showMap, viewModel: viewModel)
-                        .environmentObject(appDelegate)
-                    
-                } else {
-                    VStack {
-                        ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, viewModel: viewModel)
-                        
-                        Divider()
-                            .padding(0)
+                    if (sizeClass == .compact) {
+                        StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showProfileView: $showProfileView, viewModel: viewModel)
                         
                         ActivityView(showMap: $showMap, viewModel: viewModel)
                             .environmentObject(appDelegate)
-                            .padding(.top, -8)
                         
-                        Divider()
-                            .padding(0)
-                        
-                        SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
-                            .ignoresSafeArea()
-                            .frame(maxHeight: 40)
-                        
+                    } else {
+                        VStack {
+                            ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, viewModel: viewModel)
+                            
+                            Divider()
+                                .padding(0)
+                            
+                            ActivityView(showMap: $showMap, viewModel: viewModel)
+                                .environmentObject(appDelegate)
+                                .padding(.top, -8)
+                            
+                            Divider()
+                                .padding(0)
+                            
+                            SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+                                .ignoresSafeArea()
+                                .frame(maxHeight: 40)
+                            
+                        }
                     }
                 }
-            }
-            .onAppear {
-                showDistance = true
-            }
-            
-            .fullScreenCover(isPresented: $showFilter) {
-                if #available(iOS 16.0, *) {
-                    if (sizeClass == .compact) {
-                        SettingsView(showFilter: $showFilter, viewModel: viewModel)
-                            .presentationDetents([.fraction(0.8)])
+                .onAppear {
+                    showDistance = true
+                }
+                
+                .fullScreenCover(isPresented: $showFilter) {
+                    if #available(iOS 16.0, *) {
+                        if (sizeClass == .compact) {
+                            SettingsView(showFilter: $showFilter, viewModel: viewModel)
+                                .presentationDetents([.fraction(0.8)])
+                        } else {
+                            ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                        }
                     } else {
-                        ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
-                    }
-                } else {
-                    if (sizeClass == .compact) {
-                        SettingsView(showFilter: $showFilter, viewModel: viewModel)
-                    } else {
-                        ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                        if (sizeClass == .compact) {
+                            SettingsView(showFilter: $showFilter, viewModel: viewModel)
+                        } else {
+                            ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                        }
                     }
                 }
-            }
-            
-            .fullScreenCover(isPresented: $showNotificationView) {
-                NotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
-            }
-            
-            .fullScreenCover(isPresented: $showProfileView) {
-                ProfileView(viewModel: viewModel, showProfileView: $showProfileView)
-            }
-            
-            .sheet(isPresented: $showLocationDisclaimer) {
-                if #available(iOS 16.1, *) {
-                    LocationDisclaimerView()
-                        .presentationDetents([.fraction(0.5)])
-                } else {
-                    LocationDisclaimerView()
+                
+                .fullScreenCover(isPresented: $showNotificationView) {
+                    NotificationSettingsView(viewModel: viewModel, showNotificationView: $showNotificationView)
+                }
+                
+                .fullScreenCover(isPresented: $showProfileView) {
+                    ProfileView(viewModel: viewModel, showProfileView: $showProfileView)
+                }
+                
+                .sheet(isPresented: $showLocationDisclaimer) {
+                    if #available(iOS 16.1, *) {
+                        LocationDisclaimerView()
+                            .presentationDetents([.fraction(0.5)])
+                    } else {
+                        LocationDisclaimerView()
+                    }
                 }
             }
         }
@@ -106,5 +122,25 @@ struct MainView_Previews: PreviewProvider {
         MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
+    }
+}
+
+import SpriteKit
+class SnowScene: SKScene {
+
+    let snowEmitterNode = SKEmitterNode(fileNamed: "Snow.sks")
+
+    override func didMove(to view: SKView) {
+        guard let snowEmitterNode = snowEmitterNode else { return }
+        snowEmitterNode.particleSize = CGSize(width: 50, height: 50)
+        snowEmitterNode.particleLifetime = 2
+        snowEmitterNode.particleLifetimeRange = 6
+        addChild(snowEmitterNode)
+    }
+
+    override func didChangeSize(_ oldSize: CGSize) {
+        guard let snowEmitterNode = snowEmitterNode else { return }
+        snowEmitterNode.particlePosition = CGPoint(x: size.width/2, y: size.height)
+        snowEmitterNode.particlePositionRange = CGVector(dx: size.width, dy: size.height)
     }
 }

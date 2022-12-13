@@ -19,6 +19,7 @@ struct BackButtonView: View {
             
             Text(text)
                 .foregroundColor(color)
+                .fontWeight(.bold)
             
             Spacer()
         }.padding([.leading, .top])

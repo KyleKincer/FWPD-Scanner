@@ -28,7 +28,6 @@ struct SettingsView: View {
                 BackButtonView(text: "Apply", color: .green)
             })
 
-            
             Text("Settings")
                 .fontWeight(.black)
                 .italic()
