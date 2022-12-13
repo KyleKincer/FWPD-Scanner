@@ -70,22 +70,7 @@ struct ExpandedFilterSettings: View {
                 .font(.subheadline)
             
             
-            VStack {
-                Section("Account") {
-                    if viewModel.loggedIn {
-                        Text("Howdy, \(viewModel.currentUser?.username ?? "")!")
-                    }
-                    Button {
-                        if !viewModel.loggedIn {
-                            showPage = true
-                        } else {
-                            viewModel.logOut()
-                        }
-                    } label: {
-                        Text(viewModel.loggedIn ? "Log out" : "Log in")
-                    }
-                }
-                
+            VStack {                
                 if (viewModel.locationEnabled) {
                     Toggle("Filter By Distance", isOn: $viewModel.useLocation)
                         .onChange(of: viewModel.useLocation) { newValue in
@@ -258,6 +243,7 @@ struct ExpandedFilterSettings: View {
                 refreshOnExit = false
                 viewModel.refresh()
                 print("R - Refreshed via Filters")
+                viewModel.showMostRecentComments = false
             }
         }
         .alert("We currently limit nature selection to 10 natures. Please deselect some natures to add new ones.", isPresented: $showNatureAlert) {

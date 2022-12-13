@@ -12,6 +12,7 @@ struct ExpandedNavBarView: View {
     @Binding var showMap : Bool
     @Binding var showLocationDisclaimer: Bool
     @Binding var showNotificationView : Bool
+    @Binding var showProfileView : Bool
     @State var viewModel : MainViewModel
     @AppStorage("scanOn") var scanning = false
     @AppStorage("onboarding") var onboarding = false
@@ -27,6 +28,9 @@ struct ExpandedNavBarView: View {
                 .foregroundColor(Color("ModeOpposite"))
                 .onTapGesture {
                     showLocationDisclaimer = true
+                }
+                .onLongPressGesture {
+                    viewModel.onboarding = true
                 }
             
             Spacer()
@@ -113,22 +117,6 @@ struct ExpandedNavBarView: View {
             
             Button(action: {
                 withAnimation {
-                    viewModel.showBookmarks.toggle()
-                }
-            }, label: {
-                Image(systemName: viewModel.showBookmarks ? "bookmark.fill" : "bookmark")
-                    .font(.system(size: 20))
-                    .foregroundColor(.orange)
-                    .shadow(radius: 2)
-            })
-            .frame(width: 50, height: 35)
-            .background(RoundedRectangle(cornerRadius: 20)
-                .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.orange))
-            .shadow(radius: 2)
-            .padding(.horizontal)
-            
-            Button(action: {
-                withAnimation {
                     showNotificationView.toggle()
                 }
             }, label: {
@@ -142,6 +130,36 @@ struct ExpandedNavBarView: View {
                 .stroke(style: StrokeStyle(lineWidth: 2)).foregroundColor(.red))
             .shadow(radius: 2)
             .padding(.horizontal)
+            
+            Button(action: {
+                withAnimation {
+                    showProfileView.toggle()
+                }
+            }, label: {
+                if let url = viewModel.currentUser?.profileImageURL {
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                            .shadow(radius: 2)
+                        
+                    } placeholder: {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.gray)
+                            .shadow(radius: 2)
+                    }
+                } else {
+                    Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
+                        .font(.system(size: 35))
+                        .foregroundColor(.orange)
+                        .shadow(radius: 2)
+                }
+            })
+            .frame(width: 50, height: 35)
+            .padding(.horizontal)
         }
         .padding([.leading, .trailing])
         
@@ -152,7 +170,7 @@ struct ExpandedNavBarView: View {
 
 struct ExpandedNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedNavBarView(showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), showNotificationView: .constant(false), viewModel: MainViewModel())
+        ExpandedNavBarView(showFilter: .constant(false), showMap: .constant(false), showLocationDisclaimer: .constant(false), showNotificationView: .constant(false), showProfileView: .constant(false), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

@@ -38,10 +38,7 @@ struct ListView: View {
                 }
                 .padding(.horizontal)
                 
-                // Show BookmarkView
-                if (viewModel.showBookmarks) {
-                    BookmarkView(viewModel: viewModel)
-                } else if (viewModel.showMostRecentComments) {
+                if (viewModel.showMostRecentComments) {
                     RecentCommentsView(viewModel: viewModel)
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results

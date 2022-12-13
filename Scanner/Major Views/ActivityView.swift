@@ -118,39 +118,6 @@ struct ActivityView: View {
                                                 }
                                             
                                             Spacer()
-                                        } else if (viewModel.showBookmarks) {
-                                            VStack {
-                                                if (viewModel.bookmarkCount == 0) {
-                                                    Text("No Bookmarks Saved")
-                                                        .foregroundColor(.primary)
-                                                        .font(.system(size: 25))
-                                                        .padding()
-                                                    Image(systemName: "bookmark")
-                                                        .foregroundColor(.orange)
-                                                        .font(.system(size: 20))
-                                                } else if (viewModel.bookmarks.count != viewModel.bookmarkCount) {
-                                                    Text("Gathering Bookmarks")
-                                                        .foregroundColor(.primary)
-                                                        .font(.system(size: 25))
-                                                        .padding()
-                                                    Image(systemName: "bookmark")
-                                                        .foregroundColor(.orange)
-                                                        .font(.system(size: 20))
-                                                }
-                                                
-                                                
-                                                else {
-                                                    List(viewModel.bookmarks) { activity in
-                                                        ActivityRowView(activity: activity, viewModel: viewModel)
-                                                    }
-                                                }
-                                            }
-                                            .onAppear {
-                                                if (viewModel.bookmarkCount != viewModel.bookmarks.count) {
-                                                    viewModel.getBookmarks()
-                                                }
-                                            }
-                                            
                                         } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
                                             VStack {
                                                 
@@ -174,35 +141,59 @@ struct ActivityView: View {
                                             }
                                             
                                         } else {
-                                            List(viewModel.activities, id: \.self) { activity in
-                                                ActivityRowView(activity: activity, viewModel: viewModel)
+                                            HStack {
                                                 
-                                                if (activity == viewModel.activities.last) {
-                                                    if (viewModel.isLoading) {
-                                                        ProgressView()
-                                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                                            .listRowSeparator(.hidden)
-                                                    } else {
-                                                        HStack (alignment: .center){
-                                                            Text("Get More")
-                                                                .bold()
-                                                                .italic()
-                                                                .foregroundColor(.blue)
-                                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
+                                                    .font(.title)
+                                                
+                                                Spacer()
+                                                
+                                                if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
+                                                    
+                                                    Button(action: {
+                                                        withAnimation {
+                                                            viewModel.showMostRecentComments.toggle()
                                                         }
-                                                        .onTapGesture {
-                                                            viewModel.getMoreActivities()
-                                                        }
-
-                                                    }
+                                                    }, label: {
+                                                        Image(systemName: viewModel.showMostRecentComments ? "bubble.right" : "clock")
+                                                            .font(.system(size: 25))
+                                                    })
                                                 }
                                             }
-                                            .refreshable {
-                                                viewModel.refresh()
+                                            .padding(.horizontal)
+                                            
+                                            if (viewModel.showMostRecentComments) {
+                                                RecentCommentsView(viewModel: viewModel)
+                                            } else {
+                                                List(viewModel.activities, id: \.self) { activity in
+                                                    ActivityRowView(activity: activity, viewModel: viewModel)
+                                                    
+                                                    if (activity == viewModel.activities.last) {
+                                                        if (viewModel.isLoading) {
+                                                            ProgressView()
+                                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                                .listRowSeparator(.hidden)
+                                                        } else {
+                                                            HStack (alignment: .center){
+                                                                Text("Get More")
+                                                                    .bold()
+                                                                    .italic()
+                                                                    .foregroundColor(.blue)
+                                                                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                                            }
+                                                            .onTapGesture {
+                                                                viewModel.getMoreActivities()
+                                                            }
+                                                            
+                                                        }
+                                                    }
+                                                }
+                                                .refreshable {
+                                                    viewModel.refresh()
+                                                }
                                             }
                                         }
                                     }
-                                    .navigationTitle(viewModel.showBookmarks ? "Bookmarks" : (viewModel.useDate || viewModel.useNature || viewModel.useLocation ? "Filtered Activity" : "Activity"))
                                     .navigationBarBackButtonHidden()
                                 }
                             detail: {
@@ -224,7 +215,36 @@ struct ActivityView: View {
                                 chosenActivity = nil
                             }
                             } else {
-                                ListView(viewModel: viewModel)
+                                VStack {
+                                    HStack {
+                                        
+                                        Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
+                                            .font(.title)
+                                        
+                                        Spacer()
+                                        
+                                        if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
+                                            
+                                            Button(action: {
+                                                withAnimation {
+                                                    viewModel.showMostRecentComments.toggle()
+                                                }
+                                            }, label: {
+                                                Image(systemName: viewModel.showMostRecentComments ? "bubble.right" : "clock")
+                                                    .font(.system(size: 25))
+                                            })
+                                        }
+                                    }
+                                    .padding(.horizontal)
+                                    
+                                    if (viewModel.showMostRecentComments) {
+                                        RecentCommentsView(viewModel: viewModel)
+                                    } else {
+                                        ListView(viewModel: viewModel)
+                                    }
+                                }
+                                
+                                
                             }
                         }
                     }

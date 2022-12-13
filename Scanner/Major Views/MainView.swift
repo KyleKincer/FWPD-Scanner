@@ -52,7 +52,7 @@ struct MainView: View {
                         
                     } else {
                         VStack {
-                            ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, viewModel: viewModel)
+                            ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, showProfileView: $showProfileView, viewModel: viewModel)
                             
                             Divider()
                                 .padding(0)

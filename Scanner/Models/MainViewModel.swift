@@ -263,7 +263,6 @@ final class MainViewModel: ObservableObject {
                     print("+ --- Got zero activities")
                     
                     withAnimation {
-                        self.serverResponsive = false
                         self.isRefreshing = false
                     }
                 }
