@@ -34,6 +34,8 @@ class CommentsViewModel: ObservableObject {
         let newComment = Comment(text: comment, user: user)
         
         Firestore.firestore().collection("activities").document(activityId).updateData(["commentCount": FieldValue.increment(Double(1))])
+        Firestore.firestore().collection("users").document(user.id).updateData(["commentCount": FieldValue.increment(Double(1)),
+                                                                                "lastCommentAt" : Timestamp().firebaseTimestamp])
         
         let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
         commentsRef.addDocument(data: newComment.toData())
