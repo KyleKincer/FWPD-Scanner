@@ -35,22 +35,7 @@ struct MapView: View {
             }
             
             if (chosenActivity != nil) {
-                Group {
-                    VStack {
-                        HStack {
-                            Spacer()
-                            
-                            Rectangle()
-                                .foregroundColor(colorScheme == .light ? .white : .black)
-                                .frame(width: 500, height: 90)
-                                .cornerRadius(20)
-                            
-                            Spacer()
-                        }
-                            
-                        Spacer()
-                    }
-                
+                Group {                
                     VStack {
                         HStack {
                             
