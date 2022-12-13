@@ -49,7 +49,6 @@
 		EB15898129242B4F0009F60D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */; };
 		EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */; };
-		EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB158992292538D20009F60D /* WatchOnboardingView.swift */; };
 		EB15899B292544080009F60D /* ScannerTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15899A292544080009F60D /* ScannerTVApp.swift */; };
 		EB1589A2292544080009F60D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1589A1292544080009F60D /* Preview Assets.xcassets */; };
@@ -97,6 +96,10 @@
 		EBC7DB2E2948BD660059BEC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */; };
 		EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */; };
 		EBC7DB342948D0BA0059BEC5 /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = EBC7DB332948D0BA0059BEC5 /* Snow.sks */; };
+		EBC7DB362948E8140059BEC5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB352948E8140059BEC5 /* FirebaseFirestore */; };
+		EBC7DB3A2948E98F0059BEC5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB392948E98F0059BEC5 /* FirebaseAuth */; };
+		EBC7DB3C2948E9940059BEC5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB3B2948E9940059BEC5 /* FirebaseMessaging */; };
+		EBC7DB3E2948EB650059BEC5 /* WatchScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */; };
 		EBD612A2292C1E8100FE9037 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBD612A1292C1E8100FE9037 /* FirebaseAnalytics */; };
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* SettingsView.swift */; };
@@ -207,6 +210,7 @@
 		EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		EBC7DB332948D0BA0059BEC5 /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
+		EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScannerModel.swift; sourceTree = "<group>"; };
 		EBD6128E292BAF2200FE9037 /* WatchScanner-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchScanner-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EBE043FE28F5F23B003C4A37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
@@ -231,6 +235,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC7DB3C2948E9940059BEC5 /* FirebaseMessaging in Frameworks */,
+				EBC7DB3A2948E98F0059BEC5 /* FirebaseAuth in Frameworks */,
+				EBC7DB362948E8140059BEC5 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				EB15897929242B370009F60D /* WatchViewModel.swift */,
+				EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */,
 				EB15897A29242B370009F60D /* NetworkManager.swift */,
 			);
 			name = Models;
@@ -516,6 +524,11 @@
 			dependencies = (
 			);
 			name = "WatchScanner Watch App";
+			packageProductDependencies = (
+				EBC7DB352948E8140059BEC5 /* FirebaseFirestore */,
+				EBC7DB392948E98F0059BEC5 /* FirebaseAuth */,
+				EBC7DB3B2948E9940059BEC5 /* FirebaseMessaging */,
+			);
 			productName = "WatchScanner Watch App";
 			productReference = EB15895B29242A550009F60D /* FWPD Scanner.app */;
 			productType = "com.apple.product-type.application";
@@ -747,7 +760,6 @@
 				EB15896929242A720009F60D /* WatchListView.swift in Sources */,
 				EB15898329242B5E0009F60D /* WatchMapAnnotationView.swift in Sources */,
 				EB15896C29242A720009F60D /* WatchStatusView.swift in Sources */,
-				EB15898629242F7E0009F60D /* ScannerModel.swift in Sources */,
 				EB158993292538D20009F60D /* WatchOnboardingView.swift in Sources */,
 				EB15897E29242B490009F60D /* DetailViewModel.swift in Sources */,
 				EB15896E29242A720009F60D /* WatchDetailView.swift in Sources */,
@@ -755,6 +767,7 @@
 				EB15898029242B4E0009F60D /* Constants.swift in Sources */,
 				EB15898229242B5B0009F60D /* WatchMapView.swift in Sources */,
 				EB15897C29242B370009F60D /* NetworkManager.swift in Sources */,
+				EBC7DB3E2948EB650059BEC5 /* WatchScannerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1240,21 @@
 			productName = FirebaseFirestore;
 		};
 		EBA6ECD62920130C00805610 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		EBC7DB352948E8140059BEC5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EBC7DB392948E98F0059BEC5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EBC7DB3B2948E9940059BEC5 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBA6ECD32920130C00805610 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;

@@ -61,12 +61,13 @@ struct MainView: View {
                                 .environmentObject(appDelegate)
                                 .padding(.top, -8)
                             
-                            Divider()
-                                .padding(0)
                             
-                            SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
-                                .ignoresSafeArea()
-                                .frame(maxHeight: 40)
+//                            Divider()
+//                                .padding(0)
+//                            
+//                            SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+//                                .ignoresSafeArea()
+//                                .frame(maxHeight: 40)
                             
                         }
                     }

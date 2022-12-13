@@ -8,7 +8,6 @@
 import Foundation
 import Firebase
 
-
 struct Scanner {
     struct Activity: Identifiable, Decodable, Equatable, Hashable, Encodable {
         var id: String

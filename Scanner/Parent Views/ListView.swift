@@ -92,9 +92,9 @@ struct ListView: View {
                         }
                     }
                 }
-                SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
-                    .ignoresSafeArea()
-                    .frame(maxHeight: 40)
+//                SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
+//                    .ignoresSafeArea()
+//                    .frame(maxHeight: 40)
             }
             
             // Refresh Reminder Capsule
