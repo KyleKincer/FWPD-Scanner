@@ -56,7 +56,7 @@ final class MainViewModel: ObservableObject {
     
     // Network and auth
     @Published var networkManager = NetworkManager()
-    @AppStorage("loggedIn") var loggedIn = false
+    @Published var loggedIn = false
     @Published var currentUser : User?
     @Published var authError = ""
     @Published var showAuth = false
@@ -69,7 +69,15 @@ final class MainViewModel: ObservableObject {
         print("I - Initializing list view model")
         model = Scanner()
         if (!self.loggedIn) {
-            self.onboarding = true
+            if let user = Auth.auth().currentUser {
+              // User is signed in.
+                self.loggedIn = true
+                self.initUser(user: user)
+                
+            } else {
+              // No user is signed in.
+                self.onboarding = true
+            }
         }
         
         if CLLocationManager.locationServicesEnabled() {
@@ -113,7 +121,7 @@ final class MainViewModel: ObservableObject {
                         // user was successfully logged in
                         if let authResult = authResult {
                             self.loginType = "email"
-                            self.initUser(auth: authResult)
+                            self.initUser(user: authResult.user)
                         }
                     }
                 }
@@ -170,18 +178,18 @@ final class MainViewModel: ObservableObject {
                 self.currentUser = (User(id: result!.user.uid,
                                          username: result!.user.displayName!,
                                          profileImageURL: (result?.user.photoURL)!))
-                initUser(auth: result)
+                initUser(user: result?.user)
             }
         }
     }
     
-    func initUser(auth: AuthDataResult?) {
+    func initUser(user: FirebaseAuth.User?) {
         self.loggedIn = true
         self.showAuth = false
         
         // Only call writeUserDocument if a document doesn't already exist
         // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(self.currentUser!.id)
+        let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
         userDocRef.getDocument { (snapshot, error) in
             if error == nil && snapshot?.exists == false {
                 self.writeUserDocument(user: self.currentUser!)
