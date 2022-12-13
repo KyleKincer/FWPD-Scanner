@@ -118,8 +118,8 @@ struct StandardNavBarView: View {
                     }
                     
                 }, label: {
-                    if (viewModel.profileImageURL != ""){
-                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
+                    if let url = viewModel.currentUser?.profileImageURL {
+                        AsyncImage(url: url) { image in
                             image
                                 .resizable()
                                 .frame(width: 30, height: 30)

@@ -64,8 +64,8 @@ struct ProfileView: View {
                     // Change icon color and send change to firebase?
                     
                 }, label: {
-                    if (viewModel.profileImageURL != "") {
-                        AsyncImage(url: URL(string: viewModel.profileImageURL)) { image in
+                    if let url = viewModel.currentUser?.profileImageURL {
+                        AsyncImage(url: url) { image in
                             image
                                 .clipShape(Circle())
                         } placeholder: {
@@ -73,7 +73,7 @@ struct ProfileView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 80))
                         }
-
+                        
                     } else {
                         Image(systemName: "person.crop.circle")
                             .foregroundColor(.gray)
@@ -82,7 +82,7 @@ struct ProfileView: View {
                 })
                 if editingUsername {
                     HStack {
-                        TextField(viewModel.username, text: $newUsername)
+                        TextField(viewModel.currentUser!.username, text: $newUsername)
                             .frame(width: 200)
                             .limitInputLength(value: $newUsername, length: 20)
                             .textInputAutocapitalization(.never)
@@ -109,12 +109,12 @@ struct ProfileView: View {
                     }
                 } else {
                     HStack {
-                        Text(viewModel.username)
+                        Text(viewModel.currentUser!.username)
                             .font(.title2)
                         Button {
                             withAnimation {
                                 editingUsername = true
-                                newUsername = viewModel.username
+                                newUsername = viewModel.currentUser!.username
                                 usernameIsFocused = true
                             }
                         } label: {
@@ -155,7 +155,7 @@ struct ProfileView: View {
     
     @MainActor
     func onSubmit() {
-        if (newUsername != viewModel.username && newUsername.count > 0) {
+        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
             viewModel.updateUsername(to: newUsername)
         }
         editingUsername = false

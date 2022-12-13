@@ -73,7 +73,7 @@ struct ExpandedFilterSettings: View {
             VStack {
                 Section("Account") {
                     if viewModel.loggedIn {
-                        Text("Howdy, \(viewModel.username)!")
+                        Text("Howdy, \(viewModel.currentUser?.username ?? "")!")
                     }
                     Button {
                         if !viewModel.loggedIn {

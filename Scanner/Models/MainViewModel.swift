@@ -42,10 +42,6 @@ final class MainViewModel: ObservableObject {
     @AppStorage("dateFrom") var dateFrom = String()
     @AppStorage("dateTo") var dateTo = String()
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
-    @AppStorage("username") var username = String()
-    @AppStorage("userId") var userId = String()
-    @AppStorage("admin") var admin = false
-    @AppStorage("profileImageURL") var profileImageURL = ""
     @Published var onboarding = false
     
     
@@ -60,8 +56,8 @@ final class MainViewModel: ObservableObject {
     
     // Network and auth
     @Published var networkManager = NetworkManager()
-    @AppStorage("loggedIn") var loggedIn = false
-    @Published var user : User?
+    @Published var loggedIn = false
+    @Published var currentUser : User?
     @Published var authError = ""
     @Published var showAuth = false
     @Published var loginType = ""
@@ -72,8 +68,16 @@ final class MainViewModel: ObservableObject {
     init() {
         print("I - Initializing list view model")
         model = Scanner()
-        if (self.userId == "") {
-            self.onboarding = true
+        if (!self.loggedIn) {
+            if let user = Auth.auth().currentUser {
+              // User is signed in.
+                self.loggedIn = true
+                self.initUser(user: user)
+                
+            } else {
+              // No user is signed in.
+                self.onboarding = true
+            }
         }
         
         if CLLocationManager.locationServicesEnabled() {
@@ -117,7 +121,7 @@ final class MainViewModel: ObservableObject {
                         // user was successfully logged in
                         if let authResult = authResult {
                             self.loginType = "email"
-                            self.initUser(auth: authResult)
+                            self.initUser(user: authResult.user)
                         }
                     }
                 }
@@ -170,33 +174,29 @@ final class MainViewModel: ObservableObject {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                self.profileImageURL = result!.user.photoURL?.absoluteString ?? ""
-                initUser(auth: result)
+                self.currentUser?.profileImageURL = result!.user.photoURL ?? URL(string: "")
+                self.currentUser = (User(id: result!.user.uid,
+                                         username: result!.user.displayName!,
+                                         profileImageURL: (result?.user.photoURL)!))
+                initUser(user: result?.user)
             }
         }
     }
     
-    func initUser(auth: AuthDataResult?) {
-        self.userId = auth!.user.uid
-        self.username = auth!.user.displayName ?? "None"
+    func initUser(user: FirebaseAuth.User?) {
         self.loggedIn = true
         self.showAuth = false
         
         // Only call writeUserDocument if a document doesn't already exist
         // in the users collection with the uid.
-        let userDocRef = Firestore.firestore().collection("users").document(self.userId)
+        let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
         userDocRef.getDocument { (snapshot, error) in
             if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+                self.writeUserDocument(user: self.currentUser!)
             } else if snapshot?.exists == true {
-                self.readUserDocument(snapshot: snapshot!)
+                self.currentUser = User(document: snapshot!)
             }
         }
-    }
-    
-    func readUserDocument(snapshot: DocumentSnapshot) {
-        self.username = (snapshot.data()!["username"] as? String)!
-        self.admin = snapshot.data()?["admin"] as? Bool ?? false
     }
     
     func googleSignOut() {
@@ -216,10 +216,8 @@ final class MainViewModel: ObservableObject {
     func logOut() {
         do {
             try Auth.auth().signOut()
-            self.username = ""
-            self.profileImageURL = ""
-            self.userId = ""
             self.loggedIn = false
+            self.currentUser = nil
             
         } catch {
             print(error.localizedDescription)
@@ -281,12 +279,12 @@ final class MainViewModel: ObservableObject {
                                 // user was successfully created
                                 if let authResult = authResult {
                                     print("Successfully created user: \(authResult.user)")
-                                    self.userId = authResult.user.uid
                                     self.loggedIn = true
                                     self.showAuth = false
-                                    self.username = username
+                                    let newUser = User(username: username)
+                                    self.currentUser = newUser
                                     
-                                    self.writeUserDocument(userId: self.userId, username: self.username, imageURL: self.profileImageURL)
+                                    self.writeUserDocument(user: newUser)
                                     completion(true)
                                 }
                             }
@@ -325,10 +323,10 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func writeUserDocument(userId: String, username: String, imageURL: String) {
+    func writeUserDocument(user: User) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.userId)
-        userRef.setData(["username": username, "imageURL": imageURL]) { err in
+        let userRef = db.collection("users").document(user.id)
+        userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? URL(string: "")]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -339,13 +337,13 @@ final class MainViewModel: ObservableObject {
     
     func updateUsername(to username: String) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(self.userId)
-        let oldUserName = self.username
-        self.username = username // preemptively set the local username property,
+        let userRef = db.collection("users").document(self.currentUser!.id)
+        let oldUserName = (self.currentUser?.username)!
+        self.currentUser?.username = username // preemptively set the local username property,
         
         userRef.updateData(["username": username]) { err in
             if let err = err {
-                self.username = oldUserName
+                self.currentUser?.username = oldUserName
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")

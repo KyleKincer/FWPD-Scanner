@@ -31,7 +31,7 @@ struct CommentsView: View {
                 if viewModel.loggedIn {
                     Spacer()
                     
-                    Text(viewModel.username)
+                    Text(viewModel.currentUser!.username)
                         .foregroundColor(.gray)
                 } else {
                     Spacer()
@@ -77,7 +77,7 @@ struct CommentsView: View {
                 if (showSubmit && viewModel.loggedIn) {
                     Button() {
                         playHaptic()
-                        commentModel.submitComment(activityId: activity.id, comment: comment, userId: viewModel.userId, userName: viewModel.username)
+                        commentModel.submitComment(activityId: activity.id, comment: comment, user: viewModel.currentUser!)
                         activity.commentCount! = activity.commentCount! + 1
                         
                         if let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber}) {
@@ -112,9 +112,9 @@ struct CommentsView: View {
             
             VStack (alignment: .leading) {
                 ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
-                    CommentView(comment: comment, admin: viewModel.admin)
+                    CommentView(comment: comment, admin: viewModel.currentUser?.admin ?? false)
                         .contextMenu {
-                            if viewModel.admin {
+                            if (viewModel.currentUser?.admin ?? false) {
                                 Button {
                                     commentModel.deleteComment(comment: comment, activityId: activity.id)
                                     activity.commentCount!-=1
