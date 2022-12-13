@@ -14,8 +14,8 @@ struct CommentView: View {
     
     var body: some View {
         HStack {
-            if (comment.imageURL != ""){
-                    AsyncImage(url: URL(string: comment.imageURL)) { image in
+            if ((comment.user.profileImageURL) != nil){
+                AsyncImage(url: comment.user.profileImageURL) { image in
                         image
                             .resizable()
                             .frame(width: 35, height: 35)
@@ -37,7 +37,7 @@ struct CommentView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(comment.userName)
+                    Text(comment.user.username)
                         .font(.headline)
                     if (admin) {
                         Image(systemName: "crown")
@@ -73,6 +73,6 @@ struct CommentView: View {
 
 struct CommentView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentView(comment: Comment(userId: "Admin", userName: "AdminKyle", text: "Howdy"), admin: true)
+        CommentView(comment: Comment(text: "Howdy!!!!!", user: User(username: "poofy")), admin: true)
     }
 }

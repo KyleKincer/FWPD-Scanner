@@ -127,83 +127,107 @@ struct Timestamp: Decodable, Equatable, Hashable {
 struct Comment: Identifiable, Decodable, Equatable, Hashable {
     static func == (lhs: Comment, rhs: Comment) -> Bool {
             return lhs.id == rhs.id &&
-                   lhs.userId == rhs.userId &&
                    lhs.text == rhs.text &&
                    lhs.timestamp == rhs.timestamp
         }
     
     func hash(into hasher: inout Hasher) {
             hasher.combine(self.id)
-            hasher.combine(self.userId)
             hasher.combine(self.text)
             hasher.combine(self.timestamp)
         }
     
     let id: String
-    let userId: String
-    var userName: String
-    let imageURL: String
     let text: String
     let timestamp: Timestamp
     let hidden: Bool
+    let user: User
 
     private enum CodingKeys: String, CodingKey {
         case id
-        case userId
-        case userName
-        case imageURL
         case text
         case timestamp
         case hidden
+        case user
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.userId = try container.decode(String.self, forKey: .userId)
-        self.userName = try container.decode(String.self, forKey: .userName)
-        self.imageURL = try container.decode(String.self, forKey: .imageURL)
         self.text = try container.decode(String.self, forKey: .text)
         self.timestamp = try container.decode(Timestamp.self, forKey: .timestamp)
         self.hidden = try container.decode(Bool.self, forKey: .hidden)
+        self.user = try container.decode(User.self, forKey: .user)
     }
 
-    init(document: QueryDocumentSnapshot) {
-        print("Document: \(document)")
+    init(document: QueryDocumentSnapshot, user: User) {
         self.id = document.documentID
-        self.userId = document.data()["userId"] as! String
-        self.userName = ""
-        self.imageURL = ""
         self.text = document.data()["text"] as! String
         self.timestamp = Timestamp(document.data()["timestamp"] as! Firebase.Timestamp)
         self.hidden = document.data()["hidden"] as? Bool ?? false
+        self.user = user
     }
     
-    init(id: String = UUID().uuidString, userId: String, userName: String, imageURL: String = "", text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp()), hidden: Bool = false) {
+    init(id: String = UUID().uuidString, text: String, timestamp: Timestamp = Timestamp(Firebase.Timestamp()), hidden: Bool = false, user: User) {
         self.id = id
-        self.userId = userId
-        self.userName = userName
-        self.imageURL = imageURL
         self.text = text
         self.timestamp = timestamp
         self.hidden = hidden
+        self.user = user
     }
     
     func toData() -> [String: Any] {
         return ["text": text,
-                "userId": userId,
+                "userId": user.id,
                 "timestamp": timestamp.firebaseTimestamp]
     }
 }
 
 
-struct User: Identifiable {
-    let id: Int
-    let username: String
+struct User: Identifiable, Decodable {
+    let id: UUID
+    var username: String
     let admin: Bool
-    let profileImageURL: String
-    let commentCount: Int
-    let lastCommentAt: Timestamp
+    var profileImageURL: URL?
+    let commentCount: Int?
+    let lastCommentAt: Timestamp?
+    
+    init(username: String) {
+        self.id = UUID()
+        self.username = username
+        self.admin = false
+        self.profileImageURL = nil
+        self.commentCount = 0
+        self.lastCommentAt = nil
+    }
+    
+    init(document: DocumentSnapshot) {
+        self.id = UUID(uuidString: document.documentID)!
+        self.username = (document.data()!["username"] as? String)!
+        self.admin = document.data()?["admin"] as? Bool ?? false
+        self.profileImageURL = URL(string: document.data()?["profileImageURL"] as! String)
+        self.commentCount = document.data()?["commentCount"] as? Int
+        self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case username
+        case admin
+        case profileImageURL
+        case commentCount
+        case lastCommentAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.username = try container.decode(String.self, forKey: .username)
+        self.admin = try container.decode(Bool.self, forKey: .admin)
+        self.profileImageURL = try container.decodeIfPresent(URL.self, forKey: .profileImageURL)
+        self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount)
+        self.lastCommentAt = try container.decodeIfPresent(Timestamp.self, forKey: .lastCommentAt)
+    }
 }
 
 

@@ -30,8 +30,8 @@ class CommentsViewModel: ObservableObject {
         }
     }
     
-    func submitComment(activityId: String, comment: String, userId: String, userName: String) {
-        let newComment = Comment(userId: userId, userName: userName, text: comment)
+    func submitComment(activityId: String, comment: String, user: User) {
+        let newComment = Comment(text: comment, user: user)
         
         Firestore.firestore().collection("activities").document(activityId).updateData(["commentCount": FieldValue.increment(Double(1))])
         
@@ -58,13 +58,8 @@ class CommentsViewModel: ObservableObject {
                     return
                 }
                 // update the comment's userName with the userName from the user document
-                let userName = userDocument!.get("username") as? String
-                let imageURL = userDocument!.get("imageURL") as? String
-                let text = commentDocument.data()["text"] as! String
-                let timestamp = commentDocument.data()["timestamp"] as! Firebase.Timestamp
-                let hidden = commentDocument.data()["hidden"] as? Bool
-                let id = commentDocument.documentID
-                let comment = Comment(id: id, userId: userId, userName: userName ?? "Unknown User", imageURL: imageURL ?? "", text: text, timestamp: Timestamp(timestamp), hidden: hidden ?? false)
+                let user = User(document: userDocument!)
+                let comment = Comment(document: commentDocument, user: user)
                 
                 // add the updated comment to the comments array
                 self.comments.append(comment)
