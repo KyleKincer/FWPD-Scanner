@@ -74,11 +74,13 @@ final class MainViewModel: ObservableObject {
         model = Scanner()
         self.onboarding = self.onboardingUD
         self.onboardingUD = false
-        if (!self.loggedIn) {
-            if let user = Auth.auth().currentUser {
+
+        if (!self.loggedIn && !self.onboarding) {
+
+            if let storedUser = Auth.auth().currentUser {
               // User is signed in.
                 self.loggedIn = true
-                self.initUser(user: user)
+                self.initUser(user: storedUser)
                 
             }
         }
@@ -182,7 +184,7 @@ final class MainViewModel: ObservableObject {
                 self.currentUser?.profileImageURL = result!.user.photoURL ?? URL(string: "")
                 self.currentUser = (User(id: result!.user.uid,
                                          username: result!.user.displayName!,
-                                         profileImageURL: (result?.user.photoURL)!))
+                                         profileImageURL: (result?.user.photoURL ?? URL(string: "")!)))
                 
                 initUser(user: result?.user)
             }
@@ -199,12 +201,10 @@ final class MainViewModel: ObservableObject {
         // in the users collection with the uid.
         let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
         userDocRef.getDocument { (snapshot, error) in
-            if (self.currentUser != nil) {
-                if error == nil && snapshot?.exists == false {
-                    self.writeUserDocument(user: self.currentUser!)
-                } else if snapshot?.exists == true {
-                    self.currentUser = User(document: snapshot!)
-                }
+            if error == nil && snapshot?.exists == false {
+                self.writeUserDocument(user: self.currentUser!)
+            } else if snapshot?.exists == true {
+                self.currentUser = User(document: snapshot!)
             }
         }
     }
@@ -340,7 +340,7 @@ final class MainViewModel: ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
         
-        userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? URL(string: "")]) { err in
+        userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? ""]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

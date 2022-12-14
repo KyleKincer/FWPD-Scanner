@@ -16,6 +16,7 @@ struct ProfileView: View {
     @FocusState var usernameIsFocused: Bool
     @State var showPurchaseSheet = false
     @State var showAlert = false
+    @State var usernameError = ""
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -90,6 +91,14 @@ struct ProfileView: View {
                     VStack {
                         if editingUsername {
                             VStack (alignment: .center){
+                                if (usernameError != "") {
+                                    Text(usernameError)
+                                        .padding(.horizontal)
+                                        .foregroundColor(.red)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .multilineTextAlignment(.center)
+                                }
+                                
                                 TextField(viewModel.currentUser!.username, text: $newUsername)
                                     .frame(width: 200)
                                     .limitInputLength(value: $newUsername, length: 20)
@@ -104,22 +113,43 @@ struct ProfileView: View {
                                     .focused($usernameIsFocused)
                                     .border(Color.white)
                                 
-                                Button {
-                                    withAnimation {
-                                        onSubmit()
+                                HStack {
+                                    
+                                    Button {
+                                        withAnimation {
+                                            newUsername = viewModel.currentUser?.username ?? "User"
+                                            editingUsername = false
+                                        }
+                                    } label: {
+                                        ZStack {
+                                            Capsule()
+                                                .frame(width: 90, height: 40)
+                                                .foregroundColor(.gray)
+                                            
+                                            Text("Cancel")
+                                                .foregroundColor(.white)
+                                                .fontWeight(.bold)
+                                        }
                                     }
-                                } label: {
-                                    ZStack {
-                                        Capsule()
-                                            .frame(width: 75, height: 40)
-                                            .foregroundColor(.blue)
-                                        
-                                        Text("Save")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.bold)
+                                    
+                                    Button {
+                                        withAnimation {
+                                            onSubmit()
+                                        }
+                                    } label: {
+                                        ZStack {
+                                            Capsule()
+                                                .frame(width: 90, height: 40)
+                                                .foregroundColor(.blue)
+                                                .opacity((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? "") ? 0 : 1)
+                                            
+                                            Text("Save")
+                                                .foregroundColor(.white)
+                                                .fontWeight(.bold)
+                                        }
                                     }
+                                    .disabled((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? ""))
                                 }
-                                .disabled(newUsername.count==0)
                                 .padding(.horizontal)
                             }
                         } else {
@@ -133,7 +163,7 @@ struct ProfileView: View {
                                 Button {
                                     withAnimation {
                                         editingUsername = true
-                                        newUsername = viewModel.currentUser!.username
+                                        newUsername = viewModel.currentUser?.username ?? "User"
                                         usernameIsFocused = true
                                     }
                                 } label: {
@@ -197,9 +227,17 @@ struct ProfileView: View {
     @MainActor
     func onSubmit() {
         if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
-            viewModel.updateUsername(to: newUsername)
+            viewModel.usernameIsAvailable(username: newUsername, { available in
+                if (available || newUsername == viewModel.currentUser?.username ?? "") {
+                    viewModel.updateUsername(to: newUsername)
+                    usernameError = ""
+                    editingUsername = false
+                } else {
+                    usernameError = "This username is not available!"
+                }
+                    
+            })
         }
-        editingUsername = false
     }
 }
 
