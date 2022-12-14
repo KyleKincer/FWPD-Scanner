@@ -161,6 +161,10 @@ struct ProfileView: View {
                 
 
                 TabView {
+                    CommunityView()
+                        .tabItem {
+                            Label("Community", systemImage: "person.3")
+                        }
                     BookmarkView(viewModel: viewModel)
                         .tabItem {
                             Label("Bookmarks", systemImage: "bookmark")
