@@ -22,6 +22,7 @@ struct Scanner {
         var distance: Double? = nil
         var bookmarked: Bool = false
         var commentCount: Int?
+        var comments: [Comment]?
         
         enum CodingKeys: String, CodingKey {
             // the API gives us control_number
@@ -204,7 +205,7 @@ struct User: Identifiable, Decodable {
         self.id = id
         self.username = username
         self.admin = false
-        self.profileImageURL = profileImageURL
+        self.profileImageURL = URL(string: profileImageURL.description)
         self.commentCount = 0
         self.lastCommentAt = nil
     }

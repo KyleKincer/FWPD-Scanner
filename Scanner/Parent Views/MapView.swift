@@ -128,21 +128,6 @@ struct MapView: View {
                         .padding(.bottom, 30)
                     }
                     
-                    if (viewModel.showBookmarks) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .foregroundColor(.blue)
-                            
-                            HStack {
-                                Text((viewModel.bookmarkCount > 0) ? "Showing Bookmarks" : "No Bookmarks")
-                            }
-                            .tint(.white)
-                        }
-                        .frame(width: 200, height: 33)
-                        .padding(.bottom, 30)
-                        
-                    }
-                    
                     Spacer()
                 
                 }.transition(.move(edge: .top))

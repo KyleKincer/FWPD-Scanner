@@ -60,7 +60,7 @@ struct RegisterView: View {
                     .padding(.horizontal)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
-            .frame(width: 350)
+            .frame(maxWidth: 350)
             
             if viewModel.authError != "" {
                 Text(viewModel.authError)

@@ -256,7 +256,6 @@ final class MainViewModel: ObservableObject {
                     
                     withAnimation {
                         self.serverResponsive = true
-                        
                         self.addDatesToActivities(.activities)
                         self.addDistancesToActivities(.activities)
                         self.isRefreshing = false
@@ -340,7 +339,7 @@ final class MainViewModel: ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
         
-        userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? ""]) { err in
+        userRef.setData(["username": user.username, "imageURL": user.profileImageURL?.description ?? ""]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

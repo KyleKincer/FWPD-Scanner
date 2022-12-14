@@ -18,6 +18,8 @@ struct LoginView: View {
     @ObservedObject var viewModel : MainViewModel
     @Binding var signingUp : Bool
     @Binding var showPage : Bool
+    @State var showPasswordForgot = false
+    @State private var resetting = false
     
     var body: some View {
         VStack {
@@ -63,6 +65,14 @@ struct LoginView: View {
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             
+            Button(action: {
+                showPasswordForgot.toggle()
+            }, label: {
+                Text("Forgot your Password?")
+                    .foregroundColor(.blue)
+                    .padding()
+            })
+            
             if errorMessage != "" {
                 Text(errorMessage)
                     .foregroundColor(.red)
@@ -105,8 +115,9 @@ struct LoginView: View {
                                 }
                                 print("Successfully logged in user: \(userId)")
                             }
-                            viewModel.loggedIn = true
-                            dismiss()
+                            withAnimation {
+                                viewModel.loggedIn = true
+                            }
                         }
                     }
                 }
@@ -122,6 +133,7 @@ struct LoginView: View {
                 }
             })
             .padding(.top)
+            .frame(maxWidth: 350)
             
             Group {
                 
@@ -180,6 +192,67 @@ struct LoginView: View {
                     .bold()
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
+            }
+        }
+        .sheet(isPresented: $showPasswordForgot) {
+            VStack {
+                Button(action: {
+                    withAnimation {
+                        email = ""
+                        showPasswordForgot.toggle()
+                    }
+                }, label: {
+                    BackButtonView(text: "Cancel", color: Color.blue)
+                })
+                
+                Text("Forgot Your Password?")
+                    .font(.title)
+                    .padding()
+                
+                Spacer()
+                
+                Text("Provide your account email:")
+                TextField("Account Email:", text: $email)
+                    .frame(height: 50)
+                    .padding(.horizontal)
+                    .autocapitalization(.none)
+                
+                Button(action: {
+                    withAnimation {
+                        resetting = true
+                        Auth.auth().sendPasswordReset(withEmail: email) { error in
+                            if (error?.localizedDescription ?? "" != "") {
+                                errorMessage = error!.localizedDescription
+                            } else {
+                                email = ""
+                                showPasswordForgot.toggle()
+                            }
+                        }
+                        resetting = false
+                    }
+                    
+                }, label: {
+                    if (resetting) {
+                        ProgressView()
+                            .scaleEffect(2)
+                        
+                    } else {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 220, height: 50)
+                                .foregroundColor(.blue)
+                            
+                            Text("Request Password Reset")
+                                .foregroundColor(.white)
+                                
+                        }
+                        .opacity(email.count == 0 ? 0 : 1)
+                    }
+                })
+                .disabled(resetting || email.count == 0)
+                .padding()
+                
+                Spacer()
             }
         }
     }

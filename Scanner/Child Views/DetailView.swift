@@ -35,11 +35,10 @@ struct DetailView: View {
                                     Text(activity.timestamp)
                                 }
                                 .foregroundColor(.secondary)
-                            
-                            if (!viewModel.showBookmarks) {
+
                                 Text("\(activity.date ?? Date(), style: .relative) ago")
                                     .foregroundColor(.secondary)
-                            }
+
                             Text(activity.controlNumber)
                                 .foregroundColor(.secondary)
                         }

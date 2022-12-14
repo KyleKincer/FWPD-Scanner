@@ -16,7 +16,6 @@ struct CommentsView: View {
     @Binding var activity: Scanner.Activity
     @State var comment: String = ""
     @State var showSubmit = false
-    @FocusState var commentIsFocused: Bool
     @State var authHandle : AuthStateDidChangeListenerHandle?
     @State var signingUp : Bool = false
     
@@ -59,7 +58,6 @@ struct CommentsView: View {
             HStack {
                 TextField("Type your comment here...", text: $comment)
                     .keyboardType(.default)
-                    .focused($commentIsFocused)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
                     .onChange(of: comment.count) { newValue in
@@ -84,7 +82,6 @@ struct CommentsView: View {
                             viewModel.activities[index].commentCount!+=1
                         }
                         
-                        commentIsFocused = false
                         comment = ""
                     } label: {
                         ZStack{
@@ -97,46 +94,45 @@ struct CommentsView: View {
             }
             .onAppear(perform: {
                 commentModel.startListening(activityId: activity.id)
-                
-                authHandle = Auth.auth().addStateDidChangeListener { auth, user in
-                    
-                }
-                
+
             })
-            .onDisappear(perform: {
-                commentModel.stopListening()
-                
-                Auth.auth().removeStateDidChangeListener(authHandle!)
-                
+            
+            .onChange(of: activity.id, perform: { id in
+                commentModel.startListening(activityId: id)
             })
             
             VStack (alignment: .leading) {
-                ForEach(commentModel.comments.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds })) { comment in
-                    CommentView(comment: comment, admin: viewModel.currentUser?.admin ?? false)
-                        .contextMenu {
-                            if (viewModel.currentUser?.admin ?? false) {
-                                Button {
-                                    commentModel.deleteComment(comment: comment, activityId: activity.id)
-                                    activity.commentCount!-=1
-                                } label: {
-                                    Text("Delete")
-                                }
-                                
-                                Button {
-                                    withAnimation {
-                                        commentModel.hideComment(comment: comment, activityId: activity.id)
+                if (activity.comments?.count ?? 0 == 1) {
+                    CommentView(comment: activity.comments!.first!, admin: viewModel.currentUser?.admin ?? false)
+
+                } else {
+                    ForEach(activity.comments?.sorted(by: { $0.timestamp.seconds > $1.timestamp.seconds }) ?? []) { comment in
+                        CommentView(comment: comment, admin: viewModel.currentUser?.admin ?? false)
+                            .contextMenu {
+                                if (viewModel.currentUser?.admin ?? false) {
+                                    Button {
+                                        commentModel.deleteComment(comment: comment, activityId: activity.id)
+                                        activity.commentCount!-=1
+                                    } label: {
+                                        Text("Delete")
                                     }
-                                } label: {
-                                    Text(comment.hidden ? "Unhide" : "Hide")
+                                    
+                                    Button {
+                                        withAnimation {
+                                            commentModel.hideComment(comment: comment, activityId: activity.id)
+                                        }
+                                    } label: {
+                                        Text(comment.hidden ? "Unhide" : "Hide")
+                                    }
+                                    
                                 }
-                                
                             }
-                        }
+                    }
                 }
             }
             .padding(.horizontal)
             .onChange(of: commentModel.comments, perform: { _ in
-                commentModel.comments = commentModel.comments
+                activity.comments = commentModel.comments
             })
             .fullScreenCover(isPresented: $viewModel.showAuth, content: {
                 if (signingUp) {

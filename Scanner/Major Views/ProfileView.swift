@@ -141,12 +141,13 @@ struct ProfileView: View {
                                             Capsule()
                                                 .frame(width: 90, height: 40)
                                                 .foregroundColor(.blue)
-                                                .opacity((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? "") ? 0 : 1)
+                                                
                                             
                                             Text("Save")
                                                 .foregroundColor(.white)
                                                 .fontWeight(.bold)
                                         }
+                                        .opacity((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? "") ? 0 : 1)
                                     }
                                     .disabled((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? ""))
                                 }
@@ -192,7 +193,7 @@ struct ProfileView: View {
 //                        }
 //                    }
                 }
-                .padding(.horizontal)
+                .padding([.top, .horizontal])
                 
                 Divider()
                     .foregroundColor(.white)

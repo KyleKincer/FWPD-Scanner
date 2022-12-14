@@ -54,7 +54,7 @@ struct ActivityRowView: View {
                         if activity.commentCount!>0 {
                             HStack {
                                 Image(systemName: "message")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.red)
                                 Text(String(activity.commentCount ?? 0))
                             }
                         }
@@ -117,7 +117,9 @@ struct ActivityRowView: View {
                 }
             } label: {
                 Text("Toggle Bookmark")
+                
             }
+            
             NavigationLink {
                 DetailView(viewModel: viewModel, activity: $activity)
             } label: {
@@ -125,24 +127,26 @@ struct ActivityRowView: View {
             }
         }
         .swipeActions {
-            Button(activity.bookmarked ? "Unmark" : "Bookmark") {
-                if activity.bookmarked {
-                    withAnimation {
-                        activity.bookmarked = false
-                        viewModel.removeBookmark(bookmark: activity)
-                    }
-                    if (viewModel.showBookmarks) {
+            if (viewModel.loggedIn) {
+                Button(activity.bookmarked ? "Unmark" : "Bookmark") {
+                    if activity.bookmarked {
                         withAnimation {
-                            viewModel.bookmarks.removeAll { $0.controlNumber == activity.controlNumber }
+                            activity.bookmarked = false
+                            viewModel.removeBookmark(bookmark: activity)
+                        }
+                        if (viewModel.showBookmarks) {
+                            withAnimation {
+                                viewModel.bookmarks.removeAll { $0.controlNumber == activity.controlNumber }
+                            }
+                        }
+                    } else {
+                        withAnimation {
+                            activity.bookmarked = true
+                            viewModel.addBookmark(bookmark: activity)
                         }
                     }
-                } else {
-                    withAnimation {
-                        activity.bookmarked = true
-                        viewModel.addBookmark(bookmark: activity)
-                    }
-                }
-            }.tint(activity.bookmarked ? .red : .orange)
+                }.tint(activity.bookmarked ? .red : .orange)
+            }
         }
     
         .onAppear {

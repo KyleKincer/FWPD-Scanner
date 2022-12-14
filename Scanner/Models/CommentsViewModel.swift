@@ -11,7 +11,7 @@ import Firebase
 class CommentsViewModel: ObservableObject {
     @Published var comments: [Comment] = []
     
-    private var listener: ListenerRegistration?
+    var listener: ListenerRegistration?
     
     func startListening(activityId: String) {
         // create a reference to the "comments" collection within the activity's document
