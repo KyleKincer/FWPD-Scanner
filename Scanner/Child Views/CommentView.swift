@@ -73,6 +73,6 @@ struct CommentView: View {
 
 struct CommentView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentView(comment: Comment(text: "Howdy!!!!!", user: User(username: "poofy")), admin: true)
+        CommentView(comment: Comment(text: "Howdy!!!!!", user: User(id: "1", username: "poofy")), admin: true)
     }
 }

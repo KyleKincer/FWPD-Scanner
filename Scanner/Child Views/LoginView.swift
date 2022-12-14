@@ -66,8 +66,12 @@ struct LoginView: View {
             if errorMessage != "" {
                 Text(errorMessage)
                     .foregroundColor(.red)
-                    .lineLimit(nil)
                     .padding(.horizontal)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
+                    .onAppear {
+                        playHaptic()
+                    }
             }
             
             Button(action: {
@@ -169,47 +173,7 @@ struct LoginView: View {
                             .padding()
                             .shadow(radius: 6)
                         }
-                        
-//                        Button(action: {
-//                            playHaptic()
-//                            withAnimation {
-//                                print("Facebook")
-//                            }
-//                        }, label: {
-//                            Image("facebookLogo")
-//                        })
-//                        .scaleEffect(0.35)
-//                        .frame(width: 50, height: 50)
-//                        .padding()
-//
-//                        Button(action: {
-//                            playHaptic()
-//                            withAnimation {
-//                                print("Twitter")
-//                            }
-//                        }, label: {
-//                            Image("twitterLogo")
-//                        })
-//                        .scaleEffect(0.08)
-//                        .frame(width: 50, height: 50)
-//                        .padding()
-//
-//                        Button(action: {
-//                            playHaptic()
-//                            withAnimation {
-//                                print("Apple")
-//                            }
-//                        }, label: {
-//                            Image("appleLogo")
-//                                .background(Color.white)
-//                                .cornerRadius(200)
-//                        })
-//                        .scaleEffect(0.4)
-//                        .frame(width: 50, height: 50)
-//                        .padding()
                     }
-                    
-                    
                 }
                 
                 Text("or sign up or in quickly with Google")

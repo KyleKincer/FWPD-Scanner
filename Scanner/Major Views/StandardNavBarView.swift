@@ -118,18 +118,22 @@ struct StandardNavBarView: View {
                     .foregroundColor(Color("ModeOpposite"))
                     .onTapGesture {
                         playHaptic()
-                        showLocationDisclaimer = true
+                        withAnimation {
+                            showLocationDisclaimer = true
+                        }
                     }
                     .minimumScaleFactor(0.5)
                     .onLongPressGesture(perform: {
-                        viewModel.onboarding = true
+                        playHaptic()
+                        withAnimation {
+                            viewModel.onboarding = true
+                        }
                     })
  
                 Spacer()
                 
                 Button(action: {
                     playHaptic()
-                    viewModel.newToNots = false
                     withAnimation {
                         showNotificationSheet.toggle()
                     }

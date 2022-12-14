@@ -36,6 +36,8 @@ struct RegisterView: View {
                 TextField("Email Address", text: $email)
                     .padding(.horizontal)
                     .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                
                 ZStack {
                     TextField("Username", text: $username)
                         .textInputAutocapitalization(.never)
@@ -63,8 +65,9 @@ struct RegisterView: View {
             if viewModel.authError != "" {
                 Text(viewModel.authError)
                     .foregroundColor(.red)
-                    .lineLimit(nil)
                     .padding(.horizontal)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
             }
             
             Group {

@@ -191,8 +191,8 @@ struct User: Identifiable, Decodable {
     let commentCount: Int?
     let lastCommentAt: Timestamp?
     
-    init(username: String) {
-        self.id = ""
+    init(id: String, username: String) {
+        self.id = id
         self.username = username
         self.admin = false
         self.profileImageURL = nil

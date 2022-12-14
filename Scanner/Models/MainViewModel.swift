@@ -54,7 +54,6 @@ final class MainViewModel: ObservableObject {
     @Published var bookmarkCount = 0
     @Published var showMostRecentComments = false
     @Published var showAuthError = false
-    @AppStorage("newToNots") var newToNots = true
     
     // Network and auth
     @Published var networkManager = NetworkManager()
@@ -74,15 +73,13 @@ final class MainViewModel: ObservableObject {
         print("I - Initializing list view model")
         model = Scanner()
         self.onboarding = self.onboardingUD
+        self.onboardingUD = false
         if (!self.loggedIn) {
             if let user = Auth.auth().currentUser {
               // User is signed in.
                 self.loggedIn = true
                 self.initUser(user: user)
                 
-            } else {
-              // No user is signed in.
-                self.onboarding = true
             }
         }
         
@@ -202,10 +199,12 @@ final class MainViewModel: ObservableObject {
         // in the users collection with the uid.
         let userDocRef = Firestore.firestore().collection("users").document(user!.uid)
         userDocRef.getDocument { (snapshot, error) in
-            if error == nil && snapshot?.exists == false {
-                self.writeUserDocument(user: self.currentUser!)
-            } else if snapshot?.exists == true {
-                self.currentUser = User(document: snapshot!)
+            if (self.currentUser != nil) {
+                if error == nil && snapshot?.exists == false {
+                    self.writeUserDocument(user: self.currentUser!)
+                } else if snapshot?.exists == true {
+                    self.currentUser = User(document: snapshot!)
+                }
             }
         }
     }
@@ -296,10 +295,9 @@ final class MainViewModel: ObservableObject {
                                     print("Successfully created user: \(authResult.user)")
                                     self.loggedIn = true
                                     self.showAuth = false
-                                    let newUser = User(username: username)
+                                    let newUser = User(id: authResult.user.uid, username: username)
                                     self.currentUser = newUser
-                                    
-                                    self.writeUserDocument(user: newUser)
+                                    self.writeUserDocument(user: self.currentUser!)
                                     completion(true)
                                 }
                             }
@@ -341,6 +339,7 @@ final class MainViewModel: ObservableObject {
     func writeUserDocument(user: User) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
+        
         userRef.setData(["username": user.username, "imageURL": user.profileImageURL ?? URL(string: "")]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

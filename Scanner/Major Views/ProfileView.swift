@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State private var newUsername = ""
     @FocusState var usernameIsFocused: Bool
     @State var showPurchaseSheet = false
+    @State var showAlert = false
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -75,6 +76,15 @@ struct ProfileView: View {
                         Image(systemName: "person.crop.circle")
                             .foregroundColor(.gray)
                             .font(.system(size: 80))
+                            .onTapGesture {
+                                showAlert = true
+                            }
+                            .alert(isPresented: $showAlert) {
+                                Alert(
+                                    title: Text("Profile Picture"),
+                                    message: Text("Log out and sign back in using Google to use your Google profile picture.")
+                                )
+                            }
                     }
                     
                     VStack {
