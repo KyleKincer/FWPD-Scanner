@@ -15,7 +15,6 @@
 		E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F449278E84A8009C0B13 /* Preview Assets.xcassets */; };
 		E202F45127907868009C0B13 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
-		E2126EB1294AB0250014082C /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = E2126EB0294AB0250014082C /* Drops */; };
 		E24522BE279134F200EFBB3E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* DetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */; };
@@ -72,6 +71,12 @@
 		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
+		EB3A2079294B22D000EC9B0E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A2078294B22D000EC9B0E /* FirebaseAnalytics */; };
+		EB3A207B294B22D000EC9B0E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A207A294B22D000EC9B0E /* FirebaseAuth */; };
+		EB3A207D294B22D000EC9B0E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A207C294B22D000EC9B0E /* FirebaseFirestore */; };
+		EB3A207F294B22D000EC9B0E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A207E294B22D000EC9B0E /* FirebaseMessaging */; };
+		EB3A2082294B233A00EC9B0E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A2081294B233A00EC9B0E /* GoogleMobileAds */; };
+		EB3A2085294B237F00EC9B0E /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A2084294B237F00EC9B0E /* Drops */; };
 		EB3A359328F5FEDE009625D0 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */; };
 		EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */; };
 		EB4EA5BD293FDE8000A39512 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA5BC293FDE8000A39512 /* RegisterView.swift */; };
@@ -93,11 +98,6 @@
 		EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */; };
 		EBC7DB342948D0BA0059BEC5 /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = EBC7DB332948D0BA0059BEC5 /* Snow.sks */; };
 		EBC7DB3E2948EB650059BEC5 /* WatchScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */; };
-		EBC7DB412948F0160059BEC5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB402948F0160059BEC5 /* FirebaseAnalytics */; };
-		EBC7DB432948F0160059BEC5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB422948F0160059BEC5 /* FirebaseAuth */; };
-		EBC7DB452948F0160059BEC5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB442948F0160059BEC5 /* FirebaseFirestore */; };
-		EBC7DB472948F0160059BEC5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB462948F0160059BEC5 /* FirebaseMessaging */; };
-		EBC7DB4B2948F1000059BEC5 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = EBC7DB4A2948F1000059BEC5 /* GoogleMobileAds */; };
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* SettingsView.swift */; };
 		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
@@ -219,13 +219,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC7DB2E2948BD660059BEC5 /* StoreKit.framework in Frameworks */,
-				EBC7DB432948F0160059BEC5 /* FirebaseAuth in Frameworks */,
-				EBC7DB472948F0160059BEC5 /* FirebaseMessaging in Frameworks */,
-				EBC7DB412948F0160059BEC5 /* FirebaseAnalytics in Frameworks */,
+				EB3A207B294B22D000EC9B0E /* FirebaseAuth in Frameworks */,
+				EB3A207F294B22D000EC9B0E /* FirebaseMessaging in Frameworks */,
 				08875E1AB8E55DE2DC319B50 /* Pods_Scanner.framework in Frameworks */,
-				E2126EB1294AB0250014082C /* Drops in Frameworks */,
-				EBC7DB452948F0160059BEC5 /* FirebaseFirestore in Frameworks */,
-				EBC7DB4B2948F1000059BEC5 /* GoogleMobileAds in Frameworks */,
+				EB3A2082294B233A00EC9B0E /* GoogleMobileAds in Frameworks */,
+				EB3A2085294B237F00EC9B0E /* Drops in Frameworks */,
+				EB3A2079294B22D000EC9B0E /* FirebaseAnalytics in Frameworks */,
+				EB3A207D294B22D000EC9B0E /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,12 +495,12 @@
 			);
 			name = Scanner;
 			packageProductDependencies = (
-				EBC7DB402948F0160059BEC5 /* FirebaseAnalytics */,
-				EBC7DB422948F0160059BEC5 /* FirebaseAuth */,
-				EBC7DB442948F0160059BEC5 /* FirebaseFirestore */,
-				EBC7DB462948F0160059BEC5 /* FirebaseMessaging */,
-				EBC7DB4A2948F1000059BEC5 /* GoogleMobileAds */,
-				E2126EB0294AB0250014082C /* Drops */,
+				EB3A2078294B22D000EC9B0E /* FirebaseAnalytics */,
+				EB3A207A294B22D000EC9B0E /* FirebaseAuth */,
+				EB3A207C294B22D000EC9B0E /* FirebaseFirestore */,
+				EB3A207E294B22D000EC9B0E /* FirebaseMessaging */,
+				EB3A2081294B233A00EC9B0E /* GoogleMobileAds */,
+				EB3A2084294B237F00EC9B0E /* Drops */,
 			);
 			productName = Scanner;
 			productReference = E202F43F278E84A7009C0B13 /* Scanner.app */;
@@ -576,9 +576,9 @@
 			);
 			mainGroup = E202F436278E84A7009C0B13;
 			packageReferences = (
-				EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				EBC7DB492948F1000059BEC5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
-				E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */,
+				EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EB3A2080294B233A00EC9B0E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				EB3A2083294B237F00EC9B0E /* XCRemoteSwiftPackageReference "Drops" */,
 			);
 			productRefGroup = E202F440278E84A7009C0B13 /* Products */;
 			projectDirPath = "";
@@ -1192,62 +1192,62 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */ = {
+		EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/omaralbeik/Drops.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 9.0.0;
 			};
 		};
-		EBC7DB492948F1000059BEC5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		EB3A2080294B233A00EC9B0E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		EB3A2083294B237F00EC9B0E /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E2126EB0294AB0250014082C /* Drops */ = {
+		EB3A2078294B22D000EC9B0E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */;
-			productName = Drops;
-		};
-		EBC7DB402948F0160059BEC5 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
-		EBC7DB422948F0160059BEC5 /* FirebaseAuth */ = {
+		EB3A207A294B22D000EC9B0E /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		EBC7DB442948F0160059BEC5 /* FirebaseFirestore */ = {
+		EB3A207C294B22D000EC9B0E /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		EBC7DB462948F0160059BEC5 /* FirebaseMessaging */ = {
+		EB3A207E294B22D000EC9B0E /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = EB3A2077294B22D000EC9B0E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		EBC7DB4A2948F1000059BEC5 /* GoogleMobileAds */ = {
+		EB3A2081294B233A00EC9B0E /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EBC7DB492948F1000059BEC5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			package = EB3A2080294B233A00EC9B0E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		EB3A2084294B237F00EC9B0E /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB3A2083294B237F00EC9B0E /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -17,23 +17,31 @@ struct ListView: View {
     var body: some View {
         ZStack {
             VStack {
-                HStack {
-                    
-                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
-                        .font(.title)
+                HStack (alignment: .center){
+                    Button (action: {
+                        withAnimation (.interactiveSpring()) {
+                            viewModel.showMostRecentComments.toggle()
+                        }
+                    }, label: {
+                        Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
+                            .font(viewModel.showMostRecentComments ? .subheadline : .title)
+                            .foregroundColor(viewModel.showMostRecentComments ? .blue : Color("ModeOpposite"))
+                    })
                     
                     Spacer()
                     
                     if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
                         
                         Button(action: {
-                            withAnimation {
+                            withAnimation (.interactiveSpring()){
                                 viewModel.showMostRecentComments.toggle()
-                            }
+                           }
                         }, label: {
-                            Image(systemName: viewModel.showMostRecentComments ? "bubble.right" : "clock")
-                                .font(.system(size: 25))
+                            Text("Comments")
+                                .font(viewModel.showMostRecentComments ? .title : .subheadline)
+                                .foregroundColor(viewModel.showMostRecentComments ? Color("ModeOpposite") : .blue)
                         })
+                        .transition(.move(edge: .leading))
                     }
                 }
                 .padding(.horizontal)
@@ -96,6 +104,9 @@ struct ListView: View {
 //                    .ignoresSafeArea()
 //                    .frame(maxHeight: 40)
             }
+            .onAppear(perform: {
+                    UITableView.appearance().contentInset.top = -35
+                })
             
             // Refresh Reminder Capsule
             if showingRefreshReminder && !viewModel.showBookmarks {
