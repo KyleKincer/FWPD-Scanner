@@ -19,9 +19,18 @@
       }
     },
     {
+      "identity" : "drops",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/omaralbeik/Drops.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f4eabe3e4e5da69e5205a69a5ddc0effd4a90519"
+      }
+    },
+    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/firebase-ios-sdk",
+      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
         "revision" : "7f31a43f8c49bd4a1723bc9fecdfaa4411dd9f36",
         "version" : "9.5.0"

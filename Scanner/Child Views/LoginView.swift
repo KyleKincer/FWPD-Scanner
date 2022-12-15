@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Drops
 import Firebase
 import FirebaseAuth
 
@@ -110,6 +111,7 @@ struct LoginView: View {
                                         if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
                                             print("Successfully retrieved username: \(username)")
                                             viewModel.currentUser = User(document: snapshot)
+                                            Drops.show(Drop(stringLiteral: "Howdy, \(username)!"))
                                         }
                                     }
                                 }

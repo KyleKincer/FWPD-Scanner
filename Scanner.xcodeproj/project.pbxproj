@@ -15,6 +15,7 @@
 		E202F44A278E84A8009C0B13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E202F449278E84A8009C0B13 /* Preview Assets.xcassets */; };
 		E202F45127907868009C0B13 /* ScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F45027907868009C0B13 /* ScannerModel.swift */; };
 		E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202F4522790C46F009C0B13 /* MainViewModel.swift */; };
+		E2126EB1294AB0250014082C /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = E2126EB0294AB0250014082C /* Drops */; };
 		E24522BE279134F200EFBB3E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522BD279134F200EFBB3E /* DetailView.swift */; };
 		E24522D22791F69400EFBB3E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24522D12791F69400EFBB3E /* LocationManager.swift */; };
 		E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24CED45294231D300EB960C /* TextFieldLimitModifier.swift */; };
@@ -222,6 +223,7 @@
 				EBC7DB472948F0160059BEC5 /* FirebaseMessaging in Frameworks */,
 				EBC7DB412948F0160059BEC5 /* FirebaseAnalytics in Frameworks */,
 				08875E1AB8E55DE2DC319B50 /* Pods_Scanner.framework in Frameworks */,
+				E2126EB1294AB0250014082C /* Drops in Frameworks */,
 				EBC7DB452948F0160059BEC5 /* FirebaseFirestore in Frameworks */,
 				EBC7DB4B2948F1000059BEC5 /* GoogleMobileAds in Frameworks */,
 			);
@@ -498,6 +500,7 @@
 				EBC7DB442948F0160059BEC5 /* FirebaseFirestore */,
 				EBC7DB462948F0160059BEC5 /* FirebaseMessaging */,
 				EBC7DB4A2948F1000059BEC5 /* GoogleMobileAds */,
+				E2126EB0294AB0250014082C /* Drops */,
 			);
 			productName = Scanner;
 			productReference = E202F43F278E84A7009C0B13 /* Scanner.app */;
@@ -575,6 +578,7 @@
 			packageReferences = (
 				EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EBC7DB492948F1000059BEC5 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */,
 			);
 			productRefGroup = E202F440278E84A7009C0B13 /* Products */;
 			projectDirPath = "";
@@ -1188,6 +1192,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1207,6 +1219,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E2126EB0294AB0250014082C /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2126EAF294AB0240014082C /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
+		};
 		EBC7DB402948F0160059BEC5 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBC7DB3F2948F0160059BEC5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
