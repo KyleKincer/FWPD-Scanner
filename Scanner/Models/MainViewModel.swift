@@ -13,6 +13,7 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
+import Drops
 
 @MainActor
 final class MainViewModel: ObservableObject {
@@ -206,7 +207,14 @@ final class MainViewModel: ObservableObject {
             } else if snapshot?.exists == true {
                 self.currentUser = User(document: snapshot!)
             }
+            self.showLoggedInDrop(username: self.currentUser?.username ?? "partner")
         }
+    }
+    
+    func showLoggedInDrop(username: String) {
+        Drops.show(Drop(title: "Howdy, \(username)!",
+                        subtitle: "Sucessfully logged in.",
+                        icon: UIImage(systemName: "person.fill.checkmark")))
     }
     
     func googleSignOut() {

@@ -111,7 +111,9 @@ struct LoginView: View {
                                         if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
                                             print("Successfully retrieved username: \(username)")
                                             viewModel.currentUser = User(document: snapshot)
-                                            Drops.show(Drop(stringLiteral: "Howdy, \(username)!"))
+                                            Drops.show(Drop(title: "Howdy, \(username)!",
+                                                            subtitle: "Sucessfully logged in.",
+                                                            icon: UIImage(systemName: "person.fill.checkmark")))
                                         }
                                     }
                                 }
