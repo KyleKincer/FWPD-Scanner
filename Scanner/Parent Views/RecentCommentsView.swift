@@ -14,6 +14,7 @@ struct RecentCommentsView: View {
         ZStack {
             if (viewModel.recentlyCommentedActivities.count == 0) {
                 VStack {
+                    Spacer()
                     Text("No recently commented activities")
                         .font(.system(size: 25))
                     
@@ -23,6 +24,7 @@ struct RecentCommentsView: View {
                             .font(.system(size: 40))
                             .padding()
                     }
+                    Spacer()
                 }
             } else {
                 NavigationView {
