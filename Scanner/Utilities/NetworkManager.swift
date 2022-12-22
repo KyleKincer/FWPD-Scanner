@@ -261,8 +261,13 @@ class NetworkManager {
             
             let results = try await query.getDocuments(source: .server)
             for document in results.documents {
-                let activity = self.makeActivity(document: document)
-                activities.append(activity)
+                let data = document.data()
+                let commentCount = data["commentCount"] as? Int ?? 0
+                
+                if (commentCount > 0) {
+                    let activity = self.makeActivity(document: document)
+                    activities.append(activity)
+                }
             }
             
         }

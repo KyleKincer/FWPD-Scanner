@@ -224,6 +224,7 @@ struct ActivityView: View {
                             }
                             } else {
                                 VStack {
+                                    
                                     HStack {
                                         
                                         Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
@@ -244,6 +245,8 @@ struct ActivityView: View {
                                         }
                                     }
                                     .padding(.horizontal)
+                                    
+                                    Spacer()
                                     
                                     if (viewModel.showMostRecentComments) {
                                         RecentCommentsView(viewModel: viewModel)
