@@ -15,7 +15,6 @@ struct ProfileView: View {
     @State private var newUsername = ""
     @FocusState var usernameIsFocused: Bool
     @State var showPurchaseSheet = false
-    @State var showAlert = false
     @State var usernameError = ""
     
     var body: some View {
@@ -57,36 +56,7 @@ struct ProfileView: View {
                 
                 HStack (alignment: .bottom) {
                     
-                    if let url = viewModel.currentUser?.profileImageURL {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(.white)
-                                .frame(width: 100, height: 100)
-                            
-                            AsyncImage(url: url) { image in
-                                image
-                                    .clipShape(Circle())
-                            } placeholder: {
-                                Image(systemName: "person.crop.circle")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 80))
-                            }
-                        }
-                        
-                    } else {
-                        Image(systemName: "person.crop.circle")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 80))
-                            .onTapGesture {
-                                showAlert = true
-                            }
-                            .alert(isPresented: $showAlert) {
-                                Alert(
-                                    title: Text("Profile Picture"),
-                                    message: Text("Log out and sign back in using Google to use your Google profile picture.")
-                                )
-                            }
-                    }
+                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL)
                     
                     VStack {
                         if editingUsername {
