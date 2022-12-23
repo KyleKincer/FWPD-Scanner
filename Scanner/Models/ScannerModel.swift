@@ -192,6 +192,7 @@ struct User: Identifiable, Decodable {
     let commentCount: Int?
     let lastCommentAt: Timestamp?
     let createdAt: Timestamp?
+    var bio: String?
     var twitterHandle: String?
     var instagramHandle: String?
     var facebookHandle: String?
@@ -205,6 +206,7 @@ struct User: Identifiable, Decodable {
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
+        self.bio = nil
         self.twitterHandle = nil
         self.instagramHandle = nil
         self.facebookHandle = nil
@@ -219,6 +221,7 @@ struct User: Identifiable, Decodable {
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
+        self.bio = nil
         self.twitterHandle = nil
         self.instagramHandle = nil
         self.facebookHandle = nil
@@ -233,6 +236,7 @@ struct User: Identifiable, Decodable {
         self.commentCount = document.data()?["commentCount"] as? Int
         self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
         self.createdAt = document.data()?["createdAt"] as? Timestamp
+        self.bio = document.data()?["bio"] as? String
         self.twitterHandle = document.data()?["twitterHandle"] as? String
         self.instagramHandle = document.data()?["instagramHandle"] as? String
         self.facebookHandle = document.data()?["facebookHandle"] as? String
@@ -246,6 +250,7 @@ struct User: Identifiable, Decodable {
         case profileImageURL
         case commentCount
         case lastCommentAt
+        case bio
         case createdAt
         case twitterHandle
         case instagramHandle
@@ -262,6 +267,7 @@ struct User: Identifiable, Decodable {
         self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount)
         self.lastCommentAt = try container.decodeIfPresent(Timestamp.self, forKey: .lastCommentAt)
         self.createdAt = try container.decodeIfPresent(Timestamp.self, forKey: .createdAt)
+        self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
         self.twitterHandle = try container.decodeIfPresent(String.self, forKey: .twitterHandle)
         self.instagramHandle = try container.decodeIfPresent(String.self, forKey: .instagramHandle)
         self.facebookHandle = try container.decodeIfPresent(String.self, forKey: .facebookHandle)
@@ -275,6 +281,7 @@ struct User: Identifiable, Decodable {
                 "commentCount": self.commentCount,
                 "lastCommentAt": self.lastCommentAt?.firebaseTimestamp,
                 "createdAt": self.createdAt?.firebaseTimestamp,
+                "bio": self.bio,
                 "twitterHandle": self.twitterHandle,
                 "instagramHandle": self.instagramHandle,
                 "facebookHandle": self.facebookHandle,
