@@ -11,9 +11,6 @@ struct ProfileView: View {
     @ObservedObject var viewModel : MainViewModel
     @State private var signingUp = false
     @Binding var showProfileView : Bool
-    @State private var editingUsername = false
-    @State private var newUsername = ""
-    @FocusState var usernameIsFocused: Bool
     @State var showPurchaseSheet = false
     @State var usernameError = ""
     
@@ -56,95 +53,29 @@ struct ProfileView: View {
                 
                 HStack (alignment: .bottom) {
                     
-                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
-                    
                     VStack {
-                        if editingUsername {
-                            VStack (alignment: .center){
-                                if (usernameError != "") {
-                                    Text(usernameError)
-                                        .padding(.horizontal)
-                                        .foregroundColor(.red)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .multilineTextAlignment(.center)
-                                }
-                                
-                                TextField(viewModel.currentUser!.username, text: $newUsername)
-                                    .frame(width: 200)
-                                    .limitInputLength(value: $newUsername, length: 20)
-                                    .textInputAutocapitalization(.never)
-                                    .submitLabel(.done)
-                                    .onSubmit {
-                                        withAnimation {
-                                            onSubmit()
-                                        }
-                                    }
-                                    .padding(.horizontal)
-                                    .focused($usernameIsFocused)
-                                    .border(Color.white)
-                                
-                                HStack {
-                                    
-                                    Button {
-                                        withAnimation {
-                                            newUsername = viewModel.currentUser?.username ?? "User"
-                                            editingUsername = false
-                                        }
-                                    } label: {
-                                        ZStack {
-                                            Capsule()
-                                                .frame(width: 90, height: 40)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("Cancel")
-                                                .foregroundColor(.white)
-                                                .fontWeight(.bold)
-                                        }
-                                    }
-                                    
-                                    Button {
-                                        withAnimation {
-                                            onSubmit()
-                                        }
-                                    } label: {
-                                        ZStack {
-                                            Capsule()
-                                                .frame(width: 90, height: 40)
-                                                .foregroundColor(.blue)
-                                                
-                                            
-                                            Text("Save")
-                                                .foregroundColor(.white)
-                                                .fontWeight(.bold)
-                                        }
-                                        .opacity((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? "") ? 0 : 1)
-                                    }
-                                    .disabled((newUsername.count==0 || newUsername == viewModel.currentUser?.username ?? ""))
-                                }
-                                .padding(.horizontal)
-                            }
-                        } else {
-                            HStack {
-                                Text(viewModel.currentUser?.username ?? "Username")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .italic()
-                                    .multilineTextAlignment(.center)
-                                
-                                Button {
-                                    withAnimation {
-                                        editingUsername = true
-                                        newUsername = viewModel.currentUser?.username ?? "User"
-                                        usernameIsFocused = true
-                                    }
-                                } label: {
-                                    Text("Edit")
-                                        .font(.footnote)
-                                        .foregroundColor(.secondary)
-                                }
+                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
+                        
+                        NavigationLink {
+                            
+                        } label: {
+                            ZStack {
+                                Capsule(style: .circular)
+                                    .strokeBorder(.gray)
+                                    .clipped()
+                                    .clipShape(Capsule())
+                                    .frame(width: 85, height: 20)
+                                Text("Edit profile")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
                             }
                         }
                     }
+                    Text(viewModel.currentUser?.username ?? "Username")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .italic()
+                        .multilineTextAlignment(.center)
                     
                     Spacer()
                     
@@ -195,21 +126,21 @@ struct ProfileView: View {
         }
     }
     
-    @MainActor
-    func onSubmit() {
-        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
-            viewModel.usernameIsAvailable(username: newUsername, { available in
-                if (available || newUsername == viewModel.currentUser?.username ?? "") {
-                    viewModel.updateUsername(to: newUsername)
-                    usernameError = ""
-                    editingUsername = false
-                } else {
-                    usernameError = "This username is not available!"
-                }
-                    
-            })
-        }
-    }
+//    @MainActor
+//    func onSubmit() {
+//        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
+//            viewModel.usernameIsAvailable(username: newUsername, { available in
+//                if (available || newUsername == viewModel.currentUser?.username ?? "") {
+//                    viewModel.updateUsername(to: newUsername)
+//                    usernameError = ""
+//                    editingUsername = false
+//                } else {
+//                    usernameError = "This username is not available!"
+//                }
+//
+//            })
+//        }
+//    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
