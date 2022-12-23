@@ -73,9 +73,31 @@ class CommentsViewModel: ObservableObject {
     func deleteComment(comment: Comment, activityId: String) {
         let activityRef = Firestore.firestore().collection("activities").document(activityId)
         let commentsRef = activityRef.collection("comments")
+
+        // Delete the comment
         commentsRef.document(comment.id).delete()
         activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+        
+        // Query to find the next most recent comment
+        let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)
+
+        query.getDocuments { (querySnapshot, error) in
+            if error != nil {
+                // Handle the error
+            } else {
+                if querySnapshot?.documents.count == 0 {
+                    // Delete the "lastCommentAt" field if there are no other comments
+                    activityRef.updateData(["lastCommentAt": FieldValue.delete(),
+                                            "commentCount": FieldValue.delete()])
+                } else if let document = querySnapshot?.documents.first {
+                    // Update the "lastCommentAt" field with the timestamp of the next most recent comment
+                    activityRef.updateData(["lastCommentAt": document.get("timestamp")!])
+                }
+            }
+        }
     }
+
+
     
     
     func hideComment(comment: Comment, activityId: String) {
