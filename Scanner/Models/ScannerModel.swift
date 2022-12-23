@@ -192,10 +192,10 @@ struct User: Identifiable, Decodable {
     let commentCount: Int?
     let lastCommentAt: Timestamp?
     let createdAt: Timestamp?
-    let twitterHandle: String?  // added this line
-    let instagramHandle: String?  // added this line
-    let facebookHandle: String?  // added this line
-    let tiktokHandle: String?  // added this line
+    var twitterHandle: String?
+    var instagramHandle: String?
+    var facebookHandle: String?
+    var tiktokHandle: String?
     
     init(id: String, username: String) {
         self.id = id
@@ -205,10 +205,10 @@ struct User: Identifiable, Decodable {
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
-        self.twitterHandle = nil  // added this line
-        self.instagramHandle = nil  // added this line
-        self.facebookHandle = nil  // added this line
-        self.tiktokHandle = nil  // added this line
+        self.twitterHandle = nil
+        self.instagramHandle = nil
+        self.facebookHandle = nil
+        self.tiktokHandle = nil
     }
     
     init(id: String, username: String, profileImageURL: URL) {
@@ -219,10 +219,10 @@ struct User: Identifiable, Decodable {
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
-        self.twitterHandle = nil  // added this line
-        self.instagramHandle = nil  // added this line
-        self.facebookHandle = nil  // added this line
-        self.tiktokHandle = nil  // added this line
+        self.twitterHandle = nil
+        self.instagramHandle = nil
+        self.facebookHandle = nil
+        self.tiktokHandle = nil
     }
     
     init(document: DocumentSnapshot) {
@@ -233,10 +233,10 @@ struct User: Identifiable, Decodable {
         self.commentCount = document.data()?["commentCount"] as? Int
         self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
         self.createdAt = document.data()?["createdAt"] as? Timestamp
-        self.twitterHandle = document.data()?["twitterHandle"] as? String  // added this line
-        self.instagramHandle = document.data()?["instagramHandle"] as? String  // added this line
-        self.facebookHandle = document.data()?["facebookHandle"] as? String  // added this line
-        self.tiktokHandle = document.data()?["tiktokHandle"] as? String  // added this line
+        self.twitterHandle = document.data()?["twitterHandle"] as? String
+        self.instagramHandle = document.data()?["instagramHandle"] as? String
+        self.facebookHandle = document.data()?["facebookHandle"] as? String
+        self.tiktokHandle = document.data()?["tiktokHandle"] as? String
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -266,6 +266,19 @@ struct User: Identifiable, Decodable {
         self.instagramHandle = try container.decodeIfPresent(String.self, forKey: .instagramHandle)
         self.facebookHandle = try container.decodeIfPresent(String.self, forKey: .facebookHandle)
         self.tiktokHandle = try container.decodeIfPresent(String.self, forKey: .tiktokHandle)
+    }
+    
+    func toData() -> [String: Any?] {
+        return ["username": self.username,
+                "admin": self.admin,
+                "profileImageURL": self.profileImageURL,
+                "commentCount": self.commentCount,
+                "lastCommentAt": self.lastCommentAt?.firebaseTimestamp,
+                "createdAt": self.createdAt?.firebaseTimestamp,
+                "twitterHandle": self.twitterHandle,
+                "instagramHandle": self.instagramHandle,
+                "facebookHandle": self.facebookHandle,
+                "tiktokHandle": self.tiktokHandle]
     }
 }
 

@@ -80,7 +80,6 @@ final class MainViewModel: ObservableObject {
 
             if let storedUser = Auth.auth().currentUser {
               // User is signed in.
-                self.loggedIn = true
                 self.initUser(user: storedUser)
                 
             }
