@@ -73,10 +73,14 @@ class CommentsViewModel: ObservableObject {
     func deleteComment(comment: Comment, activityId: String) {
         let activityRef = Firestore.firestore().collection("activities").document(activityId)
         let commentsRef = activityRef.collection("comments")
+        let usersRef = Firestore.firestore().collection("users").document(comment.user.id)
 
         // Delete the comment
         commentsRef.document(comment.id).delete()
         activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+        
+        // Decrement the user's commentCount
+        usersRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
         
         // Query to find the next most recent comment
         let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)
