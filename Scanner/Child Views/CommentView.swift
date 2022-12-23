@@ -12,28 +12,34 @@ struct CommentView: View {
     let admin: Bool
     let formatter = RelativeDateTimeFormatter()
     
+    @State private var showingProfile = false
+    
     var body: some View {
         HStack {
-            if ((comment.user.profileImageURL) != nil){
-                AsyncImage(url: comment.user.profileImageURL) { image in
-                        image
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                    } placeholder: {
+            Button {
+                showingProfile = true
+            } label: {
+                if ((comment.user.profileImageURL) != nil){
+                    AsyncImage(url: comment.user.profileImageURL) { image in
+                            image
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.gray)
+                        }
+                        
+                    } else {
                         Image(systemName: "person.circle")
                             .resizable()
                             .frame(width: 35, height: 35)
                             .foregroundColor(.gray)
                     }
-                    
-                } else {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                        .foregroundColor(.gray)
-                }
-
+            }
+            
             
             VStack(alignment: .leading) {
                 HStack {
@@ -66,6 +72,14 @@ struct CommentView: View {
             }
         }
         .padding(.vertical, 4)
+        .sheet(isPresented: $showingProfile) {
+            if #available(iOS 16.0, *) {
+                ProfilePopover(user: comment.user)
+                    .presentationDetents([.medium, .large])
+            } else {
+                ProfilePopover(user: comment.user)
+            }
+        }
     
         Divider()
     }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
-import FirebaseCore
+import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
@@ -157,7 +157,6 @@ final class MainViewModel: ObservableObject {
             // 5
             GIDSignIn.sharedInstance.signIn(with: configuration, presenting: rootViewController) { [unowned self] user, error in
                 authenticateUser(for: user, with: error)
-                
             }
             self.loginType = "google"
         }
@@ -347,7 +346,7 @@ final class MainViewModel: ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
         
-        userRef.setData(["username": user.username, "imageURL": user.profileImageURL?.description ?? ""]) { err in
+        userRef.setData(["username": user.username, "imageURL": user.profileImageURL?.description ?? "", "createdAt": Firebase.Timestamp()]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

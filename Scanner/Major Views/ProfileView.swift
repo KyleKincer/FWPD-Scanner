@@ -56,7 +56,7 @@ struct ProfileView: View {
                 
                 HStack (alignment: .bottom) {
                     
-                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL)
+                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
                     
                     VStack {
                         if editingUsername {

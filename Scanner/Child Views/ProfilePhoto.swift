@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
-import Drops
 
 struct ProfilePhoto: View {
     let url: URL?
+    let size: CGFloat
     
     var body: some View {
         if let url = url {
             ZStack {
                 Circle()
                     .foregroundColor(.white)
-                    .frame(width: 100, height: 100)
+                    .frame(width: size, height: size)
                 
                 AsyncImage(url: url) { image in
                     image
+                        .resizable()
+                        .frame(width: size - 3, height: size - 3)
                         .clipShape(Circle())
                 } placeholder: {
                     Image(systemName: "person.crop.circle")
