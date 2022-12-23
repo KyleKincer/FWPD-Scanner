@@ -12,7 +12,7 @@ struct ProfilePopover: View {
     var body: some View {
         VStack(spacing: 5) {
             // Photo
-            ProfilePhoto(url: user.profileImageURL, size: 200)
+            ProfilePhoto(url: user.profileImageURL, size: 175)
             
             // Username
             Text(user.username)

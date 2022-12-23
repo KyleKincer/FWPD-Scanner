@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State private var signingUp = false
     @Binding var showProfileView : Bool
     @State var showPurchaseSheet = false
-    @State var usernameError = ""
+    @State var showingProfileEditor = false
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -24,8 +24,8 @@ struct ProfileView: View {
             }
             
         } else {
-            // Profile View
             VStack {
+                // Nav
                 HStack {
                     Button (action: {
                         withAnimation {
@@ -51,26 +51,28 @@ struct ProfileView: View {
                     
                 }
                 
-                HStack (alignment: .bottom) {
-                    
+                // Profile view
+                HStack (alignment: .top) {
                     VStack {
                         ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
                         
-                        NavigationLink {
-                            
-                        } label: {
-                            ZStack {
-                                Capsule(style: .circular)
-                                    .strokeBorder(.gray)
-                                    .clipped()
-                                    .clipShape(Capsule())
-                                    .frame(width: 85, height: 20)
-                                Text("Edit profile")
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                            }
+                        Button {
+                            showingProfileEditor = true
+                        }
+                    label: {
+                        ZStack {
+                            Capsule(style: .circular)
+                                .strokeBorder(.gray)
+                                .clipped()
+                                .clipShape(Capsule())
+                                .frame(width: 85, height: 20)
+                            Text("Edit profile")
+                                .font(.footnote)
+                                .foregroundColor(.white)
                         }
                     }
+                    }
+                    // Username
                     Text(viewModel.currentUser?.username ?? "Username")
                         .font(.title)
                         .fontWeight(.bold)
@@ -79,20 +81,20 @@ struct ProfileView: View {
                     
                     Spacer()
                     
-//                    if (!editingUsername) {
-//
-//                        HStack (alignment: .center) {
-//                            Button(action: {
-//                                showPurchaseSheet.toggle()
-//                            }, label: {
-//                                Image(systemName: "dollarsign.square")
-//                                    .foregroundColor(.white)
-//                                    .padding(.trailing)
-//                                    .shadow(radius: 5.0)
-//                                    .font(.system(size: 30))
-//                            })
-//                        }
-//                    }
+                    //                    if (!editingUsername) {
+                    //
+                    //                        HStack (alignment: .center) {
+                    //                            Button(action: {
+                    //                                showPurchaseSheet.toggle()
+                    //                            }, label: {
+                    //                                Image(systemName: "dollarsign.square")
+                    //                                    .foregroundColor(.white)
+                    //                                    .padding(.trailing)
+                    //                                    .shadow(radius: 5.0)
+                    //                                    .font(.system(size: 30))
+                    //                            })
+                    //                        }
+                    //                    }
                 }
                 .padding([.top, .horizontal])
                 
@@ -101,7 +103,7 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-
+                
                 TabView {
                     BookmarkView(viewModel: viewModel)
                         .tabItem {
@@ -123,24 +125,47 @@ struct ProfileView: View {
             .sheet(isPresented: $showPurchaseSheet) {
                 PurchaseView(viewModel: viewModel)
             }
+            .sheet(isPresented: $showingProfileEditor) {
+                if #available(iOS 16.0, *) {
+                    ProfileEditView(viewModel: viewModel)
+                        .presentationDetents([.large])
+                        .presentationDragIndicator(.visible)
+                } else {
+                    VStack {
+                        HStack {
+                            Button (action: {
+                                withAnimation {
+                                    showProfileView.toggle()
+                                }
+                            }, label: {
+                                BackButtonView(text: "Back", color: .orange)
+                            })
+                            
+                            Spacer()
+                        }
+                        
+                        ProfileEditView(viewModel: viewModel)
+                    }
+                }
+            }
         }
     }
     
-//    @MainActor
-//    func onSubmit() {
-//        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
-//            viewModel.usernameIsAvailable(username: newUsername, { available in
-//                if (available || newUsername == viewModel.currentUser?.username ?? "") {
-//                    viewModel.updateUsername(to: newUsername)
-//                    usernameError = ""
-//                    editingUsername = false
-//                } else {
-//                    usernameError = "This username is not available!"
-//                }
-//
-//            })
-//        }
-//    }
+    //    @MainActor
+    //    func onSubmit() {
+    //        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
+    //            viewModel.usernameIsAvailable(username: newUsername, { available in
+    //                if (available || newUsername == viewModel.currentUser?.username ?? "") {
+    //                    viewModel.updateUsername(to: newUsername)
+    //                    usernameError = ""
+    //                    editingUsername = false
+    //                } else {
+    //                    usernameError = "This username is not available!"
+    //                }
+    //
+    //            })
+    //        }
+    //    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
