@@ -370,6 +370,25 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    func updateUser(user: User, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        usernameIsAvailable(username: user.username) { success in
+            if !success {
+                completion(.failure(AccountError.usernameTaken))
+            }
+        }
+        
+        let data = user.toData()
+
+        Firestore.firestore().collection("users").document(user.id).setData(data as [String : Any]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(()))
+            }
+        }
+    
     // Get next 25 activities from Firestore
     func getMoreActivities() {
         withAnimation {

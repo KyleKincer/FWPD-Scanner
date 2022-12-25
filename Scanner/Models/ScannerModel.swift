@@ -228,6 +228,22 @@ struct User: Identifiable, Decodable {
         self.tiktokHandle = nil
     }
     
+    init(id: String, username: String, bio: String?, twitterHandle: String?, instagramHandle: String?, tiktokHandle: String?) {
+        self.id = id
+        self.username = username
+        self.admin = false
+        self.profileImageURL = nil
+        self.commentCount = 0
+        self.lastCommentAt = nil
+        self.createdAt = nil
+        self.bio = bio
+        self.twitterHandle = twitterHandle
+        self.instagramHandle = instagramHandle
+        self.facebookHandle = nil
+        self.tiktokHandle = tiktokHandle
+    }
+
+    
     init(document: DocumentSnapshot) {
         self.id = document.documentID
         self.username = (document.data()!["username"] as? String)!

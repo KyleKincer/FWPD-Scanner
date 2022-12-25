@@ -45,7 +45,7 @@ struct CommentView: View {
                 HStack {
                     Text(comment.user.username)
                         .font(.headline)
-                    if (admin) {
+                    if (comment.user.admin) {
                         Image(systemName: "crown")
                             .font(.footnote)
                             .foregroundColor(.red)

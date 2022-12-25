@@ -68,9 +68,10 @@ struct ProfileView: View {
                                 .frame(width: 85, height: 20)
                             Text("Edit profile")
                                 .font(.footnote)
-                                .foregroundColor(.white)
+                                .foregroundColor(.secondary)
                         }
                     }
+                    .padding(.top, 10)
                     }
                     // Username
                     Text(viewModel.currentUser?.username ?? "Username")

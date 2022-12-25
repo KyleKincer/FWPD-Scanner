@@ -24,3 +24,15 @@ enum SetName: String {
     case bookmarks
     case recentlyCommentedActivities
 }
+
+enum AccountError: LocalizedError {
+    case usernameTaken
+
+    var localizedDescription: String? {
+        switch self {
+        case .usernameTaken:
+            return NSLocalizedString("The username is already taken", comment: "")
+        }
+    }
+}
+
