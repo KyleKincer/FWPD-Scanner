@@ -87,7 +87,7 @@
 		EB633C63295B2433004EC04B /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C60295B2433004EC04B /* ProfileEditView.swift */; };
 		EB633C64295B2433004EC04B /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C61295B2433004EC04B /* ProfilePhotoView.swift */; };
 		EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C62295B2433004EC04B /* ProfilePopoverView.swift */; };
-		EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */; };
+		EB64E79028F6209500721DD0 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E78F28F6209500721DD0 /* FilterSettingsView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
@@ -102,8 +102,6 @@
 		EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */; };
 		EBC7DB3E2948EB650059BEC5 /* WatchScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */; };
 		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
-		EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE043FE28F5F23B003C4A37 /* SettingsView.swift */; };
-		EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE0440028F5F255003C4A37 /* NaturesListView.swift */; };
 		EBFB9ED2292EA7F2002BD3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15899E292544080009F60D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +194,7 @@
 		EB633C60295B2433004EC04B /* ProfileEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		EB633C61295B2433004EC04B /* ProfilePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
 		EB633C62295B2433004EC04B /* ProfilePopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePopoverView.swift; sourceTree = "<group>"; };
-		EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedFilterSettingsView.swift; sourceTree = "<group>"; };
+		EB64E78F28F6209500721DD0 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
 		EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScannerRelease.entitlements; sourceTree = "<group>"; };
@@ -215,8 +213,6 @@
 		EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScannerModel.swift; sourceTree = "<group>"; };
 		EBD6128E292BAF2200FE9037 /* WatchScanner-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchScanner-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
-		EBE043FE28F5F23B003C4A37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EBE0440028F5F255003C4A37 /* NaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturesListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,11 +457,9 @@
 		EB633C67295B2599004EC04B /* Settings Views */ = {
 			isa = PBXGroup;
 			children = (
-				EBE043FE28F5F23B003C4A37 /* SettingsView.swift */,
-				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
+				EB64E78F28F6209500721DD0 /* FilterSettingsView.swift */,
 				EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */,
 				EB136E12292DC53E00CA905D /* NotificationView.swift */,
-				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -507,8 +501,8 @@
 			isa = PBXGroup;
 			children = (
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
-				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
+				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
 				EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */,
@@ -754,7 +748,7 @@
 				EB136E13292DC53E00CA905D /* NotificationView.swift in Sources */,
 				E24CED4C29463AB200EB960C /* RecentCommentsView.swift in Sources */,
 				E26449502796487200685DAB /* ActivityRowView.swift in Sources */,
-				EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */,
+				EB64E79028F6209500721DD0 /* FilterSettingsView.swift in Sources */,
 				EB0C3B0B29443B4B0098C234 /* HistoryView.swift in Sources */,
 				E264494E2794B56700685DAB /* NetworkManager.swift in Sources */,
 				EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */,
@@ -775,8 +769,6 @@
 				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
 				EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
-				EBE043FF28F5F23B003C4A37 /* SettingsView.swift in Sources */,
-				EBE0440128F5F255003C4A37 /* NaturesListView.swift in Sources */,
 				EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */,
 				EB3A359328F5FEDE009625D0 /* NotificationSettingsView.swift in Sources */,
 				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,

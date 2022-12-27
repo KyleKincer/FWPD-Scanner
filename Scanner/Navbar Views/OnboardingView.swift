@@ -27,8 +27,12 @@ struct OnboardingView: View {
                 Group {
                     Spacer()
                     
-                    Text("Welcome to")
+                    Text("FWPD")
                         .italic()
+                        .fontWeight(.bold)
+                        .font(.subheadline)
+                        .padding(.top)
+                    
                     Text("Scanner")
                         .fontWeight(.black)
                         .font(.largeTitle)

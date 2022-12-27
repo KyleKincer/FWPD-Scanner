@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExpandedSettingsView: View {
+struct FilterSettingsView: View {
     @Binding var showFilter: Bool
     @ObservedObject var viewModel: MainViewModel
     @State private var refreshOnExit = false
@@ -17,49 +17,34 @@ struct ExpandedSettingsView: View {
     @State var selection = Set<String>()
     @State var dateFrom = Date()
     @State var dateTo = Date()
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.editMode) private var editMode
     @State var tenSet = Set<String>()
     @State var showNatureAlert = false
     @State private var searchText = ""
     @State var showPage : Bool = false
     @State var signingUp : Bool = false
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) private var editMode
+
     let oldestDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2018, month: 01, day: 01))!
     
     var body: some View {
         VStack {
             
-            ZStack {
-                Text("Activity Filters")
-                    .fontWeight(.black)
-                    .italic()
-                    .font(.largeTitle)
-                    .shadow(radius: 2)
-                    .foregroundColor(Color("ModeOpposite"))
-                    .padding(.top)
-                
-                HStack {
-                    Button(action: {
-                        if (selection.count-1 == 0) {
-                            viewModel.useNature = false
-                            selection.insert("None")
-                        }
-                        dismiss()
-                    }, label: {
-                        HStack {
-                            Image(systemName: "arrow.left")
-                                .font(.system(size: 30))
-                            Text("Save Filters")
-                                .padding([.trailing, .vertical])
-                        }
-                    })
-                    .padding(.leading)
-                    .foregroundColor(.green)
-                    
-                    Spacer()
-                    
+            Button(action: {
+                withAnimation {
+                    showFilter.toggle()
                 }
-            }
+            }, label: {
+                BackButtonView(text: "Apply", color: .green)
+            })
+            
+            Text("Activity Filters")
+                .fontWeight(.black)
+                .italic()
+                .font(.largeTitle)
+                .shadow(radius: 2)
+                .foregroundColor(Color("ModeOpposite"))
+                .padding(.top)
             
             Text("Only one Scanner Filter Category may be applied at a time.")
                 .multilineTextAlignment(.center)
@@ -68,7 +53,6 @@ struct ExpandedSettingsView: View {
             Text("This app only works for Fort Wayne, IN")
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
-            
             
             VStack {                
                 if (viewModel.locationEnabled) {
@@ -195,16 +179,10 @@ struct ExpandedSettingsView: View {
                 
                 Spacer()
             }
-            .padding(.horizontal, 70)
+            .padding(.horizontal, 30)
             .padding(.vertical, 10)
         }
-        .fullScreenCover(isPresented: $showPage, content: {
-            if (signingUp) {
-                RegisterView(viewModel: viewModel, signingUp: $signingUp, showPage: $showPage)
-            } else {
-                LoginView(viewModel: viewModel, signingUp: $signingUp, showPage: $showPage)
-            }
-        })
+
         .environment(\.editMode, .constant(EditMode.active))
         .onAppear {
             if (viewModel.selectedNatures.count == 1) {
@@ -261,9 +239,9 @@ struct ExpandedSettingsView: View {
     }
 }
 
-struct ExpandedSettingsView_Previews: PreviewProvider {
+struct FilterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedSettingsView(showFilter: .constant(true), viewModel: MainViewModel())
+        FilterSettingsView(showFilter: .constant(true), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }
