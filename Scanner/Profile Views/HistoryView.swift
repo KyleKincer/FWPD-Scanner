@@ -23,6 +23,7 @@ struct HistoryView: View {
             } else {
                 Text("No History In This Session")
                     .font(.system(size: 25))
+                    .multilineTextAlignment(.center)
                 
                 Image(systemName: "clock.badge.questionmark.fill")
                     .font(.system(size: 40))

@@ -49,6 +49,7 @@ struct ListView: View {
                 if (viewModel.showMostRecentComments) {
                     RecentCommentsView(viewModel: viewModel)
                         .transition(.move(edge: .trailing).combined(with: .scale))
+                    
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
                     if (viewModel.activities.count == 0 && !viewModel.isRefreshing) {
@@ -141,5 +142,6 @@ struct ListView: View {
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         ListView(viewModel: MainViewModel())
+            .environmentObject(AppDelegate())
     }
 }
