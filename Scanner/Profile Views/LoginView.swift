@@ -195,7 +195,7 @@ struct LoginView: View {
                                     } else {
                                         
                                         Image("googleLogo")
-                                            .scaleEffect(0.2)
+                                            .resizable()
                                             .frame(width: 50, height: 50)
                                             .shadow(radius: 6)
                                             .transition(.scale)

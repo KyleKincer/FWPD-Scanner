@@ -248,7 +248,13 @@ struct User: Identifiable, Decodable {
         self.id = document.documentID
         self.username = (document.data()!["username"] as? String)!
         self.admin = document.data()?["admin"] as? Bool ?? false
-        self.profileImageURL = URL(string: document.data()?["imageURL"] as! String)
+        
+        //This needs fixed
+        let profileImageString = document.data()?["imageURL"] ?? ""
+        self.profileImageURL = URL(string: profileImageString as! String)
+        
+        //
+        
         self.commentCount = document.data()?["commentCount"] as? Int
         self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
         self.createdAt = document.data()?["createdAt"] as? Timestamp
