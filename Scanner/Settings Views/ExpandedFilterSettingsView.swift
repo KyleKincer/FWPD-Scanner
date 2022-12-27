@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExpandedFilterSettings: View {
+struct ExpandedSettingsView: View {
     @Binding var showFilter: Bool
     @ObservedObject var viewModel: MainViewModel
     @State private var refreshOnExit = false
@@ -261,9 +261,9 @@ struct ExpandedFilterSettings: View {
     }
 }
 
-struct ExpandedFilterSettings_Previews: PreviewProvider {
+struct ExpandedSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpandedFilterSettings(showFilter: .constant(true), viewModel: MainViewModel())
+        ExpandedSettingsView(showFilter: .constant(true), viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }

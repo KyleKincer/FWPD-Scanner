@@ -17,6 +17,7 @@ import Drops
 
 @MainActor
 final class MainViewModel: ObservableObject {
+    
     // Main Model
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
@@ -45,7 +46,6 @@ final class MainViewModel: ObservableObject {
     @AppStorage("selectedNatures") var selectedNaturesUD = String()
     @AppStorage("adsRemoved") var adsRemoved = false
     @AppStorage("onboarding") var onboardingUD = true
-    @Published var onboarding = false
     
     // View States
     @Published var isRefreshing = false
@@ -55,13 +55,14 @@ final class MainViewModel: ObservableObject {
     @Published var bookmarkCount = 0
     @Published var showMostRecentComments = false
     @Published var showAuthError = false
+    @Published var onboarding = false
+    @Published var showAuth = false
     
     // Network and auth
     @Published var networkManager = NetworkManager()
     @Published var loggedIn = false
     @Published var currentUser : User?
     @Published var authError = ""
-    @Published var showAuth = false
     @Published var loginType = ""
     
     // Store

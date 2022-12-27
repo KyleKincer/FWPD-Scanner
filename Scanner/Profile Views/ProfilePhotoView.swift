@@ -38,8 +38,8 @@ struct ProfilePhoto: View {
     }
 }
 
-//struct ProfilePhoto_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfilePhoto()
-//    }
-//}
+struct ProfilePhoto_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfilePhoto(url: nil, size: CGFloat(5.0))
+    }
+}

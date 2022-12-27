@@ -136,8 +136,8 @@ struct ProfileEditView: View {
     }
 }
 
-//struct ProfileEditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileEditView(viewModel: MainViewModel())
-//    }
-//}
+struct ProfileEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileEditView(viewModel: MainViewModel())
+    }
+}

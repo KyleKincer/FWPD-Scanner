@@ -82,13 +82,13 @@ struct MainView: View {
                             SettingsView(showFilter: $showFilter, viewModel: viewModel)
                                 .presentationDetents([.fraction(0.8)])
                         } else {
-                            ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                            ExpandedSettingsView(showFilter: $showFilter, viewModel: viewModel)
                         }
                     } else {
                         if (sizeClass == .compact) {
                             SettingsView(showFilter: $showFilter, viewModel: viewModel)
                         } else {
-                            ExpandedFilterSettings(showFilter: $showFilter, viewModel: viewModel)
+                            ExpandedSettingsView(showFilter: $showFilter, viewModel: viewModel)
                         }
                     }
                 }

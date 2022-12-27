@@ -84,6 +84,9 @@
 		EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406728E6166E009FDA3D /* StandardNavBarView.swift */; };
 		EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406928E617A0009FDA3D /* ActivityView.swift */; };
 		EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */; };
+		EB633C63295B2433004EC04B /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C60295B2433004EC04B /* ProfileEditView.swift */; };
+		EB633C64295B2433004EC04B /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C61295B2433004EC04B /* ProfilePhotoView.swift */; };
+		EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C62295B2433004EC04B /* ProfilePopoverView.swift */; };
 		EB64E79028F6209500721DD0 /* ExpandedFilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
 		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
@@ -190,6 +193,9 @@
 		EB62D7EE28E79D9B005A76E7 /* WatchRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRowView.swift; sourceTree = "<group>"; };
 		EB62D7F028E7A7D7005A76E7 /* WatchMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMapAnnotationView.swift; sourceTree = "<group>"; };
 		EB62D7F228E7A80D005A76E7 /* WatchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMapView.swift; sourceTree = "<group>"; };
+		EB633C60295B2433004EC04B /* ProfileEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		EB633C61295B2433004EC04B /* ProfilePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
+		EB633C62295B2433004EC04B /* ProfilePopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePopoverView.swift; sourceTree = "<group>"; };
 		EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedFilterSettingsView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
@@ -292,7 +298,11 @@
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
 				EB57406B28E61A20009FDA3D /* Major Views */,
-				EB57406D28E61A5E009FDA3D /* Parent Views */,
+				EB633C68295B2658004EC04B /* Navbar Views */,
+				EB633C67295B2599004EC04B /* Settings Views */,
+				EB633C66295B2583004EC04B /* Profile Views */,
+				EB633C69295B268A004EC04B /* Comment Views */,
+				EB57406D28E61A5E009FDA3D /* List Views */,
 				EBB42E4428F65D2100F32BD8 /* Child Views */,
 				E202F448278E84A8009C0B13 /* Preview Content */,
 				E202F446278E84A8009C0B13 /* Assets.xcassets */,
@@ -402,32 +412,22 @@
 			isa = PBXGroup;
 			children = (
 				EB1CC35B28E5158F009B593F /* MainView.swift */,
-				EB0C3B0829442E590098C234 /* ProfileView.swift */,
-				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
-				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
-				EBE043FE28F5F23B003C4A37 /* SettingsView.swift */,
-				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
-				EB397D2B28F8AC2900E7178F /* StatusView.swift */,
 				EB57406928E617A0009FDA3D /* ActivityView.swift */,
-				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
+				EB397D2B28F8AC2900E7178F /* StatusView.swift */,
 			);
 			path = "Major Views";
 			sourceTree = "<group>";
 		};
-		EB57406D28E61A5E009FDA3D /* Parent Views */ = {
+		EB57406D28E61A5E009FDA3D /* List Views */ = {
 			isa = PBXGroup;
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
-				E2C16902293BE34B00642670 /* CommentsView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
-				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
-				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
-				EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */,
 				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
 			);
-			path = "Parent Views";
+			path = "List Views";
 			sourceTree = "<group>";
 		};
 		EB57406E28E61A70009FDA3D /* Models */ = {
@@ -440,6 +440,53 @@
 				E2C16906293C343800642670 /* CommentsViewModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EB633C66295B2583004EC04B /* Profile Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB0C3B0829442E590098C234 /* ProfileView.swift */,
+				EB633C60295B2433004EC04B /* ProfileEditView.swift */,
+				EB633C61295B2433004EC04B /* ProfilePhotoView.swift */,
+				EB633C62295B2433004EC04B /* ProfilePopoverView.swift */,
+				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
+				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
+				EBC7DB2B2948BB110059BEC5 /* PurchaseView.swift */,
+				EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */,
+				EB0C3B0A29443B4B0098C234 /* HistoryView.swift */,
+			);
+			path = "Profile Views";
+			sourceTree = "<group>";
+		};
+		EB633C67295B2599004EC04B /* Settings Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBE043FE28F5F23B003C4A37 /* SettingsView.swift */,
+				EB64E78F28F6209500721DD0 /* ExpandedFilterSettingsView.swift */,
+				EB3A359228F5FEDE009625D0 /* NotificationSettingsView.swift */,
+				EB136E12292DC53E00CA905D /* NotificationView.swift */,
+				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
+			);
+			path = "Settings Views";
+			sourceTree = "<group>";
+		};
+		EB633C68295B2658004EC04B /* Navbar Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
+				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
+				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
+			);
+			path = "Navbar Views";
+			sourceTree = "<group>";
+		};
+		EB633C69295B268A004EC04B /* Comment Views */ = {
+			isa = PBXGroup;
+			children = (
+				E2C16902293BE34B00642670 /* CommentsView.swift */,
+				E29176692941A03000D14526 /* CommentView.swift */,
+			);
+			path = "Comment Views";
 			sourceTree = "<group>";
 		};
 		EB98F86828E8C3B7009AC6B1 /* Frameworks */ = {
@@ -461,15 +508,9 @@
 			children = (
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
-				EB136E12292DC53E00CA905D /* NotificationView.swift */,
 				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
-				EBE0440028F5F255003C4A37 /* NaturesListView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
-				EB4EA5BC293FDE8000A39512 /* RegisterView.swift */,
-				E2E36C66293FB1F300A4A32C /* LoginView.swift */,
-				E29176692941A03000D14526 /* CommentView.swift */,
-				EBC7DB2B2948BB110059BEC5 /* PurchaseView.swift */,
 				EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */,
 			);
 			path = "Child Views";
@@ -695,11 +736,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
+				EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */,
 				EB0C3B0929442E590098C234 /* ProfileView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
 				EBBBCE31292AED720015E4C1 /* RefreshReminderView.swift in Sources */,
 				EB1CC35C28E5158F009B593F /* MainView.swift in Sources */,
 				E291766A2941A03000D14526 /* CommentView.swift in Sources */,
+				EB633C63295B2433004EC04B /* ProfileEditView.swift in Sources */,
 				E25EDCDC29398D5800F017E8 /* BannerAd.swift in Sources */,
 				E202F45127907868009C0B13 /* ScannerModel.swift in Sources */,
 				EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */,
@@ -722,6 +765,7 @@
 				EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */,
 				E2C16903293BE34B00642670 /* CommentsView.swift in Sources */,
 				EBBBCE2F292AE5500015E4C1 /* BookmarkView.swift in Sources */,
+				EB633C64295B2433004EC04B /* ProfilePhotoView.swift in Sources */,
 				E26449602798D38E00685DAB /* MapView.swift in Sources */,
 				EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */,
 				EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */,
