@@ -148,8 +148,7 @@ struct CommentsView: View {
                                     
                                 }
                             }
-                            .opacity(viewModel.activities.count > 0 ? 1 : 0)
-                            .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.activities.count > 0)
+                            .transition(.scale)
                     }
                 }
             }

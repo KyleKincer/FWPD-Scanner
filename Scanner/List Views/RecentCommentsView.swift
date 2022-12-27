@@ -43,9 +43,6 @@ struct RecentCommentsView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.getRecentlyCommentedActivities()
-        }
     }
 }
 

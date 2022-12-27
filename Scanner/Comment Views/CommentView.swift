@@ -40,7 +40,6 @@ struct CommentView: View {
                     }
             }
             
-            
             VStack(alignment: .leading) {
                 HStack {
                     Text(comment.user.username)

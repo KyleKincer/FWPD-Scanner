@@ -129,6 +129,7 @@ struct ProfileView: View {
                     ProfileEditView(viewModel: viewModel)
                         .presentationDetents([.large])
                         .presentationDragIndicator(.visible)
+                    
                 } else {
                     VStack {
                         HStack {

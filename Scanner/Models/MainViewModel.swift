@@ -248,6 +248,7 @@ final class MainViewModel: ObservableObject {
     
     func refresh() {
         print("R --- Refreshing")
+
         self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
@@ -278,6 +279,7 @@ final class MainViewModel: ObservableObject {
         }
         self.getNatures()
         self.getBookmarks()
+        self.getRecentlyCommentedActivities()
     }
     
     func createUser(email: String, password: String, username: String, _ completion: @escaping (Bool) -> Void) {
