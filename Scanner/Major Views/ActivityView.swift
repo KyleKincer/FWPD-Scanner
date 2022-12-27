@@ -54,6 +54,7 @@ struct ActivityView: View {
                         if (showMap) {
                             MapView(chosenActivity: $chosenActivity, activities: (viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities), viewModel: viewModel)
                                 .edgesIgnoringSafeArea(.all)
+                                .transition(.opacity)
                         }
                         
                         if (!showMap) {
@@ -91,6 +92,7 @@ struct ActivityView: View {
                             .onAppear {
                                 chosenActivity = nil
                             }
+                            .transition(.opacity)
                         }
                     }
                 default:
@@ -98,6 +100,7 @@ struct ActivityView: View {
                         if (showMap) {
                             MapView(chosenActivity: $chosenActivity, activities: viewModel.showBookmarks ? $viewModel.bookmarks : $viewModel.activities, viewModel: viewModel)
                                 .edgesIgnoringSafeArea(.all)
+                                .transition(.opacity)
                             
                         } else {
                             if #available(iOS 16.0, *) {
@@ -202,6 +205,7 @@ struct ActivityView: View {
                                             }
                                         }
                                     }
+                                    .transition(.opacity)
                                     .navigationBarBackButtonHidden()
                                 }
                             detail: {
@@ -254,6 +258,7 @@ struct ActivityView: View {
                                         ListView(viewModel: viewModel)
                                     }
                                 }
+                                .transition(.opacity)
                             }
                         }
                     }
@@ -267,5 +272,6 @@ struct ActivityView: View {
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityView(showMap: .constant(false), viewModel: MainViewModel())
+            .environmentObject(AppDelegate())
     }
 }

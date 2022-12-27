@@ -69,7 +69,20 @@ struct OnboardingView: View {
                             }
                     }
                     
-                    DisclaimerView()
+                    Text("One-Time Disclaimer:")
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    
+                    Text("Activities listed in FWPD Scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: false)
+                        .padding(.horizontal, 50)
+                    
+                    Text("If you are experiencing an emergency, dial 911.")
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: false)
+                        .padding(.horizontal, 30)
                         .padding(.top)
                     
                     Spacer()
@@ -102,25 +115,6 @@ struct OnboardingView: View {
             viewModel.selectedNaturesUD.removeAll()
             viewModel.refresh()
         }
-    }
-}
-    
-struct DisclaimerView: View {
-    var body: some View {
-        Text("One-Time Disclaimer:")
-            .fontWeight(.bold)
-        
-        Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
-            .multilineTextAlignment(.center)
-            .fixedSize(horizontal: false, vertical: false)
-            .padding(.horizontal, 50)
-        
-        Text("If you are experiencing an emergency, dial 911.")
-            .fontWeight(.bold)
-            .multilineTextAlignment(.center)
-            .fixedSize(horizontal: false, vertical: false)
-            .padding(.horizontal, 30)
-            .padding(.top)
     }
 }
 

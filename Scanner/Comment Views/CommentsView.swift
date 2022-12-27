@@ -18,6 +18,7 @@ struct CommentsView: View {
     @State var showSubmit = false
     @State var authHandle : AuthStateDidChangeListenerHandle?
     @State var signingUp : Bool = false
+    @State var animationDelay = 0.5
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -147,6 +148,8 @@ struct CommentsView: View {
                                     
                                 }
                             }
+                            .opacity(viewModel.activities.count > 0 ? 1 : 0)
+                            .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.activities.count > 0)
                     }
                 }
             }

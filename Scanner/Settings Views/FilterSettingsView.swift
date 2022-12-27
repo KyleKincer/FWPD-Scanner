@@ -79,6 +79,7 @@ struct FilterSettingsView: View {
                             
                             Section("Note: Traveling outside of Fort Wayne will prevent results from appearing when filtering by distance!") {}
                         }
+                        .transition(.move(edge: .top))
                     }
                     
                     Divider()
@@ -105,6 +106,7 @@ struct FilterSettingsView: View {
                                 justAppeared1 = false
                             }
                         }
+                        .transition(.move(edge: .top))
                     
                     
                     DatePicker("To", selection: $dateTo, in: oldestDate...Date(), displayedComponents: .date)
@@ -115,6 +117,7 @@ struct FilterSettingsView: View {
                                 justAppeared2 = false
                             }
                         }
+                        .transition(.move(edge: .top))
                 }
                 
                 Divider()
@@ -181,6 +184,7 @@ struct FilterSettingsView: View {
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 10)
+            .transition(.move(edge: .top))
         }
 
         .environment(\.editMode, .constant(EditMode.active))
@@ -242,7 +246,5 @@ struct FilterSettingsView: View {
 struct FilterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         FilterSettingsView(showFilter: .constant(true), viewModel: MainViewModel())
-            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
-            .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
     }
 }

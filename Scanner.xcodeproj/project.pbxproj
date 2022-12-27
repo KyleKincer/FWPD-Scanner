@@ -89,7 +89,7 @@
 		EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C62295B2433004EC04B /* ProfilePopoverView.swift */; };
 		EB64E79028F6209500721DD0 /* FilterSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E78F28F6209500721DD0 /* FilterSettingsView.swift */; };
 		EB64E79428F649ED00721DD0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79328F649ED00721DD0 /* OnboardingView.swift */; };
-		EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
+		EB64E79628F657F100721DD0 /* DisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* DisclaimerView.swift */; };
 		EB7E41F628F72FDC0007347E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */; };
 		EBA6ECD9292017EC00805610 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EBBBCE2F292AE5500015E4C1 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBCE2E292AE5500015E4C1 /* BookmarkView.swift */; };
@@ -101,7 +101,6 @@
 		EBC7DB2E2948BD660059BEC5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC7DB2D2948BD660059BEC5 /* StoreKit.framework */; };
 		EBC7DB302948BD7D0059BEC5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB2F2948BD7D0059BEC5 /* StoreManager.swift */; };
 		EBC7DB3E2948EB650059BEC5 /* WatchScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7DB3D2948EB650059BEC5 /* WatchScannerModel.swift */; };
-		EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */; };
 		EBFB9ED2292EA7F2002BD3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15899E292544080009F60D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +195,7 @@
 		EB633C62295B2433004EC04B /* ProfilePopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePopoverView.swift; sourceTree = "<group>"; };
 		EB64E78F28F6209500721DD0 /* FilterSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSettingsView.swift; sourceTree = "<group>"; };
 		EB64E79328F649ED00721DD0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDisclaimerView.swift; sourceTree = "<group>"; };
+		EB64E79528F657F100721DD0 /* DisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclaimerView.swift; sourceTree = "<group>"; };
 		EB70058A28FF2D2F0056892F /* ScannerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScannerRelease.entitlements; sourceTree = "<group>"; };
 		EB7E41F528F72FDC0007347E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB98F86928E8C3B7009AC6B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -294,11 +293,11 @@
 				EB57406E28E61A70009FDA3D /* Models */,
 				E264494C2794B55000685DAB /* Utilities */,
 				EB57406B28E61A20009FDA3D /* Major Views */,
+				EB57406D28E61A5E009FDA3D /* List Views */,
 				EB633C68295B2658004EC04B /* Navbar Views */,
 				EB633C67295B2599004EC04B /* Settings Views */,
 				EB633C66295B2583004EC04B /* Profile Views */,
 				EB633C69295B268A004EC04B /* Comment Views */,
-				EB57406D28E61A5E009FDA3D /* List Views */,
 				EBB42E4428F65D2100F32BD8 /* Child Views */,
 				E202F448278E84A8009C0B13 /* Preview Content */,
 				E202F446278E84A8009C0B13 /* Assets.xcassets */,
@@ -419,7 +418,6 @@
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
-				EB64E79528F657F100721DD0 /* LocationDisclaimerView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
 			);
@@ -470,6 +468,7 @@
 				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
 				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
 				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
+				EB64E79528F657F100721DD0 /* DisclaimerView.swift */,
 			);
 			path = "Navbar Views";
 			sourceTree = "<group>";
@@ -771,7 +770,7 @@
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */,
 				EB3A359328F5FEDE009625D0 /* NotificationSettingsView.swift in Sources */,
-				EB64E79628F657F100721DD0 /* LocationDisclaimerView.swift in Sources */,
+				EB64E79628F657F100721DD0 /* DisclaimerView.swift in Sources */,
 				E264495727986B0700685DAB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -811,7 +810,6 @@
 				EB1589C0292545190009F60D /* MainViewModel.swift in Sources */,
 				EB1589B7292544790009F60D /* TVOnboardingView.swift in Sources */,
 				EB1589BA292544CA0009F60D /* MapViewModel.swift in Sources */,
-				EBD612A5292D031F00FE9037 /* LocationDisclaimerView.swift in Sources */,
 				EB1589B1292544790009F60D /* TVMapAnnotationView.swift in Sources */,
 				EB1589BC292544E40009F60D /* ScannerModel.swift in Sources */,
 				EB1589B6292544790009F60D /* TVStatusView.swift in Sources */,
@@ -963,7 +961,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -984,7 +982,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
@@ -1012,7 +1010,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1033,7 +1031,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				NSLocationAlwaysAndWhenInUseUsageDescription = "\"Will you allow this app to know your location?\"";
 				NSLocationWhenInUseUsageDescription = "\"Will you allow this app to always know your location?\"";
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
@@ -1059,7 +1057,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1072,7 +1070,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
 				PRODUCT_NAME = "FWPD Scanner";
 				SDKROOT = watchos;
@@ -1093,7 +1091,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1106,7 +1104,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
 				PRODUCT_NAME = "FWPD Scanner";
 				SDKROOT = watchos;
@@ -1127,7 +1125,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1141,7 +1139,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1161,7 +1159,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1175,7 +1173,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylekincer.ScannerTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

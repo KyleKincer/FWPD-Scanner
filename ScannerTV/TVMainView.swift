@@ -117,7 +117,7 @@ struct TVMainView: View {
             }
         }
         .sheet(isPresented: $showLocationDisclaimer, content: {
-            LocationDisclaimerView()
+            DisclaimerView()
         })
     }
 }

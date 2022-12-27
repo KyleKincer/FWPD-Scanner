@@ -29,6 +29,7 @@ struct BookmarkView: View {
                     Section {
                         List(viewModel.bookmarks, id: \.self) { activity in
                             ActivityRowView(activity: activity, viewModel: viewModel)
+                                .transition(.opacity)
                         }
                     }
                     .navigationTitle("Bookmarks")

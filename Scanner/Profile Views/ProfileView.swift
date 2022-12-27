@@ -120,9 +120,7 @@ struct ProfileView: View {
                         }
                 }
             }
-            .onDisappear {
-                viewModel.refresh()
-            }
+
             .sheet(isPresented: $showPurchaseSheet) {
                 PurchaseView(viewModel: viewModel)
             }

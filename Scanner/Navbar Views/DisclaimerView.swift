@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LocationDisclaimerView: View {
+struct DisclaimerView: View {
     let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     let build = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
     var body: some View {
@@ -19,7 +19,7 @@ struct LocationDisclaimerView: View {
             
             Spacer()
             
-            Text("Scanner Location Disclaimer")
+            Text("Location Disclaimer")
                 .font(.title2)
                 .italic()
                 .bold()
@@ -30,7 +30,7 @@ struct LocationDisclaimerView: View {
                 .font(.system(size: 60))
                 .padding(2)
             
-            Text("Scanner collects your precise location to provide information on the closest FWPD activities when certain filters are applied. All other times, location is used to display the distance between you and the location of reported activites.\nYour location is never shared to third-party vendors.")
+            Text("FWPD Scanner collects your precise location to provide information on the closest FWPD activities when certain filters are applied. All other times, location is used to display the distance between you and the location of reported activites.\nYour location is never shared to third-party vendors.")
                 .multilineTextAlignment(.center)
                 .padding()
                 .font(.footnote)
@@ -38,7 +38,7 @@ struct LocationDisclaimerView: View {
             
             Spacer()
             
-            Text("\(version) build \(build)")
+            Text("v\(version) - \(build)")
                 .foregroundColor(.gray)
                 .font(.footnote)
                 .padding()
@@ -46,8 +46,8 @@ struct LocationDisclaimerView: View {
     }
 }
 
-struct LocationDisclaimerView_Previews: PreviewProvider {
+struct DisclaimerView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationDisclaimerView()
+        DisclaimerView()
     }
 }

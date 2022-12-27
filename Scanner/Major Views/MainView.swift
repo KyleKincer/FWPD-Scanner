@@ -46,13 +46,16 @@ struct MainView: View {
                     
                     if (sizeClass == .compact) {
                         StandardNavBarView(showNotificationSheet: $showNotificationView, showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showProfileView: $showProfileView, viewModel: viewModel)
+                            .transition(.opacity)
                         
                         ActivityView(showMap: $showMap, viewModel: viewModel)
                             .environmentObject(appDelegate)
+                            .transition(.opacity)
                         
                     } else {
                         VStack {
                             ExpandedNavBarView(showFilter: $showFilter, showMap: $showMap, showLocationDisclaimer: $showLocationDisclaimer, showNotificationView: $showNotificationView, showProfileView: $showProfileView, viewModel: viewModel)
+                                .transition(.opacity)
                             
                             Divider()
                                 .padding(0)
@@ -60,6 +63,7 @@ struct MainView: View {
                             ActivityView(showMap: $showMap, viewModel: viewModel)
                                 .environmentObject(appDelegate)
                                 .padding(.top, -8)
+                                .transition(.opacity)
                             
                             
 //                            Divider()
@@ -90,10 +94,10 @@ struct MainView: View {
                 
                 .sheet(isPresented: $showLocationDisclaimer) {
                     if #available(iOS 16.1, *) {
-                        LocationDisclaimerView()
+                        DisclaimerView()
                             .presentationDetents([.fraction(0.5)])
                     } else {
-                        LocationDisclaimerView()
+                        DisclaimerView()
                     }
                 }
             }
@@ -107,9 +111,12 @@ struct MainView_Previews: PreviewProvider {
         MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
             .previewDisplayName("iPhone 13 mini")
+            .environmentObject(AppDelegate())
+        
         MainView(viewModel: MainViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (3rd generation)"))
             .previewDisplayName("iPad Pro (11-inch) (3rd generation)")
+            .environmentObject(AppDelegate())
     }
 }
 

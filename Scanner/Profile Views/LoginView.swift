@@ -164,38 +164,55 @@ struct LoginView: View {
                     }
                 })
                 
+                Divider()
+                    .padding()
+                
                 HStack {
                     Group {
-                        
-                        if (googleAuth) {
-                            ProgressView()
-                                .scaleEffect(2.5)
-                                .frame(width: 50, height: 50)
-                                .padding()
-                                .shadow(radius: 6)
-                            
-                        } else {
-                            Button(action: {
-                                playHaptic()
-                                googleAuth.toggle()
-                                withAnimation {
-                                    viewModel.loginWithGoogle()
+
+                        Button(action: {
+                            playHaptic()
+                            googleAuth.toggle()
+                            withAnimation {
+                                viewModel.loginWithGoogle()
+                            }
+                        }, label: {
+                            ZStack {
+                                Capsule()
+                                    .cornerRadius(100)
+                                
+                                    .foregroundColor(Color("ModeOpposite"))
+                                HStack {
+                                    
+                                    if (googleAuth) {
+                                        ProgressView()
+                                            .scaleEffect(2.5)
+                                            .frame(width: 50, height: 50)
+                                            .shadow(radius: 6)
+                                            .tint(Color.blue)
+                                            .transition(.scale)
+                                        
+                                    } else {
+                                        
+                                        Image("googleLogo")
+                                            .scaleEffect(0.2)
+                                            .frame(width: 50, height: 50)
+                                            .shadow(radius: 6)
+                                            .transition(.scale)
+                                    }
+                                    
+                                    Text("Login With Google")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color("ModeOpposite"))
+                                        .colorInvert()
+                                    
                                 }
-                            }, label: {
-                                Image("googleLogo")
-                            })
-                            .scaleEffect(0.2)
-                            .frame(width: 50, height: 50)
-                            .padding()
-                            .shadow(radius: 6)
-                        }
+                                
+                            }
+                            .frame(width: 250, height: 80)
+                        })
                     }
                 }
-                
-                Text("or sign up or in quickly with Google")
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
             }
         }
         .sheet(isPresented: $showPasswordForgot) {

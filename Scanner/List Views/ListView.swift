@@ -13,6 +13,7 @@ struct ListView: View {
     @State var showingRefreshReminder = false
     @State var showRefreshReminderOnActive = false
     @Environment(\.horizontalSizeClass) var sizeClass
+    @State var animationDelay = 0.5
     
     var body: some View {
         ZStack {
@@ -41,13 +42,13 @@ struct ListView: View {
                                 .font(viewModel.showMostRecentComments ? .title : .subheadline)
                                 .foregroundColor(viewModel.showMostRecentComments ? Color("ModeOpposite") : .blue)
                         })
-                        .transition(.move(edge: .leading))
                     }
                 }
                 .padding(.horizontal)
                 
                 if (viewModel.showMostRecentComments) {
                     RecentCommentsView(viewModel: viewModel)
+                        .transition(.move(edge: .trailing).combined(with: .scale))
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
                     if (viewModel.activities.count == 0 && !viewModel.isRefreshing) {
@@ -73,7 +74,10 @@ struct ListView: View {
                         NavigationView {
                             
                             List(viewModel.activities, id: \.self) { activity in
+                                
                                 ActivityRowView(activity: activity, viewModel: viewModel)
+                                    .opacity(viewModel.activities.count > 0 ? 1 : 0)
+                                    .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.activities.count > 0)
                                 
                                 if (activity == viewModel.activities.last) {
                                     if (viewModel.isLoading) {
@@ -98,6 +102,7 @@ struct ListView: View {
                                 viewModel.refresh()
                             }
                         }
+                        .transition(.move(edge: .leading).combined(with: .scale))
                     }
                 }
 //                SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
