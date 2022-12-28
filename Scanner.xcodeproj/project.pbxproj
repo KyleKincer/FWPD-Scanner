@@ -69,7 +69,6 @@
 		EB1589C32925482C0009F60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBA6ECD8292017EC00805610 /* GoogleService-Info.plist */; };
 		EB1A90EE295488A8002AC570 /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = EB1A90ED295488A8002AC570 /* Snow.sks */; };
 		EB1CC35C28E5158F009B593F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35B28E5158F009B593F /* MainView.swift */; };
-		EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */; };
 		EB346CB928FA407200693F59 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB346CB828FA407200693F59 /* DetailViewModel.swift */; };
 		EB397D2C28F8AC2900E7178F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB397D2B28F8AC2900E7178F /* StatusView.swift */; };
 		EB3A2079294B22D000EC9B0E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EB3A2078294B22D000EC9B0E /* FirebaseAnalytics */; };
@@ -174,7 +173,6 @@
 		EB1589BE292544F60009F60D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EB1A90ED295488A8002AC570 /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		EB1CC35B28E5158F009B593F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedDetailView.swift; sourceTree = "<group>"; };
 		EB346CB828FA407200693F59 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		EB397D2B28F8AC2900E7178F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		EB397D2F28F8E8DE00E7178F /* WatchStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStatusView.swift; sourceTree = "<group>"; };
@@ -417,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
+				E24522BD279134F200EFBB3E /* DetailView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
@@ -499,8 +498,6 @@
 		EBB42E4428F65D2100F32BD8 /* Child Views */ = {
 			isa = PBXGroup;
 			children = (
-				E24522BD279134F200EFBB3E /* DetailView.swift */,
-				EB1CC35D28E521D7009B593F /* ExpandedDetailView.swift */,
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
 				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
@@ -765,7 +762,6 @@
 				EB3A359528F6127F009625D0 /* ExpandedNavBarView.swift in Sources */,
 				E24CED46294231D300EB960C /* TextFieldLimitModifier.swift in Sources */,
 				E202F4532790C46F009C0B13 /* MainViewModel.swift in Sources */,
-				EB1CC35E28E521D7009B593F /* ExpandedDetailView.swift in Sources */,
 				EBBBCE33292B0B5D0015E4C1 /* SubscriptionManager.swift in Sources */,
 				E202F443278E84A7009C0B13 /* ScannerApp.swift in Sources */,
 				EBC7DB2A2948AEE10059BEC5 /* UniversalBackButton.swift in Sources */,

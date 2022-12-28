@@ -183,7 +183,6 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
     }
 }
 
-
 struct User: Identifiable, Decodable {
     let id: String
     var username: String
@@ -243,7 +242,6 @@ struct User: Identifiable, Decodable {
         self.tiktokHandle = tiktokHandle
     }
 
-    
     init(document: DocumentSnapshot) {
         self.id = document.documentID
         self.username = (document.data()!["username"] as? String)!

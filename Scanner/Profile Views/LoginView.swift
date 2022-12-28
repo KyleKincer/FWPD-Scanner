@@ -180,6 +180,7 @@ struct LoginView: View {
                             ZStack {
                                 Capsule()
                                     .cornerRadius(100)
+                                    .shadow(radius: 10)
                                 
                                     .foregroundColor(Color("ModeOpposite"))
                                 HStack {
