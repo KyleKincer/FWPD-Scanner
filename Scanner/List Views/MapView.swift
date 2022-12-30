@@ -34,6 +34,7 @@ struct MapView: View {
                 chosenActivity = nil
             }
             
+            
             if (chosenActivity != nil) {
                 Group {                
                     VStack {

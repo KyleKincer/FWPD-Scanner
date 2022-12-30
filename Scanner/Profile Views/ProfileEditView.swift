@@ -14,19 +14,11 @@ struct ProfileEditView: View {
     @State var twitterHandle = ""
     @State var instagramHandle = ""
     @State var tiktokHandle = ""
+    @Binding var showingProfileEditor: Bool
     
     var body: some View {
         
         VStack(alignment: .center) {
-            Text("Edit Profile")
-                .font(.title3)
-                .fontWeight(.bold)
-                .italic()
-                .padding(.top)
-            
-            ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
-                .padding(.top, 20)
-            
             List {
                 // Username
                 HStack {
@@ -48,7 +40,9 @@ struct ProfileEditView: View {
                             .lineLimit(3...4)
                             .limitInputLength(value: $bio, length: 200)
                     } else {
-                        // Fallback on earlier versions
+                        TextField(viewModel.currentUser?.bio ?? "Write a bit about yourself...", text: $bio)
+                            .textFieldStyle(.roundedBorder)
+                            .limitInputLength(value: $bio, length: 200)
                     }
                 }
                 
@@ -109,6 +103,7 @@ struct ProfileEditView: View {
                                     print("Username is available")
                                 }
                             }
+                            showingProfileEditor.toggle()
                         } label: {
                             ZStack {
                                 Capsule()
@@ -138,6 +133,6 @@ struct ProfileEditView: View {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(viewModel: MainViewModel())
+        ProfileEditView(viewModel: MainViewModel(), showingProfileEditor: .constant(true))
     }
 }

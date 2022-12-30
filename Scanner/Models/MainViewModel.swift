@@ -392,7 +392,6 @@ final class MainViewModel: ObservableObject {
             }
         }
     
-    // Get next 25 activities from Firestore
     func getMoreActivities() {
         withAnimation {
             self.isLoading = true
@@ -420,8 +419,7 @@ final class MainViewModel: ObservableObject {
             }
         }
     }
-    
-    // Get natures from Firestore
+
     func getNatures() {
         Task.init {
             do {
@@ -502,10 +500,6 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    
-    // Bookmark Controls
-    
-    //addBookmark
     func addBookmark(bookmark : Scanner.Activity) {
         var bookmarks = defaults.object(forKey: "Bookmarks") as? [String] ?? []
         bookmarks.append(String(bookmark.controlNumber))
@@ -518,9 +512,7 @@ final class MainViewModel: ObservableObject {
         print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         defaults.set(self.bookmarkCount, forKey: "bookmarkCount")
     }
-    
-    
-    //removeBookmark
+
     func removeBookmark(bookmark : Scanner.Activity) {
         var bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
         bookmarks?.removeAll { $0 == bookmark.controlNumber}
@@ -540,8 +532,7 @@ final class MainViewModel: ObservableObject {
             self.refresh()
         }
     }
-    
-    //checkBookmark
+
     func checkBookmark(bookmark : Scanner.Activity) -> Bool {
         let bookmarks = defaults.object(forKey: "Bookmarks") as? [String]
         let index = bookmarks?.firstIndex {$0 == bookmark.controlNumber}
@@ -552,8 +543,7 @@ final class MainViewModel: ObservableObject {
             return false
         }
     }
-    
-    //getBookmarks
+
     func getBookmarks() {
         let bookmarks = (defaults.object(forKey: "Bookmarks") as? [String])
         if (self.bookmarkCount > 0 && self.bookmarks.count != bookmarkCount) {

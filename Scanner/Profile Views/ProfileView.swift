@@ -56,22 +56,25 @@ struct ProfileView: View {
                     VStack {
                         ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
                         
-                        Button {
-                            showingProfileEditor = true
+                        if (!showingProfileEditor) {
+                            Button {
+                                withAnimation {
+                                    showingProfileEditor = true
+                                }
+                            } label: {
+                                ZStack {
+                                    Capsule(style: .circular)
+                                        .strokeBorder(.gray)
+                                        .clipped()
+                                        .clipShape(Capsule())
+                                        .frame(width: 85, height: 20)
+                                    Text("Edit profile")
+                                        .font(.footnote)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(.top, 10)
                         }
-                    label: {
-                        ZStack {
-                            Capsule(style: .circular)
-                                .strokeBorder(.gray)
-                                .clipped()
-                                .clipShape(Capsule())
-                                .frame(width: 85, height: 20)
-                            Text("Edit profile")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .padding(.top, 10)
                     }
                     // Username
                     Text(viewModel.currentUser?.username ?? "Username")
@@ -104,50 +107,56 @@ struct ProfileView: View {
                 
                 Spacer()
                 
-                
-                TabView {
-                    BookmarkView(viewModel: viewModel)
-                        .tabItem {
-                            Label("Bookmarks", systemImage: "bookmark")
-                                .tint(.orange)
-                        }
-                        .badge(viewModel.bookmarkCount)
+                if (showingProfileEditor) {
+                    ProfileEditView(viewModel: viewModel, showingProfileEditor: $showingProfileEditor)
+                        .transition(.opacity)
                     
-                    HistoryView(viewModel: viewModel)
-                        .tabItem {
-                            Label("History", systemImage: "clock")
-                                .foregroundColor(.blue)
-                        }
+                } else {
+                    TabView {
+                        BookmarkView(viewModel: viewModel)
+                            .tabItem {
+                                Label("Bookmarks", systemImage: "bookmark")
+                                    .tint(.orange)
+                            }
+                            .badge(viewModel.bookmarkCount)
+                        
+                        HistoryView(viewModel: viewModel)
+                            .tabItem {
+                                Label("History", systemImage: "clock")
+                                    .foregroundColor(.blue)
+                            }
+                    }
+                    .transition(.opacity)
                 }
             }
 
             .sheet(isPresented: $showPurchaseSheet) {
                 PurchaseView(viewModel: viewModel)
             }
-            .sheet(isPresented: $showingProfileEditor) {
-                if #available(iOS 16.0, *) {
-                    ProfileEditView(viewModel: viewModel)
-                        .presentationDetents([.large])
-                        .presentationDragIndicator(.visible)
-                    
-                } else {
-                    VStack {
-                        HStack {
-                            Button (action: {
-                                withAnimation {
-                                    showProfileView.toggle()
-                                }
-                            }, label: {
-                                BackButtonView(text: "Back", color: .orange)
-                            })
-                            
-                            Spacer()
-                        }
-                        
-                        ProfileEditView(viewModel: viewModel)
-                    }
-                }
-            }
+//            .sheet(isPresented: $showingProfileEditor) {
+//                if #available(iOS 16.0, *) {
+//                    ProfileEditView(viewModel: viewModel)
+//                        .presentationDetents([.large])
+//                        .presentationDragIndicator(.visible)
+//
+//                } else {
+//                    VStack {
+//                        HStack {
+//                            Button (action: {
+//                                withAnimation {
+//                                    showProfileView.toggle()
+//                                }
+//                            }, label: {
+//                                BackButtonView(text: "Back", color: .orange)
+//                            })
+//
+//                            Spacer()
+//                        }
+//
+//                        ProfileEditView(viewModel: viewModel)
+//                    }
+//                }
+//            }
         }
     }
     
