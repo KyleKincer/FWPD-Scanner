@@ -176,7 +176,6 @@ struct FilterSettingsView: View {
                             showNatureAlert = true
                             selection = tenSet
                         }
-                        
                     })
                 }
                 

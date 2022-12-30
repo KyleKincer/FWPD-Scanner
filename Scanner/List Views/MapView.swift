@@ -111,6 +111,7 @@ struct MapView: View {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 15)
                                     .foregroundColor(.blue)
+                                    .shadow(radius: 10)
                                 
                                 if (viewModel.isLoading) {
                                     ProgressView()

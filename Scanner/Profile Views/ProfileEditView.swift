@@ -109,6 +109,7 @@ struct ProfileEditView: View {
                                 Capsule()
                                     .frame(width: 100, height: 40)
                                     .foregroundColor(.blue)
+                                    .shadow(radius: 10)
                                 
                                 Text("Save")
                                     .foregroundColor(.white)

@@ -77,6 +77,7 @@ struct StandardNavBarView: View {
                         }
                     }
                 })
+                .accessibilityLabel("Toggle map view and list view")
                 
                 Spacer()
                 
@@ -107,6 +108,7 @@ struct StandardNavBarView: View {
                     }
                 })
                 .foregroundColor(.green)
+                .accessibilityLabel("Activity Filters")
                 
                 Spacer()
                 
@@ -129,6 +131,7 @@ struct StandardNavBarView: View {
                             viewModel.onboarding = true
                         }
                     })
+                    .accessibilityLabel("Scanner header. Tap to view location disclaimer.")
  
                 Spacer()
                 
@@ -154,6 +157,7 @@ struct StandardNavBarView: View {
                 })
                 .font(.system(size: 25))
                 .foregroundColor(.red)
+                .accessibilityLabel("Notification Settings")
                 
                 Spacer()
                 
@@ -217,6 +221,7 @@ struct StandardNavBarView: View {
                 })
             }
             .padding([.leading, .trailing])
+            .accessibilityLabel("Profile")
             
             Spacer()
             

@@ -130,6 +130,7 @@ struct LoginView: View {
                     Capsule()
                         .frame(width: 100, height: 40)
                         .foregroundColor(.blue)
+                        .shadow(radius: 10)
                     
                     Text("Sign In")
                         .foregroundColor(.white)
@@ -140,13 +141,6 @@ struct LoginView: View {
             .frame(maxWidth: 350)
             
             Group {
-                
-                Divider()
-                    .padding()
-                
-                Text("No Account?")
-                    .bold()
-                
                 Button(action: {
                     playHaptic()
                     withAnimation {
@@ -157,8 +151,9 @@ struct LoginView: View {
                         Capsule()
                             .frame(width: 200, height: 40)
                             .foregroundColor(.blue)
+                            .shadow(radius: 10)
                         
-                        Text("Sign Up with Email")
+                        Text("Create an Account")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
@@ -166,6 +161,8 @@ struct LoginView: View {
                 
                 Divider()
                     .padding()
+                
+                Text("or go the fastest route")
                 
                 HStack {
                     Group {
@@ -202,7 +199,7 @@ struct LoginView: View {
                                             .transition(.scale)
                                     }
                                     
-                                    Text("Login With Google")
+                                    Text("Use Google")
                                         .fontWeight(.bold)
                                         .foregroundColor(Color("ModeOpposite"))
                                         .colorInvert()
@@ -210,7 +207,7 @@ struct LoginView: View {
                                 }
                                 
                             }
-                            .frame(width: 250, height: 80)
+                            .frame(width: 200, height: 80)
                         })
                     }
                 }

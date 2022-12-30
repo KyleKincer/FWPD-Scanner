@@ -83,7 +83,7 @@ struct NotificationSettingsView: View {
                 .environment(\.editMode, .constant(EditMode.active))
                 
             } else {
-                Text("Note: This will result in many notifications. To receive fewer notifications, disable the toggle and select specific activty natures!")
+                Text("Note: This will result in many notifications. To receive fewer notifications, disable the toggle and select specific activity natures!")
                     .padding()
                 
                 Text("To receive no notifications, turn off the toggle and make sure no Natures are selected.")

@@ -10,6 +10,7 @@ import SwiftUI
 struct DisclaimerView: View {
     let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     let build = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+    
     var body: some View {
         VStack {
             Capsule()

@@ -47,6 +47,7 @@ struct ProfileView: View {
                         Text("Sign Out")
                             .foregroundColor(.red)
                             .padding([.top, .trailing])
+                            .shadow(radius: 10)
                     })
                     
                 }
@@ -68,6 +69,8 @@ struct ProfileView: View {
                                         .clipped()
                                         .clipShape(Capsule())
                                         .frame(width: 85, height: 20)
+                                        .shadow(radius: 10)
+                                    
                                     Text("Edit profile")
                                         .font(.footnote)
                                         .foregroundColor(.secondary)
