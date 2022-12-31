@@ -28,11 +28,13 @@ struct ProfileView: View {
                 // Nav
                 HStack {
                     Button (action: {
-                        withAnimation {
-                            showProfileView.toggle()
+                            withAnimation {
+                                showProfileView.toggle()
                         }
                     }, label: {
-                        BackButtonView(text: "Back", color: .orange)
+                        if (!showingProfileEditor) {
+                            BackButtonView(text: "Back", color: .orange)
+                        }
                     })
                     
                     Spacer()
@@ -112,7 +114,7 @@ struct ProfileView: View {
                 
                 if (showingProfileEditor) {
                     ProfileEditView(viewModel: viewModel, showingProfileEditor: $showingProfileEditor)
-                        .transition(.opacity)
+                        .transition(.move(edge: .bottom))
                     
                 } else {
                     TabView {
@@ -129,7 +131,7 @@ struct ProfileView: View {
                                     .foregroundColor(.blue)
                             }
                     }
-                    .transition(.opacity)
+                    .transition(.move(edge: .bottom))
                 }
             }
 

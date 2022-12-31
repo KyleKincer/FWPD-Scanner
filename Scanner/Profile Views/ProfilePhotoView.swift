@@ -12,28 +12,30 @@ struct ProfilePhoto: View {
     let size: CGFloat
     
     var body: some View {
-        if let url = url {
-            ZStack {
-                Circle()
-                    .foregroundColor(.white)
-                    .frame(width: size, height: size)
-                
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .frame(width: size - 3, height: size - 3)
-                        .clipShape(Circle())
-                } placeholder: {
-                    Image(systemName: "person.crop.circle")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 80))
+        VStack {
+            if let url = url {
+                ZStack {
+                    Circle()
+                        .foregroundColor(.white)
+                        .frame(width: size, height: size)
+                    
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .frame(width: size - 3, height: size - 3)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        Image(systemName: "person.crop.circle")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 80))
+                    }
                 }
+                
+            } else {
+                Image(systemName: "person.crop.circle")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 80))
             }
-            
-        } else {
-            Image(systemName: "person.crop.circle")
-                .foregroundColor(.gray)
-                .font(.system(size: 80))
         }
     }
 }

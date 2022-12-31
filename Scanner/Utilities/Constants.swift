@@ -28,10 +28,10 @@ enum SetName: String {
 enum AccountError: LocalizedError {
     case usernameTaken
 
-    var localizedDescription: String? {
+    var errorDescription: String? {
         switch self {
         case .usernameTaken:
-            return NSLocalizedString("The username is already taken", comment: "")
+            return NSLocalizedString("This username is already taken", comment: "")
         }
     }
 }

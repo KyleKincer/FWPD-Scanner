@@ -76,11 +76,11 @@ final class MainViewModel: ObservableObject {
         model = Scanner()
         self.onboarding = self.onboardingUD
         self.onboardingUD = false
-
+        
         if (!self.loggedIn && !self.onboarding) {
-
+            
             if let storedUser = Auth.auth().currentUser {
-              // User is signed in.
+                // User is signed in.
                 self.initUser(user: storedUser)
                 
             }
@@ -248,7 +248,7 @@ final class MainViewModel: ObservableObject {
     
     func refresh() {
         print("R --- Refreshing")
-
+        
         self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
@@ -348,7 +348,7 @@ final class MainViewModel: ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
         
-        userRef.setData(["username": user.username, "imageURL": user.profileImageURL?.description ?? "", "createdAt": Firebase.Timestamp()]) { err in
+        userRef.setData(["username": user.username, "profileImageURL": user.profileImageURL?.description ?? "", "createdAt": Firebase.Timestamp()]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -375,15 +375,36 @@ final class MainViewModel: ObservableObject {
     
     func updateUser(user: User, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        usernameIsAvailable(username: user.username) { success in
-            if !success {
-                completion(.failure(AccountError.usernameTaken))
+        if (user.username != self.currentUser?.username) {
+            // If we need to update the username, make sure it's available
+            usernameIsAvailable(username: user.username) { success in
+                if !success {
+                    completion(.failure(AccountError.usernameTaken))
+                } else {
+                    let data = user.toData()
+                    print("Username is available")
+                    self.currentUser?.username = user.username
+                    self.currentUser?.bio = user.bio
+                    self.currentUser?.twitterHandle = user.twitterHandle
+                    self.currentUser?.instagramHandle = user.instagramHandle
+                    self.currentUser?.tiktokHandle = user.tiktokHandle
+                    Firestore.firestore().collection("users").document(user.id).updateData(data as [String : Any]) { error in
+                        if let error = error {
+                            completion(.failure(error))
+                            return
+                        }
+                        completion(.success(()))
+                    }
+                }
             }
-        }
-        
-        let data = user.toData()
-
-        Firestore.firestore().collection("users").document(user.id).setData(data as [String : Any]) { error in
+        } else {
+            let data = user.toData()
+            self.currentUser?.username = user.username
+            self.currentUser?.bio = user.bio
+            self.currentUser?.twitterHandle = user.twitterHandle
+            self.currentUser?.instagramHandle = user.instagramHandle
+            self.currentUser?.tiktokHandle = user.tiktokHandle
+            Firestore.firestore().collection("users").document(user.id).updateData(data as [String : Any]) { error in
                 if let error = error {
                     completion(.failure(error))
                     return
@@ -391,6 +412,7 @@ final class MainViewModel: ObservableObject {
                 completion(.success(()))
             }
         }
+    }
     
     func getMoreActivities() {
         withAnimation {

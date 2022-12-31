@@ -201,7 +201,7 @@ struct User: Identifiable, Decodable {
         self.id = id
         self.username = username
         self.admin = false
-        self.profileImageURL = nil
+        self.profileImageURL = URL(string: "")
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
@@ -231,7 +231,7 @@ struct User: Identifiable, Decodable {
         self.id = id
         self.username = username
         self.admin = false
-        self.profileImageURL = nil
+        self.profileImageURL = URL(string: "")
         self.commentCount = 0
         self.lastCommentAt = nil
         self.createdAt = nil
@@ -246,13 +246,7 @@ struct User: Identifiable, Decodable {
         self.id = document.documentID
         self.username = (document.data()!["username"] as? String)!
         self.admin = document.data()?["admin"] as? Bool ?? false
-        
-        //This needs fixed
-        let profileImageString = document.data()?["imageURL"] ?? ""
-        self.profileImageURL = URL(string: profileImageString as! String)
-        
-        //
-        
+        self.profileImageURL = URL(string: document.data()?["profileImageURL"] as? String ?? "")
         self.commentCount = document.data()?["commentCount"] as? Int
         self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
         self.createdAt = document.data()?["createdAt"] as? Timestamp
@@ -297,15 +291,15 @@ struct User: Identifiable, Decodable {
     func toData() -> [String: Any?] {
         return ["username": self.username,
                 "admin": self.admin,
-                "profileImageURL": self.profileImageURL,
+                "profileImageURL": Auth.auth().currentUser?.photoURL?.description ?? "",
                 "commentCount": self.commentCount,
                 "lastCommentAt": self.lastCommentAt?.firebaseTimestamp,
                 "createdAt": self.createdAt?.firebaseTimestamp,
                 "bio": self.bio,
-                "twitterHandle": self.twitterHandle,
-                "instagramHandle": self.instagramHandle,
-                "facebookHandle": self.facebookHandle,
-                "tiktokHandle": self.tiktokHandle]
+                "twitterHandle": self.twitterHandle ?? "",
+                "instagramHandle": self.instagramHandle ?? "",
+                "facebookHandle": self.facebookHandle ?? "",
+                "tiktokHandle": self.tiktokHandle ?? ""]
     }
 }
 

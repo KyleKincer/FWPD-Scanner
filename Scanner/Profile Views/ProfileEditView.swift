@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileEditView: View {
     @ObservedObject var viewModel : MainViewModel
@@ -15,19 +16,38 @@ struct ProfileEditView: View {
     @State var instagramHandle = ""
     @State var tiktokHandle = ""
     @Binding var showingProfileEditor: Bool
+    @State var saving = false
+    @State var localError = ""
     
     var body: some View {
         
         VStack(alignment: .center) {
+            
+            Text("Editing Profile")
+                .fontWeight(.bold)
+            
             List {
                 // Username
                 HStack {
                     Text("Username")
+                    
                     Spacer()
+                    
                     TextField(viewModel.currentUser?.username ?? "Username", text: $username)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.never)
                         .limitInputLength(value: $username, length: 20)
+                }
+                
+                if (localError != "") {
+                    HStack {
+                        Spacer()
+                        
+                        Text(localError)
+                            .foregroundColor(.red)
+                        
+                        Spacer()
+                    }
                 }
                 
                 // Bio
@@ -88,45 +108,83 @@ struct ProfileEditView: View {
                             .frame(width: 200)
                     }
                 }
-                
-                Section {
-                    // Submit
-                    HStack {
-                        Spacer()
-                        Button {
-                            viewModel.updateUser(user: User(id: viewModel.currentUser!.id, username: username, bio: bio, twitterHandle: twitterHandle, instagramHandle: instagramHandle, tiktokHandle: tiktokHandle)) { result in
-                                switch result {
-                                case .failure(let error):
-                                    print(error)
-                                    
-                                case .success():
-                                    print("Username is available")
-                                }
-                            }
-                            showingProfileEditor.toggle()
-                        } label: {
-                            ZStack {
-                                Capsule()
-                                    .frame(width: 100, height: 40)
-                                    .foregroundColor(.blue)
-                                    .shadow(radius: 10)
-                                
-                                Text("Save")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.bold)
-                            }
-                        }
-                        Spacer()
-                    }
-                }.listRowBackground(Color(.clear))
             }
             .listStyle(.insetGrouped)
-            .onAppear() {
-                username = viewModel.currentUser?.username ?? ""
-                bio = viewModel.currentUser?.bio ?? ""
-                twitterHandle = viewModel.currentUser?.twitterHandle ?? ""
-                instagramHandle = viewModel.currentUser?.instagramHandle ?? ""
-                tiktokHandle = viewModel.currentUser?.tiktokHandle ?? ""
+            .listRowBackground(Color(.clear))
+            
+            // Submit
+            if (saving) {
+                ProgressView()
+                    .tint(.blue)
+                    .scaleEffect(2)
+                
+            } else {
+                HStack {
+                    Spacer()
+                    
+                    
+                    Button {
+                        withAnimation {
+                            showingProfileEditor.toggle()
+                        }
+                    } label: {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 100, height: 40)
+                                .foregroundColor(.gray)
+                            
+                            Text("Cancel")
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                    }
+                    .padding()
+                    
+                    
+                    Button {
+                        withAnimation {
+                            saving = true
+                            localError = ""
+                        }
+                        
+                        viewModel.updateUser(user: User(id: viewModel.currentUser!.id, username: username, bio: bio, twitterHandle: twitterHandle, instagramHandle: instagramHandle, tiktokHandle: tiktokHandle)) { result in
+                            switch result {
+                            case .failure(let error):
+                                print(error)
+                                withAnimation {
+                                    localError = error.localizedDescription
+                                    saving = false
+                                }
+                                
+                            case .success():
+                                print("Local user information updated")
+                                withAnimation {
+                                    showingProfileEditor.toggle()
+                                }
+                            }
+                        }
+                    } label: {
+                        ZStack {
+                            Capsule()
+                                .frame(width: 100, height: 40)
+                                .foregroundColor(.blue)
+                            
+                            Text("Save")
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                    }
+                    .padding()
+                    
+                    Spacer()
+                }
+                .onAppear() {
+                    username = viewModel.currentUser?.username ?? ""
+                    bio = viewModel.currentUser?.bio ?? ""
+                    twitterHandle = viewModel.currentUser?.twitterHandle ?? ""
+                    instagramHandle = viewModel.currentUser?.instagramHandle ?? ""
+                    tiktokHandle = viewModel.currentUser?.tiktokHandle ?? ""
+                }
             }
         }
     }
@@ -135,5 +193,6 @@ struct ProfileEditView: View {
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileEditView(viewModel: MainViewModel(), showingProfileEditor: .constant(true))
+            .environmentObject(AppDelegate())
     }
 }
