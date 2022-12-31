@@ -152,6 +152,7 @@ struct ActivityView: View {
                                                 }, label: {
                                                     Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
                                                         .font(viewModel.showMostRecentComments ? .subheadline : .title)
+                                                        
                                                         .foregroundColor(viewModel.showMostRecentComments ? .blue : Color("ModeOpposite"))
                                                 })
                                                 

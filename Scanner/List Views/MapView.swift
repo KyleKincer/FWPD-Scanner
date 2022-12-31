@@ -17,7 +17,7 @@ struct MapView: View {
     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack() {
             Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: activities) { activity in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
                     MapAnnotationView(activity: activity, chosenActivity: $chosenActivity)
@@ -34,105 +34,102 @@ struct MapView: View {
                 chosenActivity = nil
             }
             
-            
-            if (chosenActivity != nil) {
-                Group {                
-                    VStack {
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Text(chosenActivity!.nature)
-                                .italic()
-                                .bold()
-                                .padding(.trailing, -8)
-                                .lineLimit(1)
-                                .font(.system(size: 20))
-                            
-                            Spacer()
-                            
-                        }.padding(.top)
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Text(chosenActivity!.address)
-                                .padding(.trailing, -8)
-                                .lineLimit(1)
-                                .font(.system(size: 15))
-                            
-                            if chosenActivity!.distance != nil {
-                                Text(", \(String(format: "%g", round(10 * chosenActivity!.distance!) / 10)) mi away")
-                                    .padding(.trailing, -8)
-                                    .lineLimit(1)
-                                    .font(.system(size: 15))
-                            }
-                            
-                            Spacer()
-                        }
-                        .font(.system(size: 10))
-                        
-                        HStack {
-                            
-                            Spacer()
-                            Text("\(chosenActivity!.timestamp) (")
-                                .padding(.trailing, -8.5)
-                            Text(chosenActivity!.date ?? Date(), style: .relative)
-                                .padding(.trailing, -3)
-                            Text("ago)")
-                            Spacer()
-                        }.padding(.bottom)
-                        
-                        Spacer()
-                    }
-                    .shadow(radius: 10)
-                }
-            }
             VStack {
+                
                 Spacer()
                 
-                HStack {
-                    
-                    Spacer()
-                    
-                    if (!viewModel.showBookmarks) {
-                        Button() {
-                            playHaptic()
-                            if (!viewModel.isLoading) {
-                                withAnimation {
-                                    viewModel.getMoreActivities()
-                                    viewModel.addDatesToActivities(.activities)
-                                    viewModel.addDistancesToActivities(.activities)
-                                }
-                            }
-                            
-                        } label: {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundColor(.blue)
-                                    .shadow(radius: 10)
-                                
-                                if (viewModel.isLoading) {
-                                    ProgressView()
-                                } else {
-                                    HStack {
-                                        Text("Get More")
-                                            .fontWeight(.semibold)
-                                        
-                                        Image(systemName: "goforward.plus")
-                                    }
-                                    .tint(.white)
-                                }
+                if (!viewModel.showBookmarks) {
+                    Button() {
+                        playHaptic()
+                        if (!viewModel.isLoading) {
+                            withAnimation {
+                                viewModel.getMoreActivities()
+                                viewModel.addDatesToActivities(.activities)
+                                viewModel.addDistancesToActivities(.activities)
                             }
                         }
-                        .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
-                        .padding(.bottom, 30)
+                        
+                    } label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.blue)
+                                .shadow(radius: 10)
+                            
+                            if (viewModel.isLoading) {
+                                ProgressView()
+                            } else {
+                                HStack {
+                                    Text("Get More")
+                                        .fontWeight(.semibold)
+                                    
+                                    Image(systemName: "goforward.plus")
+                                }
+                                .tint(.white)
+                            }
+                        }
                     }
-                    
-                    Spacer()
+                    .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
+                    .padding(.bottom, chosenActivity == nil ? 30 : 0)
+                }
                 
-                }.transition(.move(edge: .top))
+                if (chosenActivity != nil) {
+                    Group { // header
+                        VStack {
+                            Text(chosenActivity!.nature == "" ? "Unknown" : chosenActivity!.nature)
+                                .font(.system(size: 30))
+                                .italic()
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding([.top, .leading, .trailing])
+                                .padding(.bottom, 5)
+                            
+                            HStack {
+                                VStack(alignment: .leading, spacing: 5) {
+                                    HStack(spacing: 5) {
+                                        Text(chosenActivity!.timestamp)
+                                    }
+                                    .foregroundColor(.secondary)
+                                    
+                                    Text("\(chosenActivity?.date ?? Date(), style: .relative) ago")
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding(.leading)
+                                
+                                Spacer()
+                                
+                                HStack {
+                                    VStack(alignment: .trailing, spacing: 5) {
+                                        HStack(spacing: 5) {
+                                            Text(chosenActivity!.address)
+                                                .foregroundColor(.secondary)
+                                            Image(systemName: "mappin.and.ellipse")
+                                                .foregroundColor(.secondary)
+                                        }
+                                        
+                                        Text("ID: \(chosenActivity!.controlNumber)")
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                .padding(.trailing)
+                            }
+                            .padding(.bottom)
+                            .padding(.horizontal)
+                        }
+                    }
+                    .font(.footnote)
+                    .background(Color(.secondarySystemBackground)
+                        .opacity(0.9))
+                    .cornerRadius(30)
+                    .shadow(radius: 8)
+                    .padding(.horizontal, 5)
+                    .padding(.bottom, 20)
+                    .transition(.move(edge: .bottom))
+                    .onTapGesture {
+                        withAnimation {
+                            chosenActivity = nil
+                        }
+                    }
+                }
             }
         }
     }
@@ -140,6 +137,6 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(chosenActivity: .constant(nil), activities: .constant([]), viewModel: MainViewModel())
+        MapView(chosenActivity: .constant(Scanner.Activity(id: "", timestamp: "right now", nature: "Wild Kyle Appears", address: "1105 Normandale Dr", location: "Chuck E Cheese", controlNumber: "5ABC123", longitude: 10.0, latitude: 10.0, commentCount: 2)), activities: .constant([]), viewModel: MainViewModel())
     }
 }

@@ -114,8 +114,8 @@ struct StandardNavBarView: View {
                 
                 Text("Scanner")
                     .fontWeight(.black)
-                    .italic()
                     .font(.largeTitle)
+                    .italic()
                     .shadow(radius: 2)
                     .foregroundColor(Color("ModeOpposite"))
                     .onTapGesture {
