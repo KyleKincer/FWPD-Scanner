@@ -170,53 +170,18 @@ struct StandardNavBarView: View {
                     
                 }, label: {
                     if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
-                        if let url = viewModel.currentUser?.profileImageURL {
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 2)
-                                
-                            } placeholder: {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.gray)
-                                    .shadow(radius: 2)
-                            }
-                            
-                        } else {
-                            Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                                .font(.system(size: 25))
-                                .foregroundColor(.orange)
-                                .shadow(radius: 2)
-                                .rotationEffect(.degrees(allJingle ? 5 : -5))
-                                .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
-                        }
+                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
+                            .font(.system(size: 25))
+                            .foregroundColor(.orange)
+                            .shadow(radius: 2)
+                            .rotationEffect(.degrees(allJingle ? 5 : -5))
+                            .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
+                            .scaleEffect(0.35)
+                            .frame(width: 40, height: 20)
                     } else {
-                        if let url = viewModel.currentUser?.profileImageURL {
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 2)
-                                
-                            } placeholder: {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.gray)
-                                    .shadow(radius: 2)
-                            }
-                            
-                        } else {
-                            Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                                .font(.system(size: 25))
-                                .foregroundColor(.orange)
-                                .shadow(radius: 2)
-                        }
+                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
+                            .scaleEffect(0.35)
+                            .frame(width: 40, height: 20)
                     }
                 })
             }

@@ -26,14 +26,14 @@ struct ProfilePhoto: View {
                             .clipShape(Circle())
                     } placeholder: {
                         Image(systemName: "person.crop.circle")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.orange)
                             .font(.system(size: 80))
                     }
                 }
                 
             } else {
                 Image(systemName: "person.crop.circle")
-                    .foregroundColor(.gray)
+                    .foregroundColor(.orange)
                     .font(.system(size: 80))
             }
         }

@@ -10,46 +10,19 @@ import FirebaseAuth
 
 struct ProfileEditView: View {
     @ObservedObject var viewModel : MainViewModel
-    @State var username = ""
+    @Binding var username: String
     @State var bio = ""
     @State var twitterHandle = ""
     @State var instagramHandle = ""
     @State var tiktokHandle = ""
     @Binding var showingProfileEditor: Bool
     @State var saving = false
-    @State var localError = ""
+    @Binding var localError: String
     
     var body: some View {
         
-        VStack(alignment: .center) {
-            
-            Text("Editing Profile")
-                .fontWeight(.bold)
-            
+        VStack(alignment: .center) {            
             List {
-                // Username
-                HStack {
-                    Text("Username")
-                    
-                    Spacer()
-                    
-                    TextField(viewModel.currentUser?.username ?? "Username", text: $username)
-                        .textFieldStyle(.roundedBorder)
-                        .textInputAutocapitalization(.never)
-                        .limitInputLength(value: $username, length: 20)
-                }
-                
-                if (localError != "") {
-                    HStack {
-                        Spacer()
-                        
-                        Text(localError)
-                            .foregroundColor(.red)
-                        
-                        Spacer()
-                    }
-                }
-                
                 // Bio
                 HStack(alignment: .top) {
                     Text("Bio")
@@ -67,14 +40,17 @@ struct ProfileEditView: View {
                 }
                 
                 // Socials
-                Section("Socials") {
+                Section {
                     // Twitter
                     HStack {
                         Image("twitter")
                             .resizable()
                             .frame(width: 20, height: 20)
+                        
                         Text("Twitter")
+                        
                         Spacer()
+                        
                         TextField(viewModel.currentUser?.twitterHandle ?? "", text: $twitterHandle)
                             .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.never)
@@ -86,8 +62,11 @@ struct ProfileEditView: View {
                         Image("instagram")
                             .resizable()
                             .frame(width: 20, height: 20)
+                        
                         Text("Instagram")
+                        
                         Spacer()
+                        
                         TextField(viewModel.currentUser?.instagramHandle ?? "", text: $instagramHandle)
                             .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.never)
@@ -99,8 +78,11 @@ struct ProfileEditView: View {
                         Image("tiktok")
                             .resizable()
                             .frame(width: 20, height: 20)
+                        
                         Text("TikTok")
+                        
                         Spacer()
+                        
                         TextField(viewModel.currentUser?.tiktokHandle ?? "", text: $tiktokHandle)
                             .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.never)
@@ -125,6 +107,7 @@ struct ProfileEditView: View {
                     
                     Button {
                         withAnimation {
+                            localError = ""
                             showingProfileEditor.toggle()
                         }
                     } label: {
@@ -192,7 +175,7 @@ struct ProfileEditView: View {
 
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditView(viewModel: MainViewModel(), showingProfileEditor: .constant(true))
+        ProfileEditView(viewModel: MainViewModel(), username: .constant("poofy"), showingProfileEditor: .constant(true), localError: .constant("That username is already taken"))
             .environmentObject(AppDelegate())
     }
 }

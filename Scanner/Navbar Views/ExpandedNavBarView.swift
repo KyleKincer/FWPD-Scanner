@@ -136,27 +136,9 @@ struct ExpandedNavBarView: View {
                     showProfileView.toggle()
                 }
             }, label: {
-                if let url = viewModel.currentUser?.profileImageURL {
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                            .shadow(radius: 2)
-                        
-                    } placeholder: {
-                        Image(systemName: "person.crop.circle.fill")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.gray)
-                            .shadow(radius: 2)
-                    }
-                } else {
-                    Image(systemName: viewModel.loggedIn ? "person.crop.circle.fill" : "person.crop.circle")
-                        .font(.system(size: 35))
-                        .foregroundColor(.orange)
-                        .shadow(radius: 2)
-                }
+                ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
+                    .scaleEffect(0.5)
+                    .shadow(radius: 1)
             })
             .frame(width: 50, height: 35)
             .padding(.horizontal)

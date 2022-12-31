@@ -13,6 +13,8 @@ struct ProfileView: View {
     @Binding var showProfileView : Bool
     @State var showPurchaseSheet = false
     @State var showingProfileEditor = false
+    @State var username = ""
+    @State var localError = ""
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -24,34 +26,34 @@ struct ProfileView: View {
             }
             
         } else {
-            VStack {
+            VStack (alignment: .leading) {
                 // Nav
                 HStack {
-                    Button (action: {
+                    
+                    if (!showingProfileEditor) {
+                        Button (action: {
                             withAnimation {
                                 showProfileView.toggle()
-                        }
-                    }, label: {
-                        if (!showingProfileEditor) {
+                            }
+                        }, label: {
                             BackButtonView(text: "Back", color: .orange)
-                        }
-                    })
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        withAnimation {
-                            viewModel.logOut()
-                            viewModel.loggedIn = false
-                            viewModel.showAuth = true
-                        }
-                    }, label: {
-                        Text("Sign Out")
-                            .foregroundColor(.red)
-                            .padding([.top, .trailing])
-                            .shadow(radius: 10)
-                    })
-                    
+                        })
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            withAnimation {
+                                viewModel.logOut()
+                                viewModel.loggedIn = false
+                                viewModel.showAuth = true
+                            }
+                        }, label: {
+                            Text("Sign Out")
+                                .foregroundColor(.red)
+                                .padding([.top, .trailing])
+                                .shadow(radius: 10)
+                        })
+                    }
                 }
                 
                 // Profile view
@@ -78,45 +80,85 @@ struct ProfileView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
-                            .padding(.top, 10)
                         }
                     }
-                    // Username
-                    Text(viewModel.currentUser?.username ?? "Username")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .italic()
-                        .multilineTextAlignment(.center)
                     
-                    Spacer()
-                    
-                    //                    if (!editingUsername) {
-                    //
-                    //                        HStack (alignment: .center) {
-                    //                            Button(action: {
-                    //                                showPurchaseSheet.toggle()
-                    //                            }, label: {
-                    //                                Image(systemName: "dollarsign.square")
-                    //                                    .foregroundColor(.white)
-                    //                                    .padding(.trailing)
-                    //                                    .shadow(radius: 5.0)
-                    //                                    .font(.system(size: 30))
-                    //                            })
-                    //                        }
-                    //                    }
+                    VStack (alignment: .leading) {
+                        Text(viewModel.currentUser?.username ?? "Username")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .italic()
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                        
+                        if (showingProfileEditor) {
+                            TextField(viewModel.currentUser?.username ?? "Username", text: $username)
+                                .textFieldStyle(.roundedBorder)
+                                .textInputAutocapitalization(.never)
+                                .limitInputLength(value: $username, length: 20)
+                                .transition(.move(edge: .trailing))
+                                .frame(maxWidth: 200)
+                                .padding(.horizontal)
+                        }
+                        
+                        if (!showingProfileEditor && viewModel.currentUser?.bio != "") {
+                            Text((viewModel.currentUser?.bio ?? ""))
+                                .multilineTextAlignment(.leading)
+                                .padding(.horizontal)
+                                .frame(maxWidth: 400)
+                                
+                        }
+                        
+                        if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
+                            
+                            HStack {
+                                if (viewModel.currentUser?.twitterHandle != "") {
+                                    Image("twitter")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                                
+                                if (viewModel.currentUser?.instagramHandle != "") {
+                                    Image("instagram")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                                
+                                if (viewModel.currentUser?.tiktokHandle != "") {
+                                    Image("tiktok")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
                 }
-                .padding([.top, .horizontal])
+                .padding()
                 
-                Divider()
-                    .foregroundColor(.white)
-                
+                if (localError != "") {
+                    HStack {
+                        Spacer()
+                        
+                        Text(localError)
+                            .foregroundColor(.red)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                }
+
                 Spacer()
                 
                 if (showingProfileEditor) {
-                    ProfileEditView(viewModel: viewModel, showingProfileEditor: $showingProfileEditor)
-                        .transition(.move(edge: .bottom))
+                    ProfileEditView(viewModel: viewModel, username: $username, showingProfileEditor: $showingProfileEditor, localError: $localError)
+                        .transition(.move(edge: .trailing))
                     
                 } else {
+                    Divider()
+                        .foregroundColor(.white)
+                    
                     TabView {
                         BookmarkView(viewModel: viewModel)
                             .tabItem {
@@ -131,55 +173,15 @@ struct ProfileView: View {
                                     .foregroundColor(.blue)
                             }
                     }
-                    .transition(.move(edge: .bottom))
+                    .transition(.move(edge: .leading))
                 }
             }
-
             .sheet(isPresented: $showPurchaseSheet) {
                 PurchaseView(viewModel: viewModel)
             }
-//            .sheet(isPresented: $showingProfileEditor) {
-//                if #available(iOS 16.0, *) {
-//                    ProfileEditView(viewModel: viewModel)
-//                        .presentationDetents([.large])
-//                        .presentationDragIndicator(.visible)
-//
-//                } else {
-//                    VStack {
-//                        HStack {
-//                            Button (action: {
-//                                withAnimation {
-//                                    showProfileView.toggle()
-//                                }
-//                            }, label: {
-//                                BackButtonView(text: "Back", color: .orange)
-//                            })
-//
-//                            Spacer()
-//                        }
-//
-//                        ProfileEditView(viewModel: viewModel)
-//                    }
-//                }
-//            }
+                
         }
     }
-    
-    //    @MainActor
-    //    func onSubmit() {
-    //        if (newUsername != viewModel.currentUser?.username && newUsername.count > 0) {
-    //            viewModel.usernameIsAvailable(username: newUsername, { available in
-    //                if (available || newUsername == viewModel.currentUser?.username ?? "") {
-    //                    viewModel.updateUsername(to: newUsername)
-    //                    usernameError = ""
-    //                    editingUsername = false
-    //                } else {
-    //                    usernameError = "This username is not available!"
-    //                }
-    //
-    //            })
-    //        }
-    //    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
