@@ -156,9 +156,6 @@ struct ProfileView: View {
                         .transition(.move(edge: .trailing))
                     
                 } else {
-                    Divider()
-                        .foregroundColor(.white)
-                    
                     TabView {
                         BookmarkView(viewModel: viewModel)
                             .tabItem {
