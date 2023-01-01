@@ -129,6 +129,10 @@ struct ProfileEditView: View {
                             saving = true
                             localError = ""
                         }
+                        // Sanitize socials inputs
+                        twitterHandle = twitterHandle.replacingOccurrences(of: "@", with: "")
+                        instagramHandle = instagramHandle.replacingOccurrences(of: "@", with: "")
+                        tiktokHandle = tiktokHandle.replacingOccurrences(of: "@", with: "")
                         
                         viewModel.updateUser(user: User(id: viewModel.currentUser!.id, username: username, bio: bio, twitterHandle: twitterHandle, instagramHandle: instagramHandle, tiktokHandle: tiktokHandle)) { result in
                             switch result {
