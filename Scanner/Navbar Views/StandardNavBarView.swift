@@ -177,11 +177,11 @@ struct StandardNavBarView: View {
                             .rotationEffect(.degrees(allJingle ? 5 : -5))
                             .animation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true))
                             .scaleEffect(0.35)
-                            .frame(width: 40, height: 20)
+                            .frame(width: 40, height: 25)
                     } else {
                         ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
                             .scaleEffect(0.35)
-                            .frame(width: 40, height: 20)
+                            .frame(width: 40, height: 25)
                     }
                 })
             }

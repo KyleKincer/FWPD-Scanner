@@ -186,11 +186,11 @@ struct Comment: Identifiable, Decodable, Equatable, Hashable {
 struct User: Identifiable, Decodable {
     let id: String
     var username: String
-    let admin: Bool
+    var admin: Bool
     var profileImageURL: URL?
-    let commentCount: Int?
-    let lastCommentAt: Timestamp?
-    let createdAt: Timestamp?
+    var commentCount: Int?
+    var lastCommentAt: Timestamp?
+    var createdAt: Timestamp?
     var bio: String?
     var twitterHandle: String?
     var instagramHandle: String?
@@ -244,7 +244,7 @@ struct User: Identifiable, Decodable {
 
     init(document: DocumentSnapshot) {
         self.id = document.documentID
-        self.username = (document.data()!["username"] as? String)!
+        self.username = (document.data()?["username"] as? String) ?? "Unknown"
         self.admin = document.data()?["admin"] as? Bool ?? false
         self.profileImageURL = URL(string: document.data()?["profileImageURL"] as? String ?? "")
         self.commentCount = document.data()?["commentCount"] as? Int

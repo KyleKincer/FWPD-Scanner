@@ -385,6 +385,9 @@ final class MainViewModel: ObservableObject {
                     print("Username is available")
                     self.currentUser?.username = user.username
                     self.currentUser?.bio = user.bio
+                    self.currentUser?.admin = user.admin
+                    self.currentUser?.createdAt = user.createdAt
+                    self.currentUser?.lastCommentAt = user.lastCommentAt
                     self.currentUser?.twitterHandle = user.twitterHandle
                     self.currentUser?.instagramHandle = user.instagramHandle
                     self.currentUser?.tiktokHandle = user.tiktokHandle
@@ -404,6 +407,8 @@ final class MainViewModel: ObservableObject {
             self.currentUser?.twitterHandle = user.twitterHandle
             self.currentUser?.instagramHandle = user.instagramHandle
             self.currentUser?.tiktokHandle = user.tiktokHandle
+            self.currentUser?.lastCommentAt = user.lastCommentAt
+            self.currentUser?.createdAt = user.createdAt
             Firestore.firestore().collection("users").document(user.id).updateData(data as [String : Any]) { error in
                 if let error = error {
                     completion(.failure(error))
