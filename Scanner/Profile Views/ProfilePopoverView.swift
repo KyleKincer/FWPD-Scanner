@@ -49,7 +49,7 @@ struct ProfilePopover: View {
                 }
                 
                 Spacer()
-
+                
             }
             
             HStack {
@@ -57,31 +57,55 @@ struct ProfilePopover: View {
                     if (user.twitterHandle != "" || user.instagramHandle != "" || user.tiktokHandle != "") {
                         if (user.twitterHandle != "" && user.twitterHandle != nil) {
                             HStack {
-                                Image("twitter")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                
-                                Text(user.twitterHandle ?? "")
+                                Button {
+                                    if let url = URL(string: "https://twitter.com/\(user.twitterHandle!)") {
+                                        UIApplication.shared.open(url)
+                                    }
+                                } label: {
+                                    HStack {
+                                        Image("twitter")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        
+                                        Text("@\(user.twitterHandle!)")
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
                             }
                         }
                         
                         if (user.instagramHandle != "" && user.instagramHandle != nil) {
-                            HStack {
-                                Image("instagram")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                
-                                Text(user.instagramHandle ?? "")
+                            Button {
+                                if let url = URL(string: "https://instagram.com/\(user.instagramHandle!)") {
+                                    UIApplication.shared.open(url)
+                                }
+                            } label: {
+                                HStack {
+                                    Image("instagram")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    
+                                    Text("@\(user.instagramHandle!)")
+                                        .foregroundColor(.secondary)
+                                }
                             }
                         }
                         
                         if (user.tiktokHandle != "" && user.tiktokHandle != nil) {
-                            HStack {
-                                Image("tiktok")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                
-                                Text(user.tiktokHandle ?? "")
+                            Button {
+                                if let url = URL(string: "https://tiktok.com/@\(user.tiktokHandle!)") {
+                                    UIApplication.shared.open(url)
+                                }
+                            } label: {
+                                HStack {
+                                    Image("tiktok")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    
+                                    Text("@\(user.tiktokHandle!)")
+                                        .foregroundColor(.secondary)
+                                    
+                                }
                             }
                         }
                     }
@@ -98,6 +122,7 @@ struct ProfilePopover: View {
                         .multilineTextAlignment(.leading)
                 }
             }
+            
             .padding(.horizontal, 20)
             .padding(.top)
         }
