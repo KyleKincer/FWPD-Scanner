@@ -15,44 +15,36 @@ struct ProfilePopover: View {
                 
                 Spacer()
                 
-                ProfilePhoto(url: user.profileImageURL, size: 175)
-                
-                Spacer()
-                
                 VStack {
-                    
                     if (user.admin) {
                         Image(systemName: "crown")
                             .foregroundColor(.red)
                     }
                     
+                    ProfilePhoto(url: user.profileImageURL, size: 175)
+                }
+                
+                Spacer()
+                
+                VStack {
                     Text(user.username)
                         .font(.title)
                         .fontWeight(.bold)
                         .italic()
                         .multilineTextAlignment(.center)
                     
-                    if (user.createdAt != nil) {
-                        Text(user.createdAt.debugDescription)
+                    if (user.bio != "" && user.bio != nil) {
+                        Text(user.bio ?? "")
+                            .padding()
+                            .multilineTextAlignment(.leading)
                     }
-                    
-                    HStack {
-                        Image(systemName: "message")
-                        
-                        if (user.commentCount ?? 0 == 1) {
-                            Text("\(user.commentCount ?? 0) comment")
-                        } else {
-                            Text("\(user.commentCount ?? 0) comments")
-                        }
-                    }
-                    .padding(.top, 1)
                 }
-                
-                Spacer()
-                
             }
             
             HStack {
+                
+                Spacer()
+                
                 VStack (alignment: .leading) {
                     if (user.twitterHandle != "" || user.instagramHandle != "" || user.tiktokHandle != "") {
                         if (user.twitterHandle != "" && user.twitterHandle != nil) {
@@ -113,18 +105,25 @@ struct ProfilePopover: View {
                     }
                 }
                 
-                if (user.bio != "" && user.bio != nil) {
+                Spacer()
+                
+                HStack {
+                    Image(systemName: "message")
                     
-                    Divider()
-                        .frame(height: 80)
-                        .padding()
-                    
-                    Text(user.bio ?? "")
-                        .padding()
-                        .multilineTextAlignment(.leading)
+                    if (user.commentCount ?? 0 == 1) {
+                        Text("\(user.commentCount ?? 0) comment")
+                    } else {
+                        Text("\(user.commentCount ?? 0) comments")
+                    }
                 }
+                .padding(.top, 1)
+                
+                if (user.createdAt != nil) {
+                    Text(user.createdAt.debugDescription)
+                }
+                
+                Spacer()
             }
-            
             .padding(.horizontal, 20)
             .padding(.top)
         }
@@ -133,6 +132,6 @@ struct ProfilePopover: View {
 
 struct ProfilePopover_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening?", twitterHandle: "@poofy", instagramHandle: "@poofy", tiktokHandle: "@poofy"))
+        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening?", twitterHandle: "poofy", instagramHandle: "poofy", tiktokHandle: "poofy"))
     }
 }
