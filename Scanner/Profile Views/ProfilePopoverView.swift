@@ -68,8 +68,8 @@ struct ProfilePopover: View {
                                             .frame(width: 20, height: 20)
                                         
                                         Text("@\(user.twitterHandle!)")
-                                            .foregroundColor(.secondary)
                                     }
+                                    .foregroundColor(.secondary)
                                 }
                             }
                         }
@@ -88,6 +88,7 @@ struct ProfilePopover: View {
                                     Text("@\(user.instagramHandle!)")
                                         .foregroundColor(.secondary)
                                 }
+                                .foregroundColor(.secondary)
                             }
                         }
                         
@@ -106,6 +107,7 @@ struct ProfilePopover: View {
                                         .foregroundColor(.secondary)
                                     
                                 }
+                                .foregroundColor(.secondary)
                             }
                         }
                     }
