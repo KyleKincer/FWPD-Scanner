@@ -147,7 +147,7 @@ struct ActivityView: View {
                                             HStack (alignment: .center){
                                                 Button (action: {
                                                     withAnimation (.interactiveSpring()) {
-                                                        viewModel.showMostRecentComments.toggle()
+                                                        viewModel.showMostRecentComments = false
                                                     }
                                                 }, label: {
                                                     Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
@@ -162,7 +162,7 @@ struct ActivityView: View {
                                                     
                                                     Button(action: {
                                                         withAnimation (.interactiveSpring()){
-                                                            viewModel.showMostRecentComments.toggle()
+                                                            viewModel.showMostRecentComments = true
                                                        }
                                                     }, label: {
                                                         Text("Comments")

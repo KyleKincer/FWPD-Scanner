@@ -361,7 +361,7 @@ final class MainViewModel: ObservableObject {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(self.currentUser!.id)
         let oldUserName = (self.currentUser?.username)!
-        self.currentUser?.username = username // preemptively set the local username property,
+        self.currentUser?.username = username // preemptively set the local username property
         
         userRef.updateData(["username": username]) { err in
             if let err = err {
@@ -373,7 +373,8 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func updateUser(user: User, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateUser(userInput: User, completion: @escaping (Result<Void, Error>) -> Void) {
+        var user = userInput
         
         if (user.username != self.currentUser?.username) {
             // If we need to update the username, make sure it's available
@@ -383,11 +384,12 @@ final class MainViewModel: ObservableObject {
                 } else {
                     let data = user.toData()
                     print("Username is available")
+                    user.admin = self.currentUser?.admin ?? false
                     self.currentUser?.username = user.username
                     self.currentUser?.bio = user.bio
                     self.currentUser?.admin = user.admin
-                    self.currentUser?.createdAt = user.createdAt
-                    self.currentUser?.lastCommentAt = user.lastCommentAt
+                    user.createdAt = self.currentUser?.createdAt
+                    user.lastCommentAt = self.currentUser?.lastCommentAt
                     self.currentUser?.twitterHandle = user.twitterHandle
                     self.currentUser?.instagramHandle = user.instagramHandle
                     self.currentUser?.tiktokHandle = user.tiktokHandle
@@ -402,6 +404,7 @@ final class MainViewModel: ObservableObject {
             }
         } else {
             let data = user.toData()
+            self.currentUser?.admin = user.admin
             self.currentUser?.username = user.username
             self.currentUser?.bio = user.bio
             self.currentUser?.twitterHandle = user.twitterHandle

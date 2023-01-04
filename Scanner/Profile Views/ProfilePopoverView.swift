@@ -31,7 +31,7 @@ struct ProfilePopover: View {
                     
                     if (user.bio != "" && user.bio != nil) {
                         Text(user.bio ?? "")
-                            .multilineTextAlignment(.leading)
+                            .multilineTextAlignment(.center)
                     }
                 }
             }
@@ -42,16 +42,16 @@ struct ProfilePopover: View {
                     .padding()
             }
             
-            HStack {
-                Image(systemName: "message")
-                
-                if (user.commentCount ?? 0 == 1) {
-                    Text("\(user.commentCount ?? 0) comment")
-                } else {
-                    Text("\(user.commentCount ?? 0) comments")
-                }
-            }
-            .padding()
+//            HStack {
+//                Image(systemName: "message")
+//
+//                if (user.commentCount ?? 0 == 1) {
+//                    Text("\(user.commentCount ?? 0) comment")
+//                } else {
+//                    Text("\(user.commentCount ?? 0) comments")
+//                }
+//            }
+//            .padding()
             
             HStack (spacing: 20) {
                 if (user.twitterHandle != "" || user.instagramHandle != "" || user.tiktokHandle != "") {

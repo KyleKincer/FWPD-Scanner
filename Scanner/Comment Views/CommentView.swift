@@ -74,7 +74,7 @@ struct CommentView: View {
         .sheet(isPresented: $showingProfile) {
             if #available(iOS 16.0, *) {
                 ProfilePopover(user: comment.user)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.medium])
             } else {
                 ProfilePopover(user: comment.user)
             }

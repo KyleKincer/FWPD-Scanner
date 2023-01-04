@@ -77,7 +77,7 @@ struct DetailMapView: View {
                                 .foregroundColor(.blue)
                             
                             Image(systemName: activity.bookmarked ? "bookmark.fill" : "bookmark")
-                                .foregroundColor(activity.bookmarked ? .yellow : .white)
+                                .foregroundColor(activity.bookmarked ? .orange : .white)
                         }
                     })
                     .padding(.bottom)

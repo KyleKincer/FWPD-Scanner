@@ -134,7 +134,7 @@ struct ProfileEditView: View {
                         instagramHandle = instagramHandle.replacingOccurrences(of: "@", with: "")
                         tiktokHandle = tiktokHandle.replacingOccurrences(of: "@", with: "")
                         
-                        viewModel.updateUser(user: User(id: viewModel.currentUser!.id, username: username, bio: bio, twitterHandle: twitterHandle, instagramHandle: instagramHandle, tiktokHandle: tiktokHandle)) { result in
+                        viewModel.updateUser(userInput: User(id: viewModel.currentUser!.id, username: username, bio: bio, twitterHandle: twitterHandle, instagramHandle: instagramHandle, tiktokHandle: tiktokHandle)) { result in
                             switch result {
                             case .failure(let error):
                                 print(error)

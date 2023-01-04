@@ -18,59 +18,103 @@ struct MapView: View {
     
     var body: some View {
         ZStack() {
-            Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: activities) { activity in
-                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
-                    MapAnnotationView(activity: activity, chosenActivity: $chosenActivity)
-                        .onTapGesture {
-                            mapModel.region.center.latitude = activity.latitude
-                            mapModel.region.center.longitude = activity.longitude
-                            
-                        }
+            if (viewModel.isRefreshing) {
+                Text("Refreshing...")
+                    .font(.title2)
+                    .fontWeight(.bold)
+            } else {
+                Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: (viewModel.showBookmarks) ? viewModel.bookmarks : viewModel.activities) { activity in
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
+                        MapAnnotationView(activity: activity, chosenActivity: $chosenActivity)
+                            .onTapGesture {
+                                mapModel.region.center.latitude = activity.latitude
+                                mapModel.region.center.longitude = activity.longitude
+                                
+                            }
+                    }
                 }
-            }
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
-            .edgesIgnoringSafeArea(.all)
-            .onDisappear {
-                chosenActivity = nil
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                .edgesIgnoringSafeArea(.all)
+                .onDisappear {
+                    chosenActivity = nil
+                }
             }
             
             VStack {
                 
                 Spacer()
                 
-                if (!viewModel.showBookmarks) {
-                    Button() {
-                        playHaptic()
-                        if (!viewModel.isLoading) {
-                            withAnimation {
-                                viewModel.getMoreActivities()
-                                viewModel.addDatesToActivities(.activities)
-                                viewModel.addDistancesToActivities(.activities)
-                            }
-                        }
-                        
-                    } label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 15)
-                                .foregroundColor(.blue)
-                                .shadow(radius: 10)
-                            
-                            if (viewModel.isLoading) {
-                                ProgressView()
-                            } else {
-                                HStack {
-                                    Text("Get More")
-                                        .fontWeight(.semibold)
-                                    
-                                    Image(systemName: "goforward.plus")
+                HStack {
+                    if (!viewModel.showBookmarks) {
+                        Button() {
+                            playHaptic()
+                            if (!viewModel.isLoading) {
+                                withAnimation {
+                                    viewModel.getMoreActivities()
+                                    viewModel.addDatesToActivities(.activities)
+                                    viewModel.addDistancesToActivities(.activities)
                                 }
-                                .tint(.white)
+                            }
+                            
+                        } label: {
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(.blue)
+                                    .shadow(radius: 10)
+                                
+                                if (viewModel.isLoading) {
+                                    ProgressView()
+                                } else {
+                                    HStack {
+                                        Text("Get More")
+                                            .fontWeight(.semibold)
+                                        
+                                        Image(systemName: "goforward.plus")
+                                    }
+                                    .tint(.white)
+                                }
                             }
                         }
+                        .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
+                        .onLongPressGesture(perform: {
+                            withAnimation {
+                                playHaptic()
+                                viewModel.refresh()
+                            }
+                        })
                     }
-                    .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
-                    .padding(.bottom, chosenActivity == nil ? 30 : 0)
+                    
+                    if (viewModel.loggedIn) {
+                        Spacer()
+                        
+                        Button(action: {
+                            withAnimation {
+                                playHaptic()
+                                viewModel.showBookmarks.toggle()
+                            }
+                        }, label: {
+                            ZStack {
+                                ZStack{
+                                    Circle()
+                                        .foregroundColor(.blue)
+                                        .shadow(radius: 10)
+                                        .frame(width: 35, height: 35)
+                                    
+                                    if (viewModel.showBookmarks) {
+                                        Image(systemName: "bookmark.fill")
+                                            .foregroundColor(.orange)
+                                    } else {
+                                        Image(systemName: "bookmark")
+                                            .foregroundColor(.orange)
+                                            .tint(.white)
+                                    }
+                                }
+                            }
+                        })
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.bottom)
                 
                 if (chosenActivity != nil) {
                     Group { // header
