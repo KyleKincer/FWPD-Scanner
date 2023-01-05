@@ -84,6 +84,11 @@ struct CommentsView: View {
                         }
                         
                         comment = ""
+                        viewModel.currentUser?.commentCount = (viewModel.currentUser?.commentCount ?? 0) + 1
+                        let today = Date.now
+                        let formatter = DateFormatter()
+                        formatter.dateStyle = .long
+                        viewModel.currentUser?.lastCommentAt = formatter.string(from: today)
                     } label: {
                         ZStack{
                             RoundedRectangle(cornerRadius: 15)

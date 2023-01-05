@@ -347,8 +347,7 @@ final class MainViewModel: ObservableObject {
     func writeUserDocument(user: User) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(user.id)
-        
-        userRef.setData(["username": user.username, "profileImageURL": user.profileImageURL?.description ?? "", "createdAt": Firebase.Timestamp()]) { err in
+        userRef.setData(["username": user.username, "profileImageURL": user.profileImageURL?.description ?? "", "createdAt": user.createdAt!]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -388,6 +387,7 @@ final class MainViewModel: ObservableObject {
                     self.currentUser?.username = user.username
                     self.currentUser?.bio = user.bio
                     self.currentUser?.admin = user.admin
+                    user.commentCount = self.currentUser?.commentCount ?? 0
                     user.createdAt = self.currentUser?.createdAt
                     user.lastCommentAt = self.currentUser?.lastCommentAt
                     self.currentUser?.twitterHandle = user.twitterHandle
@@ -404,14 +404,16 @@ final class MainViewModel: ObservableObject {
             }
         } else {
             let data = user.toData()
-            self.currentUser?.admin = user.admin
+            user.admin = self.currentUser?.admin ?? false
             self.currentUser?.username = user.username
             self.currentUser?.bio = user.bio
+            self.currentUser?.admin = user.admin
+            user.commentCount = self.currentUser?.commentCount ?? 0
+            user.createdAt = self.currentUser?.createdAt
+            user.lastCommentAt = self.currentUser?.lastCommentAt
             self.currentUser?.twitterHandle = user.twitterHandle
             self.currentUser?.instagramHandle = user.instagramHandle
             self.currentUser?.tiktokHandle = user.tiktokHandle
-            self.currentUser?.lastCommentAt = user.lastCommentAt
-            self.currentUser?.createdAt = user.createdAt
             Firestore.firestore().collection("users").document(user.id).updateData(data as [String : Any]) { error in
                 if let error = error {
                     completion(.failure(error))

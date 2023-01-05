@@ -23,20 +23,39 @@ struct MapView: View {
                     .font(.title2)
                     .fontWeight(.bold)
             } else {
-                Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: (viewModel.showBookmarks) ? viewModel.bookmarks : viewModel.activities) { activity in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
-                        MapAnnotationView(activity: activity, chosenActivity: $chosenActivity)
-                            .onTapGesture {
-                                mapModel.region.center.latitude = activity.latitude
-                                mapModel.region.center.longitude = activity.longitude
-                                
-                            }
+                if (viewModel.activities.count > 0) {
+                    Map(coordinateRegion: $mapModel.region, showsUserLocation: true, annotationItems: (viewModel.showBookmarks) ? viewModel.bookmarks : viewModel.activities) { activity in
+                        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude)) {
+                            Button (action : {
+                                withAnimation {
+                                    if (chosenActivity == activity) {
+                                        chosenActivity = nil
+                                    } else {
+                                        chosenActivity = nil
+                                        chosenActivity = activity
+                                    }
+                                }
+                            }, label: {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .foregroundColor(chosenActivity == activity ? .blue : .red)
+                                    .scaleEffect(chosenActivity == activity ? 2 : 1)
+                            })
+                        }
                     }
-                }
-                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
-                .edgesIgnoringSafeArea(.all)
-                .onDisappear {
-                    chosenActivity = nil
+                    .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                    .edgesIgnoringSafeArea(.all)
+                    .onDisappear {
+                        withAnimation {
+                            chosenActivity = nil
+                        }
+                    }
+                } else {
+                    Map(coordinateRegion: $mapModel.region, showsUserLocation: true)
+                        .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                        .edgesIgnoringSafeArea(.all)
+                        .onDisappear {
+                            chosenActivity = nil
+                        }
                 }
             }
             
@@ -64,6 +83,7 @@ struct MapView: View {
                                 
                                 if (viewModel.isLoading) {
                                     ProgressView()
+                                        .tint(.white)
                                 } else {
                                     HStack {
                                         Text("Get More")
@@ -75,7 +95,7 @@ struct MapView: View {
                                 }
                             }
                         }
-                        .frame(width: viewModel.isLoading ? 50 : 120, height: 33)
+                        .frame(width: 120, height: 35)
                         .onLongPressGesture(perform: {
                             withAnimation {
                                 playHaptic()
@@ -85,8 +105,6 @@ struct MapView: View {
                     }
                     
                     if (viewModel.loggedIn) {
-                        Spacer()
-                        
                         Button(action: {
                             withAnimation {
                                 playHaptic()

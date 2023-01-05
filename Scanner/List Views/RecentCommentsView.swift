@@ -29,6 +29,9 @@ struct RecentCommentsView: View {
                     
                     Spacer()
                 }
+                .onTapGesture {
+                    viewModel.refresh()
+                }
             } else {
                 NavigationView {
                     Section {

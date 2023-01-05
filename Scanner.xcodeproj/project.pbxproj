@@ -82,7 +82,6 @@
 		EB4EA5BD293FDE8000A39512 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EA5BC293FDE8000A39512 /* RegisterView.swift */; };
 		EB57406828E6166E009FDA3D /* StandardNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406728E6166E009FDA3D /* StandardNavBarView.swift */; };
 		EB57406A28E617A0009FDA3D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57406928E617A0009FDA3D /* ActivityView.swift */; };
-		EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */; };
 		EB633C63295B2433004EC04B /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C60295B2433004EC04B /* ProfileEditView.swift */; };
 		EB633C64295B2433004EC04B /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C61295B2433004EC04B /* ProfilePhotoView.swift */; };
 		EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB633C62295B2433004EC04B /* ProfilePopoverView.swift */; };
@@ -181,7 +180,6 @@
 		EB4EA5BC293FDE8000A39512 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		EB57406728E6166E009FDA3D /* StandardNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardNavBarView.swift; sourceTree = "<group>"; };
 		EB57406928E617A0009FDA3D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		EB57DA1528E78D0C0031B68A /* WatchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMainView.swift; sourceTree = "<group>"; };
 		EB62D7E828E79ADD005A76E7 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
 		EB62D7EC28E79D47005A76E7 /* WatchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDetailView.swift; sourceTree = "<group>"; };
@@ -499,7 +497,6 @@
 			isa = PBXGroup;
 			children = (
 				EBC53FAF28FC96B80063F87A /* DetailMapView.swift */,
-				EB57DA0B28E61BC40031B68A /* MapAnnotationView.swift */,
 				EBBBCE30292AED720015E4C1 /* RefreshReminderView.swift */,
 				EBC7DB292948AEE10059BEC5 /* UniversalBackButton.swift */,
 			);
@@ -725,7 +722,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB57DA0C28E61BC40031B68A /* MapAnnotationView.swift in Sources */,
 				EB633C65295B2433004EC04B /* ProfilePopoverView.swift in Sources */,
 				EB0C3B0929442E590098C234 /* ProfileView.swift in Sources */,
 				EBC53FB028FC96B80063F87A /* DetailMapView.swift in Sources */,
@@ -957,7 +953,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/Scanner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1006,7 +1002,7 @@
 				CODE_SIGN_ENTITLEMENTS = Scanner/ScannerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1053,7 +1049,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1087,7 +1083,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "WatchScanner Watch App/WatchScanner Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchScanner Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1121,7 +1117,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;
@@ -1155,7 +1151,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"ScannerTV/Preview Content\"";
 				DEVELOPMENT_TEAM = PFJ824B57Q;
 				ENABLE_PREVIEWS = YES;

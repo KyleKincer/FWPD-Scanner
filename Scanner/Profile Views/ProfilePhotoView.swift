@@ -16,7 +16,7 @@ struct ProfilePhoto: View {
             if let url = url {
                 ZStack {
                     Circle()
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("ModeOpposite"))
                         .frame(width: size, height: size)
                     
                     AsyncImage(url: url) { image in

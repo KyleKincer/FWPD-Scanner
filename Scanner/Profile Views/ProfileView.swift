@@ -44,6 +44,12 @@ struct ProfileView: View {
                         Button(action: {
                             withAnimation {
                                 viewModel.logOut()
+                                
+                                
+                                if (viewModel.loginType == "google") {
+                                    viewModel.googleSignOut()
+                                }
+                                
                                 viewModel.loggedIn = false
                                 viewModel.showAuth = true
                             }
@@ -59,6 +65,12 @@ struct ProfileView: View {
                 // Profile view
                 HStack (alignment: .top) {
                     VStack {
+                        
+                        if (viewModel.currentUser!.admin) {
+                            Image(systemName: "crown")
+                                .foregroundColor(.red)
+                        }
+                        
                         ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
                         
                         if (!showingProfileEditor) {
@@ -83,7 +95,7 @@ struct ProfileView: View {
                         }
                     }
                     
-                    VStack (alignment: .leading) {
+                    VStack (alignment: .center) {
                         Text(viewModel.currentUser?.username ?? "Username")
                             .font(.title)
                             .fontWeight(.bold)
@@ -103,10 +115,14 @@ struct ProfileView: View {
                         
                         if (!showingProfileEditor && viewModel.currentUser?.bio != "") {
                             Text((viewModel.currentUser?.bio ?? ""))
-                                .multilineTextAlignment(.leading)
+                                .multilineTextAlignment(.center)
                                 .padding(.horizontal)
                                 .frame(maxWidth: 400)
                                 
+                        }
+                        
+                        if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
+                            Text("Member since " + (viewModel.currentUser?.createdAt)!)
                         }
                         
                         if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {

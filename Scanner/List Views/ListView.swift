@@ -70,6 +70,9 @@ struct ListView: View {
                             
                             Spacer()
                         }
+                        .onTapGesture {
+                            viewModel.refresh()
+                        }
                         // Results
                     } else {
                         NavigationView {

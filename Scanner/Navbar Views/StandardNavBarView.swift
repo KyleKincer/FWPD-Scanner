@@ -170,7 +170,7 @@ struct StandardNavBarView: View {
                     
                 }, label: {
                     if (Date().formatted(date: .abbreviated, time: .omitted) == "Dec 25, 2022") {
-                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
+                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 85)
                             .font(.system(size: 25))
                             .foregroundColor(.orange)
                             .shadow(radius: 2)
@@ -179,7 +179,7 @@ struct StandardNavBarView: View {
                             .scaleEffect(0.35)
                             .frame(width: 40, height: 25)
                     } else {
-                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 80)
+                        ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 85)
                             .scaleEffect(0.35)
                             .frame(width: 40, height: 25)
                     }

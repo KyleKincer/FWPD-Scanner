@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfilePopover: View {
+    @State private var showingAdmin = false
     let user: User
     var body: some View {
         VStack() {
@@ -16,9 +17,12 @@ struct ProfilePopover: View {
                     if (user.admin) {
                         Image(systemName: "crown")
                             .foregroundColor(.red)
+                            .onTapGesture {
+                                showingAdmin = true
+                            }
                     }
                     
-                    ProfilePhoto(url: user.profileImageURL, size: 150)
+                    ProfilePhoto(url: user.profileImageURL, size: 100)
                     
                 }
                 
@@ -32,26 +36,25 @@ struct ProfilePopover: View {
                     if (user.bio != "" && user.bio != nil) {
                         Text(user.bio ?? "")
                             .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: false)
                     }
                 }
             }
-            .padding(.top)
+            .padding(.vertical)
             
-            if (user.createdAt != nil) {
-                Text(user.createdAt.debugDescription)
-                    .padding()
+            if (user.createdAt != "" && user.createdAt != nil) {
+                Text("Member since " + user.createdAt!)
             }
             
-//            HStack {
-//                Image(systemName: "message")
-//
-//                if (user.commentCount ?? 0 == 1) {
-//                    Text("\(user.commentCount ?? 0) comment")
-//                } else {
-//                    Text("\(user.commentCount ?? 0) comments")
-//                }
-//            }
-//            .padding()
+            HStack {
+                Image(systemName: "message")
+
+                if (user.commentCount ?? 0 == 1) {
+                    Text("\(user.commentCount ?? 0) comment contributed")
+                } else {
+                    Text("\(user.commentCount ?? 0) comments contributed")
+                }
+            }
             
             HStack (spacing: 20) {
                 if (user.twitterHandle != "" || user.instagramHandle != "" || user.tiktokHandle != "") {
@@ -108,13 +111,16 @@ struct ProfilePopover: View {
                 }
             }
             .padding()
+            .alert("This user is designated as a community admin", isPresented: $showingAdmin) {
+                        Button("OK", role: .cancel) { }
+                    }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 5)
     }
 }
 
 struct ProfilePopover_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening?", twitterHandle: "poofy", instagramHandle: "poofy", tiktokHandle: "poofy"))
+        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening? la la la la la la la la la", twitterHandle: "poofy", instagramHandle: "poofy", tiktokHandle: "poofy", admin: true))
     }
 }

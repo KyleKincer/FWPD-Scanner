@@ -77,6 +77,10 @@ struct StatusView: View {
                         
                     }.frame(width: 200, height: 100)
                 }
+            } else {
+                ProgressView()
+                    .tint(.blue)
+                    .scaleEffect(2)
             }
         }
     }

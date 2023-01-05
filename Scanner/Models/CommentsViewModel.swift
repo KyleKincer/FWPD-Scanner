@@ -37,13 +37,16 @@ class CommentsViewModel: ObservableObject {
         let commentsRef = activityRef.collection("comments")
         let userRef = Firestore.firestore().collection("users").document(user.id)
         
+        let today = Date.now
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
         // Update activities data
         activityRef.updateData(["commentCount": FieldValue.increment(Double(1)),
                                 "lastCommentAt" : Timestamp().firebaseTimestamp])
         
         // Update user's data
         userRef.updateData(["commentCount": FieldValue.increment(Double(1)),
-                            "lastCommentAt" : Timestamp().firebaseTimestamp])
+                            "lastCommentAt" : formatter.string(from: today)])
         
         // Add comment
         commentsRef.addDocument(data: newComment.toData())
@@ -86,7 +89,7 @@ class CommentsViewModel: ObservableObject {
         activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
         
         // Decrement the user's commentCount
-        usersRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+        usersRef.updateData(["commentCount": FieldValue.increment(Double(-1)), "lastCommentAt": ""])
         
         // Query to find the next most recent comment
         let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)

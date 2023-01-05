@@ -188,13 +188,12 @@ struct User: Identifiable, Decodable {
     var username: String
     var admin: Bool
     var profileImageURL: URL?
-    var commentCount: Int?
-    var lastCommentAt: Timestamp?
-    var createdAt: Timestamp?
+    var commentCount: Int
+    var lastCommentAt: String?
+    var createdAt: String?
     var bio: String?
     var twitterHandle: String?
     var instagramHandle: String?
-    var facebookHandle: String?
     var tiktokHandle: String?
     
     init(id: String, username: String) {
@@ -203,12 +202,14 @@ struct User: Identifiable, Decodable {
         self.admin = false
         self.profileImageURL = URL(string: "")
         self.commentCount = 0
-        self.lastCommentAt = nil
-        self.createdAt = nil
+        self.lastCommentAt = ""
+        let today = Date.now
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        self.createdAt = formatter.string(from: today)
         self.bio = nil
         self.twitterHandle = nil
         self.instagramHandle = nil
-        self.facebookHandle = nil
         self.tiktokHandle = nil
     }
     
@@ -218,27 +219,31 @@ struct User: Identifiable, Decodable {
         self.admin = false
         self.profileImageURL = URL(string: profileImageURL.description)
         self.commentCount = 0
-        self.lastCommentAt = nil
-        self.createdAt = nil
+        self.lastCommentAt = ""
+        let today = Date.now
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        self.createdAt = formatter.string(from: today)
         self.bio = nil
-        self.twitterHandle = nil
-        self.instagramHandle = nil
-        self.facebookHandle = nil
-        self.tiktokHandle = nil
+        self.twitterHandle = ""
+        self.instagramHandle = ""
+        self.tiktokHandle = ""
     }
     
-    init(id: String, username: String, bio: String?, twitterHandle: String?, instagramHandle: String?, tiktokHandle: String?) {
+    init(id: String, username: String, bio: String?, twitterHandle: String?, instagramHandle: String?, tiktokHandle: String?, admin: Bool?) {
         self.id = id
         self.username = username
-        self.admin = false
+        self.admin = admin ?? false
         self.profileImageURL = URL(string: "")
         self.commentCount = 0
-        self.lastCommentAt = nil
-        self.createdAt = nil
+        self.lastCommentAt = ""
+        let today = Date.now
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        self.createdAt = formatter.string(from: today)
         self.bio = bio
         self.twitterHandle = twitterHandle
         self.instagramHandle = instagramHandle
-        self.facebookHandle = nil
         self.tiktokHandle = tiktokHandle
     }
 
@@ -247,13 +252,12 @@ struct User: Identifiable, Decodable {
         self.username = (document.data()?["username"] as? String) ?? "Unknown"
         self.admin = document.data()?["admin"] as? Bool ?? false
         self.profileImageURL = URL(string: document.data()?["profileImageURL"] as? String ?? "")
-        self.commentCount = document.data()?["commentCount"] as? Int
-        self.lastCommentAt = document.data()?["lastCommentAt"] as? Timestamp
-        self.createdAt = document.data()?["createdAt"] as? Timestamp
+        self.commentCount = document.data()?["commentCount"] as? Int ?? 0
+        self.lastCommentAt = document.data()?["lastCommentAt"] as? String
+        self.createdAt = document.data()?["createdAt"] as? String // this doesn't work at all
         self.bio = document.data()?["bio"] as? String
         self.twitterHandle = document.data()?["twitterHandle"] as? String
         self.instagramHandle = document.data()?["instagramHandle"] as? String
-        self.facebookHandle = document.data()?["facebookHandle"] as? String
         self.tiktokHandle = document.data()?["tiktokHandle"] as? String
     }
     
@@ -268,7 +272,6 @@ struct User: Identifiable, Decodable {
         case createdAt
         case twitterHandle
         case instagramHandle
-        case facebookHandle
         case tiktokHandle
     }
     
@@ -278,13 +281,12 @@ struct User: Identifiable, Decodable {
         self.username = try container.decode(String.self, forKey: .username)
         self.admin = try container.decode(Bool.self, forKey: .admin)
         self.profileImageURL = try container.decodeIfPresent(URL.self, forKey: .profileImageURL)
-        self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount)
-        self.lastCommentAt = try container.decodeIfPresent(Timestamp.self, forKey: .lastCommentAt)
-        self.createdAt = try container.decodeIfPresent(Timestamp.self, forKey: .createdAt)
+        self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount) ?? 0
+        self.lastCommentAt = try container.decodeIfPresent(String.self, forKey: .lastCommentAt)
+        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
         self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
         self.twitterHandle = try container.decodeIfPresent(String.self, forKey: .twitterHandle)
         self.instagramHandle = try container.decodeIfPresent(String.self, forKey: .instagramHandle)
-        self.facebookHandle = try container.decodeIfPresent(String.self, forKey: .facebookHandle)
         self.tiktokHandle = try container.decodeIfPresent(String.self, forKey: .tiktokHandle)
     }
     
@@ -293,12 +295,11 @@ struct User: Identifiable, Decodable {
                 "admin": self.admin,
                 "profileImageURL": Auth.auth().currentUser?.photoURL?.description ?? "",
                 "commentCount": self.commentCount,
-                "lastCommentAt": self.lastCommentAt?.firebaseTimestamp,
-                "createdAt": self.createdAt?.firebaseTimestamp,
+                "lastCommentAt": self.lastCommentAt,
+                "createdAt": self.createdAt,
                 "bio": self.bio,
                 "twitterHandle": self.twitterHandle ?? "",
                 "instagramHandle": self.instagramHandle ?? "",
-                "facebookHandle": self.facebookHandle ?? "",
                 "tiktokHandle": self.tiktokHandle ?? ""]
     }
 }

@@ -142,6 +142,9 @@ struct ActivityView: View {
                                                 Spacer()
                                                 
                                             }
+                                            .onTapGesture {
+                                                viewModel.refresh()
+                                            }
                                             
                                         } else {
                                             HStack (alignment: .center){

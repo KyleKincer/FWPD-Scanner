@@ -13,6 +13,7 @@ struct CommentView: View {
     let formatter = RelativeDateTimeFormatter()
     
     @State private var showingProfile = false
+    @State private var showingAdmin = false
     
     var body: some View {
         HStack {
@@ -48,6 +49,9 @@ struct CommentView: View {
                         Image(systemName: "crown")
                             .font(.footnote)
                             .foregroundColor(.red)
+                            .onTapGesture {
+                                showingAdmin = true
+                            }
                     }
                     Text("·")
                     
@@ -79,6 +83,9 @@ struct CommentView: View {
                 ProfilePopover(user: comment.user)
             }
         }
+        .alert("This user is designated as a community admin", isPresented: $showingAdmin) {
+                    Button("OK", role: .cancel) { }
+                }
     
         Divider()
     }
