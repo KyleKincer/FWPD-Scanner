@@ -230,12 +230,12 @@ struct User: Identifiable, Decodable {
         self.tiktokHandle = ""
     }
     
-    init(id: String, username: String, bio: String?, twitterHandle: String?, instagramHandle: String?, tiktokHandle: String?, admin: Bool?) {
+    init(id: String, username: String, bio: String?, twitterHandle: String?, instagramHandle: String?, tiktokHandle: String?, admin: Bool?, commentCount: Int) {
         self.id = id
         self.username = username
         self.admin = admin ?? false
         self.profileImageURL = URL(string: "")
-        self.commentCount = 0
+        self.commentCount = commentCount
         self.lastCommentAt = ""
         let today = Date.now
         let formatter = DateFormatter()

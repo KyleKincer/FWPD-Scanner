@@ -121,6 +121,6 @@ struct ProfilePopover: View {
 
 struct ProfilePopover_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening? la la la la la la la la la", twitterHandle: "poofy", instagramHandle: "poofy", tiktokHandle: "poofy", admin: true))
+        ProfilePopover(user: User(id: "aisjdfiuewoijf", username: "poofy", bio: "hello world how are ya doin on this fine evening? la la la la la la la la la", twitterHandle: "poofy", instagramHandle: "poofy", tiktokHandle: "poofy", admin: true, commentCount: 3))
     }
 }
