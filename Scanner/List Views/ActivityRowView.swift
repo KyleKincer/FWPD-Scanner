@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ActivityRowView: View {
     @State var activity: Scanner.Activity

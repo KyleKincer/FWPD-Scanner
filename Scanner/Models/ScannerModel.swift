@@ -91,6 +91,64 @@ struct Scanner {
         let id: String
         let name: String
     }
+    
+    struct Fire: Identifiable, Decodable, Equatable, Hashable, Encodable {
+        var id: String
+        let timestamp: String
+        let nature: String
+        let address: String
+        var controlNumber: String
+        var date: Date? = nil
+        var bookmarked: Bool = false
+        var commentCount: Int?
+        var comments: [Comment]?
+        
+        enum CodingKeys: String, CodingKey {
+            // the API gives us control_number
+            case controlNumber = "control_number"
+            case id
+            case timestamp
+            case nature
+            case address
+            case date
+            case bookmarked
+            case commentCount
+        }
+        
+        init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.id = try container.decode(String.self, forKey: .id)
+                self.timestamp = try container.decode(String.self, forKey: .timestamp)
+                self.nature = try container.decode(String.self, forKey: .nature)
+                self.address = try container.decode(String.self, forKey: .address)
+                self.controlNumber = try container.decode(String.self, forKey: .controlNumber)
+                self.date = try container.decode(Date.self, forKey: .date)
+                self.bookmarked = try container.decode(Bool.self, forKey: .bookmarked)
+                self.commentCount = try container.decode(Int.self, forKey: .commentCount)
+            }
+        
+        init() {
+                self.id = ""
+                self.timestamp = ""
+                self.nature = ""
+                self.address = ""
+                self.controlNumber = ""
+                self.date = nil
+                self.bookmarked = false
+                self.commentCount = 0
+            }
+        
+        init(id: String, timestamp: String, nature: String, address: String, controlNumber: String, commentCount: Int) {
+                self.id = id
+                self.timestamp = timestamp
+                self.nature = nature
+                self.address = address
+                self.controlNumber = controlNumber
+                self.bookmarked = false
+                self.commentCount = commentCount
+                self.date = nil
+            }
+    }
 }
 
 struct Timestamp: Decodable, Equatable, Hashable {

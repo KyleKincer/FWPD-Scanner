@@ -22,6 +22,7 @@ final class MainViewModel: ObservableObject {
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
+    @Published var fires = [Scanner.Fire]()
     @Published var history = [Scanner.Activity]()
     @Published var recentlyCommentedActivities = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
@@ -54,6 +55,7 @@ final class MainViewModel: ObservableObject {
     @Published var showBookmarks = false
     @Published var bookmarkCount = 0
     @Published var showMostRecentComments = false
+    @Published var showFires = false
     @Published var showAuthError = false
     @Published var onboarding = false
     @Published var showAuth = false
@@ -113,6 +115,7 @@ final class MainViewModel: ObservableObject {
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
         self.refresh()
+        self.refreshFires()
     }
     
     func login(email: String, password: String) {
@@ -244,42 +247,6 @@ final class MainViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
-    }
-    
-    func refresh() {
-        print("R --- Refreshing")
-        
-        self.showBookmarks = false
-        self.isRefreshing = true
-        self.activities.removeAll() // clear out stored activities
-        
-        Task.init {
-            do {
-                // Get first set of activities
-                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
-                if (newActivities.count > 0) {
-                    self.activities.append(contentsOf: newActivities)
-                    print("+ --- Got activities")
-                    
-                    
-                    withAnimation {
-                        self.serverResponsive = true
-                        self.addDatesToActivities(.activities)
-                        self.addDistancesToActivities(.activities)
-                        self.isRefreshing = false
-                    }
-                } else {
-                    print("+ --- Got zero activities")
-                    
-                    withAnimation {
-                        self.isRefreshing = false
-                    }
-                }
-            }
-        }
-        self.getNatures()
-        self.getBookmarks()
-        self.getRecentlyCommentedActivities()
     }
     
     func createUser(email: String, password: String, username: String, _ completion: @escaping (Bool) -> Void) {
@@ -424,6 +391,74 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    func refresh() {
+        print("R --- Refreshing")
+        
+        self.showBookmarks = false
+        self.isRefreshing = true
+        self.activities.removeAll() // clear out stored activities
+        
+        Task.init {
+            do {
+                // Get first set of activities
+                let newActivities = try await self.networkManager.getFirstActivities(filterByDate: self.useDate, filterByLocation: self.useLocation, filterByNature: self.useNature, dateFrom: self.dateFrom, dateTo: self.dateTo, selectedNatures: self.selectedNaturesString, location: self.locationManager.location, radius: self.radius)
+                if (newActivities.count > 0) {
+                    self.activities.append(contentsOf: newActivities)
+                    print("+ --- Got activities")
+                    
+                    
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(.activities)
+                        self.addDistancesToActivities(.activities)
+                        self.isRefreshing = false
+                    }
+                } else {
+                    print("+ --- Got zero activities")
+                    
+                    withAnimation {
+                        self.isRefreshing = false
+                    }
+                }
+            }
+        }
+        self.getNatures()
+        self.getBookmarks()
+        self.getRecentlyCommentedActivities()
+    }
+    
+    func refreshFires() {
+        print("R --- Refreshing Fires")
+        
+        self.showBookmarks = false
+        self.isRefreshing = true
+        self.fires.removeAll() // clear out stored activities
+        
+        Task.init {
+            do {
+                // Get first set of activities
+                let newFires = try await self.networkManager.getFirstFires(filterByDate: self.useDate, dateFrom: self.dateFrom, dateTo: self.dateTo)
+                if (newFires.count > 0) {
+                    self.fires.append(contentsOf: newFires)
+                    print("+ --- Got Fires")
+                    
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(.fires)
+                        self.isRefreshing = false
+                    }
+                } else {
+                    print("+ --- Got zero fires")
+                    
+                    withAnimation {
+                        self.isRefreshing = false
+                    }
+                }
+            }
+        }
+        self.getBookmarks()
+    }
+    
     func getMoreActivities() {
         withAnimation {
             self.isLoading = true
@@ -444,6 +479,33 @@ final class MainViewModel: ObservableObject {
                     }
                 } else {
                     print("+ --- Got more but zero activities")
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                }
+            }
+        }
+    }
+    
+    func getMoreFires() {
+        withAnimation {
+            self.isLoading = true
+        }
+        
+        Task.init {
+            do {
+                let newFires = try await self.networkManager.getMoreFires(filterByDate: self.useDate, dateFrom: self.dateFrom, dateTo: self.dateTo)
+                
+                if (newFires.count > 0) {
+                    self.fires.append(contentsOf: newFires)
+                    print("+ --- Got more fires")
+                    withAnimation {
+                        self.serverResponsive = true
+                        self.addDatesToActivities(.fires)
+                        self.isLoading = false
+                    }
+                } else {
+                    print("+ --- Got more but zero fires")
                     withAnimation {
                         self.isLoading = false
                     }
@@ -492,6 +554,13 @@ final class MainViewModel: ObservableObject {
             }
             self.recentlyCommentedActivities = set
             print("G - Set dates on recentlyCommentedActivities")
+        case .fires:
+            var set = self.fires
+            for i in set.indices {
+                set[i].date = formatter.date(from: set[i].timestamp)
+            }
+            self.fires = set
+            print("G - Set dates on fires")
         }
     }
     
@@ -522,6 +591,8 @@ final class MainViewModel: ObservableObject {
                 }
                 self.recentlyCommentedActivities = set
                 print("G - Set distances on recentlyCommentedActivities")
+            case .fires:
+                print("cannot add distances to fires")
             }
         }
     }

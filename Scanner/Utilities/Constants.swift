@@ -23,6 +23,7 @@ enum SetName: String {
     case activities
     case bookmarks
     case recentlyCommentedActivities
+    case fires
 }
 
 enum AccountError: LocalizedError {

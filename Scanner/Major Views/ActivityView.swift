@@ -150,21 +150,40 @@ struct ActivityView: View {
                                             HStack (alignment: .center){
                                                 Button (action: {
                                                     withAnimation (.interactiveSpring()) {
+                                                        viewModel.showFires = false
                                                         viewModel.showMostRecentComments = false
                                                     }
                                                 }, label: {
-                                                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
+                                                    Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Police Filtered" : "Police")
                                                         .font(viewModel.showMostRecentComments ? .subheadline : .title)
                                                         
-                                                        .foregroundColor(viewModel.showMostRecentComments ? .blue : Color("ModeOpposite"))
+                                                        .foregroundColor((viewModel.showMostRecentComments || viewModel.showFires) ? .blue : Color("ModeOpposite"))
                                                 })
                                                 
                                                 Spacer()
                                                 
                                                 if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
                                                     
+                                                    if (viewModel.fires.count > 0) {
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Button(action: {
+                                                            withAnimation (.interactiveSpring()){
+                                                                viewModel.showMostRecentComments = false
+                                                                viewModel.showFires = true
+                                                            }
+                                                        }, label: {
+                                                            Text("Fire")
+                                                                .font(viewModel.showFires ? .title : .subheadline)
+                                                                .foregroundColor(viewModel.showFires ? Color("ModeOpposite") : .blue)
+                                                        })
+                                                        .transition(.move(edge: .top))
+                                                    }
+                                                    
                                                     Button(action: {
                                                         withAnimation (.interactiveSpring()){
+                                                            viewModel.showFires = false
                                                             viewModel.showMostRecentComments = true
                                                        }
                                                     }, label: {
@@ -235,7 +254,7 @@ struct ActivityView: View {
                                     
                                     HStack {
                                         
-                                        Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : (viewModel.showMostRecentComments ? "Recent Comments" : "Recent Activity"))
+                                        Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Police Filtered" : (viewModel.showMostRecentComments ? "Comments" : "Police"))
                                             .font(.title)
                                         
                                         Spacer()

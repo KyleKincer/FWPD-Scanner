@@ -19,30 +19,7 @@ struct ListView: View {
         ZStack {
             VStack {
                 HStack (alignment: .center){
-                    Button (action: {
-                        withAnimation (.interactiveSpring()) {
-                            viewModel.showMostRecentComments = false
-                        }
-                    }, label: {
-                        Text((viewModel.useDate || viewModel.useNature || viewModel.useLocation) ? "Filtered Activity" : "Recent Activity")
-                            .font(viewModel.showMostRecentComments ? .subheadline : .title)
-                            .foregroundColor(viewModel.showMostRecentComments ? .blue : Color("ModeOpposite"))
-                    })
-                    
-                    Spacer()
-                    
-                    if (!viewModel.useDate && !viewModel.useNature && !viewModel.useLocation) {
-                        
-                        Button(action: {
-                            withAnimation (.interactiveSpring()){
-                                viewModel.showMostRecentComments = true
-                           }
-                        }, label: {
-                            Text("Comments")
-                                .font(viewModel.showMostRecentComments ? .title : .subheadline)
-                                .foregroundColor(viewModel.showMostRecentComments ? Color("ModeOpposite") : .blue)
-                        })
-                    }
+                    DepartmentSelectorView(viewModel: viewModel, fireSelected: $viewModel.showFires, showComments: $viewModel.showMostRecentComments)
                 }
                 .padding(.horizontal)
                 
@@ -50,6 +27,60 @@ struct ListView: View {
                     RecentCommentsView(viewModel: viewModel)
                         .transition(.move(edge: .trailing).combined(with: .scale))
                     
+                } else if (viewModel.showFires) {
+                    if (viewModel.fires.count == 0 && !viewModel.isRefreshing) {
+                        VStack {
+                            
+                            Spacer()
+                            
+                            Text("No Matches Found")
+                                .font(.system(size: 25))
+                            
+                            Text("Adjust your filter settings")
+                                .font(.system(size: 15))
+                            
+                            Image(systemName: "flame")
+                                .foregroundColor(.red)
+                                .font(.system(size: 40))
+                                .padding()
+                            
+                            Spacer()
+                        }
+                    } else {
+                        List(viewModel.fires, id: \.self) { fire in
+                            
+                            FireRowView(fire: fire, viewModel: viewModel)
+                                .opacity(viewModel.fires.count > 0 ? 1 : 0)
+                                .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.fires.count > 0)
+                            
+                            if (fire == viewModel.fires.last) {
+                                if (viewModel.isLoading) {
+                                    ProgressView()
+                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        .listRowSeparator(.hidden)
+                                } else {
+                                    HStack (alignment: .center){
+                                        Text("Get More")
+                                            .bold()
+                                            .italic()
+                                            .foregroundColor(.blue)
+                                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                    }
+                                    .onTapGesture {
+                                        viewModel.getMoreActivities()
+                                    }
+                                }
+                            }
+                                
+                        }
+                        .refreshable {
+                            viewModel.refresh()
+                        }
+                        .transition(.move(edge: .trailing).combined(with: .scale))
+                        
+                        .padding(.top, -10)
+                    }
+                
                 } else  { // Show normal activity view
                     // If count = 0, likely filtered and no applicable results
                     if (viewModel.activities.count == 0 && !viewModel.isRefreshing) {
@@ -107,6 +138,7 @@ struct ListView: View {
                             }
                         }
                         .transition(.move(edge: .leading).combined(with: .scale))
+                        .padding(.top, -10)
                     }
                 }
 //                SwiftUIBannerAd(adPosition: .bottom, adUnitId: Constants.appID)
