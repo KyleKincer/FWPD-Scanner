@@ -50,6 +50,10 @@ struct FilterSettingsView: View {
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
             
+            Text("FWFD filtering is ony available by date at this time!")
+                .multilineTextAlignment(.center)
+                .font(.subheadline)
+            
             Text("This app only works for Fort Wayne, IN")
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
