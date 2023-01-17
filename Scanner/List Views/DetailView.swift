@@ -22,12 +22,21 @@ struct DetailView: View {
         GeometryReader { geometry in
             ScrollView {
                 Group { // header
-                    Text(activity.nature == "" ? "Unknown" : activity.nature)
-                        .font(.system(size: 30))
-                        .italic()
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal)
+                    if (activity.isFire == "true") {
+                        Text(activity.nature == "" ? "Unknown" : "👨‍🚒 " + activity.nature)
+                            .font(.system(size: 30))
+                            .italic()
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal)
+                    } else {
+                        Text(activity.nature == "" ? "Unknown" : "👮‍♂️ " + activity.nature)
+                            .font(.system(size: 30))
+                            .italic()
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal)
+                    }
                     
                     HStack {
                             VStack(alignment: .leading, spacing: 5) {
@@ -39,8 +48,10 @@ struct DetailView: View {
                                 Text("\(activity.date ?? Date(), style: .relative) ago")
                                     .foregroundColor(.secondary)
 
-                            Text(activity.controlNumber)
-                                .foregroundColor(.secondary)
+                                if (activity.isFire == "false") {
+                                    Text(activity.controlNumber)
+                                        .foregroundColor(.secondary)
+                                }
                         }
                         .padding(.leading)
                         .padding(.vertical, 5)
@@ -71,20 +82,56 @@ struct DetailView: View {
                     .padding(.horizontal, 5)
                     .padding(.bottom, 5)
                     
-                    
-                    DetailMapView(viewModel: viewModel, activity: $activity)
-                        .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
-                        .frame(height: geometry.size.height * 0.4)
-                        .edgesIgnoringSafeArea(.all)
-                        .onAppear {
-                            viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
-                        }
-                        .onDisappear {
-                            viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
-                        }
-                        .environmentObject(appDelegate)
-                        .cornerRadius(5.0)
-                        .padding(.horizontal)
+                    if (activity.isFire == "false") {
+                        
+                        DetailMapView(viewModel: viewModel, activity: $activity)
+                            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .black, .clear]), startPoint: .bottom, endPoint: .top))
+                            .frame(height: geometry.size.height * 0.4)
+                            .edgesIgnoringSafeArea(.all)
+                            .onAppear {
+                                viewModel.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: activity.latitude, longitude: activity.longitude), latitudinalMeters: 300, longitudinalMeters: 300)
+                            }
+                            .onDisappear {
+                                viewModel.region = MKCoordinateRegion(center: Constants.defaultLocation, span: MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375))
+                            }
+                            .environmentObject(appDelegate)
+                            .cornerRadius(5.0)
+                            .padding(.horizontal)
+                    } else {
+                        Button(action: {
+                            playHaptic()
+                            activity.bookmarked.toggle()
+                            
+                            if (activity.bookmarked) {
+                                viewModel.addBookmark(bookmark: activity)
+                                if (viewModel.showBookmarks) {
+                                    withAnimation {
+                                        viewModel.activities.append(activity)
+                                    }
+                                }
+                                
+                            } else {
+                                viewModel.removeBookmark(bookmark: activity)
+                                if (viewModel.showBookmarks) {
+                                    withAnimation {
+                                        viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                                    }
+                                }
+                            }
+                            
+                        }, label: {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 45, height: 45)
+                                    .foregroundColor(.blue)
+                                
+                                Image(systemName: activity.bookmarked ? "bookmark.fill" : "bookmark")
+                                    .foregroundColor(activity.bookmarked ? .orange : .white)
+                            }
+                        })
+                        .padding(.bottom)
+                        .padding(.trailing)
+                    }
                     
                     CommentsView(viewModel: viewModel, activity: $activity)
                 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecentCommentsView: View {
     @ObservedObject var viewModel: MainViewModel
-
+    
     var body: some View {
         ZStack {
             if (viewModel.recentlyCommentedActivities.count == 0) {
@@ -30,7 +30,11 @@ struct RecentCommentsView: View {
                     Spacer()
                 }
                 .onTapGesture {
-                    viewModel.refresh()
+                    if (viewModel.showFires) {
+                        viewModel.refreshFires()
+                    } else {
+                        viewModel.refreshActivities()
+                    }
                 }
             } else {
                 NavigationView {
@@ -42,7 +46,7 @@ struct RecentCommentsView: View {
                     .navigationBarTitleDisplayMode(.inline)
                 }
                 .refreshable {
-                    viewModel.getRecentlyCommentedActivities()
+                    viewModel.getRecentlyCommentedActivities(getFires: viewModel.showFires)
                 }
             }
         }

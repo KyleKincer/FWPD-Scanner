@@ -46,35 +46,41 @@ struct ListView: View {
                             
                             Spacer()
                         }
+                        .onTapGesture {
+                            viewModel.refreshFires()
+                        }
+                        
                     } else {
-                        List(viewModel.fires, id: \.self) { fire in
-                            
-                            FireRowView(fire: fire, viewModel: viewModel)
-                                .opacity(viewModel.fires.count > 0 ? 1 : 0)
-                                .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.fires.count > 0)
-                            
-                            if (fire == viewModel.fires.last) {
-                                if (viewModel.isLoading) {
-                                    ProgressView()
-                                        .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                        .listRowSeparator(.hidden)
-                                } else {
-                                    HStack (alignment: .center){
-                                        Text("Get More")
-                                            .bold()
-                                            .italic()
-                                            .foregroundColor(.blue)
+                        NavigationView {
+                            List(viewModel.fires, id: \.self) { fire in
+                                
+                                ActivityRowView(activity: fire, viewModel: viewModel)
+                                    .opacity(viewModel.fires.count > 0 ? 1 : 0)
+                                    .animation(Animation.easeOut(duration: 0.6).delay(animationDelay), value: viewModel.fires.count > 0)
+                                
+                                if (fire == viewModel.fires.last) {
+                                    if (viewModel.isLoading) {
+                                        ProgressView()
                                             .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
-                                    }
-                                    .onTapGesture {
-                                        viewModel.getMoreActivities()
+                                            .listRowSeparator(.hidden)
+                                    } else {
+                                        HStack (alignment: .center){
+                                            Text("Get More")
+                                                .bold()
+                                                .italic()
+                                                .foregroundColor(.blue)
+                                                .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                                        }
+                                        .onTapGesture {
+                                            viewModel.getMoreFires()
+                                        }
                                     }
                                 }
-                            }
                                 
+                            }
                         }
                         .refreshable {
-                            viewModel.refresh()
+                            viewModel.refreshFires()
                         }
                         .transition(.move(edge: .trailing).combined(with: .scale))
                         
@@ -94,15 +100,28 @@ struct ListView: View {
                             Text("Adjust your filter settings")
                                 .font(.system(size: 15))
                             
-                            Image(systemName: "doc.text.magnifyingglass")
-                                .foregroundColor(.blue)
-                                .font(.system(size: 40))
-                                .padding()
-                            
+                            HStack {
+                                Spacer()
+                                
+                                Image(systemName: "light.beacon.min")
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: 40))
+                                    .padding(.vertical)
+                                
+                                Image(systemName: "light.beacon.min")
+                                    .foregroundColor(.red)
+                                    .font(.system(size: 40))
+                                    .padding(.vertical)
+
+
+                                
+                                Spacer()
+                            }
+                                                      
                             Spacer()
                         }
                         .onTapGesture {
-                            viewModel.refresh()
+                            viewModel.refreshActivities()
                         }
                         // Results
                     } else {
@@ -134,7 +153,7 @@ struct ListView: View {
                                 }
                             }
                             .refreshable {
-                                viewModel.refresh()
+                                viewModel.refreshActivities()
                             }
                         }
                         .transition(.move(edge: .leading).combined(with: .scale))

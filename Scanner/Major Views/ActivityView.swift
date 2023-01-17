@@ -59,34 +59,13 @@ struct ActivityView: View {
                         
                         if (!showMap) {
                             VStack {
-                                if (!viewModel.serverResponsive) {
-                                    
-                                    Spacer()
-                                    
-                                    StatusView(viewModel: viewModel)
-                                        .onTapGesture {
-                                            if (!viewModel.serverResponsive) {
-                                                withAnimation {
-                                                    viewModel.serverResponsive = true
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                        viewModel.serverResponsive = false
-                                                        viewModel.refresh()
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                } else {
-                                    if #available(iOS 16.0, *) {
-                                        NavigationStack {
-                                            ListView(viewModel: viewModel)
-                                        }
-                                        
-                                    } else {
+                                if #available(iOS 16.0, *) {
+                                    NavigationStack {
                                         ListView(viewModel: viewModel)
                                     }
+                                    
+                                } else {
+                                    ListView(viewModel: viewModel)
                                 }
                             }
                             .onAppear {
@@ -106,22 +85,7 @@ struct ActivityView: View {
                             if #available(iOS 16.0, *) {
                                 NavigationSplitView {
                                     VStack {
-                                        if (!viewModel.serverResponsive) {
-                                            Spacer()
-                                            
-                                            StatusView(viewModel: viewModel)
-                                                .onTapGesture {
-                                                    withAnimation (.linear(duration: 0.5)) {
-                                                        viewModel.serverResponsive = true
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                            viewModel.serverResponsive = false
-                                                            viewModel.refresh()
-                                                        }
-                                                    }
-                                                }
-                                            
-                                            Spacer()
-                                        } else if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
+                                        if (viewModel.activities.count == 0 && !viewModel.isLoading && !viewModel.isRefreshing) {
                                             VStack {
                                                 
                                                 Spacer()
@@ -143,7 +107,7 @@ struct ActivityView: View {
                                                 
                                             }
                                             .onTapGesture {
-                                                viewModel.refresh()
+                                                viewModel.refreshActivities()
                                             }
                                             
                                         } else {
@@ -198,6 +162,7 @@ struct ActivityView: View {
                                             
                                             if (viewModel.showMostRecentComments) {
                                                 RecentCommentsView(viewModel: viewModel)
+                                                
                                             } else {
                                                 List(viewModel.activities, id: \.self) { activity in
                                                     ActivityRowView(activity: activity, viewModel: viewModel)
@@ -223,7 +188,7 @@ struct ActivityView: View {
                                                     }
                                                 }
                                                 .refreshable {
-                                                    viewModel.refresh()
+                                                    viewModel.refreshActivities()
                                                 }
                                             }
                                         }

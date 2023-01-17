@@ -79,12 +79,18 @@ struct NotificationView: View {
             .onAppear{
                 isBookmarked = activity.bookmarked
                 Task.init {
+                    var isFire = false
+                    
+                    if (activity.isFire == "true") {
+                        isFire = true
+                    }
+                    
                     do {
-                        appDelegate.notificationActivity = try await viewModel.networkManager.getActivity(controlNumber: appDelegate.notificationActivity.controlNumber)
+                        appDelegate.notificationActivity = try await viewModel.networkManager.getActivity(controlNumber: appDelegate.notificationActivity.controlNumber, isFire: isFire)
                         
                         let formatter = DateFormatter()
                         formatter.dateFormat = "yyyy/MM/dd HH:mm:SS"
-                    appDelegate.notificationActivity.date = formatter.date(from: appDelegate.notificationActivity.timestamp)
+                        appDelegate.notificationActivity.date = formatter.date(from: appDelegate.notificationActivity.timestamp)
 
 
                         if let location = viewModel.locationManager.location {
@@ -95,7 +101,8 @@ struct NotificationView: View {
                 print("G - Opened from notification")
             }
             .onDisappear {
-                viewModel.refresh()
+                viewModel.refreshActivities()
+                viewModel.refreshFires()
             }
         }
     }

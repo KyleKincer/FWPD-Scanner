@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State var showingProfileEditor = false
     @State var username = ""
     @State var localError = ""
+    @State var showAdminTools = false
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -69,6 +70,9 @@ struct ProfileView: View {
                         if (viewModel.currentUser!.admin) {
                             Image(systemName: "crown")
                                 .foregroundColor(.red)
+                                .onTapGesture(perform: {
+                                    showAdminTools = true
+                                })
                         }
                         
                         ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 100)
@@ -123,6 +127,7 @@ struct ProfileView: View {
                         
                         if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
                             Text("Member since " + (viewModel.currentUser?.createdAt)!)
+                                .padding(.top)
                         }
                         
                         if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
@@ -191,6 +196,9 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $showPurchaseSheet) {
                 PurchaseView(viewModel: viewModel)
+            }
+            .sheet(isPresented: $showAdminTools) {
+                AdminToolsView(viewModel: viewModel)
             }
                 
         }

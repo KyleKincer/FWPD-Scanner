@@ -27,25 +27,7 @@ class NetworkManager {
         let latitude = data["latitude"] as? Double ?? 0.0
         let commentCount = data["commentCount"] as? Int ?? 0
         let activity = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, location: location, controlNumber: controlNumber, longitude: longitude, latitude: latitude, commentCount: commentCount)
-        
         return activity
-    }
-    
-    // Converts Firestore fire document into a single fire
-    func makeFire(document: QueryDocumentSnapshot) -> Scanner.Fire {
-        let id = document.documentID
-        let data = document.data()
-        let location = ""
-        let address = data["address"] as? String ?? ""
-        let timestamp = data["timestamp"] as? String ?? ""
-        let controlNumber = data["control_number"] as? String ?? ""
-        let longitude = 0.0
-        let nature = data["nature"] as? String ?? "Unknown"
-        let latitude = 0.0
-        let commentCount = data["commentCount"] as? Int ?? 0
-        let fire = Scanner.Fire(id: id, timestamp: timestamp, nature: nature, address: address, controlNumber: controlNumber, commentCount: commentCount)
-        
-        return fire
     }
     
     //Get first 25 activities from Firestore
@@ -170,58 +152,6 @@ class NetworkManager {
         return activities
     }
     
-    func getFirstFires(filterByDate: Bool, dateFrom: String, dateTo: String) async throws -> [Scanner.Fire] {
-        var fires = [Scanner.Fire]()
-
-        // Prepare natures
-        print("+ --- Gathering Fires from Firestore")
-        
-        do {
-            if (filterByDate) {
-                // DateRange
-                print("F -- Filtering by Date")
-                
-                let query = try await db.collection("fires")
-                    .whereField("timestamp", isGreaterThanOrEqualTo: dateFrom)
-                    .whereField("timestamp", isLessThanOrEqualTo: dateTo)
-                    .order(by: "timestamp", descending: true)
-                    .limit(to: 25)
-                    .getDocuments(source: .server)
-                if (query.documents.count > 0) {
-                    self.lastDocument = query.documents.last
-                }
-                for document in query.documents {
-                    fires.append(self.makeFire(document: document))
-                }
-                
-                fires = fires.sorted(by: { $0.timestamp > $1.timestamp })
-                
-            } else {
-                // No filters
-                print("F -- No Filters")
-                
-                let query = try await db.collection("fires")
-                    .order(by: "timestamp", descending: true)
-                    .limit(to: 25)
-                    .getDocuments(source: .server)
-                if (query.documents.count > 0) {
-                    self.lastDocument = query.documents.last
-                }
-                for document in query.documents {
-                    fires.append(self.makeFire(document: document))
-                }
-                
-                fires = fires.sorted(by: { $0.timestamp > $1.timestamp })
-            }
-            
-        } catch {
-            print("X - Error getting fires: \(error.localizedDescription)")
-        }
-        
-        //Bout damn time
-        return fires
-    }
-    
     // Get 25 more activities from Firestore
     func getMoreActivities(filterByDate: Bool, filterByLocation: Bool, filterByNature: Bool, dateFrom: String, dateTo: String, selectedNatures: [String]? = nil, location: CLLocation? = nil, radius: Double? = nil) async throws -> [Scanner.Activity] {
         
@@ -297,9 +227,170 @@ class NetworkManager {
         return activities
     }
     
-    func getMoreFires(filterByDate: Bool, dateFrom: String, dateTo: String) async throws -> [Scanner.Fire] {
+    // Get one single activity from Firestore
+    func getActivity(controlNumber: String, isFire: Bool) async throws -> Scanner.Activity {
+        if (isFire) {
+            let query = try await db.collection("fires")
+                .whereField("control_number", isEqualTo: controlNumber)
+                .order(by: "timestamp", descending: true)
+                .getDocuments(source: .server)
+            
+                let activity = self.makeFire(document: query.documents.first!)
+            
+                return activity
+            
+        } else {
+            let query = try await db.collection("activities")
+                .whereField("control_number", isEqualTo: controlNumber)
+                .order(by: "timestamp", descending: true)
+                .getDocuments(source: .server)
+            
+            let activity = self.makeActivity(document: query.documents.first!)
+            return activity
+        }
         
-        var fires = [Scanner.Fire]()
+        
+    }
+    
+    func getAllActivities() async throws -> [Scanner.Activity] {
+        var activities : [Scanner.Activity] = []
+        
+        let query = try await db.collection("activities")
+            .order(by: "timestamp", descending: true)
+            .limit(to: 1500)
+            .getDocuments(source: .server)
+        
+        let documents = query.documents
+        
+        for doc in documents {
+            let activity = self.makeActivity(document: doc)
+            activities.append(activity)
+        }
+        
+        return activities
+    }
+    
+    // Get a defined array of activites from their control numbers
+    func getActivitySet(controlNumbers: [String], isFire: Bool) async throws -> [Scanner.Activity] {
+        var activities : [Scanner.Activity] = []
+        
+        for controlNum in controlNumbers {
+            do {
+                try await activities.append(self.getActivity(controlNumber: controlNum, isFire: isFire))
+            }
+        }
+        return activities.sorted(by: { $0.timestamp > $1.timestamp })
+    }
+    
+    func getRecentlyCommentedActivities(getFires: Bool) async throws -> [Scanner.Activity] {
+        var activities = [Scanner.Activity]()
+        
+        do {
+            if (getFires) {
+                let db = Firestore.firestore()
+                let firesRef = db.collection("fires")
+                let fireQuery = firesRef.order(by: "lastCommentAt", descending: true).limit(to: 100)
+                let fires = try await fireQuery.getDocuments(source: .server)
+                for document in fires.documents {
+                    let data = document.data()
+                    let commentCount = data["commentCount"] as? Int ?? 0
+                    
+                    if (commentCount > 0) {
+                        let activity = self.makeFire(document: document)
+                        activities.append(activity)
+                    }
+                }
+            } else {
+                
+                let activitiesRef = db.collection("activities")
+                let query = activitiesRef.order(by: "lastCommentAt", descending: true).limit(to: 100)
+                let results = try await query.getDocuments(source: .server)
+                for document in results.documents {
+                    let data = document.data()
+                    let commentCount = data["commentCount"] as? Int ?? 0
+                    
+                    if (commentCount > 0) {
+                        let activity = self.makeActivity(document: document)
+                        activities.append(activity)
+                    }
+                }
+            }
+        }
+        return activities
+    }
+    
+    // Converts Firestore fire document into a single fire
+    func makeFire(document: QueryDocumentSnapshot) -> Scanner.Activity {
+        let id = document.documentID
+        let data = document.data()
+        let address = data["address"] as? String ?? ""
+        let timestamp = data["timestamp"] as? String ?? ""
+        let controlNumber = data["control_number"] as? String ?? ""
+        let nature = data["nature"] as? String ?? "Unknown"
+        let commentCount = data["commentCount"] as? Int ?? 0
+        let fire = Scanner.Activity(id: id, timestamp: timestamp, nature: nature, address: address, controlNumber: controlNumber, commentcount: commentCount, isFire: "true")
+        
+        return fire
+    }
+    
+    func getFirstFires(filterByDate: Bool, dateFrom: String, dateTo: String) async throws -> [Scanner.Activity] {
+        var fires = [Scanner.Activity]()
+
+        // Prepare natures
+        print("+ --- Gathering Fires from Firestore")
+        
+        do {
+            if (filterByDate) {
+                // DateRange
+                print("F -- Filtering by Date")
+                
+                let query = try await db.collection("activities")
+                    .whereField("timestamp", isGreaterThanOrEqualTo: dateFrom)
+                    .whereField("timestamp", isLessThanOrEqualTo: dateTo)
+                    .whereField("isFire", isEqualTo: "true")
+                    .order(by: "timestamp", descending: true)
+                    .limit(to: 25)
+                    .getDocuments(source: .server)
+                if (query.documents.count > 0) {
+                    self.lastDocument = query.documents.last
+                }
+                for document in query.documents {
+                    fires.append(self.makeFire(document: document))
+                }
+                
+                fires = fires.sorted(by: { $0.timestamp > $1.timestamp })
+                
+            } else {
+                // No filters
+                print("F -- No Filters")
+                
+                let query = try await db.collection("fires")
+                    .order(by: "timestamp", descending: true)
+                    .limit(to: 25)
+                    .getDocuments(source: .server)
+                if (query.documents.count > 0) {
+                    self.lastDocument = query.documents.last
+                }
+                for document in query.documents {
+                    fires.append(self.makeFire(document: document))
+                }
+                
+                fires = fires.sorted(by: { $0.timestamp > $1.timestamp })
+            }
+            
+        } catch {
+            print("X - Error getting fires: \(error.localizedDescription)")
+        }
+        
+        //Bout damn time
+        return fires
+    }
+    
+    
+    
+    func getMoreFires(filterByDate: Bool, dateFrom: String, dateTo: String) async throws -> [Scanner.Activity] {
+        
+        var fires = [Scanner.Activity]()
         print("+ --- Getting more Fires from Firestore")
         
         do {
@@ -346,71 +437,7 @@ class NetworkManager {
         return fires
     }
     
-    // Get one single activity from Firestore
-    func getActivity(controlNumber: String) async throws -> Scanner.Activity {
-        let query = try await db.collection("activities")
-            .whereField("control_number", isEqualTo: controlNumber)
-            .order(by: "timestamp", descending: true)
-            .getDocuments(source: .server)
-        let activity = self.makeActivity(document: query.documents.first!)
-        
-        return activity
-    }
     
-    func getFire(controlNumber: String) async throws -> Scanner.Fire {
-        let query = try await db.collection("fires")
-            .whereField("control_number", isEqualTo: controlNumber)
-            .order(by: "timestamp", descending: true)
-            .getDocuments(source: .server)
-        let fire = self.makeFire(document: query.documents.first!)
-        
-        return fire
-    }
-    
-    // Get a defined array of activites from their control numbers
-    func getActivitySet(controlNumbers: [String]) async throws -> [Scanner.Activity] {
-        var activities : [Scanner.Activity] = []
-        
-        for controlNum in controlNumbers {
-            do {
-                try await activities.append(self.getActivity(controlNumber: controlNum))
-            }
-        }
-        return activities.sorted(by: { $0.timestamp > $1.timestamp })
-    }
-    
-    func getFireSet(controlNumbers: [String]) async throws -> [Scanner.Fire] {
-        var fires : [Scanner.Fire] = []
-        
-        for controlNum in controlNumbers {
-            do {
-                try await fires.append(self.getFire(controlNumber: controlNum))
-            }
-        }
-        return fires.sorted(by: { $0.timestamp > $1.timestamp })
-    }
-    
-    func getRecentlyCommentedActivities() async throws -> [Scanner.Activity] {
-        var activities = [Scanner.Activity]()
-        
-        do {
-            let db = Firestore.firestore()
-            let activitiesRef = db.collection("activities")
-            let query = activitiesRef.order(by: "lastCommentAt", descending: true).limit(to: 100)
-            
-            let results = try await query.getDocuments(source: .server)
-            for document in results.documents {
-                let data = document.data()
-                let commentCount = data["commentCount"] as? Int ?? 0
-                
-                if (commentCount > 0) {
-                    let activity = self.makeActivity(document: document)
-                    activities.append(activity)
-                }
-            }
-        }
-        return activities
-    }
     
     func makeNature(document: QueryDocumentSnapshot) -> Scanner.Nature {
         let id = document.documentID

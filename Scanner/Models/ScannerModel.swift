@@ -23,6 +23,7 @@ struct Scanner {
         var bookmarked: Bool = false
         var commentCount: Int?
         var comments: [Comment]?
+        var isFire: String = "false"
         
         enum CodingKeys: String, CodingKey {
             // the API gives us control_number
@@ -38,116 +39,81 @@ struct Scanner {
             case distance
             case bookmarked
             case commentCount
+            case isFire
         }
         
         init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: CodingKeys.self)
-                self.id = try container.decode(String.self, forKey: .id)
-                self.timestamp = try container.decode(String.self, forKey: .timestamp)
-                self.nature = try container.decode(String.self, forKey: .nature)
-                self.address = try container.decode(String.self, forKey: .address)
-                self.location = try container.decode(String.self, forKey: .location)
-                self.controlNumber = try container.decode(String.self, forKey: .controlNumber)
-                self.longitude = try container.decode(Double.self, forKey: .longitude)
-                self.latitude = try container.decode(Double.self, forKey: .latitude)
-                self.date = try container.decode(Date.self, forKey: .date)
-                self.distance = try container.decode(Double.self, forKey: .distance)
-                self.bookmarked = try container.decode(Bool.self, forKey: .bookmarked)
-                self.commentCount = try container.decode(Int.self, forKey: .commentCount)
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.id = try container.decode(String.self, forKey: .id)
+            self.timestamp = try container.decode(String.self, forKey: .timestamp)
+            self.nature = try container.decode(String.self, forKey: .nature)
+            self.address = try container.decode(String.self, forKey: .address)
+            self.location = try container.decode(String.self, forKey: .location)
+            self.controlNumber = try container.decode(String.self, forKey: .controlNumber)
+            self.longitude = try container.decode(Double.self, forKey: .longitude)
+            self.latitude = try container.decode(Double.self, forKey: .latitude)
+            self.date = try container.decode(Date.self, forKey: .date)
+            self.distance = try container.decode(Double.self, forKey: .distance)
+            self.bookmarked = try container.decode(Bool.self, forKey: .bookmarked)
+            self.commentCount = try container.decode(Int.self, forKey: .commentCount)
+            self.isFire = try container.decode(String.self, forKey: .isFire)
+            if self.isFire == "" {
+                self.isFire = "false"
             }
+        }
         
         init() {
-                self.id = ""
-                self.timestamp = ""
-                self.nature = ""
-                self.address = ""
-                self.location = ""
-                self.controlNumber = ""
-                self.longitude = 0
-                self.latitude = 0
-                self.date = nil
-                self.distance = nil
-                self.bookmarked = false
-                self.commentCount = 0
-            }
+            self.id = ""
+            self.timestamp = ""
+            self.nature = ""
+            self.address = ""
+            self.location = ""
+            self.controlNumber = ""
+            self.longitude = 0
+            self.latitude = 0
+            self.date = nil
+            self.distance = nil
+            self.bookmarked = false
+            self.commentCount = 0
+            self.isFire = "false"
+        }
         
         init(id: String, timestamp: String, nature: String, address: String, location: String, controlNumber: String, longitude: Double, latitude: Double, commentCount: Int) {
-                self.id = id
-                self.timestamp = timestamp
-                self.nature = nature
-                self.address = address
-                self.location = location
-                self.controlNumber = controlNumber
-                self.longitude = longitude
-                self.latitude = latitude
-                self.date = nil
-                self.distance = nil
-                self.bookmarked = false
-                self.commentCount = commentCount
-            }
+            self.id = id
+            self.timestamp = timestamp
+            self.nature = nature
+            self.address = address
+            self.location = location
+            self.controlNumber = controlNumber
+            self.longitude = longitude
+            self.latitude = latitude
+            self.date = nil
+            self.distance = nil
+            self.bookmarked = false
+            self.commentCount = commentCount
+            self.isFire = "false"
+        }
+        
+        init(id: String, timestamp: String, nature: String, address: String, controlNumber: String, commentcount: Int, isFire: String) {
+            self.id = id
+            self.timestamp = timestamp
+            self.nature = nature
+            self.address = address
+            self.location = ""
+            self.controlNumber = controlNumber
+            self.longitude = 0.0
+            self.latitude = 0.0
+            self.date = nil
+            self.distance = nil
+            self.bookmarked = false
+            self.commentCount = commentcount
+            self.isFire = isFire
+        }
     }
     
     struct Nature: Identifiable, Decodable, Equatable {
         let id: String
         let name: String
-    }
-    
-    struct Fire: Identifiable, Decodable, Equatable, Hashable, Encodable {
-        var id: String
-        let timestamp: String
-        let nature: String
-        let address: String
-        var controlNumber: String
-        var date: Date? = nil
-        var bookmarked: Bool = false
-        var commentCount: Int?
-        var comments: [Comment]?
-        
-        enum CodingKeys: String, CodingKey {
-            // the API gives us control_number
-            case controlNumber = "control_number"
-            case id
-            case timestamp
-            case nature
-            case address
-            case date
-            case bookmarked
-            case commentCount
-        }
-        
-        init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: CodingKeys.self)
-                self.id = try container.decode(String.self, forKey: .id)
-                self.timestamp = try container.decode(String.self, forKey: .timestamp)
-                self.nature = try container.decode(String.self, forKey: .nature)
-                self.address = try container.decode(String.self, forKey: .address)
-                self.controlNumber = try container.decode(String.self, forKey: .controlNumber)
-                self.date = try container.decode(Date.self, forKey: .date)
-                self.bookmarked = try container.decode(Bool.self, forKey: .bookmarked)
-                self.commentCount = try container.decode(Int.self, forKey: .commentCount)
-            }
-        
-        init() {
-                self.id = ""
-                self.timestamp = ""
-                self.nature = ""
-                self.address = ""
-                self.controlNumber = ""
-                self.date = nil
-                self.bookmarked = false
-                self.commentCount = 0
-            }
-        
-        init(id: String, timestamp: String, nature: String, address: String, controlNumber: String, commentCount: Int) {
-                self.id = id
-                self.timestamp = timestamp
-                self.nature = nature
-                self.address = address
-                self.controlNumber = controlNumber
-                self.bookmarked = false
-                self.commentCount = commentCount
-                self.date = nil
-            }
     }
 }
 

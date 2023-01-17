@@ -76,7 +76,7 @@ struct CommentsView: View {
                 if (showSubmit && viewModel.loggedIn) {
                     Button() {
                         playHaptic()
-                        commentModel.submitComment(activityId: activity.id, comment: comment, user: viewModel.currentUser!)
+                        commentModel.submitComment(activityId: activity.id, isFire: activity.isFire, comment: comment, user: viewModel.currentUser!)
                         activity.commentCount! = activity.commentCount! + 1
                         
                         if let index = viewModel.activities.firstIndex(where: {$0.controlNumber == activity.controlNumber}) {
@@ -99,12 +99,12 @@ struct CommentsView: View {
                 }
             }
             .onAppear(perform: {
-                commentModel.startListening(activityId: activity.id)
+                commentModel.startListening(activityId: activity.id, isFire: activity.isFire)
 
             })
             
             .onChange(of: activity.id, perform: { id in
-                commentModel.startListening(activityId: id)
+                commentModel.startListening(activityId: id, isFire: activity.isFire)
             })
             
             VStack (alignment: .leading) {
@@ -113,7 +113,7 @@ struct CommentsView: View {
                         .contextMenu(menuItems: {
                             if (viewModel.currentUser?.admin ?? false) {
                                 Button {
-                                    commentModel.deleteComment(comment: activity.comments!.first!, activityId: activity.id)
+                                    commentModel.deleteComment(comment: activity.comments!.first!, activityId: activity.id, isFire: activity.isFire)
                                     activity.commentCount!-=1
                                 } label: {
                                     Text("Delete")
@@ -121,7 +121,7 @@ struct CommentsView: View {
                                 
                                 Button {
                                     withAnimation {
-                                        commentModel.hideComment(comment: activity.comments!.first!, activityId: activity.id)
+                                        commentModel.hideComment(comment: activity.comments!.first!, activityId: activity.id, isFire: activity.isFire)
                                     }
                                 } label: {
                                     Text(activity.comments!.first!.hidden ? "Unhide" : "Hide")
@@ -137,7 +137,7 @@ struct CommentsView: View {
                             .contextMenu {
                                 if (viewModel.currentUser?.admin ?? false) {
                                     Button {
-                                        commentModel.deleteComment(comment: comment, activityId: activity.id)
+                                        commentModel.deleteComment(comment: comment, activityId: activity.id, isFire: activity.isFire)
                                         activity.commentCount!-=1
                                     } label: {
                                         Text("Delete")
@@ -145,7 +145,7 @@ struct CommentsView: View {
                                     
                                     Button {
                                         withAnimation {
-                                            commentModel.hideComment(comment: comment, activityId: activity.id)
+                                            commentModel.hideComment(comment: comment, activityId: activity.id, isFire: activity.isFire)
                                         }
                                     } label: {
                                         Text(comment.hidden ? "Unhide" : "Hide")

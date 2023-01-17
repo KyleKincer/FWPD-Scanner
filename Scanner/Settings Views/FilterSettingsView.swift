@@ -222,7 +222,7 @@ struct FilterSettingsView: View {
             
             if refreshOnExit {
                 refreshOnExit = false
-                viewModel.refresh()
+                viewModel.refreshActivities()
                 print("R - Refreshed via Filters")
                 viewModel.showMostRecentComments = false
             }

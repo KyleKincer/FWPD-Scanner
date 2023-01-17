@@ -68,8 +68,16 @@ struct ActivityRowView: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
+                        
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Image(systemName: activity.bookmarked ? "bookmark.fill" : "mappin.and.ellipse")
                             .foregroundColor(activity.bookmarked ? .orange : .primary)
                         
+                        Text(activity.address.capitalized)
+                            .font(.footnote)
                         Spacer()
                     }
 
@@ -83,17 +91,13 @@ struct ActivityRowView: View {
                         Spacer()
                     }
                     
-                    HStack {
-                        Text(activity.address.capitalized)
-                            .font(.footnote)
-                        Spacer()
-                    }
-                    
-                    HStack {
-                        Text(activity.location)
-                            .font(.footnote)
-                        
-                        Spacer()
+                    if (activity.location != "") {
+                        HStack {
+                            Text(activity.location)
+                                .font(.footnote)
+                            
+                            Spacer()
+                        }
                     }
                 }
             }

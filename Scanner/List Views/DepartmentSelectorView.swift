@@ -18,6 +18,7 @@ struct DepartmentSelectorView: View {
                 Button(action: {
                     withAnimation (.linear){
                         fireSelected = false
+                        viewModel.getRecentlyCommentedActivities(getFires: fireSelected)
                     }
                 }, label: {
                     Text("👮‍♂️   Police")
@@ -31,7 +32,7 @@ struct DepartmentSelectorView: View {
                 Button(action: {
                     withAnimation (.linear){
                         fireSelected = true
-                        showComments = false
+                        viewModel.getRecentlyCommentedActivities(getFires: fireSelected)
                     }
                 }, label: {
                     Text("Fire   👨‍🚒")
@@ -42,7 +43,7 @@ struct DepartmentSelectorView: View {
             }
             .padding(.horizontal)
 
-            if (!fireSelected && !(viewModel.useDate || viewModel.useNature || viewModel.useLocation)) {
+            if (!(viewModel.useDate || viewModel.useNature || viewModel.useLocation)) {
                 
                 Divider()
                     .padding(.horizontal)
@@ -56,7 +57,7 @@ struct DepartmentSelectorView: View {
                         Text("Recent Activity")
                             .fontWeight(.semibold)
                             .font(!showComments ? .title2 : .subheadline)
-                            .foregroundColor(!showComments ? .blue : .gray)
+                            .foregroundColor(!showComments ? (fireSelected ? .red : .blue) : .gray)
                     })
                     
                     Spacer()
@@ -69,7 +70,7 @@ struct DepartmentSelectorView: View {
                         Text("Recent Comments")
                             .fontWeight(.semibold)
                             .font(showComments ? .title2 : .subheadline)
-                            .foregroundColor(showComments ? .blue : .gray)
+                            .foregroundColor(showComments ? (fireSelected ? .red : .blue) : .gray)
                     })
                 }
                 .padding(.horizontal)

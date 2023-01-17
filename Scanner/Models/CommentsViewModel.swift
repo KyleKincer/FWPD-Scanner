@@ -13,45 +13,81 @@ class CommentsViewModel: ObservableObject {
     
     var listener: ListenerRegistration?
     
-    func startListening(activityId: String) {
+    func startListening(activityId: String, isFire: String) {
         // create a reference to the "comments" collection within the activity's document
-        let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
-        
-        // create a snapshot listener that listens for changes to the comments collection
-        listener = commentsRef.addSnapshotListener { (querySnapshot, error) in
-            // check for errors
-            if let error = error {
-                print("Error getting comments: \(error)")
-                return
-            }
+        if (isFire == "true") {
+            let commentsRef = Firestore.firestore().collection("fires").document(activityId).collection("comments")
             
-            // update the comments property with the data from the snapshot
-            self.updateComments(querySnapshot: querySnapshot)
+            // create a snapshot listener that listens for changes to the comments collection
+            listener = commentsRef.addSnapshotListener { (querySnapshot, error) in
+                // check for errors
+                if let error = error {
+                    print("Error getting comments: \(error)")
+                    return
+                }
+                
+                // update the comments property with the data from the snapshot
+                self.updateComments(querySnapshot: querySnapshot)
+            }
+        } else {
+            let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments")
+            
+            // create a snapshot listener that listens for changes to the comments collection
+            listener = commentsRef.addSnapshotListener { (querySnapshot, error) in
+                // check for errors
+                if let error = error {
+                    print("Error getting comments: \(error)")
+                    return
+                }
+                
+                // update the comments property with the data from the snapshot
+                self.updateComments(querySnapshot: querySnapshot)
+            }
         }
+        
     }
     
-    func submitComment(activityId: String, comment: String, user: User) {
+    func submitComment(activityId: String, isFire: String, comment: String, user: User) {
         let newComment = Comment(text: comment, user: user)
         
-        let activityRef = Firestore.firestore().collection("activities").document(activityId)
-        let commentsRef = activityRef.collection("comments")
-        let userRef = Firestore.firestore().collection("users").document(user.id)
-        
-        let today = Date.now
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        // Update activities data
-        activityRef.updateData(["commentCount": FieldValue.increment(Double(1)),
-                                "lastCommentAt" : Timestamp().firebaseTimestamp])
-        
-        // Update user's data
-        userRef.updateData(["commentCount": FieldValue.increment(Double(1)),
-                            "lastCommentAt" : formatter.string(from: today)])
-        
-        // Add comment
-        commentsRef.addDocument(data: newComment.toData())
+        if (isFire == "true") {
+            let activityRef = Firestore.firestore().collection("fires").document(activityId)
+            let commentsRef = activityRef.collection("comments")
+            let userRef = Firestore.firestore().collection("users").document(user.id)
+            
+            let today = Date.now
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            // Update activities data
+            activityRef.updateData(["commentCount": FieldValue.increment(Double(1)),
+                                    "lastCommentAt" : Timestamp().firebaseTimestamp])
+            
+            // Update user's data
+            userRef.updateData(["commentCount": FieldValue.increment(Double(1)),
+                                "lastCommentAt" : formatter.string(from: today)])
+            
+            // Add comment
+            commentsRef.addDocument(data: newComment.toData())
+        } else {
+            let activityRef = Firestore.firestore().collection("activities").document(activityId)
+            let commentsRef = activityRef.collection("comments")
+            let userRef = Firestore.firestore().collection("users").document(user.id)
+            
+            let today = Date.now
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            // Update activities data
+            activityRef.updateData(["commentCount": FieldValue.increment(Double(1)),
+                                    "lastCommentAt" : Timestamp().firebaseTimestamp])
+            
+            // Update user's data
+            userRef.updateData(["commentCount": FieldValue.increment(Double(1)),
+                                "lastCommentAt" : formatter.string(from: today)])
+            
+            // Add comment
+            commentsRef.addDocument(data: newComment.toData())
+        }
     }
-    
     
     func updateComments(querySnapshot: QuerySnapshot?) {
         self.comments.removeAll()
@@ -79,32 +115,63 @@ class CommentsViewModel: ObservableObject {
     }
     
     
-    func deleteComment(comment: Comment, activityId: String) {
-        let activityRef = Firestore.firestore().collection("activities").document(activityId)
-        let commentsRef = activityRef.collection("comments")
-        let usersRef = Firestore.firestore().collection("users").document(comment.user.id)
-
-        // Delete the comment
-        commentsRef.document(comment.id).delete()
-        activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
-        
-        // Decrement the user's commentCount
-        usersRef.updateData(["commentCount": FieldValue.increment(Double(-1)), "lastCommentAt": ""])
-        
-        // Query to find the next most recent comment
-        let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)
-
-        query.getDocuments { (querySnapshot, error) in
-            if error != nil {
-                // Handle the error
-            } else {
-                if querySnapshot?.documents.count == 0 {
-                    // Delete the "lastCommentAt" field if there are no other comments
-                    activityRef.updateData(["lastCommentAt": FieldValue.delete(),
-                                            "commentCount": FieldValue.delete()])
-                } else if let document = querySnapshot?.documents.first {
-                    // Update the "lastCommentAt" field with the timestamp of the next most recent comment
-                    activityRef.updateData(["lastCommentAt": document.get("timestamp")!])
+    func deleteComment(comment: Comment, activityId: String, isFire: String) {
+        if (isFire == "true") {
+            let activityRef = Firestore.firestore().collection("fires").document(activityId)
+            let commentsRef = activityRef.collection("comments")
+            let usersRef = Firestore.firestore().collection("users").document(comment.user.id)
+            
+            // Delete the comment
+            commentsRef.document(comment.id).delete()
+            activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+            
+            // Decrement the user's commentCount
+            usersRef.updateData(["commentCount": FieldValue.increment(Double(-1)), "lastCommentAt": ""])
+            
+            // Query to find the next most recent comment
+            let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)
+            
+            query.getDocuments { (querySnapshot, error) in
+                if error != nil {
+                    // Handle the error
+                } else {
+                    if querySnapshot?.documents.count == 0 {
+                        // Delete the "lastCommentAt" field if there are no other comments
+                        activityRef.updateData(["lastCommentAt": FieldValue.delete(),
+                                                "commentCount": FieldValue.delete()])
+                    } else if let document = querySnapshot?.documents.first {
+                        // Update the "lastCommentAt" field with the timestamp of the next most recent comment
+                        activityRef.updateData(["lastCommentAt": document.get("timestamp")!])
+                    }
+                }
+            }
+        } else {
+            let activityRef = Firestore.firestore().collection("activities").document(activityId)
+            let commentsRef = activityRef.collection("comments")
+            let usersRef = Firestore.firestore().collection("users").document(comment.user.id)
+            
+            // Delete the comment
+            commentsRef.document(comment.id).delete()
+            activityRef.updateData(["commentCount": FieldValue.increment(Double(-1))])
+            
+            // Decrement the user's commentCount
+            usersRef.updateData(["commentCount": FieldValue.increment(Double(-1)), "lastCommentAt": ""])
+            
+            // Query to find the next most recent comment
+            let query = commentsRef.order(by: "timestamp", descending: true).limit(to: 1)
+            
+            query.getDocuments { (querySnapshot, error) in
+                if error != nil {
+                    // Handle the error
+                } else {
+                    if querySnapshot?.documents.count == 0 {
+                        // Delete the "lastCommentAt" field if there are no other comments
+                        activityRef.updateData(["lastCommentAt": FieldValue.delete(),
+                                                "commentCount": FieldValue.delete()])
+                    } else if let document = querySnapshot?.documents.first {
+                        // Update the "lastCommentAt" field with the timestamp of the next most recent comment
+                        activityRef.updateData(["lastCommentAt": document.get("timestamp")!])
+                    }
                 }
             }
         }
@@ -113,12 +180,17 @@ class CommentsViewModel: ObservableObject {
 
     
     
-    func hideComment(comment: Comment, activityId: String) {
-        let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments").document(comment.id)
-        // update the comment's hidden property in Firestore
-        commentsRef.updateData(["hidden": !comment.hidden])
-}
-    
+    func hideComment(comment: Comment, activityId: String, isFire: String) {
+        if (isFire == "true") {
+            let commentsRef = Firestore.firestore().collection("fires").document(activityId).collection("comments").document(comment.id)
+            // update the comment's hidden property in Firestore
+            commentsRef.updateData(["hidden": !comment.hidden])
+        } else {
+            let commentsRef = Firestore.firestore().collection("activities").document(activityId).collection("comments").document(comment.id)
+            // update the comment's hidden property in Firestore
+            commentsRef.updateData(["hidden": !comment.hidden])
+        }
+    }
     
     func stopListening() {
         // stop listening for changes to the comments collection

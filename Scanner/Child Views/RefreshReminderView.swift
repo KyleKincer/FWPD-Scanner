@@ -18,7 +18,8 @@ struct RefreshReminderView: View {
             Button() {
                 withAnimation {
                     playHaptic()
-                    viewModel.refresh()
+                    viewModel.refreshActivities()
+                    viewModel.refreshFires()
                 }
                 withAnimation(.spring()) {
                     showingRefreshReminder.toggle()

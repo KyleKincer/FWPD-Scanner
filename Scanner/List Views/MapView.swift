@@ -99,7 +99,7 @@ struct MapView: View {
                         .onLongPressGesture(perform: {
                             withAnimation {
                                 playHaptic()
-                                viewModel.refresh()
+                                viewModel.refreshActivities()
                             }
                         })
                     }

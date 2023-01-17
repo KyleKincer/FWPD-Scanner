@@ -22,9 +22,10 @@ final class MainViewModel: ObservableObject {
     @Published var model: Scanner
     @Published var activities = [Scanner.Activity]()
     @Published var bookmarks = [Scanner.Activity]()
-    @Published var fires = [Scanner.Fire]()
+    @Published var fires = [Scanner.Activity]()
     @Published var history = [Scanner.Activity]()
     @Published var recentlyCommentedActivities = [Scanner.Activity]()
+    @Published var recentlyCommentedFires = [Scanner.Activity]()
     @Published var natures = [Scanner.Nature]()
     
     // Location and Map
@@ -53,9 +54,9 @@ final class MainViewModel: ObservableObject {
     @Published var serverResponsive = true
     @Published var isLoading = false
     @Published var showBookmarks = false
+    @Published var showFires = false
     @Published var bookmarkCount = 0
     @Published var showMostRecentComments = false
-    @Published var showFires = false
     @Published var showAuthError = false
     @Published var onboarding = false
     @Published var showAuth = false
@@ -114,7 +115,7 @@ final class MainViewModel: ObservableObject {
         
         self.bookmarkCount=defaults.object(forKey: "bookmarkCount") as? Int ?? 0
         print("G - Found \(self.bookmarkCount) bookmark(s)!")
-        self.refresh()
+        self.refreshActivities()
         self.refreshFires()
     }
     
@@ -391,13 +392,13 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func refresh() {
-        print("R --- Refreshing")
-        
-        self.showBookmarks = false
+    func refreshActivities() {
+        print("R --- Refreshing Activities")
+        //self.showBookmarks = false
         self.isRefreshing = true
         self.activities.removeAll() // clear out stored activities
         
+        // Get activities
         Task.init {
             do {
                 // Get first set of activities
@@ -424,13 +425,13 @@ final class MainViewModel: ObservableObject {
         }
         self.getNatures()
         self.getBookmarks()
-        self.getRecentlyCommentedActivities()
+        self.getRecentlyCommentedActivities(getFires: self.showFires)
     }
     
     func refreshFires() {
         print("R --- Refreshing Fires")
         
-        self.showBookmarks = false
+        //self.showBookmarks = false
         self.isRefreshing = true
         self.fires.removeAll() // clear out stored activities
         
@@ -561,6 +562,13 @@ final class MainViewModel: ObservableObject {
             }
             self.fires = set
             print("G - Set dates on fires")
+        case .recentlyCommentedFires:
+            var set = self.recentlyCommentedFires
+            for i in set.indices {
+                set[i].date = formatter.date(from: set[i].timestamp)
+            }
+            self.recentlyCommentedFires = set
+            print("G - Set dates on recentlyCommentedFires")
         }
     }
     
@@ -593,6 +601,8 @@ final class MainViewModel: ObservableObject {
                 print("G - Set distances on recentlyCommentedActivities")
             case .fires:
                 print("cannot add distances to fires")
+            case .recentlyCommentedFires:
+                print("cannot add distances to recentlycommentedfires")
             }
         }
     }
@@ -632,7 +642,7 @@ final class MainViewModel: ObservableObject {
         print("G - Now have \(String(self.bookmarkCount)) bookmarks")
         if self.bookmarkCount == 0 && self.showBookmarks {
             self.showBookmarks = false
-            self.refresh()
+            self.refreshActivities()
         }
     }
 
@@ -647,16 +657,32 @@ final class MainViewModel: ObservableObject {
         }
     }
 
+    
+    // MODIFY THIS METHOD TO SUPPORT FIRE BOOKMARKS
     func getBookmarks() {
+        self.bookmarks = []
         let bookmarks = (defaults.object(forKey: "Bookmarks") as? [String])
         if (self.bookmarkCount > 0 && self.bookmarks.count != bookmarkCount) {
             Task.init {
+                var fires = [String]()
+                var activities = [String]()
                 do {
                     //Get bookmarks
-                    let bookmarks = try await self.networkManager.getActivitySet(controlNumbers: bookmarks!)
-                    self.bookmarks = bookmarks
-                    self.addDatesToActivities(.bookmarks)
+                    for bookmark in bookmarks! {
+                        if bookmark.matches(".*-.*-.*-.*") {
+                            fires.append(bookmark)
+                        } else {
+                            activities.append(bookmark)
+                        }
+                    }
+                    let activityBookmarks = try await self.networkManager.getActivitySet(controlNumbers: activities, isFire: false)
+                    self.bookmarks = activityBookmarks
                     self.addDistancesToActivities(.bookmarks)
+                    
+                    let fireBookmarks = try await self.networkManager.getActivitySet(controlNumbers: fires, isFire: true)
+                    self.bookmarks = self.bookmarks + fireBookmarks
+                    self.addDatesToActivities(.bookmarks)
+                    
                     print("+ --- Got bookmark entries from Firebase")
                 }
             }
@@ -665,16 +691,22 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    func getRecentlyCommentedActivities() {
+    func getRecentlyCommentedActivities(getFires: Bool) {
         Task.init {
             do {
-                //Get bookmarks
-                let recentlyCommentedActivities = try await self.networkManager.getRecentlyCommentedActivities()
+                //Get comments
+                let recentlyCommentedActivities = try await self.networkManager.getRecentlyCommentedActivities(getFires: getFires)
                 self.recentlyCommentedActivities = recentlyCommentedActivities
                 self.addDatesToActivities(.recentlyCommentedActivities)
                 self.addDistancesToActivities(.recentlyCommentedActivities)
                 print("+ --- Got recentlyCommentedActivities from Firebase")
             }
         }
+    }
+}
+
+extension String {
+    func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }

@@ -113,7 +113,7 @@ struct OnboardingView: View {
         }
         .onDisappear {
             viewModel.selectedNaturesUD.removeAll()
-            viewModel.refresh()
+            viewModel.refreshActivities()
         }
     }
 }

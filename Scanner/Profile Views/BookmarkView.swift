@@ -36,11 +36,6 @@ struct BookmarkView: View {
                 }
             }
         }
-        .onAppear {
-            if (viewModel.bookmarkCount != viewModel.bookmarks.count) {
-                viewModel.getBookmarks()
-            }
-        }
     }
 }
 
