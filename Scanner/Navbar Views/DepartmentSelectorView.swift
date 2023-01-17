@@ -54,7 +54,7 @@ struct DepartmentSelectorView: View {
                             showComments = false
                         }
                     }, label: {
-                        Text("Recent Activity")
+                        Text("Activity")
                             .fontWeight(.semibold)
                             .font(!showComments ? .title2 : .subheadline)
                             .foregroundColor(!showComments ? (fireSelected ? .red : .blue) : .gray)
@@ -67,7 +67,7 @@ struct DepartmentSelectorView: View {
                             showComments = true
                         }
                     }, label: {
-                        Text("Recent Comments")
+                        Text("Comments")
                             .fontWeight(.semibold)
                             .font(showComments ? .title2 : .subheadline)
                             .foregroundColor(showComments ? (fireSelected ? .red : .blue) : .gray)

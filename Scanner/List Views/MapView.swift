@@ -60,6 +60,8 @@ struct MapView: View {
             }
             
             VStack {
+                Text("Only FWPD Activity is shown on the Map")
+                    .foregroundColor(Color("ModeOpposite"))
                 
                 Spacer()
                 

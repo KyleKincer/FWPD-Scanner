@@ -394,7 +394,6 @@
 			children = (
 				E202F444278E84A7009C0B13 /* ListView.swift */,
 				E24522BD279134F200EFBB3E /* DetailView.swift */,
-				EB5A41382975CBE50047E05D /* DepartmentSelectorView.swift */,
 				E264495F2798D38E00685DAB /* MapView.swift */,
 				E264494F2796487200685DAB /* ActivityRowView.swift */,
 				E24CED4B29463AB200EB960C /* RecentCommentsView.swift */,
@@ -483,6 +482,7 @@
 			children = (
 				EB57406728E6166E009FDA3D /* StandardNavBarView.swift */,
 				EB3A359428F6127F009625D0 /* ExpandedNavBarView.swift */,
+				EB5A41382975CBE50047E05D /* DepartmentSelectorView.swift */,
 				EB64E79328F649ED00721DD0 /* OnboardingView.swift */,
 				EB64E79528F657F100721DD0 /* DisclaimerView.swift */,
 			);

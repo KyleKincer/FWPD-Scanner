@@ -41,6 +41,10 @@ struct NotificationSettingsView: View {
                 Text("Currently Disabled")
             }
             
+            Text("Notifications are currently only available for Police Department activity!")
+                .multilineTextAlignment(.center)
+                .padding()
+            
             Toggle("Notify Of All Activity", isOn: $selectAll)
                 .padding(.horizontal, 50)
                 .padding(.vertical)

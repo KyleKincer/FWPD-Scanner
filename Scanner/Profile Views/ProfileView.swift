@@ -27,7 +27,7 @@ struct ProfileView: View {
             }
             
         } else {
-            VStack (alignment: .leading) {
+            VStack (alignment: .center) {
                 // Nav
                 HStack {
                     
@@ -127,7 +127,7 @@ struct ProfileView: View {
                         
                         if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
                             Text("Member since " + (viewModel.currentUser?.createdAt)!)
-                                .padding(.top)
+                                .padding(.top, 3)
                         }
                         
                         if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
