@@ -73,7 +73,7 @@ struct TVOnboardingView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 0)
                 
-                Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
+                Text("Activities listed in scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD and FWFD. Activites are not posted as they happen, but rather as soon as the respective department posts them.")
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)

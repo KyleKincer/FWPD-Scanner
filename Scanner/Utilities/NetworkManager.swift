@@ -344,10 +344,9 @@ class NetworkManager {
                 // DateRange
                 print("F -- Filtering by Date")
                 
-                let query = try await db.collection("activities")
+                let query = try await db.collection("fires")
                     .whereField("timestamp", isGreaterThanOrEqualTo: dateFrom)
                     .whereField("timestamp", isLessThanOrEqualTo: dateTo)
-                    .whereField("isFire", isEqualTo: "true")
                     .order(by: "timestamp", descending: true)
                     .limit(to: 25)
                     .getDocuments(source: .server)

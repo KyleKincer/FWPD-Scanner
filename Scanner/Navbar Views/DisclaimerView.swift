@@ -31,7 +31,7 @@ struct DisclaimerView: View {
                 .font(.system(size: 60))
                 .padding(2)
             
-            Text("FWPD Scanner collects your precise location to provide information on the closest FWPD activities when certain filters are applied. All other times, location is used to display the distance between you and the location of reported activites.\nYour location is never shared to third-party vendors.")
+            Text("Fort Wayne Scanner collects your precise location to provide information on the closest FWPD and FWFD activities when certain filters are applied. All other times, location is used to display the distance between you and the location of reported activites.\nYour location is never shared to third-party vendors.")
                 .multilineTextAlignment(.center)
                 .padding()
                 .font(.footnote)

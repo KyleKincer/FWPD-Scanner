@@ -75,6 +75,13 @@ struct DepartmentSelectorView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 2)
+            } else {
+                Text("Filtered")
+                    .fontWeight(.semibold)
+                    .font(.title2)
+                    .foregroundColor(.green)
+                    .padding(.horizontal)
+                    .padding(.top, 2)
             }
         }
     }

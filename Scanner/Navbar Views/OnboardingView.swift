@@ -27,7 +27,7 @@ struct OnboardingView: View {
                 Group {
                     Spacer()
                     
-                    Text("FWPD")
+                    Text("Fort Wayne")
                         .italic()
                         .fontWeight(.bold)
                         .font(.subheadline)
@@ -73,7 +73,7 @@ struct OnboardingView: View {
                         .fontWeight(.bold)
                         .padding(.top)
                     
-                    Text("Activities listed in FWPD Scanner are posted by the Fort Wayne Police Department. All information provided is sourced directly from FWPD. Activites are not posted as they happen, but rather as soon as FWPD posts them.")
+                    Text("Activities listed in Fort Wayne Scanner are posted by the Fort Wayne Police and Fire Department. All information provided is sourced directly from FWPD and FWFD. Activites are not posted as they happen, but rather as soon as the respective department posts them.")
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: false)
                         .padding(.horizontal, 50)
