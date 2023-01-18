@@ -72,7 +72,9 @@ struct ListView: View {
                                                 .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                         }
                                         .onTapGesture {
-                                            viewModel.getMoreFires()
+                                            withAnimation {
+                                                viewModel.getMoreFires()
+                                            }
                                         }
                                     }
                                 }
@@ -147,7 +149,9 @@ struct ListView: View {
                                                 .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
                                         }
                                         .onTapGesture {
-                                            viewModel.getMoreActivities()
+                                            withAnimation {
+                                                viewModel.getMoreActivities()
+                                            }
                                         }
                                     }
                                 }
@@ -165,8 +169,10 @@ struct ListView: View {
 //                    .frame(maxHeight: 40)
             }
             .onAppear(perform: {
+                withAnimation {
                     UITableView.appearance().contentInset.top = -35
-                })
+                }
+            })
             
             // Refresh Reminder Capsule
             if showingRefreshReminder && !viewModel.showBookmarks {

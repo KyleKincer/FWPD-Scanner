@@ -99,22 +99,24 @@ struct DetailView: View {
                             .padding(.horizontal)
                     } else {
                         Button(action: {
-                            playHaptic()
-                            activity.bookmarked.toggle()
-                            
-                            if (activity.bookmarked) {
-                                viewModel.addBookmark(bookmark: activity)
-                                if (viewModel.showBookmarks) {
-                                    withAnimation {
-                                        viewModel.activities.append(activity)
-                                    }
-                                }
+                            withAnimation {
+                                playHaptic()
+                                activity.bookmarked.toggle()
                                 
-                            } else {
-                                viewModel.removeBookmark(bookmark: activity)
-                                if (viewModel.showBookmarks) {
-                                    withAnimation {
-                                        viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                                if (activity.bookmarked) {
+                                    viewModel.addBookmark(bookmark: activity)
+                                    if (viewModel.showBookmarks) {
+                                        withAnimation {
+                                            viewModel.activities.append(activity)
+                                        }
+                                    }
+                                    
+                                } else {
+                                    viewModel.removeBookmark(bookmark: activity)
+                                    if (viewModel.showBookmarks) {
+                                        withAnimation {
+                                            viewModel.activities.removeAll { $0.controlNumber == activity.controlNumber }
+                                        }
                                     }
                                 }
                             }
@@ -138,16 +140,17 @@ struct DetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .transition(.slide)
                 .onAppear {
-                    isBookmarked = activity.bookmarked
-                    
-                    let index = viewModel.history.firstIndex(of: activity)
-                    
-                    if (index != nil) {
-                        viewModel.history.remove(at: index ?? 0)
+                    withAnimation {
+                        isBookmarked = activity.bookmarked
+                        
+                        let index = viewModel.history.firstIndex(of: activity)
+                        
+                        if (index != nil) {
+                            viewModel.history.remove(at: index ?? 0)
+                        }
+                        viewModel.history.append(activity)
                     }
-                    viewModel.history.append(activity)
-                    
-                    
+                                        
                 }
             }
         }

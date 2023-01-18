@@ -81,6 +81,7 @@ struct ProfileView: View {
                             Button {
                                 withAnimation {
                                     showingProfileEditor = true
+                                    playHaptic()
                                 }
                             } label: {
                                 ZStack {

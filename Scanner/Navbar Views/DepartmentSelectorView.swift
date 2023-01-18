@@ -18,6 +18,7 @@ struct DepartmentSelectorView: View {
                 Button(action: {
                     withAnimation (.linear){
                         fireSelected = false
+                        playHaptic()
                         viewModel.getRecentlyCommentedActivities(getFires: fireSelected)
                     }
                 }, label: {
@@ -32,6 +33,7 @@ struct DepartmentSelectorView: View {
                 Button(action: {
                     withAnimation (.linear){
                         fireSelected = true
+                        playHaptic()
                         viewModel.getRecentlyCommentedActivities(getFires: fireSelected)
                     }
                 }, label: {
@@ -52,6 +54,7 @@ struct DepartmentSelectorView: View {
                     Button(action: {
                         withAnimation (.interactiveSpring()) {
                             showComments = false
+                            playHaptic()
                         }
                     }, label: {
                         Text("Activity")
@@ -65,6 +68,7 @@ struct DepartmentSelectorView: View {
                     Button(action: {
                         withAnimation (.interactiveSpring()) {
                             showComments = true
+                            playHaptic()
                         }
                     }, label: {
                         Text("Comments")

@@ -97,7 +97,7 @@ struct MapView: View {
                                 }
                             }
                         }
-                        .frame(width: 120, height: 35)
+                        .frame(width: 140, height: 35)
                         .onLongPressGesture(perform: {
                             withAnimation {
                                 playHaptic()
@@ -113,23 +113,33 @@ struct MapView: View {
                                 viewModel.showBookmarks.toggle()
                             }
                         }, label: {
-                            ZStack {
-                                ZStack{
-                                    Circle()
-                                        .foregroundColor(.blue)
-                                        .shadow(radius: 10)
-                                        .frame(width: 35, height: 35)
-                                    
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(.blue)
+                                    .shadow(radius: 10)
+                                
+                                HStack {
                                     if (viewModel.showBookmarks) {
                                         Image(systemName: "bookmark.fill")
                                             .foregroundColor(.orange)
+                                        
+                                        Text("Disable")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.white)
+                                        
                                     } else {
                                         Image(systemName: "bookmark")
                                             .foregroundColor(.orange)
                                             .tint(.white)
+                                        
+                                        Text("Bookmarks")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.white)
                                     }
                                 }
+                                .padding(.horizontal, 2)
                             }
+                            .frame(width: 140, height: 35)
                         })
                     }
                 }
