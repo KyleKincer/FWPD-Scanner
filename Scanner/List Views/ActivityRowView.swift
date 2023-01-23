@@ -37,7 +37,9 @@ struct ActivityRowView: View {
                         Image(systemName: activity.bookmarked ? "bookmark.fill" : "mappin.and.ellipse")
                             .foregroundColor(activity.bookmarked ? .orange : .primary)
                         
-                        Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
+                        if (activity.isFire == "false") {
+                            Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
+                        }
                         
                         Spacer()
                         

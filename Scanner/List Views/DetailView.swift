@@ -66,7 +66,7 @@ struct DetailView: View {
                                     Image(systemName: "mappin.and.ellipse")
                                         .foregroundColor(.secondary)
                                 }
-                                if (showDistance && !viewModel.showBookmarks) {
+                                if (showDistance && !viewModel.showBookmarks && activity.isFire == "false") {
                                     Text("\(String(format: "%g", round(10 * (activity.distance ?? 0)) / 10)) miles away")
                                         .foregroundColor(.secondary)
                                 }
