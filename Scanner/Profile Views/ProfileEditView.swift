@@ -18,6 +18,8 @@ struct ProfileEditView: View {
     @Binding var showingProfileEditor: Bool
     @State var saving = false
     @Binding var localError: String
+    @State var showDelete = false
+    @State var deleting = false
     
     var body: some View {
         
@@ -93,6 +95,34 @@ struct ProfileEditView: View {
             }
             .listStyle(.insetGrouped)
             .listRowBackground(Color(.clear))
+            
+            HStack {
+                
+                Spacer()
+                
+                Button(action: {
+                    withAnimation {
+                        showDelete.toggle()
+                    }
+                    print("Starting account deletion workflow...")
+                }, label: {
+                    ZStack {
+                        Capsule()
+                            .frame(width: 200, height: 40)
+                            .foregroundColor(.red)
+                        
+                        Text("Delete Account")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                })
+                .padding(.bottom, 30)
+                .padding(.top, 10)
+                
+                Spacer()
+            }
+            
+            Spacer()
             
             // Submit
             if (saving) {
@@ -174,6 +204,88 @@ struct ProfileEditView: View {
                 }
             }
         }
+        .sheet(isPresented: $showDelete, content: {
+            VStack {
+                // Delete confirmation
+                Text("Account Deletion")
+                    .fontWeight(.bold)
+                    .font(.title)
+                    .padding()
+                
+                if (!deleting) {
+                    
+                    Text("Account deletion is available to clear all of your personal data (name, profile picture, etc) from our database. This data is never shared with a third party, and is safe and sound with us. However, if you'd like to delete this data, you may.")
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Text("You will lose access to all profile-dependent features, such as bookmarking and commenting, until you make a new account. Any existing comments from you will be shown to others as Anonymous.")
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Spacer()
+                    
+                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 50.0)
+                        .scaleEffect(5)
+                    
+                    Spacer()
+                    
+                    Text("Are you sure you'd like to delete your account?")
+                        .bold()
+                    
+                    
+                    HStack {
+                        Button(action: {
+                            // Dismiss sheet
+                            withAnimation {
+                                showDelete.toggle()
+                            }
+                        }, label: {
+                            ZStack {
+                                Capsule()
+                                    .frame(width: 200, height: 40)
+                                    .foregroundColor(.gray)
+                                
+                                Text("Cancel")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        })
+                        
+                        Button(action: {
+                            withAnimation {
+                                deleting = true
+                                
+                                let user = Auth.auth().currentUser
+                                viewModel.deleteUser(user: user, completion: { success in
+                                    if (success) {
+                                        viewModel.loggedIn = false
+                                        viewModel.showAuth = true
+                                        deleting = false
+                                        showDelete = false
+                                    }
+                                })
+                            }
+                            
+                        }, label: {
+                            ZStack {
+                                Capsule()
+                                    .frame(width: 100, height: 40)
+                                    .foregroundColor(.red)
+                                
+                                Text("Delete")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                            }
+                        })
+                    }
+                } else {
+                    Text("Deleting Account")
+                        .bold()
+                    
+                    ProgressView()
+                }
+            }.interactiveDismissDisabled()
+        })
     }
 }
 

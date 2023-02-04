@@ -214,6 +214,22 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    func deleteUser(user: FirebaseAuth.User?, completion: @escaping (Bool) -> Void) {
+        //Delete the user account
+        Task {
+            user?.delete { error in
+                if error != nil {
+                    print("Error deleting account!")
+                    completion(false)
+                } else {
+                    // Account deleted.
+                    print("Account Deleted!")
+                    completion(true)
+                }
+            }
+        }
+    }
+    
     func showLoggedInDrop(username: String) {
         Drops.show(Drop(title: "Howdy, \(username)!",
                         subtitle: "Sucessfully logged in.",
