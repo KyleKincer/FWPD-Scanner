@@ -30,16 +30,15 @@ struct OnboardingView: View {
                     Text("Fort Wayne")
                         .italic()
                         .fontWeight(.bold)
-                        .font(.subheadline)
+                        .font(.title)
                         .padding(.top)
                     
                     Text("Scanner")
                         .fontWeight(.black)
-                        .font(.largeTitle)
+                        .font(.system(size: 70))
                         .italic()
                         .shadow(radius: 2)
                         .foregroundColor(Color("ModeOpposite"))
-                        .scaleEffect(2)
                     
                     if (colorScheme == .light) {
                         Image("launchicon")
@@ -115,6 +114,7 @@ struct OnboardingView: View {
             viewModel.selectedNaturesUD.removeAll()
             viewModel.refreshActivities()
         }
+        .frame(maxWidth: 500)
     }
 }
 

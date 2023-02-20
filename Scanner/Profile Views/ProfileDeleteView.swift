@@ -24,7 +24,7 @@ struct ProfileDeleteView: View {
             // Delete confirmation
             Text("Account Deletion")
                 .fontWeight(.bold)
-                .font(.title)
+                .font(.system(size: 50))
                 .padding()
             
             if (!showCredentials) {
@@ -33,20 +33,17 @@ struct ProfileDeleteView: View {
                     Text("Account deletion is available to clear all of your personal data (name, profile picture, etc) from our database. This data is never shared with a third party, and is safe and sound with us. However, if you'd like to delete this data, you may.")
                         .multilineTextAlignment(.center)
                         .padding()
+                        .font(.system(size: 20))
                     
                     Text("You will lose access to all profile-dependent features, such as bookmarking and commenting, until you make a new account. Any existing comments from you will be shown to others as Anonymous.")
                         .multilineTextAlignment(.center)
                         .padding()
-                    
-                    Spacer()
-                    
-                    ProfilePhoto(url: viewModel.currentUser?.profileImageURL, size: 50.0)
-                        .scaleEffect(2)
-                    
-                    Spacer()
+                        .font(.system(size: 20))
+
                     
                     Text("Are you sure you'd like to delete your account?")
                         .bold()
+                        .multilineTextAlignment(.center)
                     
                     HStack {
                         Button(action: {
@@ -298,6 +295,7 @@ struct ProfileDeleteView: View {
                 }
             }
         }
+        .frame(maxWidth: 500)
     }
 }
 

@@ -79,7 +79,7 @@ struct DetailView: View {
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(8)
                     .shadow(radius: 4)
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, 15)
                     .padding(.bottom, 5)
                     
                     if (activity.isFire == "false") {

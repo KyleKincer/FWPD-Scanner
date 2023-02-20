@@ -60,7 +60,6 @@ struct RegisterView: View {
                     .padding(.horizontal)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
-            .frame(maxWidth: 350)
             
             if viewModel.authError != "" {
                 Text(viewModel.authError)
@@ -101,6 +100,8 @@ struct RegisterView: View {
         .onDisappear() {
             viewModel.authError = "" // clear auth error on exit so we don't show it again if user trys to register again
         }
+        .frame(maxWidth: 500)
+        .frame(maxWidth: 500)
     }
 }
 

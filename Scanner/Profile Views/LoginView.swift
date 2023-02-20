@@ -34,20 +34,20 @@ struct LoginView: View {
                 BackButtonView(text: "Cancel", color: Color.orange)
             })
                     
-            Spacer()
             
             Group {
                 Text("Sign In")
                     .fontWeight(.black)
                     .italic()
-                    .font(.largeTitle)
+                    .font(.system(size: 30))
                     .shadow(radius: 2)
                     .foregroundColor(Color("ModeOpposite"))
                 
                 Image(systemName: "person.3.fill")
-                    .font(.system(size: 50))
+                    .font(.system(size: 70))
                     .foregroundColor(.orange)
                     .shadow(radius: 5)
+                    .padding()
                 
                 Spacer()
             
@@ -61,8 +61,11 @@ struct LoginView: View {
                     .padding(.horizontal)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
+                    .frame(maxWidth: 500)
+                
                 SecureField("Password", text: $password)
                     .padding(.horizontal)
+                    .frame(maxWidth: 500)
             }
             .textFieldStyle(RoundedBorderTextFieldStyle())
             
@@ -88,76 +91,81 @@ struct LoginView: View {
             Button(action: {
                 playHaptic()
                 withAnimation {
-                    print("A -- Logging in...")
-                    
-                    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                        if let error = error {
-                            // there was an error logging in
-                            print("Error logging in: \(error)")
-                            self.errorMessage = error.localizedDescription
-                        } else {
-                            self.errorMessage = ""
-                            // user was successfully logged in
-                            if let authResult = authResult {
-                                let userId = authResult.user.uid
-                                
-                                // Get the user's username from Firestore
-                                Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
-                                    if let error = error {
-                                        // there was an error getting the username
-                                        print("Error getting username: \(error)")
-                                    } else {
-                                        // the username was successfully retrieved
-                                        if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
-                                            print("Successfully retrieved username: \(username)")
-                                            viewModel.currentUser = User(document: snapshot)
-                                            Drops.show(Drop(title: "Howdy, \(username)!",
-                                                            subtitle: "Sucessfully logged in.",
-                                                            icon: UIImage(systemName: "person.fill.checkmark")))
-                                        }
-                                    }
-                                }
-                                print("Successfully logged in user: \(userId)")
-                            }
-                            withAnimation {
-                                viewModel.loggedIn = true
-                            }
-                        }
-                    }
+                    signingUp = true
                 }
             }, label: {
                 ZStack {
                     Capsule()
-                        .frame(width: 100, height: 40)
+                        .frame(width: 200, height: 40)
                         .foregroundColor(.blue)
                         .shadow(radius: 10)
                     
-                    Text("Sign In")
+                    Text("Create an Account")
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
             })
-            .padding(.top)
-            .frame(maxWidth: 350)
+            .padding()
             
             Group {
+            
+                Text("Already got an account?")
+                
                 Button(action: {
                     playHaptic()
                     withAnimation {
-                        signingUp = true
+                        print("A -- Logging in...")
+                        
+                        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                            if let error = error {
+                                // there was an error logging in
+                                print("Error logging in: \(error)")
+                                self.errorMessage = error.localizedDescription
+                            } else {
+                                self.errorMessage = ""
+                                // user was successfully logged in
+                                if let authResult = authResult {
+                                    let userId = authResult.user.uid
+                                    
+                                    // Get the user's username from Firestore
+                                    Firestore.firestore().collection("users").document(userId).getDocument { (snapshot, error) in
+                                        if let error = error {
+                                            // there was an error getting the username
+                                            print("Error getting username: \(error)")
+                                        } else {
+                                            // the username was successfully retrieved
+                                            if let snapshot = snapshot, let data = snapshot.data(), let username = data["username"] as? String {
+                                                print("Successfully retrieved username: \(username)")
+                                                viewModel.currentUser = User(document: snapshot)
+                                                Drops.show(Drop(title: "Howdy, \(username)!",
+                                                                subtitle: "Sucessfully logged in.",
+                                                                icon: UIImage(systemName: "person.fill.checkmark")))
+                                            }
+                                        }
+                                    }
+                                    print("Successfully logged in user: \(userId)")
+                                }
+                                withAnimation {
+                                    viewModel.loggedIn = true
+                                }
+                            }
+                        }
                     }
                 }, label: {
                     ZStack {
                         Capsule()
-                            .frame(width: 200, height: 40)
+                            .frame(width: 100, height: 40)
                             .foregroundColor(.blue)
                             .shadow(radius: 10)
                         
-                        Text("Create an Account")
+                        Text("Sign In")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
                 })
+                .padding(.bottom)
+                .frame(maxWidth: 350)
+                
                 
                 Divider()
                     .padding()
@@ -211,6 +219,7 @@ struct LoginView: View {
                         })
                     }
                 }
+                .padding()
             }
         }
         .sheet(isPresented: $showPasswordForgot) {

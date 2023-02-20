@@ -66,6 +66,7 @@ struct PurchaseView: View {
             SKPaymentQueue.default().add(viewModel.store)
             viewModel.store.getProducts(productIDs: productIDs)
         })
+        .frame(maxWidth: 500)
     }
 }
 

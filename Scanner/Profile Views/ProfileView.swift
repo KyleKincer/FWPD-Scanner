@@ -16,6 +16,7 @@ struct ProfileView: View {
     @State var username = ""
     @State var localError = ""
     @State var showAdminTools = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         if (!viewModel.loggedIn) {
@@ -66,7 +67,6 @@ struct ProfileView: View {
                 // Profile view
                 HStack (alignment: .top) {
                     VStack {
-                        
                         if (viewModel.currentUser!.admin) {
                             Image(systemName: "crown")
                                 .foregroundColor(.red)
@@ -100,60 +100,130 @@ struct ProfileView: View {
                         }
                     }
                     
-                    VStack (alignment: .center) {
-                        Text(viewModel.currentUser?.username ?? "Username")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .italic()
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                    if (horizontalSizeClass == .compact) {
                         
-                        if (showingProfileEditor) {
-                            TextField(viewModel.currentUser?.username ?? "Username", text: $username)
-                                .textFieldStyle(.roundedBorder)
-                                .textInputAutocapitalization(.never)
-                                .limitInputLength(value: $username, length: 20)
-                                .transition(.move(edge: .trailing))
-                                .frame(maxWidth: 200)
-                                .padding(.horizontal)
-                        }
-                        
-                        if (!showingProfileEditor && viewModel.currentUser?.bio != "") {
-                            Text((viewModel.currentUser?.bio ?? ""))
+                        VStack (alignment: .center) {
+                            Text(viewModel.currentUser?.username ?? "Username")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .italic()
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal)
-                                .frame(maxWidth: 400)
-                                
-                        }
-                        
-                        if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
-                            Text("Member since " + (viewModel.currentUser?.createdAt)!)
-                                .padding(.top, 3)
-                        }
-                        
-                        if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
                             
-                            HStack {
-                                if (viewModel.currentUser?.twitterHandle != "") {
-                                    Image("twitter")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
+                            if (showingProfileEditor) {
+                                TextField(viewModel.currentUser?.username ?? "Username", text: $username)
+                                    .textFieldStyle(.roundedBorder)
+                                    .textInputAutocapitalization(.never)
+                                    .limitInputLength(value: $username, length: 20)
+                                    .transition(.move(edge: .trailing))
+                                    .frame(maxWidth: 200)
+                                    .padding(.horizontal)
+                            }
+                            
+                            if (!showingProfileEditor && viewModel.currentUser?.bio != "") {
+                                Text((viewModel.currentUser?.bio ?? ""))
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal)
+                                    .frame(maxWidth: 400)
+                                    .font(.system(size: 15))
+                                
+                            }
+                            
+                            if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
+                                Text("Member since " + (viewModel.currentUser?.createdAt)!)
+                                    .padding(.top, 3)
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: 10))
+                            }
+                            
+                            if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
+                                
+                                HStack {
+                                    if (viewModel.currentUser?.twitterHandle != "") {
+                                        Image("twitter")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                    }
+                                    
+                                    if (viewModel.currentUser?.instagramHandle != "") {
+                                        Image("instagram")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                    }
+                                    
+                                    if (viewModel.currentUser?.tiktokHandle != "") {
+                                        Image("tiktok")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .padding()
+                    } else {
+                        VStack {
+                            HStack (alignment: .center) {
+                                VStack {
+                                    Text(viewModel.currentUser?.username ?? "Username")
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .italic()
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal)
+                                    
+                                    if (!showingProfileEditor && viewModel.currentUser?.createdAt != nil && viewModel.currentUser?.createdAt != "") {
+                                        Text("Member since " + (viewModel.currentUser?.createdAt)!)
+                                            .padding(.top, 3)
+                                    }
+                                    
+                                    if (!showingProfileEditor && (viewModel.currentUser?.twitterHandle != "" || viewModel.currentUser?.instagramHandle != "" || viewModel.currentUser?.tiktokHandle != "")) {
+                                        
+                                        HStack {
+                                            if (viewModel.currentUser?.twitterHandle != "") {
+                                                Image("twitter")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                            
+                                            if (viewModel.currentUser?.instagramHandle != "") {
+                                                Image("instagram")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                            
+                                            if (viewModel.currentUser?.tiktokHandle != "") {
+                                                Image("tiktok")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                                .padding()
+                                
+                                if (showingProfileEditor) {
+                                    TextField(viewModel.currentUser?.username ?? "Username", text: $username)
+                                        .textFieldStyle(.roundedBorder)
+                                        .textInputAutocapitalization(.never)
+                                        .limitInputLength(value: $username, length: 20)
+                                        .transition(.move(edge: .trailing))
+                                        .frame(maxWidth: 200)
+                                        .padding(.horizontal)
                                 }
                                 
-                                if (viewModel.currentUser?.instagramHandle != "") {
-                                    Image("instagram")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                }
-                                
-                                if (viewModel.currentUser?.tiktokHandle != "") {
-                                    Image("tiktok")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
+                                if (!showingProfileEditor && viewModel.currentUser?.bio != "") {
+                                    Text((viewModel.currentUser?.bio ?? ""))
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal)
+                                        .frame(maxWidth: 400)
                                     
                                 }
                             }
-                            .padding(.horizontal)
+                            Divider()
+                                .padding(.horizontal)
                         }
                     }
                 }

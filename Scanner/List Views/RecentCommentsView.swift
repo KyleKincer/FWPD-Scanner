@@ -19,6 +19,8 @@ struct RecentCommentsView: View {
                     
                     Text("No recently commented activities")
                         .font(.system(size: 25))
+                        .padding()
+                        .multilineTextAlignment(.center)
                     
                     ZStack {
                         Image(systemName: "clock")

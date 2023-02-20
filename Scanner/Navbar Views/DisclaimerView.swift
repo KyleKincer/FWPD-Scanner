@@ -13,10 +13,6 @@ struct DisclaimerView: View {
     
     var body: some View {
         VStack {
-            Capsule()
-                    .fill(Color.secondary)
-                    .frame(width: 30, height: 3)
-                    .padding(20)
             
             Spacer()
             

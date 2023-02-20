@@ -48,34 +48,37 @@ struct NotificationSettingsView: View {
             Toggle("Notify Of All Activity", isOn: $selectAll)
                 .padding(.horizontal, 50)
                 .padding(.vertical)
+                .frame(maxWidth: 500)
             
             if (!selectAll) {
-                
-                Divider()
-                    .padding(.horizontal, 20)
-                
-                HStack {
-                    Text("Select Natures:")
-                        .bold()
-                        .font(.system(size: 15))
+                Group {
+                    Divider()
+                        .padding(.horizontal, 20)
                     
-                    Spacer()
-                    
-                    Button {
-                        withAnimation {
-                            selection.removeAll()
+                    HStack {
+                        Text("Select Natures:")
+                            .bold()
+                            .font(.system(size: 15))
+                        
+                        Spacer()
+                        
+                        Button {
+                            withAnimation {
+                                selection.removeAll()
+                            }
+                        } label: {
+                            Text("Clear All")
                         }
-                    } label: {
-                        Text("Clear All")
+                        .disabled(selection.count == 0)
                     }
-                    .disabled(selection.count == 0)
-                    .padding(.horizontal)
+                    .padding(.horizontal, 50)
+                    
+                    TextField("Search", text: $searchText)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                        .frame(maxWidth: 700)
                 }
-                .padding(.horizontal, 50)
-                
-                TextField("Search", text: $searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal)
+                .frame(maxWidth: 500)
                 
                 List(selection: $selection, content: {
                     ForEach(searchResults, id: \.name) { nature in

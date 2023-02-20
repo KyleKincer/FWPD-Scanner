@@ -44,15 +44,16 @@ struct FilterSettingsView: View {
                 .font(.largeTitle)
                 .shadow(radius: 2)
                 .foregroundColor(Color("ModeOpposite"))
-                .padding(.top)
             
             Text("Only one Scanner Filter Category may be applied at a time.")
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
+                .padding([.horizontal, .top])
             
             Text("FWFD filtering is ony available by date at this time!")
                 .multilineTextAlignment(.center)
                 .font(.subheadline)
+                .padding(.horizontal)
             
             Text("This app only works for Fort Wayne, IN")
                 .multilineTextAlignment(.center)
@@ -69,6 +70,7 @@ struct FilterSettingsView: View {
                                 viewModel.useNature = false
                             }
                         }
+                        .frame(maxWidth: 300)
                     
                     if (viewModel.useLocation) {
                         VStack {
@@ -87,6 +89,7 @@ struct FilterSettingsView: View {
                     }
                     
                     Divider()
+                        .frame(maxWidth: 300)
                 }
                 
                 Toggle("Filter By Date", isOn: $viewModel.useDate)
@@ -100,6 +103,7 @@ struct FilterSettingsView: View {
                             }
                         }
                     }
+                    .frame(maxWidth: 300)
                 
                 if (viewModel.useDate) {
                     DatePicker("From", selection: $dateFrom, in: oldestDate...dateTo, displayedComponents: .date)
@@ -138,6 +142,7 @@ struct FilterSettingsView: View {
                             }
                         }
                     }
+                    .frame(maxWidth: 300)
                 
                 if (viewModel.useNature) {
                     HStack {

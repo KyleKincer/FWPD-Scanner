@@ -27,7 +27,10 @@ struct ProfileEditView: View {
                 // Bio
                 HStack(alignment: .top) {
                     Text("Bio")
+                        .padding()
+                    
                     Spacer()
+                    
                     if #available(iOS 16.0, *) {
                         TextField(viewModel.currentUser?.bio ?? "Write a bit about yourself...", text: $bio, axis: .vertical)
                             .textFieldStyle(.roundedBorder)
@@ -39,6 +42,7 @@ struct ProfileEditView: View {
                             .limitInputLength(value: $bio, length: 200)
                     }
                 }
+                .frame(maxWidth: 500)
                 
                 // Socials
                 Section {
@@ -91,6 +95,7 @@ struct ProfileEditView: View {
                             .frame(width: 200)
                     }
                 }
+                .frame(maxWidth: 500)
             }
             .listStyle(.insetGrouped)
             .listRowBackground(Color(.clear))

@@ -38,7 +38,7 @@ struct MapView: View {
                             }, label: {
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .foregroundColor(chosenActivity == activity ? .blue : .red)
-                                    .scaleEffect(chosenActivity == activity ? 2 : 1)
+                                    .font(.system(size: chosenActivity == activity ? 50 : 20))
                             })
                         }
                     }
@@ -62,6 +62,7 @@ struct MapView: View {
             VStack {
                 Text("Only FWPD Activity is shown on the Map")
                     .foregroundColor(Color("ModeOpposite"))
+                    .italic()
                 
                 Spacer()
                 
@@ -203,6 +204,7 @@ struct MapView: View {
                             chosenActivity = nil
                         }
                     }
+                    .frame(maxWidth: 500)
                 }
             }
         }

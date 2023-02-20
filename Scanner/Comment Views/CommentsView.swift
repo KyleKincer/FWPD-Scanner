@@ -56,24 +56,25 @@ struct CommentsView: View {
             }
             .padding(.horizontal)
             
-            HStack {
-                TextField("Type your comment here...", text: $comment)
-                    .keyboardType(.default)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                    .onChange(of: comment.count) { newValue in
-                        if (newValue > 0) {
-                            withAnimation(.easeInOut) {
-                                showSubmit = true
-                            }
-                        } else {
-                            withAnimation(.easeInOut) {
-                                showSubmit = false
+            HStack (alignment: .center) {
+                if (viewModel.loggedIn) {
+                    
+                    TextField("Type your comment here...", text: $comment)
+                        .keyboardType(.default)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                        .onChange(of: comment.count) { newValue in
+                            if (newValue > 0) {
+                                withAnimation(.easeInOut) {
+                                    showSubmit = true
+                                }
+                            } else {
+                                withAnimation(.easeInOut) {
+                                    showSubmit = false
+                                }
                             }
                         }
-                    }
-                
-                if (showSubmit && viewModel.loggedIn) {
+                    
                     Button() {
                         playHaptic()
                         commentModel.submitComment(activityId: activity.id, isFire: activity.isFire, comment: comment, user: viewModel.currentUser!)
@@ -96,6 +97,14 @@ struct CommentsView: View {
                                 .tint(.white)
                         }.frame(width: 100, height: 35)
                     }
+                    .padding(.trailing)
+                } else {
+                    Spacer()
+                    
+                    Text("Login with an account to join in on the community")
+                        .multilineTextAlignment(.center)
+
+                    Spacer()
                 }
             }
             .onAppear(perform: {

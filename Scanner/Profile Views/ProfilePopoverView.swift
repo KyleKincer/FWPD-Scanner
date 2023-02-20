@@ -36,7 +36,7 @@ struct ProfilePopover: View {
                     if (user.bio != "" && user.bio != nil) {
                         Text(user.bio ?? "")
                             .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: false)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }
@@ -115,7 +115,8 @@ struct ProfilePopover: View {
                         Button("OK", role: .cancel) { }
                     }
         }
-        .padding(.horizontal, 5)
+        .padding(.horizontal, 8)
+        .frame(maxWidth: 500)
     }
 }
 
